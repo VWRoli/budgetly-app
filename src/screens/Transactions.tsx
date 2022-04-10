@@ -1,12 +1,22 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Transaction from '../components/Transaction';
+import Data from '../api/data.json';
 
 const Transactions = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Transactions Screen</Text>
+    <View style={styles.container}>
+      {Data.transactions.map((tr) => (
+        <Transaction key={tr.id} props={tr} />
+      ))}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
+});
 
 export default Transactions;

@@ -1,0 +1,49 @@
+{
+  "userID": "54515115225",
+  "firstName": "placeholder",
+  "lastName": "user",
+  "transactions": [
+    {
+      "id": "146846465",
+      "date": 1649602950802,
+      "transactionName": "Small market",
+      "amount": 50,
+      "currency": "EUR"
+    },
+    {
+      "id": "146846467",
+      "date": 1649602950802,
+      "transactionName": "Big market",
+      "amount": 50,
+      "currency": "EUR"
+    },
+    {
+      "id": "1468464659",
+      "date": 1649602950802,
+      "transactionName": "Supermarket",
+      "amount": 67,
+      "currency": "EUR"
+    },
+    {
+      "id": "1468464654",
+      "date": 1649602950802,
+      "transactionName": "Small market",
+      "amount": 500,
+      "currency": "EUR"
+    },
+    {
+      "id": "14684646574",
+      "date": 1649602950802,
+      "transactionName": "Small market",
+      "amount": 89,
+      "currency": "EUR"
+    },
+    {
+      "id": "14684646535",
+      "date": 1649602950802,
+      "transactionName": "Small market",
+      "amount": 37,
+      "currency": "EUR"
+    }
+  ]
+}
