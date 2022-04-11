@@ -1,7 +1,10 @@
 {
   "userID": "54515115225",
-  "firstName": "placeholder",
-  "lastName": "user",
+  "username": "placeholder",
+  "email": "placeholder@something.com",
+  "accountBalance": 2000,
+  "accountCurrency": "eur",
+  "availableToBudget": 1000,
   "transactions": [
     {
       "id": "146846465",
