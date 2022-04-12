@@ -1,35 +1,43 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Card, Subheading, Title } from 'react-native-paper';
+import { Subheading, Title } from 'react-native-paper';
+import LinearGradient from 'react-native-linear-gradient';
 
 interface Props {
   title: string;
   amount: number;
   currency: string;
+  color: string[];
 }
 
 const MainCard: React.FC<Props> = ({
   title,
   amount,
   currency,
+  color,
 }): JSX.Element => {
   return (
-    <Card style={styles.card}>
-      <Subheading>{title}</Subheading>
+    <LinearGradient colors={color} style={styles.card}>
+      <Subheading style={{ color: '#fff' }}>{title}</Subheading>
       <View style={styles.wrapper}>
-        <Title>{currency}</Title>
-        <Title>{amount}</Title>
+        <Title style={styles.title}>{currency}</Title>
+        <Title style={styles.title}>{amount}</Title>
       </View>
-    </Card>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    width: '45%',
+    width: '47%',
     margin: 5,
     padding: 5,
     borderRadius: 10,
+  },
+  title: {
+    color: '#fff',
+    fontWeight: 'bold',
+    marginRight: 5,
   },
   wrapper: {
     flexDirection: 'row',
