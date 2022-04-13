@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import MainCard from '../components/MainCard';
+import Card from '../components/Card';
 import {
   blueGradient,
   greenGradient,
@@ -11,30 +11,34 @@ import {
 const Budget = () => {
   return (
     <View style={styles.wrapper}>
-      <MainCard
+      <Card
         title="Income"
         amount={2000}
         currency="Huf"
         color={greenGradient}
+        iconName="money"
       />
-      <MainCard
+      <Card
         title="Expense"
         amount={2000}
         currency="Huf"
         color={blueGradient}
+        iconName="money-off"
       />
 
-      <MainCard
+      <Card
         title="Current Balance"
         amount={2000}
         currency="Huf"
         color={purpleGradient}
+        iconName="account-balance"
       />
-      <MainCard
+      <Card
         title="Available to budget"
         amount={2000}
         currency="Huf"
         color={orangeGradient}
+        iconName="account-balance-wallet"
       />
     </View>
   );
