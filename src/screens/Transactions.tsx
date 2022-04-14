@@ -16,6 +16,7 @@ const Transactions = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    paddingTop: 10,
   },
 });
 
