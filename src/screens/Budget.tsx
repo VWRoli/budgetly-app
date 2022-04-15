@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import BudgetItem from '../components/BudgetCategory';
+import BudgetCategory from '../components/BudgetTitle';
 import Card from '../components/Card';
 import {
   blueGradient,
@@ -40,6 +42,8 @@ const Budget = () => {
         color={orangeGradient}
         iconName="account-balance-wallet"
       />
+      <BudgetCategory />
+      <BudgetItem title="Internet" budgeted={15000} />
     </View>
   );
 };
