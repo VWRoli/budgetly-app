@@ -9,7 +9,7 @@ const BudgetCategory = () => {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '95%',
-        paddingVertical: 5,
+        paddingVertical: 10,
       }}
     >
       <Text style={{ fontWeight: 'bold' }}>Bills</Text>

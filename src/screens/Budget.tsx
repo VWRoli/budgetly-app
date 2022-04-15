@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import BudgetItem from '../components/BudgetCategory';
 import BudgetCategory from '../components/BudgetTitle';
 import Card from '../components/Card';
+import CarouselCards from '../components/CarouselCards';
 import {
   blueGradient,
   greenGradient,
@@ -42,6 +43,7 @@ const Budget = () => {
         color={orangeGradient}
         iconName="account-balance-wallet"
       />
+      <CarouselCards />
       <BudgetCategory />
       <BudgetItem title="Internet" budgeted={15000} />
     </View>
