@@ -5,6 +5,8 @@ import { LogBox } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 //Navigation
 import AppStack from './src/navigation/AppStack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AuthStack from './src/navigation/AuthStack';
 
 //To ignore warning
 LogBox.ignoreLogs([
@@ -21,11 +23,15 @@ const theme = {
   },
 };
 
+const Stack = createNativeStackNavigator();
+
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
   return (
     <NavigationContainer>
       <PaperProvider theme={theme}>
-        <AppStack />
+        {isLoggedIn ? <AppStack /> : <AuthStack />}
       </PaperProvider>
     </NavigationContainer>
   );
