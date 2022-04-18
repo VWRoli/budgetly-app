@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
+import Input from '../components/common/Input';
 
 const LoginScreen = () => {
   const [text, setText] = React.useState('');
@@ -14,22 +15,15 @@ const LoginScreen = () => {
         alignItems: 'center',
       }}
     >
-      <TextInput
-        style={{ width: '60%' }}
-        label="Email"
-        value={text}
-        mode="outlined"
-        onChangeText={(text) => setText(text)}
-      />
-
-      <TextInput
-        style={{ width: '60%' }}
+      <Input label="Email" value={text} changeHandler={() => setText(text)} />
+      <Input
         label="Password"
         value={password}
-        mode="outlined"
-        onChangeText={(password) => setPassword(password)}
+        changeHandler={() => setPassword(password)}
       />
-      <Button mode="contained">Login</Button>
+      <Button mode="contained" style={{ marginTop: 10, borderRadius: 10 }}>
+        Login
+      </Button>
     </View>
   );
 };
