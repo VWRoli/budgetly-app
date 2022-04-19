@@ -1,5 +1,6 @@
+import { Link } from '@react-navigation/native';
 import React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { Button } from 'react-native-paper';
 import Logo from '../assets/Logo';
 import Input from '../components/common/Input';
@@ -23,9 +24,16 @@ const LoginScreen = () => {
         value={password}
         changeHandler={() => setPassword(password)}
       />
-      <Button mode="contained" style={{ marginTop: 10, borderRadius: 10 }}>
+      <Button mode="contained" style={{ marginVertical: 10 }}>
         Login
       </Button>
+      <Link to={{ screen: 'Signup' }} style={{ color: '#1E84F3' }}>
+        Not a member? Sign up!
+      </Link>
+
+      <Link to={{ screen: 'Home' }} style={{ color: '#1E84F3' }}>
+        Forgot password?
+      </Link>
     </View>
   );
 };

@@ -1,6 +1,6 @@
+import { Link } from '@react-navigation/native';
 import React from 'react';
 import { View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 import Logo from '../assets/Logo';
 import Input from '../components/common/Input';
@@ -25,9 +25,12 @@ const SignupScreen = () => {
         changeHandler={() => setPassword(password)}
       />
 
-      <Button mode="contained" style={{ marginTop: 10, borderRadius: 10 }}>
+      <Button mode="contained" style={{ marginVertical: 10 }}>
         Sign Up
       </Button>
+      <Link to={{ screen: 'Login' }} style={{ color: '#1E84F3' }}>
+        Already signed up? Log in!
+      </Link>
     </View>
   );
 };

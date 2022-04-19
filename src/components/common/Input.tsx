@@ -14,8 +14,8 @@ const Input: React.FC<Props> = ({
 }): JSX.Element => {
   return (
     <TextInput
-      theme={{ roundness: 10 }}
-      style={{ width: '60%', borderRadius: 10 }}
+      theme={{ roundness: 5 }}
+      style={{ width: '60%', marginVertical: 5 }}
       label={label}
       value={value}
       mode="outlined"
