@@ -9,7 +9,9 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
       <Button mode="contained" onPress={() => navigation.navigate('Login')}>
         Login
       </Button>
-      <Button mode="outlined">Sign Up</Button>
+      <Button mode="outlined" onPress={() => navigation.navigate('Signup')}>
+        Sign Up
+      </Button>
     </View>
   );
 };

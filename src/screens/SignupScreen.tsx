@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 import Logo from '../assets/Logo';
 import Input from '../components/common/Input';
 
-const LoginScreen = () => {
+const SignupScreen = () => {
   const [text, setText] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -23,11 +24,12 @@ const LoginScreen = () => {
         value={password}
         changeHandler={() => setPassword(password)}
       />
+
       <Button mode="contained" style={{ marginTop: 10, borderRadius: 10 }}>
-        Login
+        Sign Up
       </Button>
     </View>
   );
 };
 
-export default LoginScreen;
+export default SignupScreen;

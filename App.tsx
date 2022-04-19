@@ -5,7 +5,6 @@ import { LogBox } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 //Navigation
 import AppStack from './src/navigation/AppStack';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AuthStack from './src/navigation/AuthStack';
 
 //To ignore warning
@@ -18,12 +17,10 @@ const theme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#1976d2',
+    primary: '#1E84F3',
     accent: '#9c27b0',
   },
 };
-
-const Stack = createNativeStackNavigator();
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
