@@ -5,7 +5,11 @@ import { Button } from 'react-native-paper';
 import Logo from '../assets/Logo';
 import Input from '../components/common/Input';
 
-const LoginScreen = () => {
+export interface LoginProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LoginScreen: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
   const [text, setText] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -24,7 +28,11 @@ const LoginScreen = () => {
         value={password}
         changeHandler={() => setPassword(password)}
       />
-      <Button mode="contained" style={{ marginVertical: 10 }}>
+      <Button
+        mode="contained"
+        style={{ marginVertical: 10 }}
+        onPress={() => setIsLoggedIn(true)}
+      >
         Login
       </Button>
       <Link to={{ screen: 'Signup' }} style={{ color: '#1E84F3' }}>
