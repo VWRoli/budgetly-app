@@ -1,17 +1,22 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CustomDrawer from '../components/CustomDrawer';
 //Screens
 import Budget from '../screens/Budget';
+import { LoginProps } from '../screens/LoginScreen';
 import Reports from '../screens/Reports';
 import Transactions from '../screens/Transactions';
 
 export const Drawer = createDrawerNavigator();
 
-const AppStack = () => {
+const AppStack: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
   return (
     <Drawer.Navigator
       initialRouteName="Budget"
+      drawerContent={(props) => (
+        <CustomDrawer props={props} setIsLoggedIn={setIsLoggedIn} />
+      )}
       screenOptions={{
         drawerActiveBackgroundColor: '#1976d2',
         drawerActiveTintColor: '#fff',

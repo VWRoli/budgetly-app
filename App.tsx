@@ -29,7 +29,7 @@ const App = () => {
     <NavigationContainer>
       <PaperProvider theme={theme}>
         {isLoggedIn ? (
-          <AppStack />
+          <AppStack setIsLoggedIn={setIsLoggedIn} />
         ) : (
           <AuthStack setIsLoggedIn={setIsLoggedIn} />
         )}

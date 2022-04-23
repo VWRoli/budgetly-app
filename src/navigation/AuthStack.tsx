@@ -15,11 +15,6 @@ const AuthStack: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
       <Stack.Screen name="Login">
         {() => <LoginScreen setIsLoggedIn={setIsLoggedIn} />}
       </Stack.Screen>
-      {/* <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        
-      /> */}
       <Stack.Screen name="Signup" component={SignupScreen} />
     </Stack.Navigator>
   );
