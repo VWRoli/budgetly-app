@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontWeight: '500',
+    fontSize: 16,
     letterSpacing: 0.4,
   },
 });
