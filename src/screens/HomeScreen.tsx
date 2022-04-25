@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-//import { Button } from 'react-native-paper';
 import Button from '../components/common/Button';
 import Logo from '../assets/Logo';
+import Link from '../components/common/Link';
 import CustomText from '../components/common/CustomText';
 import HeaderText from '../components/common/HeaderText';
 import Container from '../components/common/Container';
@@ -38,7 +38,10 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             text="Already have an acccount?"
             styles={{ marginRight: 5 }}
           />
-          <CustomText text="Sign In" primary bold />
+          <Link
+            text="Log In"
+            pressHandler={() => navigation.navigate('Login')}
+          />
         </View>
       </Container>
     </View>

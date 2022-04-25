@@ -3,7 +3,6 @@ import { Text } from 'react-native';
 
 interface Props {
   text: string;
-  pressHandler?: () => void;
   primary?: boolean;
   bold?: boolean;
   styles?: { [key: string]: string | number };
@@ -12,7 +11,6 @@ interface Props {
 const CustomText: React.FC<Props> = ({
   primary,
   text,
-  pressHandler,
   bold,
   styles,
 }): JSX.Element => {
@@ -24,7 +22,6 @@ const CustomText: React.FC<Props> = ({
         fontWeight: `${bold ? 'bold' : 'normal'}`,
         ...styles,
       }}
-      onPress={pressHandler}
     >
       {text}
     </Text>
