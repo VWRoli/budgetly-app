@@ -4,12 +4,19 @@ import { View } from 'react-native';
 import Button from '../components/common/Button';
 import Logo from '../assets/Logo';
 import CustomText from '../components/common/CustomText';
+import HeaderText from '../components/common/HeaderText';
+import Container from '../components/common/Container';
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Logo />
-      <View style={{ width: '90%', alignItems: 'center' }}>
+      <Container>
+        <HeaderText text="Simplify your finances" />
+        <CustomText text="Keep track of your money with budgetly!" />
+      </Container>
+
+      <Container>
         <Button
           label="Register Now"
           pressHandler={() => navigation.navigate('Signup')}
@@ -21,17 +28,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           />
           <CustomText text="Sign In" primary bold />
         </View>
-      </View>
-      {/* <Button
-        mode="contained"
-        onPress={() => navigation.navigate('Login')}
-        style={{ marginVertical: 10 }}
-      >
-        Login
-      </Button>
-      <Button mode="outlined" onPress={() => navigation.navigate('Signup')}>
-        Sign Up
-      </Button> */}
+      </Container>
     </View>
   );
 };
