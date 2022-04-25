@@ -1,11 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import Button from '../components/common/Button';
 import Logo from '../assets/Logo';
+//Components
+import Button from '../components/common/Button';
 import Link from '../components/common/Link';
 import CustomText from '../components/common/CustomText';
 import HeaderText from '../components/common/HeaderText';
-import Container from '../components/common/Container';
+import Wrapper from '../components/common/Wrapper';
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   return (
@@ -19,16 +20,16 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
       }}
     >
       <View></View>
-      <Container>
+      <Wrapper>
         <Logo />
         <HeaderText
           text="Simplify your finances..."
           styles={{ marginVertical: 15 }}
         />
         <CustomText text="Keep track of your money simply and efficiently!" />
-      </Container>
+      </Wrapper>
 
-      <Container>
+      <Wrapper>
         <Button
           label="Register Now"
           pressHandler={() => navigation.navigate('Signup')}
@@ -43,7 +44,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             pressHandler={() => navigation.navigate('Login')}
           />
         </View>
-      </Container>
+      </Wrapper>
     </View>
   );
 };
