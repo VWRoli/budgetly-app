@@ -10,7 +10,8 @@ function Icon(props: SvgProps) {
       />
       <Path
         d="M119 53.5c0 29.547-23.953 53.5-53.5 53.5S12 83.047 12 53.5 35.953 0 65.5 0 119 23.953 119 53.5z"
-        fill="#fff"
+        fill="#1D3777"
+        fillOpacity={0.05}
       />
       <Path d="M32 45h18v33H32V45z" fill="#D1175E" />
       <Path d="M56 29h18v49H56V29z" fill="#1E84F3" />

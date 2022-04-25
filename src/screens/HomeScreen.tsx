@@ -15,6 +15,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingVertical: 35,
+        backgroundColor: '#fff',
       }}
     >
       <View></View>
