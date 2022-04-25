@@ -9,10 +9,21 @@ import Container from '../components/common/Container';
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Logo />
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: 35,
+      }}
+    >
+      <View></View>
       <Container>
-        <HeaderText text="Simplify your finances" />
+        <Logo />
+        <HeaderText
+          text="Simplify your finances..."
+          styles={{ marginVertical: 15 }}
+        />
         <CustomText text="Keep track of your money with budgetly!" />
       </Container>
 
