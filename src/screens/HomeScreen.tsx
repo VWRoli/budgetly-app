@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           text="Simplify your finances..."
           styles={{ marginVertical: 15 }}
         />
-        <CustomText text="Keep track of your money with budgetly!" />
+        <CustomText text="Keep track of your money simply and efficiently!" />
       </Container>
 
       <Container>
