@@ -1,15 +1,19 @@
-import { Link } from '@react-navigation/native';
 import React from 'react';
 import { View } from 'react-native';
-import { Button } from 'react-native-paper';
 import Logo from '../assets/Logo';
+//Components
 import Input from '../components/common/Input';
+import Button from '../components/common/Button';
+import Link from '../components/common/Link';
+import CustomText from '../components/common/CustomText';
+import HeaderText from '../components/common/HeaderText';
 
 export interface LoginProps {
+  navigation: any;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LoginScreen: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
+const LoginScreen: React.FC<LoginProps> = ({ setIsLoggedIn, navigation }) => {
   const [text, setText] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -22,26 +26,42 @@ const LoginScreen: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
       }}
     >
       <Logo />
+      <View
+        style={{
+          width: '85%',
+          paddingVertical: 15,
+        }}
+      >
+        <HeaderText text="Login" />
+      </View>
       <Input label="Email" value={text} changeHandler={() => setText(text)} />
       <Input
         label="Password"
         value={password}
         changeHandler={() => setPassword(password)}
       />
-      <Button
-        mode="contained"
-        style={{ marginVertical: 10 }}
-        onPress={() => setIsLoggedIn(true)}
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          width: '85%',
+          paddingVertical: 15,
+        }}
       >
-        Login
-      </Button>
-      <Link to={{ screen: 'Signup' }} style={{ color: '#1E84F3' }}>
-        Not a member? Sign up!
-      </Link>
+        <Link
+          text="Forgot password?"
+          pressHandler={() => navigation.navigate('ResetScreen')}
+        />
+      </View>
+      <Button label="Login" pressHandler={() => setIsLoggedIn(true)} />
 
-      <Link to={{ screen: 'Home' }} style={{ color: '#1E84F3' }}>
-        Forgot password?
-      </Link>
+      <View style={{ flexDirection: 'row', marginTop: 25 }}>
+        <CustomText text="New to budgetly?" styles={{ marginRight: 5 }} />
+        <Link
+          text="Register"
+          pressHandler={() => navigation.navigate('Register')}
+        />
+      </View>
     </View>
   );
 };

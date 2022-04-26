@@ -7,11 +7,7 @@ interface Props {
   styles?: { [key: string]: string | number };
 }
 
-const CustomText: React.FC<Props> = ({
-  text,
-  pressHandler,
-  styles,
-}): JSX.Element => {
+const Link: React.FC<Props> = ({ text, pressHandler, styles }): JSX.Element => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={pressHandler}>
       <Text
@@ -28,4 +24,4 @@ const CustomText: React.FC<Props> = ({
   );
 };
 
-export default CustomText;
+export default Link;
