@@ -34,12 +34,24 @@ const LoginScreen: React.FC<LoginProps> = ({ setIsLoggedIn, navigation }) => {
       >
         <HeaderText text="Login" />
       </View>
-      <Input label="Email" value={text} changeHandler={() => setText(text)} />
       <Input
-        label="Password"
-        value={password}
+        placeholder="Email"
+        value={text}
+        changeHandler={() => setText(text)}
+        icon="alternate-email"
+      />
+      <Input
+        placeholder="Password"
+        value={text}
+        secureTextEntry
+        icon="lock-outline"
         changeHandler={() => setPassword(password)}
       />
+      {/* <Input
+        label="Password"
+        value={password}
+        
+      /> */}
       <View
         style={{
           flexDirection: 'row',

@@ -1,27 +1,62 @@
 import React from 'react';
-import { TextInput } from 'react-native-paper';
+import { StyleSheet, TextInput, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
   value: string;
-  label: string;
   changeHandler: () => void;
+  placeholder: string;
+  secureTextEntry?: boolean;
+  icon: string;
 }
 
 const Input: React.FC<Props> = ({
   value,
   changeHandler,
-  label,
+  secureTextEntry,
+  placeholder,
+  icon,
 }): JSX.Element => {
   return (
-    <TextInput
-      theme={{ roundness: 5 }}
-      style={{ width: '60%', marginVertical: 5 }}
-      label={label}
-      value={value}
-      mode="outlined"
-      onChangeText={changeHandler}
-    />
+    <View style={styles.searchSection}>
+      <Icon style={styles.searchIcon} name={icon} size={20} color="#8B8C9E" />
+      <TextInput
+        secureTextEntry={secureTextEntry}
+        style={styles.input}
+        value={value}
+        placeholder={placeholder}
+        onChangeText={changeHandler}
+      />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  searchSection: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    marginVertical: 5,
+  },
+  searchIcon: {
+    padding: 10,
+  },
+  input: {
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingLeft: 0,
+    backgroundColor: '#fff',
+    color: 'red',
+    width: '75%',
+    marginVertical: 5,
+    borderRadius: 15,
+    fontSize: 16,
+  },
+});
 
 export default Input;
