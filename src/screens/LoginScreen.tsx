@@ -42,11 +42,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
         icon="lock-outline"
         changeHandler={() => setPassword(password)}
       />
-      {/* <Input
-        label="Password"
-        value={password}
-        
-      /> */}
+
       <View
         style={{
           flexDirection: 'row',
