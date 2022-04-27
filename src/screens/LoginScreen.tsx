@@ -8,12 +8,7 @@ import Link from '../components/common/Link';
 import CustomText from '../components/common/CustomText';
 import HeaderText from '../components/common/HeaderText';
 
-export interface LoginProps {
-  navigation: any;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const LoginScreen: React.FC<LoginProps> = ({ setIsLoggedIn, navigation }) => {
+const LoginScreen = ({ navigation }: { navigation: any }) => {
   const [text, setText] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -65,13 +60,13 @@ const LoginScreen: React.FC<LoginProps> = ({ setIsLoggedIn, navigation }) => {
           pressHandler={() => navigation.navigate('ResetScreen')}
         />
       </View>
-      <Button label="Login" pressHandler={() => setIsLoggedIn(true)} />
+      <Button label="Login" pressHandler={() => {}} />
 
       <View style={{ flexDirection: 'row', marginTop: 25 }}>
         <CustomText text="New to budgetly?" styles={{ marginRight: 5 }} />
         <Link
           text="Register"
-          pressHandler={() => navigation.navigate('Register')}
+          pressHandler={() => navigation.navigate('Signup')}
         />
       </View>
     </View>

@@ -28,11 +28,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <PaperProvider theme={theme}>
-        {isLoggedIn ? (
-          <AppStack setIsLoggedIn={setIsLoggedIn} />
-        ) : (
-          <AuthStack setIsLoggedIn={setIsLoggedIn} />
-        )}
+        {isLoggedIn ? <AppStack /> : <AuthStack />}
       </PaperProvider>
     </NavigationContainer>
   );
