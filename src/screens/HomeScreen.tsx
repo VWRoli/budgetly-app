@@ -7,6 +7,7 @@ import Link from '../components/common/Link';
 import CustomText from '../components/common/CustomText';
 import HeaderText from '../components/common/HeaderText';
 import Wrapper from '../components/common/Wrapper';
+import Container from '../components/common/Container';
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   return (

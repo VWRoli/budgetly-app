@@ -7,19 +7,14 @@ import Button from '../components/common/Button';
 import Link from '../components/common/Link';
 import CustomText from '../components/common/CustomText';
 import HeaderText from '../components/common/HeaderText';
+import Container from '../components/common/Container';
 
 const LoginScreen = ({ navigation }: { navigation: any }) => {
   const [text, setText] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <Container>
       <Logo />
       <View
         style={{
@@ -53,7 +48,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
       >
         <Link
           text="Forgot password?"
-          pressHandler={() => navigation.navigate('ResetScreen')}
+          pressHandler={() => navigation.navigate('ReminderScreen')}
         />
       </View>
       <Button label="Login" pressHandler={() => {}} />
@@ -65,7 +60,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
           pressHandler={() => navigation.navigate('Signup')}
         />
       </View>
-    </View>
+    </Container>
   );
 };
 

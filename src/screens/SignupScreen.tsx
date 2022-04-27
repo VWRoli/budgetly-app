@@ -7,6 +7,7 @@ import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
 import Link from '../components/common/Link';
+import Container from '../components/common/Container';
 
 //todo navigation type
 const SignupScreen = ({ navigation }: { navigation: any }) => {
@@ -15,13 +16,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
   const [password, setPassword] = React.useState('');
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <Container>
       <Logo />
       <View
         style={{
@@ -85,7 +80,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         />
         <Link text="Login" pressHandler={() => navigation.navigate('Login')} />
       </View>
-    </View>
+    </Container>
   );
 };
 
