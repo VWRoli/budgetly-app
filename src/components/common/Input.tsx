@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     backgroundColor: '#fff',
     color: 'red',
-    width: '75%',
+    width: '80%',
     marginVertical: 5,
     borderRadius: 15,
     fontSize: 16,

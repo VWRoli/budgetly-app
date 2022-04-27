@@ -48,7 +48,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
       >
         <Link
           text="Forgot password?"
-          pressHandler={() => navigation.navigate('ReminderScreen')}
+          pressHandler={() => navigation.navigate('Reminder')}
         />
       </View>
       <Button label="Login" pressHandler={() => {}} />
