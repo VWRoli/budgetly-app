@@ -5,14 +5,13 @@ import {
 import React from 'react';
 import { TouchableOpacity, View, Dimensions } from 'react-native';
 import { Text } from 'react-native-paper';
-import { LoginProps } from '../screens/LoginScreen';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-interface Props extends LoginProps {
+interface Props {
   props: any;
 }
 
-const CustomDrawer: React.FC<Props> = ({ props, setIsLoggedIn }) => {
+const CustomDrawer: React.FC<Props> = ({ props }) => {
   const ScreenHeight = Dimensions.get('window').height;
 
   return (
@@ -64,7 +63,7 @@ const CustomDrawer: React.FC<Props> = ({ props, setIsLoggedIn }) => {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => setIsLoggedIn(false)}
+              onPress={() => {}}
               style={{ paddingVertical: 15, marginLeft: 25 }}
             >
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
