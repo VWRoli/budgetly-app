@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Logo from '../assets/Logo';
 //Components
 import Wrapper from '../components/common/Wrapper';
@@ -7,26 +7,18 @@ import CustomText from '../components/common/CustomText';
 import HeaderText from '../components/common/HeaderText';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
+import BackButton from '../components/common/BackButton';
 
-const ReminderScreen = () => {
+const ReminderScreen = ({ navigation }: { navigation: any }) => {
   const [text, setText] = React.useState('');
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-      }}
-    >
+    <View style={styles.wrapper}>
+      <View style={styles.backButton}>
+        <BackButton pressHandler={() => navigation.goBack()} />
+      </View>
       <Logo />
-      <View
-        style={{
-          width: '90%',
-          paddingVertical: 15,
-        }}
-      >
+      <View style={styles.header}>
         <HeaderText text="Forgot Password?" styles={{ width: '45%' }} />
       </View>
       <Wrapper>
@@ -47,5 +39,23 @@ const ReminderScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 35,
+    left: 15,
+  },
+  header: {
+    width: '90%',
+    paddingVertical: 15,
+  },
+});
 
 export default ReminderScreen;
