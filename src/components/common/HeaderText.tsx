@@ -3,15 +3,16 @@ import { Text } from 'react-native';
 
 interface Props {
   text: string;
+  size?: number;
   styles?: { [key: string]: string | number };
 }
 
-const HeaderText: React.FC<Props> = ({ text, styles }): JSX.Element => {
+const HeaderText: React.FC<Props> = ({ text, styles, size }): JSX.Element => {
   return (
     <Text
       style={{
         color: '#1D3777',
-        fontSize: 32,
+        fontSize: size || 32,
         fontWeight: 'bold',
         ...styles,
       }}
