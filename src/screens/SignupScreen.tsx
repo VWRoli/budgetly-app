@@ -55,16 +55,9 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         }}
       >
         <CustomText
-          text="By signing up, you're agree to our"
+          text="By signing up, you're agree to our "
           styles={{ fontSize: 12 }}
         />
-        <Link
-          text="Terms & Conditions"
-          pressHandler={() => navigation.navigate('Terms')}
-          styles={{ fontSize: 12, marginHorizontal: 5 }}
-        />
-
-        <CustomText text="and" styles={{ fontSize: 12 }} />
         <Link
           text="Privacy Policy"
           pressHandler={() => navigation.navigate('Privacy')}
