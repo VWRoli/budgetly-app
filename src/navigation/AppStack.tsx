@@ -12,8 +12,16 @@ const AppStack: React.FC = (): JSX.Element => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        tabBarStyle: {
+          backgroundColor: '#fff',
+          height: 55,
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+        },
+        tabBarShowLabel: false,
+
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+          let iconName = '';
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
