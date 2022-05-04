@@ -12,6 +12,7 @@ const AppStack: React.FC = (): JSX.Element => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        headerShown: false,
         tabBarStyle: {
           backgroundColor: '#fff',
           height: 55,
@@ -23,7 +24,7 @@ const AppStack: React.FC = (): JSX.Element => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = '';
 
-          if (route.name === 'Home') {
+          if (route.name === 'Budget') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Reports') {
             iconName = focused ? 'pie-chart' : 'pie-chart-outline';
@@ -39,7 +40,7 @@ const AppStack: React.FC = (): JSX.Element => {
         tabBarInactiveTintColor: '#8B8C9E',
       })}
     >
-      <Tab.Screen name="Home" component={BudgetScreen} />
+      <Tab.Screen name="Budget" component={BudgetScreen} />
       <Tab.Screen name="Reports" component={ReportsScreen} />
       <Tab.Screen name="Transactions" component={TransactionsScreen} />
     </Tab.Navigator>
