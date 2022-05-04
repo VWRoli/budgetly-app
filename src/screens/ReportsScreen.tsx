@@ -3,12 +3,12 @@ import React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native';
 
-const BudgetScreen: React.FC = (): JSX.Element => {
+const ReportsScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Budget!</Text>
+      <Text>Reports!</Text>
     </View>
   );
 };
 
-export default BudgetScreen;
+export default ReportsScreen;

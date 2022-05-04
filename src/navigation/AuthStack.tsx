@@ -9,7 +9,7 @@ import PrivacyScreen from '../screens/PrivacyScreen';
 
 const Stack = createNativeStackNavigator();
 
-const AuthStack = () => {
+const AuthStack: React.FC = (): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomeScreen} />

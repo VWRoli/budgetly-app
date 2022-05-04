@@ -1,30 +1,39 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+//Screens
+import BudgetScreen from '../screens/BudgetScreen';
+import ReportsScreen from '../screens/ReportsScreen';
+import TransactionsScreen from '../screens/TransactionsScreen';
 
 const Tab = createBottomTabNavigator();
 
-function HomeScreen() {
+const AppStack: React.FC = (): JSX.Element => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
+          if (route.name === 'Home') {
+            iconName = focused ? 'home' : 'home-outline';
+          } else if (route.name === 'Reports') {
+            iconName = focused ? 'pie-chart' : 'pie-chart-outline';
+          } else if (route.name === 'Transactions') {
+            iconName = focused
+              ? 'md-arrow-forward-circle'
+              : 'md-arrow-forward-circle-outline';
+          }
 
-const AppStack = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#06B3C4',
+        tabBarInactiveTintColor: '#8B8C9E',
+      })}
+    >
+      <Tab.Screen name="Home" component={BudgetScreen} />
+      <Tab.Screen name="Reports" component={ReportsScreen} />
+      <Tab.Screen name="Transactions" component={TransactionsScreen} />
     </Tab.Navigator>
   );
 };
