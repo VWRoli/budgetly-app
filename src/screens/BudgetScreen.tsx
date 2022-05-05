@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text } from 'react-native';
+import CategoryCard from '../components/CategoryCard';
+import CustomText from '../components/common/CustomText';
 //Components
 import MainCard from '../components/MainCard';
 
@@ -10,11 +11,15 @@ const BudgetScreen: React.FC = (): JSX.Element => {
       style={{
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#F4F9F5',
+        backgroundColor: '#f8f7f7',
         paddingTop: 35,
       }}
     >
       <MainCard />
+      <View style={{ paddingTop: 35, width: '85%' }}>
+        <CustomText text="Categories" styles={{ marginVertical: 10 }} />
+        <CategoryCard />
+      </View>
     </View>
   );
 };

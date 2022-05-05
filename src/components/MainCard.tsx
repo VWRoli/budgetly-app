@@ -33,8 +33,6 @@ const MainCard = () => {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: '#eee',
-    borderWidth: 1,
     borderRadius: 15,
     width: '85%',
     paddingBottom: 50,
