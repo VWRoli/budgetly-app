@@ -1,19 +1,20 @@
 import React from 'react';
-//Components
 import { View } from 'react-native';
 import { Text } from 'react-native';
+//Components
+import MainCard from '../components/MainCard';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
   return (
     <View
       style={{
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#F4F9F5',
+        paddingTop: 35,
       }}
     >
-      <Text>Budget!</Text>
+      <MainCard />
     </View>
   );
 };
