@@ -8,9 +8,16 @@ const Stack = createNativeStackNavigator();
 
 const DashStack: React.FC = (): JSX.Element => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="Budget"
+    >
       <Stack.Screen name="Budget" component={BudgetScreen} />
-      <Stack.Screen name="BudgetDetail" component={BudgetDetailScreen} />
+      <Stack.Screen
+        name="BudgetDetail"
+        component={BudgetDetailScreen}
+        options={{ headerShown: true, title: 'Bills' }}
+      />
     </Stack.Navigator>
   );
 };
