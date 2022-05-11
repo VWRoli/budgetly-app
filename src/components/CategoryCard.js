@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 //Components
 import CircularIcon from './common/CircularIcon';
 import CustomText from './common/CustomText';
@@ -7,8 +8,13 @@ import Divider from './common/Divider';
 import HeaderText from './common/HeaderText';
 
 const CategoryCard = () => {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate('BudgetDetail')}
+    >
       <View style={styles.row}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <View style={{ marginRight: 10 }}>
@@ -29,7 +35,7 @@ const CategoryCard = () => {
         <HeaderText text="HUF 3,149,706" size={28} />
         <CustomText text="HUF 0" />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

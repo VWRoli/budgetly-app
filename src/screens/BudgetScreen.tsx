@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
+//Components
 import CategoryCard from '../components/CategoryCard';
 import CustomText from '../components/common/CustomText';
-//Components
 import MainCard from '../components/MainCard';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
