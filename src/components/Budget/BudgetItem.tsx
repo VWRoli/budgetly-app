@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Chip from '../common/Chip';
 //Components
 import CustomText from '../common/CustomText';
 import Date from '../common/Date';
@@ -29,10 +30,8 @@ const BudgetItem = () => {
           />
           <CustomText text="Internet" />
         </View>
-        {/* Todo this is a chip */}
-        <View>
-          <Text>HUF 3059</Text>
-        </View>
+
+        <Chip value="HUF 3059" />
       </View>
       <Date />
     </View>
