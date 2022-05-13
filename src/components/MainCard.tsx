@@ -3,9 +3,14 @@ import { Text, View, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 //Components
 import CustomText from './common/CustomText';
+import Date from './common/Date';
 import HeaderText from './common/HeaderText';
 
-const MainCard = () => {
+interface Props {
+  date?: boolean;
+}
+
+const MainCard: React.FC<Props> = ({ date }): JSX.Element => {
   return (
     <LinearGradient
       colors={[
@@ -18,6 +23,11 @@ const MainCard = () => {
       style={styles.container}
     >
       <CustomText text="My Balance" />
+      {date && (
+        <View style={{ position: 'absolute', right: 15, top: 15 }}>
+          <Date />
+        </View>
+      )}
       <HeaderText text="HUF 349,706" />
       <View style={styles.tab}>
         <Text style={{ color: '#fff', fontWeight: 'bold' }}>
@@ -37,7 +47,7 @@ const styles = StyleSheet.create({
     width: '85%',
     paddingBottom: 50,
     paddingTop: 25,
-    paddingLeft: 15,
+    paddingHorizontal: 15,
   },
   tab: {
     position: 'absolute',

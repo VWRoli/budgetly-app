@@ -15,7 +15,7 @@ const BudgetScreen: React.FC = (): JSX.Element => {
         paddingTop: 35,
       }}
     >
-      <MainCard />
+      <MainCard date />
       <View style={{ paddingTop: 35, width: '85%' }}>
         <CustomText text="Categories" styles={{ marginVertical: 10 }} />
         <CategoryCard />

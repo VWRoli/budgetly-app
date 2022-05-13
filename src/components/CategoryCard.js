@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-//Components
 import CircularIcon from './common/CircularIcon';
+//Components
 import CustomText from './common/CustomText';
 import Divider from './common/Divider';
 import HeaderText from './common/HeaderText';
