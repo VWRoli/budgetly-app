@@ -1,14 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import BudgetItem from '../components/Budget/BudgetItem';
 //Components
 import MainCard from '../components/MainCard';
 
-const BudgetDetailScreen = ({ navigation }: { navigation: any }) => {
+const BudgetDetailScreen = () => {
   return (
     <View style={styles.container}>
       <MainCard />
-      <BudgetItem />
+      <View style={{ marginTop: 35, width: '85%' }}>
+        <BudgetItem />
+        <BudgetItem />
+        <BudgetItem />
+      </View>
     </View>
   );
 };
