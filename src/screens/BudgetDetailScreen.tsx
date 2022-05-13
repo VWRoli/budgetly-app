@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import BudgetItem from '../components/Budget/BudgetItem';
 //Components
 import MainCard from '../components/MainCard';
 
@@ -7,6 +8,7 @@ const BudgetDetailScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View style={styles.container}>
       <MainCard />
+      <BudgetItem />
     </View>
   );
 };
