@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Chip from '../common/Chip';
 //Components
 import CustomText from '../common/CustomText';
+import Chip from '../common/Chip';
 import Date from '../common/Date';
 
-const BudgetItem = () => {
+const BudgetItem: React.FC = (): JSX.Element => {
   return (
     <View
       style={{
@@ -20,7 +20,7 @@ const BudgetItem = () => {
         justifyContent: 'space-between',
       }}
     >
-      <View style={{}}>
+      <View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons
             name="web"
