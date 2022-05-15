@@ -15,7 +15,7 @@ const CategoryCard = ({ category }) => {
     <TouchableOpacity
       style={styles.container}
       //todo typescript error
-      onPress={() => navigation.navigate('BudgetDetail')}
+      onPress={() => navigation.navigate('BudgetDetail', { id: category.id })}
     >
       <View style={styles.row}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>

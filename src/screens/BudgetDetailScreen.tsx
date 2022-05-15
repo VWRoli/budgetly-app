@@ -1,26 +1,38 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import BudgetItem from '../components/Budget/BudgetItem';
 //Components
 import MainCard from '../components/MainCard';
+import { BASE_URL } from '../constants/constants';
+import { useFetch } from '../hooks/useFetch';
+import { budgetItemType } from '../types/budgetItemType';
 
-const BudgetDetailScreen = () => {
+const BudgetDetailScreen = ({ route }: { route: any }) => {
+  const {
+    data: budgetItems,
+    isLoading,
+    isError,
+  } = useFetch(`${BASE_URL}categories/${route.params.id}/budgetItems`);
   return (
-    <View style={styles.container}>
-      {/* <MainCard /> */}
+    <ScrollView
+      contentContainerStyle={{
+        alignItems: 'center',
+      }}
+      style={styles.container}
+    >
+      {/*todo some summary card <MainCard /> */}
       <View style={{ marginTop: 35, width: '85%' }}>
-        <BudgetItem />
-        <BudgetItem />
-        <BudgetItem />
+        {budgetItems.map((item: budgetItemType) => (
+          <BudgetItem item={item} />
+        ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: '#f8f7f7',
     paddingTop: 35,
   },
