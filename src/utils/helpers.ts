@@ -1,6 +1,7 @@
-export const formatter = (locale: string, currency: string, amount: number) =>
-  new Intl.NumberFormat(locale, {
+//todo locale: string, currency: string,
+export const formatter = (amount: number) =>
+  new Intl.NumberFormat('hu-HU', {
     style: 'currency',
-    currency: currency,
+    currency: 'huf',
     minimumFractionDigits: 0,
   }).format(amount);

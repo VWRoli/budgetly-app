@@ -1,17 +1,17 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { userType } from '../types/userType';
 import { formatter } from '../utils/helpers';
 //Components
 import CustomText from './common/CustomText';
 import HeaderText from './common/HeaderText';
 
 interface Props {
-  data: any; //todo
+  data: userType;
 }
 
 const MainCard: React.FC<Props> = ({ data }): JSX.Element => {
-  //console.log(formatter(data.accountLocale, data.currency, 5000));
   return (
     <LinearGradient
       colors={[
@@ -25,14 +25,10 @@ const MainCard: React.FC<Props> = ({ data }): JSX.Element => {
     >
       <CustomText text="My Balance" />
 
-      <HeaderText
-        text={`${formatter(data.accountLocale, data.currency, data.balance)}`}
-      />
+      <HeaderText text={`${formatter(data.balance)}`} />
       <View style={styles.tab}>
         <Text style={styles.tabText}>Avialable to Budget</Text>
         <Text style={styles.availableText}>{`${formatter(
-          data.accountLocale,
-          data.currency,
           data.available,
         )}`}</Text>
       </View>

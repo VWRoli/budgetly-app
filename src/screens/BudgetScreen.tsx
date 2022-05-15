@@ -13,7 +13,7 @@ const BudgetScreen: React.FC = (): JSX.Element => {
     isLoading,
     isError,
   } = useFetch(`${BASE_URL}users/1`);
-  //console.log(accountData);
+
   return (
     <View
       style={{
