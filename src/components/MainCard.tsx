@@ -1,16 +1,17 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { formatter } from '../utils/helpers';
 //Components
 import CustomText from './common/CustomText';
-import Date from './common/Date';
 import HeaderText from './common/HeaderText';
 
 interface Props {
-  date?: boolean;
+  data: any; //todo
 }
 
-const MainCard: React.FC<Props> = ({ date }): JSX.Element => {
+const MainCard: React.FC<Props> = ({ data }): JSX.Element => {
+  //console.log(formatter(data.accountLocale, data.currency, 5000));
   return (
     <LinearGradient
       colors={[
@@ -23,19 +24,17 @@ const MainCard: React.FC<Props> = ({ date }): JSX.Element => {
       style={styles.container}
     >
       <CustomText text="My Balance" />
-      {date && (
-        <View style={{ position: 'absolute', right: 15, top: 15 }}>
-          <Date />
-        </View>
-      )}
-      <HeaderText text="HUF 349,706" />
+
+      <HeaderText
+        text={`${formatter(data.accountLocale, data.currency, data.balance)}`}
+      />
       <View style={styles.tab}>
-        <Text style={{ color: '#fff', fontWeight: 'bold' }}>
-          Avialable to Budget
-        </Text>
-        <Text style={{ color: '#1eff05', fontWeight: 'bold', fontSize: 16 }}>
-          HUF 11,289
-        </Text>
+        <Text style={styles.tabText}>Avialable to Budget</Text>
+        <Text style={styles.availableText}>{`${formatter(
+          data.accountLocale,
+          data.currency,
+          data.available,
+        )}`}</Text>
       </View>
     </LinearGradient>
   );
@@ -61,6 +60,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
+  availableText: { color: '#1eff05', fontWeight: 'bold', fontSize: 16 },
+  tabText: { color: '#fff', fontWeight: 'bold' },
 });
 
 export default MainCard;

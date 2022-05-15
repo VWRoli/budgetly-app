@@ -7,7 +7,7 @@ import MainCard from '../components/MainCard';
 const BudgetDetailScreen = () => {
   return (
     <View style={styles.container}>
-      <MainCard />
+      {/* <MainCard /> */}
       <View style={{ marginTop: 35, width: '85%' }}>
         <BudgetItem />
         <BudgetItem />

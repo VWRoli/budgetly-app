@@ -1,3 +1,5 @@
+export const BASE_URL = `https://budgetly-mobile-app.herokuapp.com/`;
+
 //COLORS
 export const greenGradient = ['#1CB246', '#129C29'];
 export const blueGradient = ['#1E84F3', '#1A6FD7'];
