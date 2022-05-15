@@ -23,7 +23,7 @@ const BudgetScreen: React.FC = (): JSX.Element => {
         paddingTop: 35,
       }}
     >
-      <MainCard data={accountData} isLoading={true} />
+      <MainCard data={accountData} isLoading={isLoading} />
 
       <View style={{ paddingTop: 35, width: '85%' }}>
         <CustomText text="Categories" styles={{ marginVertical: 10 }} />

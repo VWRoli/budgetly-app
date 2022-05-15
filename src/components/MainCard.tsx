@@ -27,16 +27,20 @@ const MainCard: React.FC<Props> = ({ data, isLoading }): JSX.Element => {
     >
       <CustomText text="My Balance" />
       {isLoading ? (
-        <Skeleton />
+        <Skeleton height={35} width={175} />
       ) : (
         <HeaderText text={`${formatter(data.balance)}`} />
       )}
 
       <View style={styles.tab}>
         <Text style={styles.tabText}>Avialable to Budget</Text>
-        <Text style={styles.availableText}>{`${formatter(
-          data.available,
-        )}`}</Text>
+        {isLoading ? (
+          <></>
+        ) : (
+          <Text style={styles.availableText}>{`${formatter(
+            data.available,
+          )}`}</Text>
+        )}
       </View>
     </LinearGradient>
   );

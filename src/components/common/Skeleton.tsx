@@ -10,7 +10,7 @@ interface Props {
 const AnimatedLG = Animated.createAnimatedComponent(LinearGradient);
 
 const Skeleton: React.FC<Props> = ({
-  height = 30,
+  height = 20,
   width = 135,
 }): JSX.Element => {
   const animatedValue = new Animated.Value(0);
@@ -36,13 +36,13 @@ const Skeleton: React.FC<Props> = ({
       style={{
         height: height,
         width: width,
-        backgroundColor: '#a0a0a0',
+        backgroundColor: '#c1c1c1',
         borderRadius: 10,
         overflow: 'hidden',
       }}
     >
       <AnimatedLG
-        colors={['#a0a0a0', '#b0b0b0', '#b0b0b0', '#a0a0a0']}
+        colors={['#c1c1c1', '#ccc', '#ccc', '#c1c1c1']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={{
