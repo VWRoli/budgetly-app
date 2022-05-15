@@ -6,12 +6,14 @@ import { formatter } from '../utils/helpers';
 //Components
 import CustomText from './common/CustomText';
 import HeaderText from './common/HeaderText';
+import Skeleton from './common/Skeleton';
 
 interface Props {
   data: userType;
+  isLoading: boolean;
 }
 
-const MainCard: React.FC<Props> = ({ data }): JSX.Element => {
+const MainCard: React.FC<Props> = ({ data, isLoading }): JSX.Element => {
   return (
     <LinearGradient
       colors={[
@@ -24,8 +26,12 @@ const MainCard: React.FC<Props> = ({ data }): JSX.Element => {
       style={styles.container}
     >
       <CustomText text="My Balance" />
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <HeaderText text={`${formatter(data.balance)}`} />
+      )}
 
-      <HeaderText text={`${formatter(data.balance)}`} />
       <View style={styles.tab}>
         <Text style={styles.tabText}>Avialable to Budget</Text>
         <Text style={styles.availableText}>{`${formatter(
