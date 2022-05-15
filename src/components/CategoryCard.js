@@ -1,18 +1,20 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import CircularIcon from './common/CircularIcon';
+import { formatter } from '../utils/helpers';
 //Components
+import CircularIcon from './common/CircularIcon';
 import CustomText from './common/CustomText';
 import Divider from './common/Divider';
 import HeaderText from './common/HeaderText';
 
-const CategoryCard = () => {
+const CategoryCard = ({ category }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       style={styles.container}
+      //todo typescript error
       onPress={() => navigation.navigate('BudgetDetail')}
     >
       <View style={styles.row}>
@@ -20,9 +22,9 @@ const CategoryCard = () => {
           <View style={{ marginRight: 10 }}>
             <CircularIcon />
           </View>
-          <CustomText text="Bills" primary bold size={20} />
+          <CustomText text={category.title} primary bold size={20} />
         </View>
-        <CustomText text="7 Items" />
+        <CustomText text={`${category.items} items`} />
       </View>
       <Divider />
       <View style={styles.row}>
@@ -32,8 +34,8 @@ const CategoryCard = () => {
         </View>
       </View>
       <View style={styles.row}>
-        <HeaderText text="HUF 3,149,706" size={28} />
-        <CustomText text="HUF 0" />
+        <HeaderText text={formatter(category.budgeted)} size={28} />
+        <CustomText text={formatter(category.available)} />
       </View>
     </TouchableOpacity>
   );
@@ -46,6 +48,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderColor: '#eee',
     borderWidth: 2,
+    marginVertical: 15,
   },
   row: {
     flexDirection: 'row',

@@ -28,7 +28,7 @@ const MainCard: React.FC = (): JSX.Element => {
       {isLoading ? (
         <Skeleton height={35} width={175} />
       ) : (
-        <HeaderText text={`${formatter(data.balance)}`} />
+        <HeaderText text={formatter(data.balance)} />
       )}
 
       <View style={styles.tab}>
@@ -36,9 +36,7 @@ const MainCard: React.FC = (): JSX.Element => {
         {isLoading ? (
           <></>
         ) : (
-          <Text style={styles.availableText}>{`${formatter(
-            data.available,
-          )}`}</Text>
+          <Text style={styles.availableText}>{formatter(data.available)}</Text>
         )}
       </View>
     </LinearGradient>
