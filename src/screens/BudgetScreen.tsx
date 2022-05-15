@@ -8,12 +8,6 @@ import { BASE_URL } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
-  const {
-    data: accountData,
-    isLoading,
-    isError,
-  } = useFetch(`${BASE_URL}users/1`);
-
   return (
     <View
       style={{
@@ -23,7 +17,7 @@ const BudgetScreen: React.FC = (): JSX.Element => {
         paddingTop: 35,
       }}
     >
-      <MainCard data={accountData} isLoading={isLoading} />
+      <MainCard />
 
       <View style={{ paddingTop: 35, width: '85%' }}>
         <CustomText text="Categories" styles={{ marginVertical: 10 }} />

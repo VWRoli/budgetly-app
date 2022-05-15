@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { BASE_URL } from '../constants/constants';
+import { useFetch } from '../hooks/useFetch';
 import { userType } from '../types/userType';
 import { formatter } from '../utils/helpers';
 //Components
@@ -8,12 +10,9 @@ import CustomText from './common/CustomText';
 import HeaderText from './common/HeaderText';
 import Skeleton from './common/Skeleton';
 
-interface Props {
-  data: userType;
-  isLoading: boolean;
-}
+const MainCard: React.FC = (): JSX.Element => {
+  const { data, isLoading, isError } = useFetch(`${BASE_URL}users/1`);
 
-const MainCard: React.FC<Props> = ({ data, isLoading }): JSX.Element => {
   return (
     <LinearGradient
       colors={[
