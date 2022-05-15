@@ -1,39 +1,22 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { formatter } from '../utils/helpers';
 //Components
 import CircularIcon from './common/CircularIcon';
 import CustomText from './common/CustomText';
 import Divider from './common/Divider';
-import HeaderText from './common/HeaderText';
 import Skeleton from './common/Skeleton';
 
-const CategoryCard = ({ category, isLoading }) => {
-  const navigation = useNavigation();
-
+const CategoryCard = () => {
   return (
-    <TouchableOpacity
-      style={styles.container}
-      //todo typescript error
-      onPress={() => navigation.navigate('BudgetDetail', { id: category.id })}
-    >
+    <TouchableOpacity style={styles.container}>
       <View style={styles.row}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <View style={{ marginRight: 10 }}>
             <CircularIcon />
           </View>
-          {isLoading ? (
-            <Skeleton />
-          ) : (
-            <CustomText text={category.title} primary bold size={20} />
-          )}
+          <Skeleton />
         </View>
-        {isLoading ? (
-          <Skeleton width={50} />
-        ) : (
-          <CustomText text={`${category.items} items`} />
-        )}
+        <Skeleton width={50} />
       </View>
       <Divider />
       <View style={styles.row}>
@@ -43,16 +26,8 @@ const CategoryCard = ({ category, isLoading }) => {
         </View>
       </View>
       <View style={styles.row}>
-        {isLoading ? (
-          <Skeleton />
-        ) : (
-          <HeaderText text={formatter(category.budgeted)} size={28} />
-        )}
-        {isLoading ? (
-          <Skeleton width={50} />
-        ) : (
-          <CustomText text={formatter(category.available)} />
-        )}
+        <Skeleton />
+        <Skeleton width={50} />
       </View>
     </TouchableOpacity>
   );

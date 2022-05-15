@@ -23,7 +23,7 @@ const BudgetDetailScreen = ({ route }: { route: any }) => {
       {/*todo some summary card <MainCard /> */}
       <View style={{ marginTop: 35, width: '85%' }}>
         {budgetItems.map((item: budgetItemType) => (
-          <BudgetItem item={item} />
+          <BudgetItem key={item.id} item={item} />
         ))}
       </View>
     </ScrollView>

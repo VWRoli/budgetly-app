@@ -2,11 +2,11 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { budgetItemType } from '../../types/budgetItemType';
+import { formatter } from '../../utils/helpers';
 //Components
 import CustomText from '../common/CustomText';
 import Chip from '../common/Chip';
 import Date from '../common/Date';
-import { formatter } from '../../utils/helpers';
 
 interface Props {
   item: budgetItemType;

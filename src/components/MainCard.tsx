@@ -26,7 +26,7 @@ const MainCard: React.FC = (): JSX.Element => {
     >
       <CustomText text="My Balance" />
       {isLoading ? (
-        <Skeleton height={35} width={175} />
+        <Skeleton width={175} />
       ) : (
         <HeaderText text={formatter(data.balance)} />
       )}
