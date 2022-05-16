@@ -21,7 +21,7 @@ const BudgetDetailScreen = ({ route }: { route: any }) => {
       style={styles.container}
     >
       {/*todo some summary card <MainCard /> */}
-      <View style={{ marginTop: 35, width: '85%' }}>
+      <View style={styles.itemsWrapper}>
         {budgetItems.map((item: budgetItemType) => (
           <BudgetItem key={item.id} item={item} />
         ))}
@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f7f7',
-    paddingTop: 35,
   },
   backButton: {
     position: 'absolute',
     top: 35,
     left: 15,
   },
+  itemsWrapper: { marginTop: 35, width: '85%' },
 });
 
 export default BudgetDetailScreen;

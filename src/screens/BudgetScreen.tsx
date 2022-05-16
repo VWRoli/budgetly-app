@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { BASE_URL } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
 import { categoryType } from '../types/categoryType';
@@ -21,15 +21,13 @@ const BudgetScreen: React.FC = (): JSX.Element => {
       contentContainerStyle={{
         alignItems: 'center',
       }}
-      style={{
-        flex: 1,
-        backgroundColor: '#f8f7f7',
-        paddingTop: 35,
-      }}
+      style={styles.container}
     >
-      <MainCard />
+      <View style={styles.mainCardWrapper}>
+        <MainCard />
+      </View>
 
-      <View style={{ paddingTop: 35, width: '85%' }}>
+      <View style={styles.categoryWrapper}>
         <CustomText text="Categories" styles={{ marginVertical: 10 }} />
         {isLoading ? (
           <>
@@ -49,5 +47,16 @@ const BudgetScreen: React.FC = (): JSX.Element => {
     </ScrollView>
   );
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f7f7',
+  },
+  mainCardWrapper: {
+    marginTop: 35,
+    width: '100%',
+    alignItems: 'center',
+  },
+  categoryWrapper: { paddingTop: 35, width: '85%' },
+});
 export default BudgetScreen;
