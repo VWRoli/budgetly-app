@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 //Components
-import CircularIcon from './common/CircularIcon';
-import CustomText from './common/CustomText';
-import Divider from './common/Divider';
-import Skeleton from './common/Skeleton';
+import CircularIcon from '../common/CircularIcon';
+import CustomText from '../common/CustomText';
+import Divider from '../common/Divider';
+import Skeleton from './Skeleton';
 
 const CategoryCard = () => {
   return (

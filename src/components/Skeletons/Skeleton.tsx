@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 interface Props {
   height?: number;
   width?: number;
+  radius?: number;
 }
 
 const AnimatedLG = Animated.createAnimatedComponent(LinearGradient);
@@ -12,6 +13,7 @@ const AnimatedLG = Animated.createAnimatedComponent(LinearGradient);
 const Skeleton: React.FC<Props> = ({
   height = 20,
   width = 135,
+  radius = 15,
 }): JSX.Element => {
   const animatedValue = new Animated.Value(0);
 
@@ -36,13 +38,13 @@ const Skeleton: React.FC<Props> = ({
       style={{
         height: height,
         width: width,
-        backgroundColor: '#c1c1c1',
-        borderRadius: 10,
+        backgroundColor: '#E6E6E6',
+        borderRadius: radius,
         overflow: 'hidden',
       }}
     >
       <AnimatedLG
-        colors={['#c1c1c1', '#ccc', '#ccc', '#c1c1c1']}
+        colors={['#E6E6E6', '#DBDBDB', '#DBDBDB', '#E6E6E6']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={{

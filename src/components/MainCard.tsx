@@ -8,7 +8,7 @@ import { formatter } from '../utils/helpers';
 //Components
 import CustomText from './common/CustomText';
 import HeaderText from './common/HeaderText';
-import Skeleton from './common/Skeleton';
+import Skeleton from './Skeletons/Skeleton';
 
 const MainCard: React.FC = (): JSX.Element => {
   const { data, isLoading, isError } = useFetch(`${BASE_URL}users/1`);

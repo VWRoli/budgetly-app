@@ -7,7 +7,7 @@ import CircularIcon from './common/CircularIcon';
 import CustomText from './common/CustomText';
 import Divider from './common/Divider';
 import HeaderText from './common/HeaderText';
-import Skeleton from './common/Skeleton';
+import Skeleton from './Skeletons/Skeleton';
 
 const CategoryCard = ({ category, isLoading }) => {
   const navigation = useNavigation();

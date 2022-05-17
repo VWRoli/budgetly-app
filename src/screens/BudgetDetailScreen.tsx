@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import BudgetItem from '../components/Budget/BudgetItem';
 //Components
 import MainCard from '../components/MainCard';
+import SkeletonItemCard from '../components/Skeletons/SkeletonItemCard';
 import { BASE_URL } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
 import { budgetItemType } from '../types/budgetItemType';
@@ -13,6 +14,8 @@ const BudgetDetailScreen = ({ route }: { route: any }) => {
     isLoading,
     isError,
   } = useFetch(`${BASE_URL}categories/${route.params.id}/budgetItems`);
+  const skeletonArray = Array.from(Array(5).keys());
+
   return (
     <ScrollView
       contentContainerStyle={{
@@ -22,9 +25,11 @@ const BudgetDetailScreen = ({ route }: { route: any }) => {
     >
       {/*todo some summary card <MainCard /> */}
       <View style={styles.itemsWrapper}>
-        {budgetItems.map((item: budgetItemType) => (
-          <BudgetItem key={item.id} item={item} />
-        ))}
+        {isLoading
+          ? skeletonArray.map((s) => <SkeletonItemCard />)
+          : budgetItems.map((item: budgetItemType) => (
+              <BudgetItem key={item.id} item={item} />
+            ))}
       </View>
     </ScrollView>
   );

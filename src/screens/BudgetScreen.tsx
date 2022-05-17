@@ -7,7 +7,7 @@ import { categoryType } from '../types/categoryType';
 import CategoryCard from '../components/CategoryCard';
 import CustomText from '../components/common/CustomText';
 import MainCard from '../components/MainCard';
-import SkeletonCategoryCard from '../components/SkeletonCategoryCard';
+import SkeletonCategoryCard from '../components/Skeletons/SkeletonCategoryCard';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
   const {
