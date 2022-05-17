@@ -16,14 +16,15 @@ const DashStack: React.FC = (): JSX.Element => {
       <Stack.Screen
         name="BudgetDetail"
         component={BudgetDetailScreen}
-        options={{
-          headerShown: true,
-          title: 'Bills',
-
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
+        options={
+          {
+            //headerShown: true,
+            // title: 'Bills',
+            // headerTitleStyle: {
+            //   fontWeight: 'bold',
+            // },
+          }
+        }
       />
     </Stack.Navigator>
   );

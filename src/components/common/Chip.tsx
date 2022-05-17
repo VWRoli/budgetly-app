@@ -13,6 +13,7 @@ const Chip: React.FC<Props> = ({ value }): JSX.Element => {
         paddingVertical: 5,
         paddingHorizontal: 10,
         margin: 5,
+        alignSelf: 'flex-start',
       }}
     >
       <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold' }}>
