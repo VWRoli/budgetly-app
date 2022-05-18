@@ -5,43 +5,36 @@ import CircularIcon from '../common/CircularIcon';
 import CustomText from '../common/CustomText';
 import Divider from '../common/Divider';
 import Skeleton from './Skeleton';
+import CardWrapper from '../common/CardWrapper';
 
 const CategoryCard = () => {
   return (
-    <TouchableOpacity style={styles.container}>
-      <View style={styles.row}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{ marginRight: 10 }}>
-            <CircularIcon />
+    <CardWrapper>
+      <TouchableOpacity style={{ width: '100%' }}>
+        <View style={styles.row}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ marginRight: 10 }}>{/* <CircularIcon /> */}</View>
+            <Skeleton />
           </View>
+          <Skeleton width={50} />
+        </View>
+        <Divider />
+        <View style={styles.row}>
+          <CustomText text="Budgeted" size={12} />
+          <View style={{ width: 55 }}>
+            <CustomText text="Available to budget" size={12} />
+          </View>
+        </View>
+        <View style={styles.row}>
           <Skeleton />
+          <Skeleton width={50} />
         </View>
-        <Skeleton width={50} />
-      </View>
-      <Divider />
-      <View style={styles.row}>
-        <CustomText text="Budgeted" size={12} />
-        <View style={{ width: 55 }}>
-          <CustomText text="Available to budget" size={12} />
-        </View>
-      </View>
-      <View style={styles.row}>
-        <Skeleton />
-        <Skeleton width={50} />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </CardWrapper>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 20,
-    borderColor: '#eee',
-    borderWidth: 2,
-    marginVertical: 15,
-  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 //Components
+import CardWrapper from '../common/CardWrapper';
 import Skeleton from './Skeleton';
 
 const SkeletonTransaction = () => {
   return (
-    <View style={styles.container}>
+    <CardWrapper>
       <View style={styles.iconWrapper}></View>
       <View style={styles.content}>
         <View>
@@ -16,21 +17,11 @@ const SkeletonTransaction = () => {
         </View>
         <Skeleton width={70} />
       </View>
-    </View>
+    </CardWrapper>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 10,
-    borderColor: '#eee',
-    borderWidth: 2,
-    marginVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   iconWrapper: {
     backgroundColor: '#06B3C4',
     borderRadius: 15,

@@ -7,6 +7,7 @@ import { transactionType } from '../types/transactionType';
 import TransactionCard from '../components/TransactionCard';
 import SkeletonTransaction from '../components/Skeletons/SkeletonTransaction';
 import Fab from '../components/common/Fab';
+import AddTransaction from '../components/AddTransaction';
 
 const TransactionsScreen = () => {
   const {
@@ -21,6 +22,7 @@ const TransactionsScreen = () => {
         flex: 1,
       }}
     >
+      <AddTransaction />
       <ScrollView
         contentContainerStyle={{
           alignItems: 'center',

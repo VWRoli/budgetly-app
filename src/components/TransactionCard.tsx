@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { formatter } from '../utils/helpers';
+import CardWrapper from './common/CardWrapper';
 import Chip from './common/Chip';
 import CustomText from './common/CustomText';
 import HeaderText from './common/HeaderText';
@@ -19,7 +20,7 @@ const TransactionCard: React.FC<Props> = ({
   category,
 }): JSX.Element => {
   return (
-    <View style={styles.container}>
+    <CardWrapper>
       <View style={styles.iconWrapper}>
         <Text style={styles.iconText}>{payee.charAt(0)}</Text>
       </View>
@@ -35,21 +36,11 @@ const TransactionCard: React.FC<Props> = ({
           outline={category === 'Income' ? false : true}
         />
       </View>
-    </View>
+    </CardWrapper>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 10,
-    borderColor: '#eee',
-    borderWidth: 2,
-    marginVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   iconWrapper: {
     backgroundColor: '#06B3C4',
     borderRadius: 15,

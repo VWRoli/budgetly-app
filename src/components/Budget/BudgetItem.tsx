@@ -7,13 +7,14 @@ import * as Progress from 'react-native-progress';
 //Components
 import CustomText from '../common/CustomText';
 import Chip from '../common/Chip';
+import CardWrapper from '../common/CardWrapper';
 
 interface Props {
   item: budgetItemType;
 }
 const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
   return (
-    <View style={styles.container}>
+    <CardWrapper>
       <View>
         <View style={styles.title}>
           <MaterialCommunityIcons
@@ -45,21 +46,11 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
           </Text>
         )}
       />
-    </View>
+    </CardWrapper>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    borderColor: '#eee',
-    borderWidth: 2,
-    marginVertical: 8,
-    borderRadius: 15,
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   title: { flexDirection: 'row', alignItems: 'center' },
 });
 
