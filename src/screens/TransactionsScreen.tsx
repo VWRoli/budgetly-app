@@ -1,9 +1,18 @@
 import React from 'react';
 //Components
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import TransactionCard from '../components/TransactionCard';
+import { BASE_URL } from '../constants/constants';
+import { useFetch } from '../hooks/useFetch';
+import { transactionType } from '../types/transactionType';
 
 const TransactionsScreen = () => {
+  const {
+    data: transactions,
+    isLoading,
+    isError,
+  } = useFetch(`${BASE_URL}users/1/transactions`);
+
   return (
     <ScrollView
       contentContainerStyle={{
@@ -15,30 +24,22 @@ const TransactionsScreen = () => {
       }}
     >
       <View style={{ width: '85%' }}>
-        <TransactionCard
-          payee="Amazon"
-          amount={3560}
-          date="2011-10-05T14:48:00.000Z"
-          category="Expenses/Fuel"
-        />
-        <TransactionCard
-          payee="Amazon"
-          amount={3560}
-          date="2011-10-05T14:48:00.000Z"
-          category="Bills"
-        />
-        <TransactionCard
-          payee="Amazon"
-          amount={3560}
-          date="2011-10-05T14:48:00.000Z"
-          category="Bills"
-        />
-        <TransactionCard
-          payee="Amazon"
-          amount={3560}
-          date="2011-10-05T14:48:00.000Z"
-          category="Bills"
-        />
+        {isLoading ? (
+          <Text>Loading</Text>
+        ) : (
+          transactions.map((tr: transactionType) => (
+            <TransactionCard
+              payee={tr.payee}
+              amount={tr.amount}
+              date={tr.date}
+              category={
+                tr.income
+                  ? 'Income'
+                  : `${tr.categoryTitle}/${tr.budgetItemTitle}`
+              }
+            />
+          ))
+        )}
       </View>
     </ScrollView>
   );

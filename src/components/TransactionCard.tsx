@@ -29,8 +29,11 @@ const TransactionCard: React.FC<Props> = ({
           <CustomText text={category} bold size={14} />
         </View>
         <View style={styles.amount}>
-          <Chip value={formatter(amount)} textColor="red" outline />
-          <CustomText text={date.split('T')[0]} size={14} />
+          <Chip
+            value={formatter(amount)}
+            textColor={`${category === 'Income' ? '#1eff05' : 'red'}`}
+            outline={category === 'Income' ? false : true}
+          />
         </View>
       </View>
     </View>
