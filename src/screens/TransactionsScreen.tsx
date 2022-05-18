@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     bottom: 25,
-    left: Dimensions.get('screen').width / 2,
+    left: Dimensions.get('screen').width / 2 - 22.5,
     alignSelf: 'flex-end',
   },
 });
