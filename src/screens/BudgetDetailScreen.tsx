@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { BASE_URL } from '../constants/constants';
+import { BASE_URL, skeletonArray } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
 import { budgetItemType } from '../types/budgetItemType';
 //Components
@@ -20,8 +20,6 @@ const BudgetDetailScreen = ({ route }: { route: any }) => {
     isLoading,
     isError,
   } = useFetch(`${BASE_URL}categories/${route.params.id}/budgetItems`);
-
-  const skeletonArray = Array.from(Array(5).keys());
 
   return (
     <ScrollView

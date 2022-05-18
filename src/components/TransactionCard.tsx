@@ -28,13 +28,12 @@ const TransactionCard: React.FC<Props> = ({
           <HeaderText text={payee} size={18} />
           <CustomText text={category} bold size={14} />
         </View>
-        <View style={styles.amount}>
-          <Chip
-            value={formatter(amount)}
-            textColor={`${category === 'Income' ? '#1eff05' : 'red'}`}
-            outline={category === 'Income' ? false : true}
-          />
-        </View>
+
+        <Chip
+          value={formatter(amount)}
+          textColor={`${category === 'Income' ? '#1eff05' : 'red'}`}
+          outline={category === 'Income' ? false : true}
+        />
       </View>
     </View>
   );
@@ -67,9 +66,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconText: { color: '#fff', fontSize: 24 },
-  amount: {
-    alignItems: 'center',
-  },
 });
 
 export default TransactionCard;

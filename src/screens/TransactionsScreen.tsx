@@ -2,18 +2,18 @@ import React from 'react';
 import {
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
   Dimensions,
 } from 'react-native';
-import { BASE_URL } from '../constants/constants';
+import { BASE_URL, skeletonArray } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
 import { transactionType } from '../types/transactionType';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //Components
 import TransactionCard from '../components/TransactionCard';
 import CircularIcon from '../components/common/CircularIcon';
+import SkeletonTransaction from '../components/Skeletons/SkeletonTransaction';
 
 const TransactionsScreen = () => {
   const {
@@ -38,23 +38,21 @@ const TransactionsScreen = () => {
         }}
       >
         <View style={{ width: '85%' }}>
-          {isLoading ? (
-            <Text>Loading</Text>
-          ) : (
-            transactions.map((tr: transactionType) => (
-              <TransactionCard
-                key={tr.id}
-                payee={tr.payee}
-                amount={tr.amount}
-                date={tr.date}
-                category={
-                  tr.income
-                    ? 'Income'
-                    : `${tr.categoryTitle}/${tr.budgetItemTitle}`
-                }
-              />
-            ))
-          )}
+          {isLoading
+            ? skeletonArray.map((_, i) => <SkeletonTransaction key={i} />)
+            : transactions.map((tr: transactionType) => (
+                <TransactionCard
+                  key={tr.id}
+                  payee={tr.payee}
+                  amount={tr.amount}
+                  date={tr.date}
+                  category={
+                    tr.income
+                      ? 'Income'
+                      : `${tr.categoryTitle}/${tr.budgetItemTitle}`
+                  }
+                />
+              ))}
         </View>
       </ScrollView>
       <TouchableOpacity activeOpacity={0.7} style={styles.fab}>
