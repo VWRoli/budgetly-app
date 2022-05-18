@@ -1,16 +1,16 @@
 import React from 'react';
 //Components
-import { View } from 'react-native';
-import { Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import TransactionCard from '../components/TransactionCard';
 
 const TransactionsScreen = () => {
   return (
-    <View
+    <ScrollView
+      contentContainerStyle={{
+        alignItems: 'center',
+      }}
       style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#fff',
       }}
     >
@@ -19,7 +19,7 @@ const TransactionsScreen = () => {
           payee="Amazon"
           amount={3560}
           date="2011-10-05T14:48:00.000Z"
-          category="Bills"
+          category="Expenses/Fuel"
         />
         <TransactionCard
           payee="Amazon"
@@ -40,7 +40,7 @@ const TransactionsScreen = () => {
           category="Bills"
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

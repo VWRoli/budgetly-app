@@ -38,11 +38,23 @@ const AppStack: React.FC = (): JSX.Element => {
         },
         tabBarActiveTintColor: '#06B3C4',
         tabBarInactiveTintColor: '#8B8C9E',
+        headerTitleAlign: 'center',
       })}
     >
       <Tab.Screen name="Dashboard" component={DashStack} />
       <Tab.Screen name="Reports" component={ReportsScreen} />
-      <Tab.Screen name="Transactions" component={TransactionsScreen} />
+      <Tab.Screen
+        name="Transactions"
+        component={TransactionsScreen}
+        options={{
+          headerShown: true,
+          title: 'Transactions',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerTintColor: '#1D3777',
+        }}
+      />
     </Tab.Navigator>
   );
 };

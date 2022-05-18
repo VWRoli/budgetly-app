@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { formatter } from '../utils/helpers';
+import Chip from './common/Chip';
 import CustomText from './common/CustomText';
 import HeaderText from './common/HeaderText';
 
@@ -21,13 +23,13 @@ const TransactionCard: React.FC<Props> = ({
       <View style={styles.iconWrapper}>
         <Text style={styles.iconText}>{payee.charAt(0)}</Text>
       </View>
-      <View style={{ flex: 1 }}>
-        <View style={styles.alignText}>
+      <View style={styles.content}>
+        <View>
           <HeaderText text={payee} size={18} />
-          <HeaderText text={`HUF ${amount}`} size={18} />
-        </View>
-        <View style={styles.alignText}>
           <CustomText text={category} bold size={14} />
+        </View>
+        <View style={styles.amount}>
+          <Chip value={formatter(amount)} textColor="red" outline />
           <CustomText text={date.split('T')[0]} size={14} />
         </View>
       </View>
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginVertical: 10,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   iconWrapper: {
     backgroundColor: '#06B3C4',
@@ -54,11 +57,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 10,
   },
-  iconText: { color: '#fff', fontSize: 24 },
-  alignText: {
+  content: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginRight: 10,
+    alignItems: 'center',
+  },
+  iconText: { color: '#fff', fontSize: 24 },
+  amount: {
+    alignItems: 'center',
   },
 });
 
