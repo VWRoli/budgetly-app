@@ -1,19 +1,12 @@
 import React from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Dimensions,
-} from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { BASE_URL, skeletonArray } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
 import { transactionType } from '../types/transactionType';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //Components
 import TransactionCard from '../components/TransactionCard';
-import CircularIcon from '../components/common/CircularIcon';
 import SkeletonTransaction from '../components/Skeletons/SkeletonTransaction';
+import Fab from '../components/common/Fab';
 
 const TransactionsScreen = () => {
   const {
@@ -55,21 +48,9 @@ const TransactionsScreen = () => {
               ))}
         </View>
       </ScrollView>
-      <TouchableOpacity activeOpacity={0.7} style={styles.fab}>
-        <CircularIcon size={45} bgColor="#1eff05">
-          <Icon name="plus-thick" color="#fff" size={30} />
-        </CircularIcon>
-      </TouchableOpacity>
+      <Fab />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  fab: {
-    position: 'absolute',
-    bottom: 25,
-    left: Dimensions.get('screen').width / 2 - 22.5,
-    alignSelf: 'flex-end',
-  },
-});
 export default TransactionsScreen;
