@@ -22,7 +22,13 @@ const TransactionsScreen = () => {
         flex: 1,
       }}
     >
-      <AddTransaction />
+      <View
+        style={{
+          alignItems: 'center',
+        }}
+      >
+        <AddTransaction />
+      </View>
       <ScrollView
         contentContainerStyle={{
           alignItems: 'center',
