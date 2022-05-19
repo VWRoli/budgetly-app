@@ -4,16 +4,30 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 interface Props {
   label: string;
   pressHandler: () => void;
+  outlined?: boolean;
+  paddingVertical?: number;
 }
 
-const Button: React.FC<Props> = ({ label, pressHandler }): JSX.Element => {
+const Button: React.FC<Props> = ({
+  label,
+  pressHandler,
+  outlined,
+  paddingVertical = 18,
+}): JSX.Element => {
+  const typeStyles = outlined ? styles.outlined : styles.filled;
   return (
     <TouchableOpacity
-      style={styles.button}
+      style={{
+        ...styles.button,
+        ...typeStyles,
+        paddingVertical: paddingVertical,
+      }}
       activeOpacity={0.7}
       onPress={pressHandler}
     >
-      <Text style={styles.text}>{label}</Text>
+      <Text style={{ ...styles.text, color: outlined ? '#06B3C4' : '#fff' }}>
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -21,15 +35,20 @@ const Button: React.FC<Props> = ({ label, pressHandler }): JSX.Element => {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#06B3C4',
     borderRadius: 15,
-    paddingVertical: 18,
-    width: '90%',
+    width: '100%',
+  },
+  filled: {
+    backgroundColor: '#06B3C4',
+  },
+  outlined: {
+    borderWidth: 1,
+    borderColor: '#06B3C4',
+    backgroundColor: '#fff',
   },
   text: {
-    color: '#fff',
     fontWeight: '500',
-    fontSize: 16,
+    fontSize: 14,
     letterSpacing: 0.4,
   },
 });
