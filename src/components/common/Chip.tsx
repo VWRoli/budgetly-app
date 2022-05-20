@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 interface Props {
-  value: string;
+  value: string | React.ReactNode;
   textColor?: string;
   outline?: boolean;
 }
