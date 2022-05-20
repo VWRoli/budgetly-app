@@ -5,14 +5,14 @@ interface Props {
   label: string;
   pressHandler: () => void;
   outlined?: boolean;
-  paddingVertical?: number;
+  slim?: boolean;
 }
 
 const Button: React.FC<Props> = ({
   label,
   pressHandler,
   outlined,
-  paddingVertical = 18,
+  slim,
 }): JSX.Element => {
   const typeStyles = outlined ? styles.outlined : styles.filled;
   return (
@@ -20,7 +20,7 @@ const Button: React.FC<Props> = ({
       style={{
         ...styles.button,
         ...typeStyles,
-        paddingVertical: paddingVertical,
+        paddingVertical: slim ? 8 : 18,
       }}
       activeOpacity={0.7}
       onPress={pressHandler}

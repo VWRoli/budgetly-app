@@ -21,7 +21,7 @@ const InputSecondary: React.FC<Props> = ({
         borderRadius: 15,
         paddingVertical: 5,
         paddingHorizontal: 10,
-        margin: 5,
+        marginVertical: 5,
         ...styles,
       }}
     />

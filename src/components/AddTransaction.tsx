@@ -10,7 +10,7 @@ import InputSecondary from './common/InputSecondary';
 
 const AddTransaction = () => {
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
+  const [openDatePicker, setOpenDatePicker] = useState(false);
 
   return (
     <View style={{ width: '85%' }}>
@@ -23,34 +23,39 @@ const AddTransaction = () => {
               flexDirection: 'row',
             }}
           >
-            <InputSecondary placeholder="Income" styles={{ flex: 1 }} />
-            <InputSecondary placeholder="Outcome" styles={{ flex: 1 }} />
+            <View style={{ flex: 1, marginRight: 2.5 }}>
+              <InputSecondary placeholder="Income" />
+            </View>
+            <View style={{ flex: 1, marginLeft: 2.5 }}>
+              <InputSecondary placeholder="Outcome" styles={{ flex: 1 }} />
+            </View>
           </View>
-          <View style={{ margin: 5 }}>
+          <View style={{ marginVertical: 5 }}>
             <Button
               label="21/05/2022"
               outlined
-              paddingVertical={8}
-              pressHandler={() => setOpen(true)}
+              slim
+              pressHandler={() => setOpenDatePicker(true)}
             />
           </View>
-
           <DatePicker
             date={date}
             mode="date"
             modal
-            open={open}
+            open={openDatePicker}
             onConfirm={(date) => {
-              setOpen(false);
+              setOpenDatePicker(false);
               setDate(date);
             }}
             onCancel={() => {
-              setOpen(false);
+              setOpenDatePicker(false);
             }}
             onDateChange={setDate}
             androidVariant="nativeAndroid"
             textColor="#1D3777"
           />
+
+          <Button label="Add transaction" slim pressHandler={() => {}} />
         </View>
       </CardWrapper>
     </View>
