@@ -1,15 +1,12 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { BASE_URL } from '../constants/constants';
+import { BASE_URL, skeletonArray } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
-import { categoryType } from '../types/categoryType';
-//Components
-import CategoryCard from '../components/CategoryCard';
-import CustomText from '../components/common/CustomText';
-import MainCard from '../components/MainCard';
-import SkeletonCategoryCard from '../components/Skeletons/SkeletonCategoryCard';
-import BudgetItem from '../components/Budget/BudgetItem';
 import { budgetItemType } from '../types/budgetItemType';
+//Components
+import SkeletonBudgetItem from '../components/Skeletons/SkeletonBudgetItem';
+import MainCard from '../components/MainCard';
+import BudgetItem from '../components/Budget/BudgetItem';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
   const {
@@ -29,28 +26,12 @@ const BudgetScreen: React.FC = (): JSX.Element => {
         <MainCard />
       </View>
       <View style={styles.categoryWrapper}>
-        {budgetItemsData.map((b: budgetItemType) => (
-          <BudgetItem item={b} />
-        ))}
+        {isLoading
+          ? skeletonArray.map((el) => <SkeletonBudgetItem key={el} />)
+          : budgetItemsData.map((b: budgetItemType) => (
+              <BudgetItem key={b.id} item={b} />
+            ))}
       </View>
-
-      {/* <View style={styles.categoryWrapper}>
-        <CustomText text="Categories" styles={{ marginVertical: 10 }} />
-        {isLoading ? (
-          <>
-            <SkeletonCategoryCard />
-            <SkeletonCategoryCard />
-          </>
-        ) : (
-          categoryData.map((category: categoryType) => (
-            <CategoryCard
-              key={category.id}
-              category={category}
-              isLoading={isLoading}
-            />
-          ))
-        )}
-      </View> */}
     </ScrollView>
   );
 };
