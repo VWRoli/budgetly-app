@@ -1,5 +1,5 @@
 export interface categoryType {
-  categoryTitle: string;
+  title: string;
   userId: number;
   id: number;
   items: number;

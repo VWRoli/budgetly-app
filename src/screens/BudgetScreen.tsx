@@ -7,13 +7,15 @@ import { budgetItemType } from '../types/budgetItemType';
 import SkeletonBudgetItem from '../components/Skeletons/SkeletonBudgetItem';
 import MainCard from '../components/MainCard';
 import BudgetItem from '../components/Budget/BudgetItem';
+import { categoryType } from '../types/categoryType';
+import Category from '../components/Budget/Category';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
   const {
-    data: budgetItemsData,
+    data: categoriesData,
     isLoading,
     isError,
-  } = useFetch(`${BASE_URL}users/1/budgetItems`);
+  } = useFetch(`${BASE_URL}users/1/categories`);
 
   return (
     <ScrollView
@@ -26,11 +28,13 @@ const BudgetScreen: React.FC = (): JSX.Element => {
         <MainCard />
       </View>
       <View style={styles.categoryWrapper}>
-        {isLoading
-          ? skeletonArray.map((el) => <SkeletonBudgetItem key={el} />)
-          : budgetItemsData.map((b: budgetItemType) => (
-              <BudgetItem key={b.id} item={b} />
-            ))}
+        {isLoading ? (
+          <></>
+        ) : (
+          categoriesData.map((c: categoryType) => (
+            <Category category={c} key={c.id} />
+          ))
+        )}
       </View>
     </ScrollView>
   );
@@ -45,6 +49,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  categoryWrapper: { paddingTop: 35, width: '95%' },
+  categoryWrapper: { paddingTop: 35, width: '95%', justifyContent: 'center' },
 });
 export default BudgetScreen;
