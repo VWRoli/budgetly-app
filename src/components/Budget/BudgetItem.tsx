@@ -22,7 +22,6 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            //backgroundColor: 'red',
           }}
         >
           <Chip
@@ -41,10 +40,10 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
           <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
             <CustomText
               text={formatter(item.balance)}
-              size={18}
+              size={16}
               styles={{ marginRight: 5 }}
             />
-            <HeaderText text={`/${formatter(item.budgeted)}`} size={24} />
+            <HeaderText text={`/${formatter(item.budgeted)}`} size={20} />
           </View>
         </View>
         <View style={{ marginVertical: 7 }}>
