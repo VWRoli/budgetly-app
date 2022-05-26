@@ -8,7 +8,7 @@ interface Props {
 }
 const CircularIcon: React.FC<Props> = ({
   children,
-  size = 35,
+  size = 20,
   bgColor = '#06B3C4',
 }): JSX.Element => {
   return (
@@ -20,6 +20,7 @@ const CircularIcon: React.FC<Props> = ({
         borderRadius: size / 2,
         justifyContent: 'center',
         alignItems: 'center',
+        marginHorizontal: 5,
       }}
     >
       {children}

@@ -6,7 +6,6 @@ import { transactionType } from '../types/transactionType';
 //Components
 import TransactionCard from '../components/TransactionCard';
 import SkeletonTransaction from '../components/Skeletons/SkeletonTransaction';
-import Fab from '../components/common/Fab';
 import AddTransaction from '../components/AddTransaction';
 
 const TransactionsScreen = () => {
@@ -56,7 +55,6 @@ const TransactionsScreen = () => {
               ))}
         </View>
       </ScrollView>
-      <Fab />
     </View>
   );
 };
