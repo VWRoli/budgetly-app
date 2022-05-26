@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { budgetItemType } from '../../types/budgetItemType';
 import { formatter } from '../../utils/helpers';
@@ -9,14 +9,20 @@ import CustomText from '../common/CustomText';
 import Chip from '../common/Chip';
 import CardWrapper from '../common/CardWrapper';
 import HeaderText from '../common/HeaderText';
+import InputSecondary from '../common/InputSecondary';
 
 interface Props {
   item: budgetItemType;
 }
 const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
+  const [isEditable, setIsEditable] = useState(false);
   return (
     <CardWrapper>
-      <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        style={{ flex: 1 }}
+        onPress={() => setIsEditable(false)}
+        activeOpacity={0.7}
+      >
         <View
           style={{
             flexDirection: 'row',
@@ -38,11 +44,21 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
             }
           />
           <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-            <CustomText
-              text={formatter(item.balance)}
-              size={16}
-              styles={{ marginRight: 5 }}
-            />
+            {isEditable ? (
+              <InputSecondary placeholder={formatter(item.balance)} />
+            ) : (
+              <TouchableOpacity
+                onPress={() => setIsEditable(true)}
+                activeOpacity={0.7}
+              >
+                <CustomText
+                  text={formatter(item.balance)}
+                  size={16}
+                  styles={{ marginRight: 5 }}
+                />
+              </TouchableOpacity>
+            )}
+
             <HeaderText text={`/${formatter(item.budgeted)}`} size={20} />
           </View>
         </View>
@@ -57,7 +73,7 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
             borderWidth={0}
           />
         </View>
-      </View>
+      </TouchableOpacity>
     </CardWrapper>
   );
 };
