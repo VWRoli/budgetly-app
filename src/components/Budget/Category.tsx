@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { BASE_URL, skeletonArray } from '../../constants/constants';
 import { useFetch } from '../../hooks/useFetch';
 import { budgetItemType } from '../../types/budgetItemType';
 import { categoryType } from '../../types/categoryType';
 import SkeletonBudgetItem from '../Skeletons/SkeletonBudgetItem';
+import AddCategory from './AddCategory';
 import BudgetItem from './BudgetItem';
 import CategoryHeader from './CategoryHeader';
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const Category: React.FC<Props> = ({ category }): JSX.Element => {
+  const [isOpen, setisOpen] = useState(false);
   const {
     data: budgetItemsData,
     isLoading,
@@ -21,7 +23,9 @@ const Category: React.FC<Props> = ({ category }): JSX.Element => {
 
   return (
     <View>
-      <CategoryHeader title={category.title} />
+      <CategoryHeader title={category.title} setIsOpen={setisOpen} />
+      {isOpen && <AddCategory setIsOpen={setisOpen} />}
+
       {isLoading
         ? skeletonArray.map((el) => <SkeletonBudgetItem key={el} />)
         : budgetItemsData?.map((b: budgetItemType) => (

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 //Components
 import CardWrapper from './common/CardWrapper';
-import CustomText from './common/CustomText';
-import Input from './common/Input';
 import Button from './common/Button';
 import InputSecondary from './common/InputSecondary';
 

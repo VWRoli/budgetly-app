@@ -1,18 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 interface Props {
   children: React.ReactNode;
   size?: number;
   bgColor?: string;
+  pressHandler: () => void;
 }
 const CircularIcon: React.FC<Props> = ({
   children,
   size = 20,
   bgColor = '#06B3C4',
+  pressHandler,
 }): JSX.Element => {
   return (
-    <View
+    <TouchableOpacity
       style={{
         backgroundColor: bgColor,
         height: size,
@@ -22,9 +24,10 @@ const CircularIcon: React.FC<Props> = ({
         alignItems: 'center',
         marginHorizontal: 5,
       }}
+      onPress={pressHandler}
     >
       {children}
-    </View>
+    </TouchableOpacity>
   );
 };
 

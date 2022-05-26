@@ -7,9 +7,10 @@ import CircularIcon from '../common/CircularIcon';
 
 interface Props {
   title: string;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CategoryHeader: React.FC<Props> = ({ title }): JSX.Element => {
+const CategoryHeader: React.FC<Props> = ({ title, setIsOpen }): JSX.Element => {
   return (
     <View
       style={{
@@ -24,7 +25,7 @@ const CategoryHeader: React.FC<Props> = ({ title }): JSX.Element => {
         }}
       >
         <CustomText text={title} primary bold size={14} />
-        <CircularIcon>
+        <CircularIcon pressHandler={() => setIsOpen((prev) => !prev)}>
           <Icon name="add" color="#fff" size={16} />
         </CircularIcon>
       </View>
