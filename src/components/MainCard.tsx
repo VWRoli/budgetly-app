@@ -3,7 +3,6 @@ import { Text, View, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { BASE_URL } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
-import { userType } from '../types/userType';
 import { formatter } from '../utils/helpers';
 //Components
 import CustomText from './common/CustomText';
@@ -15,22 +14,31 @@ const MainCard: React.FC = (): JSX.Element => {
 
   return (
     <LinearGradient
-      colors={[
-        'rgba(139, 140, 158, 0.15)',
-        'rgba(139, 140, 158, 0.2)',
-        'rgba(139, 140, 158, 0.3)',
-      ]}
-      start={{ x: 0.0, y: 0.25 }}
-      end={{ x: 0.5, y: 1.0 }}
+      colors={['#8CE6FF', '#fff', '#9CDEE9']}
+      start={{ x: 0.0, y: 1 }}
+      end={{ x: 1, y: 0.0 }}
+      locations={[0, 0.5, 0.75]}
       style={styles.container}
     >
+      <View
+        style={{
+          position: 'absolute',
+          height: 50,
+          width: 50,
+          borderColor: '#FF73B7',
+          borderWidth: 1,
+          borderRadius: 25,
+          right: 50,
+          top: 25,
+        }}
+      ></View>
+
       <CustomText text="My Balance" />
       {isLoading ? (
         <Skeleton width={175} />
       ) : (
         <HeaderText text={formatter(data.balance)} />
       )}
-
       <View style={styles.tab}>
         <Text style={styles.tabText}>Avialable to Budget</Text>
         {isLoading ? (
@@ -65,6 +73,13 @@ const styles = StyleSheet.create({
   },
   availableText: { color: '#1eff05', fontWeight: 'bold', fontSize: 16 },
   tabText: { color: '#fff', fontWeight: 'bold' },
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
 });
 
 export default MainCard;

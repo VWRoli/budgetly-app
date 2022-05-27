@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { chipColors } from '../../constants/constants';
+import { rng } from '../../utils/helpers';
 
 interface Props {
   value: string | React.ReactNode;
@@ -9,8 +11,6 @@ interface Props {
   outline?: boolean;
 }
 const Chip: React.FC<Props> = ({ value, icon, outline }): JSX.Element => {
-  const chipColors = ['#D5F3D6', '#FEE99C', '#9BDDE7', '#06B3C4', '#FBD5EF'];
-  const rng = () => Math.floor(Math.random() * 5);
   const randomBgColor = chipColors[rng()];
 
   return (

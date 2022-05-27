@@ -5,3 +5,5 @@ export const formatter = (amount: number) =>
     currency: 'huf',
     minimumFractionDigits: 0,
   }).format(amount);
+
+export const rng = () => Math.floor(Math.random() * 5);
