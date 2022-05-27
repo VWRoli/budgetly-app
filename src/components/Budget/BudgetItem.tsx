@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, TouchableOpacity } from 'react-native';
 import { budgetItemType } from '../../types/budgetItemType';
 import { formatter } from '../../utils/helpers';
 import * as Progress from 'react-native-progress';
@@ -30,19 +29,7 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
             alignItems: 'center',
           }}
         >
-          <Chip
-            value={
-              <View style={styles.title}>
-                <MaterialCommunityIcons
-                  name="web"
-                  size={20}
-                  color="#fff"
-                  style={{ marginRight: 5 }}
-                />
-                <CustomText text={item.title} styles={{ color: '#fff' }} bold />
-              </View>
-            }
-          />
+          <Chip icon="laptop" value={item.title} />
           <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
             {isEditable ? (
               <InputSecondary placeholder={formatter(item.balance)} />
@@ -54,7 +41,8 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
                 <CustomText
                   text={formatter(item.balance)}
                   size={16}
-                  styles={{ marginRight: 5 }}
+                  styles={{ marginRight: 5, color: '#06B3C4' }}
+                  bold
                 />
               </TouchableOpacity>
             )}
@@ -77,9 +65,5 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
     </CardWrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  title: { flexDirection: 'row', alignItems: 'center' },
-});
 
 export default BudgetItem;
