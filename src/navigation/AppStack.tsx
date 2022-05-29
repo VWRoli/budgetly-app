@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 //Screens
 import ReportsScreen from '../screens/ReportsScreen';
 import TransactionsScreen from '../screens/TransactionsScreen';
-import DashStack from './DashStack';
+import BudgetScreen from '../screens/BudgetScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +24,7 @@ const AppStack: React.FC = (): JSX.Element => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = '';
 
-          if (route.name === 'Dashboard') {
+          if (route.name === 'Budget') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Reports') {
             iconName = focused ? 'pie-chart' : 'pie-chart-outline';
@@ -41,7 +41,7 @@ const AppStack: React.FC = (): JSX.Element => {
         headerTitleAlign: 'center',
       })}
     >
-      <Tab.Screen name="Dashboard" component={DashStack} />
+      <Tab.Screen name="Budget" component={BudgetScreen} />
       <Tab.Screen name="Reports" component={ReportsScreen} />
       <Tab.Screen
         name="Transactions"
