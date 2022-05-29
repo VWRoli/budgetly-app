@@ -20,19 +20,6 @@ const MainCard: React.FC = (): JSX.Element => {
       locations={[0, 0.5, 0.75]}
       style={styles.container}
     >
-      <View
-        style={{
-          position: 'absolute',
-          height: 50,
-          width: 50,
-          borderColor: '#FF73B7',
-          borderWidth: 1,
-          borderRadius: 25,
-          right: 50,
-          top: 25,
-        }}
-      ></View>
-
       <CustomText text="My Balance" />
       {isLoading ? (
         <Skeleton width={175} />

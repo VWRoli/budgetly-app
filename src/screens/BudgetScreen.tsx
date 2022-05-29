@@ -1,12 +1,9 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { BASE_URL, skeletonArray } from '../constants/constants';
+import { BASE_URL } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
-import { budgetItemType } from '../types/budgetItemType';
 //Components
-import SkeletonBudgetItem from '../components/Skeletons/SkeletonBudgetItem';
 import MainCard from '../components/MainCard';
-import BudgetItem from '../components/Budget/BudgetItem';
 import { categoryType } from '../types/categoryType';
 import Category from '../components/Budget/Category';
 

@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 export const BASE_URL = `https://budgetly-mobile-app.herokuapp.com/`;
 
 export const skeletonArray = Array.from(Array(5).keys());
@@ -24,3 +26,6 @@ export const monthList = [
   'November',
   'December',
 ];
+
+export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
+export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
