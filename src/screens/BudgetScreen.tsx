@@ -6,6 +6,7 @@ import { useFetch } from '../hooks/useFetch';
 import MainCard from '../components/MainCard';
 import { categoryType } from '../types/categoryType';
 import Category from '../components/Budget/Category';
+import MonthHeader from '../components/Budget/MonthHeader';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
   const {
@@ -21,6 +22,7 @@ const BudgetScreen: React.FC = (): JSX.Element => {
       }}
       style={styles.container}
     >
+      <MonthHeader />
       <View style={styles.mainCardWrapper}>
         <MainCard />
       </View>
