@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f7f7',
   },
   mainCardWrapper: {
-    marginTop: 35,
+    marginTop: 5,
     width: '100%',
     alignItems: 'center',
   },
