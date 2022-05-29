@@ -51,22 +51,17 @@ const styles = StyleSheet.create({
     bottom: -20,
     left: 25,
     alignItems: 'center',
-    backgroundColor: '#06B3C4',
+    backgroundColor: '#1D3777',
+    borderColor: '#06b3b4',
+    borderWidth: 1,
     borderRadius: 35,
     paddingVertical: 10,
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
-  availableText: { color: '#1eff05', fontWeight: 'bold', fontSize: 16 },
+  availableText: { color: '#fce91b', fontWeight: 'bold', fontSize: 16 },
   tabText: { color: '#fff', fontWeight: 'bold' },
-  absolute: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-  },
 });
 
 export default MainCard;
