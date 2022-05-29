@@ -41,7 +41,7 @@ const BudgetScreen: React.FC = (): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f7f7',
+    backgroundColor: '#fff',
   },
   mainCardWrapper: {
     marginTop: 5,

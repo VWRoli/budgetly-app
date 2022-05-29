@@ -34,7 +34,7 @@ const TransactionsScreen = () => {
         }}
         style={{
           flex: 1,
-          backgroundColor: '#f8f7f7',
+          backgroundColor: '#fff',
         }}
       >
         <View style={{ width: '85%' }}>
