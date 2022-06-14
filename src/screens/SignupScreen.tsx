@@ -1,6 +1,7 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View } from 'react-native';
 import Logo from '../assets/Logo';
+import validator from 'validator';
 //Components
 import HeaderText from '../components/common/HeaderText';
 import Input from '../components/common/Input';
@@ -8,17 +9,27 @@ import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
 import Link from '../components/common/Link';
 import Container from '../components/common/Container';
+import InputErrorMsg from '../components/common/InputErrorMsg';
 
 //todo navigation type
 const SignupScreen = ({ navigation }: { navigation: any }) => {
-  const [username, setUsername] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [usernameError, setUsernameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   const handleSignUp = () => {
-    console.log(username);
-    console.log(email);
-    console.log(password);
+    if (!username) {
+      setUsernameError(true);
+    }
+    if (!validator.isEmail(email)) {
+      setEmailError(true);
+    }
+    if (!validator.isStrongPassword(password)) {
+      setPasswordError(true);
+    }
   };
 
   return (
@@ -38,12 +49,16 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         changeHandler={setUsername}
         icon="person-outline"
       />
+      {usernameError && <InputErrorMsg msg="Please provide a username" />}
       <Input
         placeholder="Email"
         value={email}
         changeHandler={setEmail}
         icon="alternate-email"
       />
+      {emailError && (
+        <InputErrorMsg msg="Please provide a properly formatted email address" />
+      )}
       <Input
         placeholder="Password"
         value={password}
@@ -51,6 +66,13 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         icon="lock-outline"
         changeHandler={setPassword}
       />
+      {passwordError && (
+        <>
+          <InputErrorMsg msg="Password must be min 8 charachters long" />
+          <InputErrorMsg msg="Must contain a lowercase and an uppercase letter" />
+          <InputErrorMsg msg="Must contain a number and a symbol" />
+        </>
+      )}
 
       <View
         style={{
