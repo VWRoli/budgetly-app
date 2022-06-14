@@ -12,7 +12,7 @@ LogBox.ignoreLogs([
 ]);
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   return (
     <NavigationContainer>

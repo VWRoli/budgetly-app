@@ -15,6 +15,10 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  const handleSignUp = () => {
+    console.log('signed up');
+  };
+
   return (
     <Container>
       <Logo />
@@ -64,7 +68,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
           styles={{ fontSize: 12 }}
         />
       </View>
-      <Button label="Sign up" pressHandler={() => {}} />
+      <Button label="Sign up" pressHandler={handleSignUp} />
 
       <View style={{ flexDirection: 'row', marginTop: 25 }}>
         <CustomText
