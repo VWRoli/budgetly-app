@@ -21,6 +21,11 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
   const [passwordError, setPasswordError] = useState(false);
 
   const handleSignUp = () => {
+    //reset fields
+    setEmailError(false);
+    setPasswordError(false);
+    setUsernameError(false);
+
     if (!username) {
       setUsernameError(true);
     }
