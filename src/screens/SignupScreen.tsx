@@ -11,12 +11,14 @@ import Container from '../components/common/Container';
 
 //todo navigation type
 const SignupScreen = ({ navigation }: { navigation: any }) => {
-  const [text, setText] = React.useState('');
   const [username, setUsername] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const handleSignUp = () => {
-    console.log('signed up');
+    console.log(username);
+    console.log(email);
+    console.log(password);
   };
 
   return (
@@ -33,21 +35,21 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
       <Input
         placeholder="Username"
         value={username}
-        changeHandler={() => setUsername(username)}
+        changeHandler={setUsername}
         icon="person-outline"
       />
       <Input
         placeholder="Email"
-        value={text}
-        changeHandler={() => setText(text)}
+        value={email}
+        changeHandler={setEmail}
         icon="alternate-email"
       />
       <Input
         placeholder="Password"
-        value={text}
+        value={password}
         secureTextEntry
         icon="lock-outline"
-        changeHandler={() => setPassword(password)}
+        changeHandler={setPassword}
       />
 
       <View

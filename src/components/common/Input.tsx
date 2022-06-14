@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
   value: string;
-  changeHandler: () => void;
+  changeHandler: Dispatch<SetStateAction<string>>;
   placeholder: string;
   secureTextEntry?: boolean;
   icon: string;
