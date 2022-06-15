@@ -26,7 +26,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
     setPasswordError(false);
     setUsernameError(false);
 
-    if (!username) {
+    if (!username || username.length <= 6) {
       setUsernameError(true);
     }
     if (!validator.isEmail(email)) {
@@ -54,7 +54,9 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         changeHandler={setUsername}
         icon="person-outline"
       />
-      {usernameError && <InputErrorMsg msg="Please provide a username" />}
+      {usernameError && (
+        <InputErrorMsg msg="Username should be more than 6 characters" />
+      )}
       <Input
         placeholder="Email"
         value={email}
