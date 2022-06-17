@@ -6,6 +6,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import ReminderScreen from '../screens/ReminderScreen';
 import PrivacyScreen from '../screens/PrivacyScreen';
+import RegistrationSuccessScreen from '../screens/RegistrationSuccessScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ const AuthStack: React.FC = (): JSX.Element => {
       <Stack.Screen name="Signup" component={SignupScreen} />
       <Stack.Screen name="Reminder" component={ReminderScreen} />
       <Stack.Screen name="Privacy" component={PrivacyScreen} />
+      <Stack.Screen name="Success" component={RegistrationSuccessScreen} />
     </Stack.Navigator>
   );
 };

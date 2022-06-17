@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import Logo from '../assets/Logo';
 import validator from 'validator';
+import * as api from '../api';
 //Components
 import HeaderText from '../components/common/HeaderText';
 import Input from '../components/common/Input';
@@ -19,14 +20,18 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [resError, setResError] = useState(false);
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
+    setIsLoading(true);
+    setResError(false);
     //reset fields
     setEmailError(false);
     setPasswordError(false);
     setUsernameError(false);
 
-    if (!username || username.length <= 6) {
+    if (!username || username.length < 6) {
       setUsernameError(true);
     }
     if (!validator.isEmail(email)) {
@@ -35,6 +40,16 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
     if (!validator.isStrongPassword(password)) {
       setPasswordError(true);
     }
+    if (!emailError && !passwordError && !usernameError) {
+      const res = await api.signUp({ username, email, password });
+
+      if (res === 201) {
+        navigation.navigate('Success');
+      } else {
+        setResError(true);
+      }
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -89,15 +104,21 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
           marginVertical: 15,
         }}
       >
-        <CustomText
-          text="By signing up, you're agree to our "
-          styles={{ fontSize: 12 }}
-        />
-        <Link
-          text="Privacy Policy"
-          pressHandler={() => navigation.navigate('Privacy')}
-          styles={{ fontSize: 12 }}
-        />
+        {isLoading ? (
+          <Text>Loading...</Text>
+        ) : (
+          <>
+            <CustomText
+              text="By signing up, you're agree to our "
+              styles={{ fontSize: 12 }}
+            />
+            <Link
+              text="Privacy Policy"
+              pressHandler={() => navigation.navigate('Privacy')}
+              styles={{ fontSize: 12 }}
+            />
+          </>
+        )}
       </View>
       <Button label="Sign up" pressHandler={handleSignUp} />
 
