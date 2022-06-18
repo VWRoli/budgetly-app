@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Alert, Text, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import Logo from '../assets/Logo';
 import validator from 'validator';
 import * as api from '../api';
 import Toast from 'react-native-toast-message';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 //Components
 import HeaderText from '../components/common/HeaderText';
 import Input from '../components/common/Input';
@@ -14,23 +15,41 @@ import Link from '../components/common/Link';
 import Container from '../components/common/Container';
 import InputErrorMsg from '../components/common/InputErrorMsg';
 
+const SignupSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(6, 'Username must be at least 6 character')
+    .max(16, 'Username is too long - maximum 16 characters allowed')
+    .required('Username is required'),
+  email: Yup.string()
+    .email('Please enter a valid email')
+    .required('Email is required'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password is too short - must be at least 8 characters long')
+
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      'Must contain one uppercase, one lowercase, one number and one special character',
+    ),
+});
+
 //todo navigation type
 const SignupScreen = ({ navigation }: { navigation: any }) => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { handleChange, handleSubmit, values } = useFormik({
-    initialValues: { username: '', email: '', password: '' },
-    onSubmit: (values) =>
-      console.log(
-        `Username: ${values.username}, Email: ${values.email}, Password: ${values.password}`,
-      ),
-  });
+  const { handleChange, handleSubmit, values, errors, touched, handleBlur } =
+    useFormik({
+      validationSchema: SignupSchema,
+      initialValues: { username: '', email: '', password: '' },
+      onSubmit: (values) => {
+        console.log(
+          `Username: ${values.username}, Email: ${values.email}, Password: ${values.password}`,
+        );
+      },
+    });
 
   const showError = (status: string) => {
     Toast.show({
@@ -40,33 +59,33 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
     });
   };
 
-  const handleSignUp = async () => {
-    setIsLoading(true);
-    //reset fields
-    setEmailError(false);
-    setPasswordError(false);
-    setUsernameError(false);
+  // const handleSignUp = async () => {
+  //   setIsLoading(true);
+  //   //reset fields
+  //   setEmailError(false);
+  //   setPasswordError(false);
+  //   setUsernameError(false);
 
-    if (!username || username.length < 6) {
-      setUsernameError(true);
-    }
-    if (!validator.isEmail(email)) {
-      setEmailError(true);
-    }
-    if (!validator.isStrongPassword(password)) {
-      setPasswordError(true);
-    }
-    if (!emailError && !passwordError && !usernameError) {
-      const res = await api.signUp({ username, email, password });
+  //   if (!username || username.length < 6) {
+  //     setUsernameError(true);
+  //   }
+  //   if (!validator.isEmail(email)) {
+  //     setEmailError(true);
+  //   }
+  //   if (!validator.isStrongPassword(password)) {
+  //     setPasswordError(true);
+  //   }
+  //   if (!emailError && !passwordError && !usernameError) {
+  //     const res = await api.signUp({ username, email, password });
 
-      if (res != 201) {
-        showError(res);
-      } else {
-        navigation.navigate('Success');
-      }
-    }
-    setIsLoading(false);
-  };
+  //     if (res != 201) {
+  //       showError(res);
+  //     } else {
+  //       navigation.navigate('Success');
+  //     }
+  //   }
+  //   setIsLoading(false);
+  // };
 
   return (
     <Container>
@@ -85,7 +104,10 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         autoCapitalize="none"
         autoCompleteType="username"
         icon="person-outline"
-        editable={!isLoading}
+        // editable={!isLoading}
+        onBlur={handleBlur('username')}
+        error={errors.username}
+        touched={touched.username}
         returnKeyType="next"
         returnKeyLabel="next"
       />
@@ -98,8 +120,11 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         autoCompleteType="email"
         keyboardType="email-address"
         changeHandler={handleChange('email')}
+        onBlur={handleBlur('email')}
+        error={errors.email}
+        touched={touched.email}
         icon="alternate-email"
-        editable={!isLoading}
+        // editable={!isLoading}
         returnKeyType="next"
         returnKeyLabel="next"
       />
@@ -113,7 +138,9 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         changeHandler={handleChange('password')}
         autoCompleteType="password"
         autoCapitalize="none"
-        editable={!isLoading}
+        onBlur={handleBlur('password')}
+        error={errors.password}
+        touched={touched.password}
         returnKeyType="go"
         returnKeyLabel="go"
       />

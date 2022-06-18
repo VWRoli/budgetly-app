@@ -7,7 +7,8 @@ interface Props {
   placeholder: string;
   secureTextEntry?: boolean;
   icon: string;
-  editable?: boolean;
+  error?: string;
+  touched?: boolean;
   // All other props
   [x: string]: any;
 }
@@ -18,16 +19,23 @@ const Input: React.FC<Props> = ({
   secureTextEntry,
   placeholder,
   icon,
-  editable,
+  error,
+  touched,
   ...otherProps
 }): JSX.Element => {
-  const validationColor = '#223e4b';
+  const validationColor = !touched ? '#ddd' : error ? '#ff4444' : '#00c851';
   return (
     <View
-      style={[
-        styles.searchSection,
-        !editable ? styles.disabled : styles.notDisabled,
-      ]}
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 15,
+        borderColor: validationColor,
+        borderWidth: 1,
+        marginVertical: 5,
+      }}
     >
       <Icon style={styles.searchIcon} name={icon} size={20} color="#8B8C9E" />
       <TextInput
@@ -36,7 +44,7 @@ const Input: React.FC<Props> = ({
         value={value}
         placeholder={placeholder}
         onChangeText={changeHandler}
-        editable={editable}
+        //editable={editable}
       />
     </View>
   );
