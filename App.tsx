@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { LogBox } from 'react-native';
+import Toast from 'react-native-toast-message';
 //Navigation
 import AppStack from './src/navigation/AppStack';
 import AuthStack from './src/navigation/AuthStack';
@@ -17,6 +18,7 @@ const App = () => {
   return (
     <NavigationContainer>
       {isLoggedIn ? <AppStack /> : <AuthStack />}
+      <Toast />
     </NavigationContainer>
   );
 };

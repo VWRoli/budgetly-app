@@ -3,6 +3,7 @@ import { ActivityIndicator, Text, View } from 'react-native';
 import Logo from '../assets/Logo';
 import validator from 'validator';
 import * as api from '../api';
+import Toast from 'react-native-toast-message';
 //Components
 import HeaderText from '../components/common/HeaderText';
 import Input from '../components/common/Input';
@@ -21,11 +22,17 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [resError, setResError] = useState(false);
+
+  const showError = (status: string) => {
+    Toast.show({
+      type: 'error',
+      text1: `Error!`,
+      text2: status,
+    });
+  };
 
   const handleSignUp = async () => {
     setIsLoading(true);
-    setResError(false);
     //reset fields
     setEmailError(false);
     setPasswordError(false);
@@ -43,10 +50,10 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
     if (!emailError && !passwordError && !usernameError) {
       const res = await api.signUp({ username, email, password });
 
-      if (res === 201) {
-        navigation.navigate('Success');
+      if (res != 201) {
+        showError(res);
       } else {
-        setResError(true);
+        navigation.navigate('Success');
       }
     }
     setIsLoading(false);
