@@ -16,7 +16,6 @@ export async function signUp(userForm: userFormType) {
   await axios
     .post(`${BASE_URL}users/user`, userForm)
     .then((res) => {
-      console.log(res);
       response = res;
     })
     .catch((error) => {
