@@ -6,6 +6,7 @@ interface Props {
   pressHandler: () => void;
   outlined?: boolean;
   slim?: boolean;
+  disabled?: boolean;
 }
 
 const Button: React.FC<Props> = ({
@@ -13,17 +14,21 @@ const Button: React.FC<Props> = ({
   pressHandler,
   outlined,
   slim,
+  disabled,
 }): JSX.Element => {
   const typeStyles = outlined ? styles.outlined : styles.filled;
+  const disabledStyles = disabled ? styles.disabled : styles.notDisabled;
   return (
     <TouchableOpacity
       style={{
         ...styles.button,
         ...typeStyles,
+        ...disabledStyles,
         paddingVertical: slim ? 8 : 18,
       }}
       activeOpacity={0.7}
       onPress={pressHandler}
+      disabled={disabled}
     >
       <Text style={{ ...styles.text, color: outlined ? '#06B3C4' : '#fff' }}>
         {label}
@@ -40,6 +45,12 @@ const styles = StyleSheet.create({
   },
   filled: {
     backgroundColor: '#06B3C4',
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  notDisabled: {
+    opacity: 1,
   },
   outlined: {
     borderWidth: 1,

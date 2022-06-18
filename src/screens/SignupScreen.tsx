@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import Logo from '../assets/Logo';
 import validator from 'validator';
 import * as api from '../api';
@@ -68,6 +68,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         value={username}
         changeHandler={setUsername}
         icon="person-outline"
+        editable={!isLoading}
       />
       {usernameError && (
         <InputErrorMsg msg="Username should be more than 6 characters" />
@@ -77,6 +78,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         value={email}
         changeHandler={setEmail}
         icon="alternate-email"
+        editable={!isLoading}
       />
       {emailError && (
         <InputErrorMsg msg="Please provide a properly formatted email address" />
@@ -87,6 +89,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         secureTextEntry
         icon="lock-outline"
         changeHandler={setPassword}
+        editable={!isLoading}
       />
       {passwordError && (
         <>
@@ -105,7 +108,9 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         }}
       >
         {isLoading ? (
-          <Text>Loading...</Text>
+          <View style={{ flex: 1 }}>
+            <ActivityIndicator size="large" color="#06B3C4" />
+          </View>
         ) : (
           <>
             <CustomText
@@ -120,15 +125,25 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
           </>
         )}
       </View>
-      <Button label="Sign up" pressHandler={handleSignUp} />
-
-      <View style={{ flexDirection: 'row', marginTop: 25 }}>
-        <CustomText
-          text="Already have an account"
-          styles={{ marginRight: 5 }}
-        />
-        <Link text="Login" pressHandler={() => navigation.navigate('Login')} />
-      </View>
+      <Button
+        label="Sign up"
+        pressHandler={handleSignUp}
+        disabled={isLoading}
+      />
+      {isLoading ? (
+        <></>
+      ) : (
+        <View style={{ flexDirection: 'row', marginTop: 25 }}>
+          <CustomText
+            text="Already have an account"
+            styles={{ marginRight: 5 }}
+          />
+          <Link
+            text="Login"
+            pressHandler={() => navigation.navigate('Login')}
+          />
+        </View>
+      )}
     </Container>
   );
 };

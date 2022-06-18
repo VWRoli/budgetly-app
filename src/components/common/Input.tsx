@@ -8,6 +8,7 @@ interface Props {
   placeholder: string;
   secureTextEntry?: boolean;
   icon: string;
+  editable?: boolean;
 }
 
 const Input: React.FC<Props> = ({
@@ -16,9 +17,15 @@ const Input: React.FC<Props> = ({
   secureTextEntry,
   placeholder,
   icon,
+  editable,
 }): JSX.Element => {
   return (
-    <View style={styles.searchSection}>
+    <View
+      style={[
+        styles.searchSection,
+        !editable ? styles.disabled : styles.notDisabled,
+      ]}
+    >
       <Icon style={styles.searchIcon} name={icon} size={20} color="#8B8C9E" />
       <TextInput
         secureTextEntry={secureTextEntry}
@@ -26,6 +33,7 @@ const Input: React.FC<Props> = ({
         value={value}
         placeholder={placeholder}
         onChangeText={changeHandler}
+        editable={editable}
       />
     </View>
   );
@@ -41,6 +49,12 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderWidth: 1,
     marginVertical: 5,
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  notDisabled: {
+    opacity: 1,
   },
   searchIcon: {
     padding: 10,
