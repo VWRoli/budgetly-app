@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Text, View } from 'react-native';
 import Logo from '../assets/Logo';
 import validator from 'validator';
 import * as api from '../api';
 import Toast from 'react-native-toast-message';
+import { useFormik } from 'formik';
 //Components
 import HeaderText from '../components/common/HeaderText';
 import Input from '../components/common/Input';
@@ -22,6 +23,14 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { handleChange, handleSubmit, values } = useFormik({
+    initialValues: { username: '', email: '', password: '' },
+    onSubmit: (values) =>
+      console.log(
+        `Username: ${values.username}, Email: ${values.email}, Password: ${values.password}`,
+      ),
+  });
 
   const showError = (status: string) => {
     Toast.show({
@@ -72,31 +81,41 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
       </View>
       <Input
         placeholder="Username"
-        value={username}
-        changeHandler={setUsername}
+        changeHandler={handleChange('username')}
+        autoCapitalize="none"
+        autoCompleteType="username"
         icon="person-outline"
         editable={!isLoading}
+        returnKeyType="next"
+        returnKeyLabel="next"
       />
       {usernameError && (
         <InputErrorMsg msg="Username should be more than 6 characters" />
       )}
       <Input
         placeholder="Email"
-        value={email}
-        changeHandler={setEmail}
+        autoCapitalize="none"
+        autoCompleteType="email"
+        keyboardType="email-address"
+        changeHandler={handleChange('email')}
         icon="alternate-email"
         editable={!isLoading}
+        returnKeyType="next"
+        returnKeyLabel="next"
       />
       {emailError && (
         <InputErrorMsg msg="Please provide a properly formatted email address" />
       )}
       <Input
         placeholder="Password"
-        value={password}
         secureTextEntry
         icon="lock-outline"
-        changeHandler={setPassword}
+        changeHandler={handleChange('password')}
+        autoCompleteType="password"
+        autoCapitalize="none"
         editable={!isLoading}
+        returnKeyType="go"
+        returnKeyLabel="go"
       />
       {passwordError && (
         <>
@@ -134,7 +153,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
       </View>
       <Button
         label="Sign up"
-        pressHandler={handleSignUp}
+        pressHandler={handleSubmit}
         disabled={isLoading}
       />
       {isLoading ? (

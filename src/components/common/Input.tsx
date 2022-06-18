@@ -3,12 +3,13 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
-  value: string;
-  changeHandler: Dispatch<SetStateAction<string>>;
+  changeHandler: (e: string | React.ChangeEvent<any>) => void;
   placeholder: string;
   secureTextEntry?: boolean;
   icon: string;
   editable?: boolean;
+  // All other props
+  [x: string]: any;
 }
 
 const Input: React.FC<Props> = ({
@@ -18,7 +19,9 @@ const Input: React.FC<Props> = ({
   placeholder,
   icon,
   editable,
+  ...otherProps
 }): JSX.Element => {
+  const validationColor = '#223e4b';
   return (
     <View
       style={[
@@ -29,7 +32,7 @@ const Input: React.FC<Props> = ({
       <Icon style={styles.searchIcon} name={icon} size={20} color="#8B8C9E" />
       <TextInput
         secureTextEntry={secureTextEntry}
-        style={styles.input}
+        style={{ ...styles.input, borderColor: validationColor }}
         value={value}
         placeholder={placeholder}
         onChangeText={changeHandler}
