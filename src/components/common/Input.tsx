@@ -1,6 +1,8 @@
+import { ErrorMessage } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import InputErrorMsg from './InputErrorMsg';
 
 interface Props {
   changeHandler: (e: string | React.ChangeEvent<any>) => void;
@@ -25,27 +27,30 @@ const Input: React.FC<Props> = ({
 }): JSX.Element => {
   const validationColor = !touched ? '#ddd' : error ? '#ff4444' : '#00c851';
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderRadius: 15,
-        borderColor: validationColor,
-        borderWidth: 1,
-        marginVertical: 5,
-      }}
-    >
-      <Icon style={styles.searchIcon} name={icon} size={20} color="#8B8C9E" />
-      <TextInput
-        secureTextEntry={secureTextEntry}
-        style={{ ...styles.input, borderColor: validationColor }}
-        value={value}
-        placeholder={placeholder}
-        onChangeText={changeHandler}
-        //editable={editable}
-      />
+    <View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#fff',
+          borderRadius: 15,
+          borderColor: validationColor,
+          borderWidth: 1,
+          marginVertical: 5,
+        }}
+      >
+        <Icon style={styles.searchIcon} name={icon} size={20} color="#8B8C9E" />
+        <TextInput
+          secureTextEntry={secureTextEntry}
+          style={{ ...styles.input, borderColor: validationColor }}
+          value={value}
+          placeholder={placeholder}
+          onChangeText={changeHandler}
+          //editable={editable}
+        />
+      </View>
+      {error && <InputErrorMsg msg={error} />}
     </View>
   );
 };

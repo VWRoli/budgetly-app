@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import Logo from '../assets/Logo';
-import validator from 'validator';
 import * as api from '../api';
 import Toast from 'react-native-toast-message';
 import { useFormik } from 'formik';
@@ -13,7 +12,6 @@ import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
 import Link from '../components/common/Link';
 import Container from '../components/common/Container';
-import InputErrorMsg from '../components/common/InputErrorMsg';
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -35,9 +33,6 @@ const SignupSchema = Yup.object().shape({
 
 //todo navigation type
 const SignupScreen = ({ navigation }: { navigation: any }) => {
-  const [usernameError, setUsernameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { handleChange, handleSubmit, values, errors, touched, handleBlur } =
@@ -111,9 +106,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         returnKeyType="next"
         returnKeyLabel="next"
       />
-      {usernameError && (
-        <InputErrorMsg msg="Username should be more than 6 characters" />
-      )}
+
       <Input
         placeholder="Email"
         autoCapitalize="none"
@@ -128,9 +121,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         returnKeyType="next"
         returnKeyLabel="next"
       />
-      {emailError && (
-        <InputErrorMsg msg="Please provide a properly formatted email address" />
-      )}
+
       <Input
         placeholder="Password"
         secureTextEntry
@@ -144,13 +135,6 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         returnKeyType="go"
         returnKeyLabel="go"
       />
-      {passwordError && (
-        <>
-          <InputErrorMsg msg="Password must be min 8 charachters long" />
-          <InputErrorMsg msg="Must contain a lowercase and an uppercase letter" />
-          <InputErrorMsg msg="Must contain a number and a symbol" />
-        </>
-      )}
 
       <View
         style={{
