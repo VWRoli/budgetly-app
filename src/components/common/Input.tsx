@@ -1,6 +1,5 @@
-import { ErrorMessage } from 'formik';
-import React, { Dispatch, SetStateAction } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import InputErrorMsg from './InputErrorMsg';
 
@@ -11,6 +10,7 @@ interface Props {
   icon: string;
   error?: string;
   touched?: boolean;
+  editable?: boolean;
   // All other props
   [x: string]: any;
 }
@@ -23,6 +23,7 @@ const Input: React.FC<Props> = ({
   icon,
   error,
   touched,
+  editable,
   ...otherProps
 }): JSX.Element => {
   const validationColor = !touched ? '#ddd' : error ? '#ff4444' : '#00c851';
@@ -38,6 +39,7 @@ const Input: React.FC<Props> = ({
           borderColor: validationColor,
           borderWidth: 1,
           marginVertical: 5,
+          opacity: editable ? 1 : 0.5,
         }}
       >
         <Icon style={styles.searchIcon} name={icon} size={20} color="#8B8C9E" />
@@ -47,7 +49,7 @@ const Input: React.FC<Props> = ({
           value={value}
           placeholder={placeholder}
           onChangeText={changeHandler}
-          //editable={editable}
+          editable={editable}
         />
       </View>
       {error && <InputErrorMsg msg={error} />}
@@ -56,16 +58,6 @@ const Input: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
-  searchSection: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    marginVertical: 5,
-  },
   disabled: {
     opacity: 0.5,
   },

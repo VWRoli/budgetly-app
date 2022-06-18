@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import Logo from '../assets/Logo';
 import * as api from '../api';
-import Toast from 'react-native-toast-message';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { SignupSchema } from '../constants/SignupSchema';
 //Components
 import HeaderText from '../components/common/HeaderText';
 import Input from '../components/common/Input';
@@ -13,74 +12,26 @@ import CustomText from '../components/common/CustomText';
 import Link from '../components/common/Link';
 import Container from '../components/common/Container';
 
-const SignupSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(6, 'Username must be at least 6 character')
-    .max(16, 'Username is too long - maximum 16 characters allowed')
-    .required('Username is required'),
-  email: Yup.string()
-    .email('Please enter a valid email')
-    .required('Email is required'),
-  password: Yup.string()
-    .required('Password is required')
-    .min(8, 'Password is too short - must be at least 8 characters long')
-
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      'Must contain one uppercase, one lowercase, one number and one special character',
-    ),
-});
-
 //todo navigation type
 const SignupScreen = ({ navigation }: { navigation: any }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { handleChange, handleSubmit, values, errors, touched, handleBlur } =
-    useFormik({
+  const { handleChange, handleSubmit, errors, touched, handleBlur } = useFormik(
+    {
       validationSchema: SignupSchema,
       initialValues: { username: '', email: '', password: '' },
-      onSubmit: (values) => {
-        console.log(
-          `Username: ${values.username}, Email: ${values.email}, Password: ${values.password}`,
-        );
+      onSubmit: async (values) => {
+        setIsLoading(true);
+        const res = await api.signUp(values);
+
+        if (res) {
+          navigation.navigate('Success');
+        }
+
+        setIsLoading(false);
       },
-    });
-
-  const showError = (status: string) => {
-    Toast.show({
-      type: 'error',
-      text1: `Error!`,
-      text2: status,
-    });
-  };
-
-  // const handleSignUp = async () => {
-  //   setIsLoading(true);
-  //   //reset fields
-  //   setEmailError(false);
-  //   setPasswordError(false);
-  //   setUsernameError(false);
-
-  //   if (!username || username.length < 6) {
-  //     setUsernameError(true);
-  //   }
-  //   if (!validator.isEmail(email)) {
-  //     setEmailError(true);
-  //   }
-  //   if (!validator.isStrongPassword(password)) {
-  //     setPasswordError(true);
-  //   }
-  //   if (!emailError && !passwordError && !usernameError) {
-  //     const res = await api.signUp({ username, email, password });
-
-  //     if (res != 201) {
-  //       showError(res);
-  //     } else {
-  //       navigation.navigate('Success');
-  //     }
-  //   }
-  //   setIsLoading(false);
-  // };
+    },
+  );
 
   return (
     <Container>
@@ -99,7 +50,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         autoCapitalize="none"
         autoCompleteType="username"
         icon="person-outline"
-        // editable={!isLoading}
+        editable={!isLoading}
         onBlur={handleBlur('username')}
         error={errors.username}
         touched={touched.username}
@@ -117,7 +68,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         error={errors.email}
         touched={touched.email}
         icon="alternate-email"
-        // editable={!isLoading}
+        editable={!isLoading}
         returnKeyType="next"
         returnKeyLabel="next"
       />
@@ -129,6 +80,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         changeHandler={handleChange('password')}
         autoCompleteType="password"
         autoCapitalize="none"
+        editable={!isLoading}
         onBlur={handleBlur('password')}
         error={errors.password}
         touched={touched.password}
