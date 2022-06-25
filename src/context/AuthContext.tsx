@@ -1,32 +1,18 @@
-import React, { FC, useContext } from 'react';
-//todo not implemented yet, not working! Does not log in on button press
+import React, { useContext } from 'react';
 
 interface DefaultType {
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  signIn: () => void;
+  signOut: () => void;
+  signUp: () => void;
 }
 
 const defaultValue: DefaultType = {
-  isLoggedIn: false,
-  setIsLoggedIn: () => {},
+  signIn: () => {},
+  signOut: () => {},
+  signUp: () => {},
 };
 
-const AuthContext = React.createContext(defaultValue);
-
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
-  return (
-    <AuthContext.Provider
-      value={{
-        isLoggedIn,
-        setIsLoggedIn,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-};
+export const AuthContext = React.createContext(defaultValue);
 
 export const useAuthContext = () => {
   return useContext(AuthContext);

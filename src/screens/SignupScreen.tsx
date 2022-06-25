@@ -11,24 +11,27 @@ import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
 import Link from '../components/common/Link';
 import Container from '../components/common/Container';
+import { useAuthContext } from '../context/AuthContext';
 
 //todo navigation type
 const SignupScreen = ({ navigation }: { navigation: any }) => {
+  const { signUp } = useAuthContext();
   const [isLoading, setIsLoading] = useState(false);
 
   const { handleChange, handleSubmit, errors, touched, handleBlur } = useFormik(
     {
-      validationSchema: SignupSchema,
+      //validationSchema: SignupSchema,
       initialValues: { username: '', email: '', password: '' },
       onSubmit: async (values) => {
-        setIsLoading(true);
-        const res = await api.signUp(values);
+        // setIsLoading(true);
+        // const res = await api.signUp(values);
 
-        if (res) {
-          navigation.navigate('Success');
-        }
+        // if (res) {
+        //   navigation.navigate('Success');
+        signUp();
+        // }
 
-        setIsLoading(false);
+        // setIsLoading(false);
       },
     },
   );
