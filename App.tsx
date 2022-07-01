@@ -2,7 +2,6 @@ import 'react-native-gesture-handler';
 import React, { useMemo, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { LogBox } from 'react-native';
-import Toast from 'react-native-toast-message';
 import { AuthContext } from './src/context/AuthContext';
 //Navigation
 import AppStack from './src/navigation/AppStack';
@@ -24,7 +23,7 @@ const App = () => {
       signOut: () => {
         setUserToken(null);
       },
-      signUp: async (token: string) => {
+      signUp: (token: string) => {
         setUserToken(token);
       },
     }),
@@ -35,7 +34,6 @@ const App = () => {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {userToken !== null ? <AppStack /> : <AuthStack />}
-        <Toast />
       </NavigationContainer>
     </AuthContext.Provider>
   );
