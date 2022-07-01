@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
+import { userFormType } from '../types/userFormType';
 
 interface DefaultType {
   signIn: () => void;
   signOut: () => void;
-  signUp: () => void;
+  signUp: (values: userFormType) => void;
 }
 
 const defaultValue: DefaultType = {

@@ -20,18 +20,14 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
 
   const { handleChange, handleSubmit, errors, touched, handleBlur } = useFormik(
     {
-      //validationSchema: SignupSchema,
+      validationSchema: SignupSchema,
       initialValues: { username: '', email: '', password: '' },
-      onSubmit: async (values) => {
-        // setIsLoading(true);
-        // const res = await api.signUp(values);
+      onSubmit: (values) => {
+        setIsLoading(true);
 
-        // if (res) {
-        //   navigation.navigate('Success');
-        signUp();
-        // }
-
-        // setIsLoading(false);
+        const res = signUp(values);
+        console.log(res);
+        setIsLoading(false);
       },
     },
   );
