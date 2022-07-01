@@ -4,6 +4,7 @@ import Logo from '../assets/Logo';
 import { useFormik } from 'formik';
 import { useAuthContext } from '../context/AuthContext';
 import { LoginSchema } from '../constants/LoginSchema';
+import * as api from '../api';
 //Components
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
@@ -17,18 +18,17 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { handleChange, handleSubmit, errors, touched, handleBlur } = useFormik(
     {
-      // validationSchema: LoginSchema,
-      initialValues: { username: '', email: '', password: '' },
+      validationSchema: LoginSchema,
+      initialValues: { username: '', password: '' },
       onSubmit: async (values) => {
-        // setIsLoading(true);
-        // const res = await api.signUp(values);
+        setIsLoading(true);
 
-        // if (res) {
-        //   navigation.navigate('Success');
-        signIn();
-        // }
+        const token = await api.logIn(values);
 
-        // setIsLoading(false);
+        if (token) {
+          signIn(token);
+        }
+        setIsLoading(false);
       },
     },
   );
@@ -45,16 +45,15 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
         <HeaderText text="Login" />
       </View>
       <Input
-        placeholder="Email"
+        placeholder="Username"
+        changeHandler={handleChange('username')}
         autoCapitalize="none"
-        autoCompleteType="email"
-        keyboardType="email-address"
-        changeHandler={handleChange('email')}
-        onBlur={handleBlur('email')}
-        error={errors.email}
-        touched={touched.email}
-        icon="alternate-email"
+        autoCompleteType="username"
+        icon="person-outline"
         editable={!isLoading}
+        onBlur={handleBlur('username')}
+        error={errors.username}
+        touched={touched.username}
         returnKeyType="next"
         returnKeyLabel="next"
       />

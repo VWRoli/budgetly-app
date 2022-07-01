@@ -17,8 +17,8 @@ const App = () => {
 
   const authContext = useMemo(
     () => ({
-      signIn: () => {
-        setUserToken('egfr');
+      signIn: (token: string) => {
+        setUserToken(token);
       },
       signOut: () => {
         setUserToken(null);

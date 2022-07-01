@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 interface DefaultType {
-  signIn: () => void;
+  signIn: (token: string) => void;
   signOut: () => void;
   signUp: (token: string) => void;
 }
