@@ -12,16 +12,24 @@ const showError = (status: number, msg: string) => {
 };
 
 export async function signUp(userForm: userFormType) {
-  let response;
-  await axios
-    .post(`${BASE_URL}users/user`, userForm)
-    .then((res) => {
-      response = res;
-    })
-    .catch((error) => {
-      if (error.response.data) {
-        showError(error.response.status, error.response.data.message);
-      }
+  try {
+    const res = await fetch(`${BASE_URL}users/user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userForm),
     });
-  return response;
+
+    const data = await res.json();
+    console.log(JSON.stringify(data, undefined, 2));
+    console.log(data.token);
+    if (data.token) {
+      return data.token;
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }

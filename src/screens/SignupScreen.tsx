@@ -22,11 +22,14 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
     {
       validationSchema: SignupSchema,
       initialValues: { username: '', email: '', password: '' },
-      onSubmit: (values) => {
+      onSubmit: async (values) => {
         setIsLoading(true);
 
-        const res = signUp(values);
-        console.log(res);
+        const token = await api.signUp(values);
+
+        if (token) {
+          signUp(token);
+        }
         setIsLoading(false);
       },
     },
