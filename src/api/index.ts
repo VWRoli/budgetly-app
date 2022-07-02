@@ -32,7 +32,7 @@ export const logIn = async (userForm: userFormType) => {
       },
       body: JSON.stringify(userForm),
     });
-    console.log(JSON.stringify(res, undefined, 2));
+
     if (!res.ok) throw new Error(`${res.status} Something went wrong!`);
 
     const data = await res.json();
