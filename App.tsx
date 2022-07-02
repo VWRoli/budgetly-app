@@ -3,11 +3,10 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { LogBox } from 'react-native';
 import { AuthContext } from './src/context/AuthContext';
-
 //Navigation
 import AppStack from './src/navigation/AppStack';
 import AuthStack from './src/navigation/AuthStack';
-import { getData, removeData, storeData } from './src/utils/helpers';
+import { localStorageUtils } from './src/utils/helpers';
 
 //To ignore warning
 LogBox.ignoreLogs([
@@ -18,7 +17,7 @@ const App = () => {
   const [userToken, setUserToken] = useState<string | null>(null);
 
   const getLocalData = async () => {
-    const localData = await getData('token');
+    const localData = await localStorageUtils.getData('token');
     if (localData) setUserToken(localData);
   };
   useEffect(() => {
@@ -27,16 +26,17 @@ const App = () => {
 
   const authContext = useMemo(
     () => ({
-      signIn: async (token: string) => {
+      signIn: (token: string) => {
         setUserToken(token);
-        await storeData('token', token);
+        localStorageUtils.storeData('token', token);
       },
       signOut: () => {
         setUserToken(null);
-        removeData('token');
+        localStorageUtils.removeData('token');
       },
       signUp: (token: string) => {
         setUserToken(token);
+        localStorageUtils.storeData('token', token);
       },
     }),
     [],
