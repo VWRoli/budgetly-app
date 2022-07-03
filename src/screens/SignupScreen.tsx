@@ -21,11 +21,20 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
   const { handleChange, handleSubmit, errors, touched, handleBlur } = useFormik(
     {
       validationSchema: SignupSchema,
-      initialValues: { username: '', email: '', password: '' },
+      initialValues: {
+        username: '',
+        email: '',
+        password: '',
+        balance: 0,
+        budgeted: 0,
+        available: 0,
+      },
       onSubmit: async (values) => {
         setIsLoading(true);
+        //update values object with default values
+        const newValues = { ...values, balance: 0, budgeted: 0, available: 0 };
 
-        const token = await api.signUp(values);
+        const token = await api.signUp(newValues);
 
         if (token) {
           signUp(token);

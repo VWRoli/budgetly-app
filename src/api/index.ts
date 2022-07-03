@@ -1,7 +1,8 @@
 import { BASE_URL } from '../constants/constants';
 import { userFormType } from '../types/userFormType';
+import { userType } from '../types/userType';
 
-export async function signUp(userForm: userFormType) {
+export async function signUp(userForm: userType) {
   try {
     const res = await fetch(`${BASE_URL}users/user`, {
       method: 'POST',
@@ -10,6 +11,7 @@ export async function signUp(userForm: userFormType) {
       },
       body: JSON.stringify(userForm),
     });
+
     if (!res.ok) throw new Error(`${res.status} Something went wrong!`);
 
     const data = await res.json();
