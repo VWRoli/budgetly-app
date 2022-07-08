@@ -11,6 +11,7 @@ interface FetchDataType {
 export const useFetch = (url: string): FetchDataType => {
   //Loading state
   const [isLoading, setIsLoading] = useState(true);
+
   const [userToken, setUserToken] = useState<string | null>(null);
 
   //Error state
@@ -44,10 +45,6 @@ export const useFetch = (url: string): FetchDataType => {
       setIsError(true);
     }
   }, [url, userToken]);
-
-  // useEffect(() => {
-  //   getLocalData();
-  // }, []);
 
   useEffect(() => {
     fetchData();

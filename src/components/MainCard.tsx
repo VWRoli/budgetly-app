@@ -24,14 +24,14 @@ const MainCard: React.FC = (): JSX.Element => {
       {isLoading ? (
         <Skeleton width={175} />
       ) : (
-        <HeaderText text={formatter(data.balance)} />
+        <HeaderText text={formatter(data?.balance)} />
       )}
       <View style={styles.tab}>
         <Text style={styles.tabText}>Avialable to Budget</Text>
         {isLoading ? (
           <></>
         ) : (
-          <Text style={styles.availableText}>{formatter(data.available)}</Text>
+          <Text style={styles.availableText}>{formatter(data?.available)}</Text>
         )}
       </View>
     </LinearGradient>
