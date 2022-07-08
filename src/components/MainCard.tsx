@@ -10,7 +10,7 @@ import HeaderText from './common/HeaderText';
 import Skeleton from './Skeletons/Skeleton';
 
 const MainCard: React.FC = (): JSX.Element => {
-  const { data, isLoading, isError } = useFetch(`${BASE_URL}users/1`);
+  const { data, isLoading, isError } = useFetch(`${BASE_URL}users/me`);
 
   return (
     <LinearGradient

@@ -18,7 +18,15 @@ export const useFetch = (url: string): FetchDataType => {
   const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          credentials: 'include',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF3ZXJ0eSIsImlkIjoiNjJjNWMzOWNkMThlZmFkNjgxNWQyNzNhIiwiaWF0IjoxNjU3MTI3ODM2LCJleHAiOjE2NTk3MTk4MzZ9.pLdgVzHChq4VMfhmaOXkcnb5Jxl2dIXh36R2hlu8L34',
+        },
+      });
       const resData = await response.json();
 
       setData(resData);
