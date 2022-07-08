@@ -9,12 +9,8 @@ import Category from '../components/Budget/Category';
 import MonthHeader from '../components/Budget/MonthHeader';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
-  const {
-    data: categoriesData,
-    isLoading,
-    isError,
-  } = useFetch(`${BASE_URL}users/1/categories`);
-
+  // const { data, isLoading, isError } = useFetch(`${BASE_URL}users/me`);
+  // console.log(data);
   return (
     <ScrollView
       contentContainerStyle={{
@@ -26,7 +22,7 @@ const BudgetScreen: React.FC = (): JSX.Element => {
       <View style={styles.mainCardWrapper}>
         <MainCard />
       </View>
-      <View style={styles.categoryWrapper}>
+      {/* <View style={styles.categoryWrapper}>
         {isLoading ? (
           <></>
         ) : (
@@ -34,7 +30,7 @@ const BudgetScreen: React.FC = (): JSX.Element => {
             <Category category={c} key={c.id} />
           ))
         )}
-      </View>
+      </View> */}
     </ScrollView>
   );
 };

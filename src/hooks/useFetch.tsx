@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { localStorageUtils } from '../utils/helpers';
 
 interface FetchDataType {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -10,6 +11,8 @@ interface FetchDataType {
 export const useFetch = (url: string): FetchDataType => {
   //Loading state
   const [isLoading, setIsLoading] = useState(true);
+  const [userToken, setUserToken] = useState<string | null>(null);
+
   //Error state
   const [isError, setIsError] = useState(false);
 
@@ -17,8 +20,19 @@ export const useFetch = (url: string): FetchDataType => {
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
+
     try {
-      const response = await fetch(url);
+      const localData = await localStorageUtils.getData('token');
+      if (localData) setUserToken(localData);
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          credentials: 'include',
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
       const resData = await response.json();
 
       setData(resData);
@@ -29,10 +43,15 @@ export const useFetch = (url: string): FetchDataType => {
       setIsLoading(false);
       setIsError(true);
     }
-  }, [url]);
+  }, [url, userToken]);
+
+  // useEffect(() => {
+  //   getLocalData();
+  // }, []);
+
   useEffect(() => {
     fetchData();
-  }, [url, fetchData]);
+  }, [url, userToken]);
 
   return { data, isLoading, isError };
 };
