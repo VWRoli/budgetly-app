@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 interface Props {
-  text: string;
+  text?: string;
   primary?: boolean;
   bold?: boolean;
   styles?: { [key: string]: string | number };

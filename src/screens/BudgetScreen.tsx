@@ -7,10 +7,9 @@ import MainCard from '../components/MainCard';
 import { categoryType } from '../types/categoryType';
 import Category from '../components/Budget/Category';
 import MonthHeader from '../components/Budget/MonthHeader';
+import CurrenciesList from '../components/CurrenciesList';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
-  // const { data, isLoading, isError } = useFetch(`${BASE_URL}users/me`);
-  // console.log(data);
   return (
     <ScrollView
       contentContainerStyle={{
@@ -19,9 +18,10 @@ const BudgetScreen: React.FC = (): JSX.Element => {
       style={styles.container}
     >
       <MonthHeader />
-      <View style={styles.mainCardWrapper}>
+      <CurrenciesList />
+      {/* <View style={styles.mainCardWrapper}>
         <MainCard />
-      </View>
+      </View> */}
       {/* <View style={styles.categoryWrapper}>
         {isLoading ? (
           <></>
