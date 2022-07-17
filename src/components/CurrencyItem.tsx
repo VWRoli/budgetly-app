@@ -1,7 +1,7 @@
 import React from 'react';
 import CountryFlag from 'react-native-country-flag';
 import cc from 'currency-codes';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import CustomText from './common/CustomText';
 
 interface Props {
