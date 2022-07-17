@@ -8,36 +8,19 @@ import { categoryType } from '../types/categoryType';
 import Category from '../components/Budget/Category';
 import MonthHeader from '../components/Budget/MonthHeader';
 import CurrenciesList from '../components/CurrenciesList';
+import CreateAccountScreen from './CreateAccountScreen';
 
 const BudgetScreen: React.FC = (): JSX.Element => {
   return (
-    <ScrollView
-      contentContainerStyle={{
-        alignItems: 'center',
-      }}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <MonthHeader />
-      <CurrenciesList />
-      {/* <View style={styles.mainCardWrapper}>
-        <MainCard />
-      </View> */}
-      {/* <View style={styles.categoryWrapper}>
-        {isLoading ? (
-          <></>
-        ) : (
-          categoriesData.map((c: categoryType) => (
-            <Category category={c} key={c.id} />
-          ))
-        )}
-      </View> */}
-    </ScrollView>
+      <CreateAccountScreen />
+    </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   mainCardWrapper: {
     marginTop: 5,

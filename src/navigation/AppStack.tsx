@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import ReportsScreen from '../screens/ReportsScreen';
 import TransactionsScreen from '../screens/TransactionsScreen';
 import BudgetScreen from '../screens/BudgetScreen';
+import CreateAccountScreen from '../screens/CreateAccountScreen';
 
 const Tab = createBottomTabNavigator();
 

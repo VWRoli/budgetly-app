@@ -10,7 +10,14 @@ interface Props {
 
 const Fab: React.FC<Props> = ({ label, pressHandler }) => {
   return (
-    <View>
+    <View
+      style={{
+        width: '100%',
+        position: 'absolute',
+        alignItems: 'center',
+        bottom: 0,
+      }}
+    >
       <Button label={label} pressHandler={pressHandler} />
     </View>
   );
