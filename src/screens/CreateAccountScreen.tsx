@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { createAccount } from '../api';
 //Components
 import Button from '../components/common/Button';
 import HeaderText from '../components/common/HeaderText';
 import CurrenciesList from '../components/CurrenciesList';
+import { localStorageUtils } from '../utils/helpers';
 
 const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
+  const [userToken, setUserToken] = useState<string>('');
+  const getLocalData = async () => {
+    const localData = await localStorageUtils.getData('token');
+    if (localData) setUserToken(localData);
+  };
+  useEffect(() => {
+    getLocalData();
+  }, []);
+
   const [selected, setSelected] = useState<string>('EUR');
-  const handleCreate = () => {
+  const handleCreate = async () => {
     {
-      console.log({ selected, balance: 0 });
-      //navigation.navigate('Budget');
+      //console.log({ selected, balance: 0 });
+      const account = await createAccount(
+        { currency: selected, balance: 0 },
+        userToken,
+      );
+      if (account) {
+        navigation.navigate('Budget');
+      }
     }
   };
   return (
