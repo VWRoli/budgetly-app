@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BASE_URL } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
 //Components
@@ -10,11 +11,12 @@ import MonthHeader from '../components/Budget/MonthHeader';
 import CurrenciesList from '../components/CurrenciesList';
 import CreateAccountScreen from './CreateAccountScreen';
 
+const Stack = createNativeStackNavigator();
+
 const BudgetScreen: React.FC = (): JSX.Element => {
   return (
     <View style={styles.container}>
       <MonthHeader />
-      <CreateAccountScreen />
     </View>
   );
 };

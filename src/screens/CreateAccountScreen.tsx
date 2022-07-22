@@ -1,12 +1,22 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+//Components
 import Fab from '../components/common/Fab';
+import HeaderText from '../components/common/HeaderText';
 import CurrenciesList from '../components/CurrenciesList';
 
-const CreateAccountScreen = () => {
-  const handleCreate = () => {};
+const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
+  const handleCreate = () => {
+    {
+      navigation.navigate('Home');
+    }
+  };
   return (
     <View style={styles.container}>
+      <HeaderText
+        text="Add new account"
+        styles={{ paddingLeft: 15, marginBottom: 15 }}
+      />
       <CurrenciesList />
       <Fab label="Create account" pressHandler={handleCreate} />
     </View>

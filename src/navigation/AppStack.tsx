@@ -6,10 +6,12 @@ import ReportsScreen from '../screens/ReportsScreen';
 import TransactionsScreen from '../screens/TransactionsScreen';
 import BudgetScreen from '../screens/BudgetScreen';
 import CreateAccountScreen from '../screens/CreateAccountScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-const AppStack: React.FC = (): JSX.Element => {
+function Home() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -57,6 +59,19 @@ const AppStack: React.FC = (): JSX.Element => {
         }}
       />
     </Tab.Navigator>
+  );
+}
+
+const AppStack: React.FC = (): JSX.Element => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="CreateAccount"
+        component={CreateAccountScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
   );
 };
 
