@@ -4,8 +4,15 @@ import { View } from 'react-native';
 import CurrencyItem from './CurrencyItem';
 import { currencyCodes } from '../constants/currencyList';
 
-const CurrenciesList = () => {
-  const [selected, setSelected] = useState<string>('EUR');
+interface Props {
+  selected: string;
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const CurrenciesList: React.FC<Props> = ({
+  selected,
+  setSelected,
+}): JSX.Element => {
   return (
     <View>
       <View>
