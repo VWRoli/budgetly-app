@@ -8,7 +8,7 @@ import CurrenciesList from '../components/CurrenciesList';
 const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
   const handleCreate = () => {
     {
-      navigation.navigate('Home');
+      navigation.navigate('Budget');
     }
   };
   return (
