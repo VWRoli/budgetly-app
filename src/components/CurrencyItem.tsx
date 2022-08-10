@@ -8,8 +8,8 @@ import CustomText from './common/CustomText';
 interface Props {
   flagCode: string;
   currencyCode: string;
-  selected: string;
-  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  selected?: string;
+  setSelected?: React.Dispatch<React.SetStateAction<string>>;
   disabled?: boolean;
 }
 
@@ -30,7 +30,7 @@ const CurrencyItem: React.FC<Props> = ({
       pointerEvents={disabled ? 'none' : 'auto'}
     >
       <TouchableOpacity
-        onPress={() => setSelected(currencyCode)}
+        onPress={() => setSelected && setSelected(currencyCode)}
         style={{
           flexDirection: 'row',
           padding: 10,

@@ -50,50 +50,53 @@ const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
         styles={{ paddingLeft: 10, marginTop: 10 }}
       />
       <View style={{ marginHorizontal: 10 }}>
-        <CustomText text="Your current accounts" />
         {isLoading && (
           <View style={{ flex: 1 }}>
             <ActivityIndicator size="large" color="#06B3C4" />
           </View>
         )}
 
-        {!isLoading &&
-          currencyCodes
-            .filter((cc) =>
-              ownedAccounts.some(
-                (acc: any) => acc.currency === cc.currencyCode,
-              ),
-            )
-            .map((cc) => (
-              <CurrencyItem
-                key={cc.flagCode}
-                currencyCode={cc.currencyCode}
-                flagCode={cc.flagCode}
-                setSelected={setSelected}
-                selected={selected}
-                disabled
-              />
-            ))}
+        {!isLoading && (
+          <View>
+            <CustomText text="Your current accounts" />
+            {currencyCodes
+              .filter((cc) =>
+                ownedAccounts.some(
+                  (acc: any) => acc.currency === cc.currencyCode,
+                ),
+              )
+              .map((cc) => (
+                <CurrencyItem
+                  key={cc.flagCode}
+                  currencyCode={cc.currencyCode}
+                  flagCode={cc.flagCode}
+                  disabled
+                />
+              ))}
+          </View>
+        )}
+        {!isLoading && (
+          <View>
+            <CustomText text="Available accounts" />
+            {currencyCodes
+              .filter((cc) =>
+                ownedAccounts.every(
+                  (acc: any) => acc.currency !== cc.currencyCode,
+                ),
+              )
+              .map((cc) => (
+                <CurrencyItem
+                  key={cc.flagCode}
+                  currencyCode={cc.currencyCode}
+                  flagCode={cc.flagCode}
+                  setSelected={setSelected}
+                  selected={selected}
+                />
+              ))}
+          </View>
+        )}
       </View>
-      {/* {isLoading ? (
-        <View style={{ flex: 1 }}>
-          <ActivityIndicator size="large" color="#06B3C4" />
-        </View>
-      ) : (
-        currencyCodes.map((c: { flagCode: string; currencyCode: string }) => (
-          <CurrencyItem
-            key={c.flagCode}
-            currencyCode={c.currencyCode}
-            flagCode={c.flagCode}
-            setSelected={setSelected}
-            selected={selected}
-            disabled={ownedAccounts.some((acc: any) => {
-              console.log(acc.currency === c.currencyCode);
-              return acc.currency === c.currencyCode;
-            })}
-          />
-        ))
-      )} */}
+
       <View style={styles.buttonWrapper}>
         <Button label="Create account" pressHandler={handleCreate} />
       </View>
