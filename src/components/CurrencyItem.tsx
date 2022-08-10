@@ -6,29 +6,36 @@ import { TouchableOpacity, View } from 'react-native';
 import CustomText from './common/CustomText';
 
 interface Props {
-  c: {
-    flagCode: string;
-    currencyCode: string;
-  };
+  flagCode: string;
+  currencyCode: string;
   selected: string;
   setSelected: React.Dispatch<React.SetStateAction<string>>;
+  disabled: boolean;
 }
 
-const CurrencyItem: React.FC<Props> = ({ c, selected, setSelected }) => {
+const CurrencyItem: React.FC<Props> = ({
+  flagCode,
+  currencyCode,
+  selected,
+  setSelected,
+  disabled,
+}) => {
   return (
     <View
       style={{
         borderRadius: 15,
         margin: 5,
+        opacity: disabled ? 0.5 : 1,
       }}
+      pointerEvents={disabled ? 'none' : 'auto'}
     >
       <TouchableOpacity
-        onPress={() => setSelected(c.currencyCode)}
+        onPress={() => setSelected(currencyCode)}
         style={{
           flexDirection: 'row',
           padding: 10,
           borderRadius: 15,
-          backgroundColor: selected === c.currencyCode ? '#06B3C4' : '#fff',
+          backgroundColor: selected === currencyCode ? '#06B3C4' : '#fff',
         }}
       >
         <View
@@ -38,19 +45,19 @@ const CurrencyItem: React.FC<Props> = ({ c, selected, setSelected }) => {
             overflow: 'hidden',
           }}
         >
-          <CountryFlag isoCode={c.flagCode} size={35} />
+          <CountryFlag isoCode={flagCode} size={35} />
         </View>
         <View style={{ marginLeft: 5 }}>
           <CustomText
-            text={cc.code(c.currencyCode)?.currency}
+            text={cc.code(currencyCode)?.currency}
             primary
             bold
-            styles={{ color: selected === c.currencyCode ? '#fff' : '#1D3777' }}
+            styles={{ color: selected === currencyCode ? '#fff' : '#1D3777' }}
           />
           <CustomText
-            text={c.currencyCode}
+            text={currencyCode}
             size={12}
-            styles={{ color: selected === c.currencyCode ? '#fff' : '#8B8C9E' }}
+            styles={{ color: selected === currencyCode ? '#fff' : '#8B8C9E' }}
           />
         </View>
       </TouchableOpacity>

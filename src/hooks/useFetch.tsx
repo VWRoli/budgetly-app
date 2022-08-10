@@ -31,7 +31,7 @@ export const useFetch = (url: string): FetchDataType => {
         headers: {
           'Content-Type': 'application/json',
           credentials: 'include',
-          Authorization: `Bearer ${userToken}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF3ZXJ0eSIsImlkIjoiNjJjNWMzOWNkMThlZmFkNjgxNWQyNzNhIiwiaWF0IjoxNjU4NDc2MzE5LCJleHAiOjE2NjEwNjgzMTl9.VRPZbRQ31Tvk0dftDjNFVpbAyukRqi9igdDQGMmEon4`,
         },
       });
       const resData = await response.json();
