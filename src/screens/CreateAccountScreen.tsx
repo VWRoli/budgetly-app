@@ -10,6 +10,7 @@ import MonthHeader from '../components/Budget/MonthHeader';
 import Button from '../components/common/Button';
 import HeaderText from '../components/common/HeaderText';
 import CurrencyItem from '../components/CurrencyItem';
+import CustomText from '../components/common/CustomText';
 
 const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
   //todo set usertoken into a context, should use usefetch instead to post data, or get token in fetch function
@@ -46,10 +47,35 @@ const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
       <MonthHeader />
       <HeaderText
         text="Add new account"
-        styles={{ paddingLeft: 15, marginTop: 10 }}
+        styles={{ paddingLeft: 10, marginTop: 10 }}
       />
+      <View style={{ marginHorizontal: 10 }}>
+        <CustomText text="Your current accounts" />
+        {isLoading && (
+          <View style={{ flex: 1 }}>
+            <ActivityIndicator size="large" color="#06B3C4" />
+          </View>
+        )}
 
-      {isLoading ? (
+        {!isLoading &&
+          currencyCodes
+            .filter((cc) =>
+              ownedAccounts.some(
+                (acc: any) => acc.currency === cc.currencyCode,
+              ),
+            )
+            .map((cc) => (
+              <CurrencyItem
+                key={cc.flagCode}
+                currencyCode={cc.currencyCode}
+                flagCode={cc.flagCode}
+                setSelected={setSelected}
+                selected={selected}
+                disabled
+              />
+            ))}
+      </View>
+      {/* {isLoading ? (
         <View style={{ flex: 1 }}>
           <ActivityIndicator size="large" color="#06B3C4" />
         </View>
@@ -67,7 +93,7 @@ const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
             })}
           />
         ))
-      )}
+      )} */}
       <View style={styles.buttonWrapper}>
         <Button label="Create account" pressHandler={handleCreate} />
       </View>

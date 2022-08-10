@@ -10,7 +10,7 @@ interface Props {
   currencyCode: string;
   selected: string;
   setSelected: React.Dispatch<React.SetStateAction<string>>;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 const CurrencyItem: React.FC<Props> = ({
@@ -24,7 +24,7 @@ const CurrencyItem: React.FC<Props> = ({
     <View
       style={{
         borderRadius: 15,
-        margin: 5,
+        marginVertical: 5,
         opacity: disabled ? 0.5 : 1,
       }}
       pointerEvents={disabled ? 'none' : 'auto'}
