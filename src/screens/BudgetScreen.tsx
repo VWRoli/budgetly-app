@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BASE_URL } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
@@ -8,7 +8,6 @@ import MainCard from '../components/MainCard';
 import { categoryType } from '../types/categoryType';
 import Category from '../components/Budget/Category';
 import MonthHeader from '../components/Budget/MonthHeader';
-import CurrenciesList from '../components/CurrenciesList';
 import CreateAccountScreen from './CreateAccountScreen';
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +16,7 @@ const BudgetScreen: React.FC = (): JSX.Element => {
   return (
     <View style={styles.container}>
       <MonthHeader />
+      <Text>Budget?</Text>
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { createAccount } from '../api';
 import { currencyCodes } from '../constants/currencyList';
 import { BASE_URL } from '../constants/constants';
@@ -41,6 +41,14 @@ const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
       }
     }
   };
+  //todo returns object with error property, unauthenticated error, don't know why exactly
+  if (ownedAccounts.error) {
+    return (
+      <View style={styles.container}>
+        <Text>{ownedAccounts.error}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
