@@ -20,7 +20,7 @@ const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
     isLoading,
     isError,
   } = useFetch(`${BASE_URL}accounts`);
-
+  //const isLoading = true;
   const getLocalData = async () => {
     const localData = await localStorageUtils.getData('token');
     if (localData) setUserToken(localData);
@@ -50,23 +50,35 @@ const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
     );
   }
 
+  const currentAccounts = currencyCodes.filter((cc) =>
+    ownedAccounts.some((acc: any) => acc.currency === cc.currencyCode),
+  ).length;
+
+  const availableAccounts = currencyCodes.filter((cc) =>
+    ownedAccounts.every((acc: any) => acc.currency !== cc.currencyCode),
+  );
+
   return (
     <View style={styles.container}>
       <MonthHeader />
       <HeaderText
         text="Add new account"
-        styles={{ paddingLeft: 10, marginTop: 10 }}
+        styles={{ paddingLeft: 10, marginVertical: 10 }}
       />
-      <View style={{ marginHorizontal: 10 }}>
+      <View style={styles.listWrapper}>
         {isLoading && (
-          <View style={{ flex: 1 }}>
+          <View>
             <ActivityIndicator size="large" color="#06B3C4" />
           </View>
         )}
 
         {!isLoading && (
           <View>
-            <CustomText text="Your current accounts" />
+            {currentAccounts ? (
+              <CustomText text="Your current accounts" />
+            ) : (
+              <></>
+            )}
             {currencyCodes
               .filter((cc) =>
                 ownedAccounts.some(
@@ -85,7 +97,11 @@ const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
         )}
         {!isLoading && (
           <View>
-            <CustomText text="Available accounts" />
+            {availableAccounts ? (
+              <CustomText text="Available accounts" />
+            ) : (
+              <></>
+            )}
             {currencyCodes
               .filter((cc) =>
                 ownedAccounts.every(
@@ -106,7 +122,11 @@ const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
       </View>
 
       <View style={styles.buttonWrapper}>
-        <Button label="Create account" pressHandler={handleCreate} />
+        <Button
+          label="Create account"
+          pressHandler={handleCreate}
+          disabled={isLoading}
+        />
       </View>
     </View>
   );
@@ -116,6 +136,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  listWrapper: {
+    marginHorizontal: 10,
+    flex: 1,
+    justifyContent: 'center',
   },
   buttonWrapper: {
     flex: 1,
