@@ -24,7 +24,7 @@ const BudgetStack = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = '';
 
-          if (route.name === 'Budget') {
+          if (route.name === 'Dash') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Reports') {
             iconName = focused ? 'pie-chart' : 'pie-chart-outline';
