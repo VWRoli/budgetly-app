@@ -12,11 +12,11 @@ import CreateAccountScreen from './CreateAccountScreen';
 
 const Stack = createNativeStackNavigator();
 
-const BudgetScreen: React.FC = (): JSX.Element => {
+const DashScreen: React.FC = (): JSX.Element => {
   return (
     <View style={styles.container}>
       <MonthHeader />
-      <Text>Budget?</Text>
+      <Text>Dash?</Text>
     </View>
   );
 };
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
   categoryWrapper: { paddingTop: 35, width: '95%', justifyContent: 'center' },
 });
-export default BudgetScreen;
+export default DashScreen;

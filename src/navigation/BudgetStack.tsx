@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //Components
 import ReportsScreen from '../screens/ReportsScreen';
 import TransactionsScreen from '../screens/TransactionsScreen';
-import BudgetScreen from '../screens/BudgetScreen';
+import Dashscreen from '../screens/DashScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +41,7 @@ const BudgetStack = () => {
         headerTitleAlign: 'center',
       })}
     >
-      <Tab.Screen name="Budget" component={BudgetScreen} />
+      <Tab.Screen name="Dash" component={Dashscreen} />
       <Tab.Screen name="Reports" component={ReportsScreen} />
       <Tab.Screen
         name="Transactions"
