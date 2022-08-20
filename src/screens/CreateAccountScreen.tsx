@@ -11,16 +11,20 @@ import Button from '../components/common/Button';
 import HeaderText from '../components/common/HeaderText';
 import CurrencyItem from '../components/CurrencyItem';
 import CustomText from '../components/common/CustomText';
+import { useAccountsContext } from '../context/AccountsContext';
 
 const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
   //todo set usertoken into a context, should use usefetch instead to post data, or get token in fetch function
   const [userToken, setUserToken] = useState<string>('');
-  const {
-    data: ownedAccounts,
-    isLoading,
-    isError,
-  } = useFetch(`${BASE_URL}accounts`);
+  const isLoading = false;
+  const { ownedAccounts } = useAccountsContext();
+  // const {
+  //   data: ownedAccounts,
+  //   isLoading,
+  //   isError,
+  // } = useFetch(`${BASE_URL}accounts`);
   //const isLoading = true;
+  //console.log('owned', JSON.stringify(ownedAccounts, undefined, 2));
   const getLocalData = async () => {
     const localData = await localStorageUtils.getData('token');
     if (localData) setUserToken(localData);
@@ -41,14 +45,6 @@ const CreateAccountScreen = ({ navigation }: { navigation: any }) => {
       }
     }
   };
-  //todo returns object with error property, unauthenticated error, don't know why exactly
-  if (ownedAccounts.error) {
-    return (
-      <View style={styles.container}>
-        <Text>{ownedAccounts.error}</Text>
-      </View>
-    );
-  }
 
   const currentAccounts = currencyCodes.filter((cc) =>
     ownedAccounts.some((acc: any) => acc.currency === cc.currencyCode),
