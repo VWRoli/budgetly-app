@@ -24,7 +24,8 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
         setIsLoading(true);
 
         const token = await api.logIn(values);
-
+        //todo axiosresponse error
+        console.log(token);
         if (token) {
           signIn(token);
         }

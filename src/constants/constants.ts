@@ -1,6 +1,4 @@
-import { Dimensions } from 'react-native';
-
-export const BASE_URL = `https://budgetly-mobile-app.herokuapp.com/`;
+export const BASE_URL = process.env.API_URL;
 
 export const skeletonArray = Array.from(Array(5).keys());
 
