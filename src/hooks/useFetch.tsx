@@ -8,8 +8,7 @@ axios.interceptors.request.use(
     config.headers!.authorization = `Bearer ${token}`;
     if (token) {
     }
-    // Do something before request is sent
-    console.log(JSON.stringify(config, undefined, 2));
+
     return config;
   },
   function (error) {
@@ -29,8 +28,6 @@ export const useFetch = (url: string): FetchDataType => {
   //Loading state
   const [isLoading, setIsLoading] = useState(true);
 
-  const [userToken, setUserToken] = useState<string | null>(null);
-
   //Error state
   const [isError, setIsError] = useState(false);
 
@@ -49,34 +46,11 @@ export const useFetch = (url: string): FetchDataType => {
         setIsError(true);
         setIsLoading(false);
       });
-
-    // try {
-    //   const localData = await localStorageUtils.getData('token');
-    //   if (localData) setUserToken(localData);
-
-    //   const response = await fetch(url, {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       credentials: 'include',
-    //       Authorization: `Bearer ${userToken}`,
-    //     },
-    //   });
-    //   const resData = await response.json();
-
-    //   setData(resData);
-
-    //   //Disable loading screen
-    //   setIsLoading(false);
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   setIsError(true);
-    // }
-  }, [url, userToken]);
+  }, [url]);
 
   useEffect(() => {
     fetchData();
-  }, [url, userToken]);
+  }, [url]);
 
   return { data, isLoading, isError };
 };
