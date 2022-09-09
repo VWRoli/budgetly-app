@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-//import { createAccount } from '../api';
 import { currencyCodes } from '../constants/currencyList';
-import { BASE_URL } from '../constants/constants';
-import { useFetch } from '../hooks/useFetch';
-import { localStorageUtils } from '../utils/helpers';
+
+import * as api from '../api';
 //Components
 import MonthHeader from '../components/Budget/MonthHeader';
 import Button from '../components/common/Button';
@@ -16,43 +14,22 @@ import { budgetType } from '../types/budgetType';
 import { createBudget } from '../api';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
-  //todo set usertoken into a context, should use usefetch instead to post data, or get token in fetch function
-  // const [userToken, setUserToken] = useState<string>('');
-  // const isLoading = false;
   const { ownedBudgets } = useBudgetsContext();
-  // const {
-  //   data: ownedBudgets,
-  //   isLoading,
-  //   isError,
-  // } = useFetch(`${BASE_URL}accounts`);
 
-  //const isLoading = true;
-  //console.log('owned', JSON.stringify(ownedAccounts, undefined, 2));
-  // const getLocalData = async () => {
-  //   const localData = await localStorageUtils.getData('token');
-  //   if (localData) setUserToken(localData);
-  // };
-  // useEffect(() => {
-  //   getLocalData();
-  // }, []);
-
-  const [selected, setSelected] = useState<string>('EUR');
+  const [selected, setSelected] = useState<string>('eur');
   const handleCreate = async () => {
     try {
-      const budget = await createBudget({ currency: selected, balance: 0 });
-      console.warn({ budget });
+      const { data } = await api.createBudget({
+        currency: selected,
+        balance: 0,
+      });
+      if (data) {
+        navigation.navigate('Budget');
+      }
     } catch (error) {
       console.error(error);
+      //todo error handling
     }
-    // {
-    //   const account = await createAccount(
-    //     { currency: selected, balance: 0 },
-    //     userToken,
-    //   );
-    //   if (account) {
-    //     navigation.navigate('Budget');
-    //   }
-    // }
   };
 
   const currentBudgets = currencyCodes.filter((cc) =>
