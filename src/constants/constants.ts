@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.API_URL;
+export const BASE_URL = 'http://192.168.0.101:5000/';
 
 export const skeletonArray = Array.from(Array(5).keys());
 

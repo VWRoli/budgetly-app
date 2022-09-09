@@ -22,14 +22,14 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
       initialValues: { username: '', password: '' },
       onSubmit: async (values) => {
         setIsLoading(true);
-
-        const token = await api.logIn(values);
-        //todo axiosresponse error
-        console.log(token);
-        if (token) {
-          signIn(token);
+        try {
+          const { data } = await api.logIn(values);
+          signIn(data.token);
+          setIsLoading(false);
+        } catch (error) {
+          setIsLoading(false);
+          //todo error handling
         }
-        setIsLoading(false);
       },
     },
   );
