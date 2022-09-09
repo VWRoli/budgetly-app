@@ -2,9 +2,8 @@ import { BASE_URL } from '../constants/constants';
 import { budgetType } from '../types/budgetType';
 import { userFormType } from '../types/userFormType';
 import { userType } from '../types/userType';
-import axios from 'axios';
+import axios from '../lib/axios';
 
-axios.defaults.headers.post['Content-Type'] = 'application/json';
 const API = axios.create({ baseURL: BASE_URL });
 
 export const signUp = (userForm: userType) => API.post('users/user', userForm);
@@ -12,6 +11,8 @@ export const signUp = (userForm: userType) => API.post('users/user', userForm);
 export const logIn = (userForm: userFormType) =>
   API.post('users/login', userForm);
 
+export const createBudget = (budgetData: budgetType) =>
+  API.post('budgets', budgetData);
 // export const createAccount = async (account: budgetType, token: string) => {
 //   try {
 //     const res = await fetch(`${BASE_URL}accounts`, {

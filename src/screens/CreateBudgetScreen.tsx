@@ -13,6 +13,7 @@ import CurrencyItem from '../components/CurrencyItem';
 import CustomText from '../components/common/CustomText';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import { budgetType } from '../types/budgetType';
+import { createBudget } from '../api';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   //todo set usertoken into a context, should use usefetch instead to post data, or get token in fetch function
@@ -37,6 +38,8 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
 
   const [selected, setSelected] = useState<string>('EUR');
   const handleCreate = async () => {
+    const budget = await createBudget({ currency: selected, balance: 0 });
+    console.warn({ budget });
     // {
     //   const account = await createAccount(
     //     { currency: selected, balance: 0 },

@@ -1,21 +1,5 @@
-import axios from 'axios';
+import axios from '../lib/axios';
 import { useState, useEffect, useCallback } from 'react';
-import { localStorageUtils } from '../utils/helpers';
-
-axios.interceptors.request.use(
-  async function (config) {
-    const token = await localStorageUtils.getData('token');
-    config.headers!.authorization = `Bearer ${token}`;
-    if (token) {
-    }
-
-    return config;
-  },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-  },
-);
 
 interface FetchDataType {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
