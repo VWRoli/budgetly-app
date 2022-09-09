@@ -8,7 +8,7 @@ import MainCard from '../components/MainCard';
 import { categoryType } from '../types/categoryType';
 import Category from '../components/Budget/Category';
 import MonthHeader from '../components/Budget/MonthHeader';
-import CreateAccountScreen from './CreateAccountScreen';
+import CreateBudgetScreen from './CreateBudgetScreen';
 
 const Stack = createNativeStackNavigator();
 

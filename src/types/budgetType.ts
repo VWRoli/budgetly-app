@@ -1,4 +1,4 @@
-export interface accountType {
+export interface budgetType {
   currency: string;
   balance: number;
 }
