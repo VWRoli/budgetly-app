@@ -38,8 +38,12 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
 
   const [selected, setSelected] = useState<string>('EUR');
   const handleCreate = async () => {
-    const budget = await createBudget({ currency: selected, balance: 0 });
-    console.warn({ budget });
+    try {
+      const budget = await createBudget({ currency: selected, balance: 0 });
+      console.warn({ budget });
+    } catch (error) {
+      console.error(error);
+    }
     // {
     //   const account = await createAccount(
     //     { currency: selected, balance: 0 },
