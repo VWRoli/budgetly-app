@@ -31,15 +31,20 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
       },
       onSubmit: async (values) => {
         setIsLoading(true);
-        //update values object with default values
-        const newValues = { ...values, balance: 0, budgeted: 0, available: 0 };
-
-        const token = await api.signUp(newValues);
-
-        if (token) {
-          signUp(token);
+        try {
+          const newValues = {
+            ...values,
+            balance: 0,
+            budgeted: 0,
+            available: 0,
+          };
+          const { data } = await api.logIn(newValues);
+          signUp(data.token);
+          setIsLoading(false);
+        } catch (error) {
+          setIsLoading(false);
+          //todo error handling
         }
-        setIsLoading(false);
       },
     },
   );
