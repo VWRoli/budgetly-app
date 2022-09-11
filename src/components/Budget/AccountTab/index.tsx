@@ -2,11 +2,11 @@ import React, { useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CountryFlag from 'react-native-country-flag';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { formatter } from '../../utils/helpers';
+import { formatter } from '../../../utils/helpers';
 import RBSheet from 'react-native-raw-bottom-sheet';
 //Components
-import CustomText from '../common/CustomText';
-import HeaderText from '../common/HeaderText';
+import CustomText from '../../common/CustomText';
+import HeaderText from '../../common/HeaderText';
 
 const AccountTab = () => {
   const refRBSheet = useRef();

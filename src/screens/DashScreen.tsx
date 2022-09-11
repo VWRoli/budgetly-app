@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 //Components
-import MonthHeader from '../components/Budget/MonthHeader';
 import AccountTab from '../components/Budget/AccountTab';
+import MonthHeader from '../components/Budget/MonthHeader';
 
 const DashScreen: React.FC = (): JSX.Element => {
   return (
