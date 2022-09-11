@@ -1,22 +1,16 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { BASE_URL } from '../constants/constants';
-import { useFetch } from '../hooks/useFetch';
+import { StyleSheet, View } from 'react-native';
 //Components
-import MainCard from '../components/MainCard';
-import { categoryType } from '../types/categoryType';
-import Category from '../components/Budget/Category';
 import MonthHeader from '../components/Budget/MonthHeader';
-import CreateBudgetScreen from './CreateBudgetScreen';
-
-const Stack = createNativeStackNavigator();
+import AccountTab from '../components/Budget/AccountTab';
 
 const DashScreen: React.FC = (): JSX.Element => {
   return (
     <View style={styles.container}>
       <MonthHeader />
-      <Text>Dash?</Text>
+      <View style={{ padding: 10 }}>
+        <AccountTab />
+      </View>
     </View>
   );
 };

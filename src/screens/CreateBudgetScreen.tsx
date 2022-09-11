@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { currencyCodes } from '../constants/currencyList';
 import * as api from '../api';
+import { useBudgetsContext } from '../context/BudgetsContext';
+import { budgetType } from '../types/budgetType';
 //Components
 import MonthHeader from '../components/Budget/MonthHeader';
 import Button from '../components/common/Button';
 import HeaderText from '../components/common/HeaderText';
 import CurrencyItem from '../components/CurrencyItem';
 import CustomText from '../components/common/CustomText';
-import { useBudgetsContext } from '../context/BudgetsContext';
-import { budgetType } from '../types/budgetType';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   const { ownedBudgets } = useBudgetsContext();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [selected, setSelected] = useState<string>('EUR');

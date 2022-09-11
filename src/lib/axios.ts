@@ -6,7 +6,6 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.baseURL = BASE_URL;
 axios.interceptors.request.use(
   async function (config) {
-    console.log('am i running');
     const token = await localStorageUtils.getData('token');
     if (token) {
       config.headers!.authorization = `Bearer ${token}`;
