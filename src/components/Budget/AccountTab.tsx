@@ -1,13 +1,15 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useRef } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CountryFlag from 'react-native-country-flag';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { formatter } from '../../utils/helpers';
+import RBSheet from 'react-native-raw-bottom-sheet';
 //Components
 import CustomText from '../common/CustomText';
 import HeaderText from '../common/HeaderText';
 
 const AccountTab = () => {
+  const refRBSheet = useRef();
   return (
     <View style={styles.wrapper}>
       <View style={styles.flagWrapper}>
@@ -17,7 +19,7 @@ const AccountTab = () => {
         <View style={{ marginRight: 20, alignItems: 'center' }}>
           <HeaderText text={formatter(16514)} />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => refRBSheet.current!.open()}>
           <MaterialCommunityIcons
             name={'chevron-down-circle-outline'}
             size={20}
@@ -25,6 +27,19 @@ const AccountTab = () => {
           />
         </TouchableOpacity>
       </View>
+      <RBSheet
+        ref={refRBSheet}
+        height={300}
+        openDuration={250}
+        customStyles={{
+          container: {
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        }}
+      >
+        <Text>View</Text>
+      </RBSheet>
     </View>
   );
 };
