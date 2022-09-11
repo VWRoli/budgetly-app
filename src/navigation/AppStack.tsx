@@ -32,14 +32,21 @@ const AppStack: React.FC = (): JSX.Element => {
     <BudgetsProvider>
       <Stack.Navigator>
         {!data.length ? (
-          <Stack.Screen
-            name="CreateBudget"
-            component={CreateBudgetScreen}
-            options={{ headerShown: false }}
-          />
+          <>
+            <Stack.Screen
+              name="CreateBudget"
+              component={CreateBudgetScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="BudgetStack"
+              component={BudgetStack}
+              options={{ headerShown: false }}
+            />
+          </>
         ) : (
           <Stack.Screen
-            name="Budget"
+            name="BudgetStack"
             component={BudgetStack}
             options={{ headerShown: false }}
           />

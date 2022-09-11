@@ -24,7 +24,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
         balance: 0,
       });
       if (data) {
-        navigation.navigate('Budget');
+        navigation.navigate('BudgetStack');
       }
       setIsLoading(false);
     } catch (error) {
