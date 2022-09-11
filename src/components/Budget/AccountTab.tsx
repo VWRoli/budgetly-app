@@ -1,28 +1,21 @@
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import CountryFlag from 'react-native-country-flag';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { formatter } from '../../utils/helpers';
 //Components
 import CustomText from '../common/CustomText';
 import HeaderText from '../common/HeaderText';
 
 const AccountTab = () => {
   return (
-    <View
-      style={{
-        borderRadius: 15,
-        backgroundColor: 'white',
-        padding: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
-    >
-      <CountryFlag isoCode={'hu'} size={35} />
+    <View style={styles.wrapper}>
+      <View style={styles.flagWrapper}>
+        <CountryFlag isoCode={'hu'} size={35} />
+      </View>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <View style={{ marginRight: 20, alignItems: 'center' }}>
-          <CustomText text="Balance" />
-          <HeaderText text="15654" />
+          <HeaderText text={formatter(16514)} />
         </View>
         <TouchableOpacity>
           <MaterialCommunityIcons
@@ -37,3 +30,20 @@ const AccountTab = () => {
 };
 
 export default AccountTab;
+
+const styles = StyleSheet.create({
+  wrapper: {
+    borderRadius: 15,
+    backgroundColor: 'white',
+    padding: 10,
+    paddingVertical: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  flagWrapper: {
+    borderRadius: 10,
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+});
