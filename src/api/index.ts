@@ -13,3 +13,5 @@ export const logIn = (userForm: userFormType) =>
 
 export const createBudget = (budgetData: budgetType) =>
   axios.post('budgets', budgetData);
+
+export const getBudgets = () => API.get('budgets');

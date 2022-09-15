@@ -1,15 +1,17 @@
-import React, { useRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import CountryFlag from 'react-native-country-flag';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { formatter } from '../../../utils/helpers';
 import RBSheet from 'react-native-raw-bottom-sheet';
 //Components
-import CustomText from '../../common/CustomText';
 import HeaderText from '../../common/HeaderText';
+import OwnedBudgets from '../OwnedBudgets';
 
 const AccountTab = () => {
-  const refRBSheet = useRef();
+  //todo RBSheet typerror, npm package error does not support propswithchildren
+  const refRBSheet = React.createRef<RBSheet>();
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.flagWrapper}>
@@ -38,7 +40,7 @@ const AccountTab = () => {
           },
         }}
       >
-        <Text>View</Text>
+        <OwnedBudgets />
       </RBSheet>
     </View>
   );

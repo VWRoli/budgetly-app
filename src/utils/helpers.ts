@@ -1,4 +1,6 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
+import { currencyCodes } from '../constants/currencyList';
+import { budgetType } from '../types/budgetType';
 
 //todo locale: string, currency: string,
 export const formatter = (amount: number) =>
@@ -37,3 +39,8 @@ export const localStorageUtils = {
     }
   },
 };
+
+export const filterCurrentBudgets = (ownedBudgets: budgetType[]) =>
+  currencyCodes.filter((cc) =>
+    ownedBudgets.some((b: budgetType) => b.currency === cc.currencyCode),
+  ).length;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { currencyCodes } from '../constants/currencyList';
 import * as api from '../api';
@@ -10,6 +10,8 @@ import Button from '../components/common/Button';
 import HeaderText from '../components/common/HeaderText';
 import CurrencyItem from '../components/CurrencyItem';
 import CustomText from '../components/common/CustomText';
+import { useFetch } from '../hooks/useFetch';
+import { BASE_URL } from '../constants/constants';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   const { ownedBudgets } = useBudgetsContext();

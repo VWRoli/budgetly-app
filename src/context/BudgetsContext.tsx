@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { budgetType } from '../types/budgetType';
 
 interface ValueTypes {
-  ownedBudgets: any[];
+  ownedBudgets: budgetType[];
   setOwnedBudgets: React.Dispatch<React.SetStateAction<budgetType[]>>;
 }
 
