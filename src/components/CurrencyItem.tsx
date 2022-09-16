@@ -2,64 +2,44 @@ import React from 'react';
 import CountryFlag from 'react-native-country-flag';
 import cc from 'currency-codes';
 import { TouchableOpacity, View } from 'react-native';
+import FlagCurrencyInfo, {
+  FlagCurrencyInfoProps,
+} from './common/FlagCurrencyInfo';
 //Components
 import CustomText from './common/CustomText';
 
-interface Props {
-  flagCode: string;
-  currencyCode: string;
-  selected?: string;
+interface Props extends FlagCurrencyInfoProps {
   setSelected?: React.Dispatch<React.SetStateAction<string>>;
   disabled?: boolean;
 }
 
-const CurrencyItem: React.FC<Props> = ({
-  flagCode,
-  currencyCode,
-  selected,
-  setSelected,
-  disabled,
-}) => {
+const CurrencyItem: React.FC<Props> = (props) => {
   return (
     <View
       style={{
         borderRadius: 15,
         marginVertical: 5,
-        opacity: disabled ? 0.5 : 1,
+        opacity: props.disabled ? 0.5 : 1,
       }}
-      pointerEvents={disabled ? 'none' : 'auto'}
+      pointerEvents={props.disabled ? 'none' : 'auto'}
     >
       <TouchableOpacity
-        onPress={() => setSelected && setSelected(currencyCode)}
+        onPress={() =>
+          props.setSelected && props.setSelected(props.currencyCode)
+        }
         style={{
           flexDirection: 'row',
           padding: 10,
           borderRadius: 15,
-          backgroundColor: selected === currencyCode ? '#06B3C4' : '#fff',
+          backgroundColor:
+            props.selected === props.currencyCode ? '#06B3C4' : '#fff',
         }}
       >
-        <View
-          style={{
-            borderRadius: 15,
-            justifyContent: 'center',
-            overflow: 'hidden',
-          }}
-        >
-          <CountryFlag isoCode={flagCode} size={35} />
-        </View>
-        <View style={{ marginLeft: 5 }}>
-          <CustomText
-            text={cc.code(currencyCode)?.currency}
-            primary
-            bold
-            styles={{ color: selected === currencyCode ? '#fff' : '#1D3777' }}
-          />
-          <CustomText
-            text={currencyCode}
-            size={12}
-            styles={{ color: selected === currencyCode ? '#fff' : '#8B8C9E' }}
-          />
-        </View>
+        <FlagCurrencyInfo
+          flagCode={props.flagCode}
+          currencyCode={props.currencyCode}
+          selected={props.selected}
+        />
       </TouchableOpacity>
     </View>
   );

@@ -19,7 +19,7 @@ const OwnedBudgets = () => {
             key={cc.flagCode}
             currencyCode={cc.currencyCode}
             flagCode={cc.flagCode}
-            disabled
+            //disabled
           />
         ))}
     </View>

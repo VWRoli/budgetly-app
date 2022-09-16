@@ -7,6 +7,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 //Components
 import HeaderText from '../../common/HeaderText';
 import OwnedBudgets from '../OwnedBudgets';
+import FlagCurrencyInfo from '../../common/FlagCurrencyInfo';
 
 const AccountTab = () => {
   //todo RBSheet typerror, npm package error does not support propswithchildren
@@ -14,9 +15,7 @@ const AccountTab = () => {
 
   return (
     <View style={styles.wrapper}>
-      <View style={styles.flagWrapper}>
-        <CountryFlag isoCode={'hu'} size={35} />
-      </View>
+      <FlagCurrencyInfo flagCode="hu" currencyCode="huf" />
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <View style={{ marginRight: 20, alignItems: 'center' }}>
           <HeaderText text={formatter(16514)} />
