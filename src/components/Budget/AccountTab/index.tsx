@@ -8,6 +8,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import HeaderText from '../../common/HeaderText';
 import OwnedBudgets from '../OwnedBudgets';
 import FlagCurrencyInfo from '../../common/FlagCurrencyInfo';
+import Drawer from './Drawer';
 
 const AccountTab = () => {
   //todo RBSheet typerror, npm package error does not support propswithchildren
@@ -39,7 +40,7 @@ const AccountTab = () => {
           },
         }}
       >
-        <OwnedBudgets />
+        <Drawer />
       </RBSheet>
     </View>
   );

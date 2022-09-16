@@ -44,11 +44,18 @@ const AppStack: React.FC = (): JSX.Element => {
           />
         </>
       ) : (
-        <Stack.Screen
-          name="BudgetStack"
-          component={BudgetStack}
-          options={{ headerShown: false }}
-        />
+        <>
+          <Stack.Screen
+            name="BudgetStack"
+            component={BudgetStack}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CreateBudget"
+            component={CreateBudgetScreen}
+            options={{ headerShown: false }}
+          />
+        </>
       )}
     </Stack.Navigator>
   );

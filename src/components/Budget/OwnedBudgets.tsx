@@ -5,7 +5,7 @@ import { useBudgetsContext } from '../../context/BudgetsContext';
 //Components
 import CurrencyItem from '../CurrencyItem';
 
-const OwnedBudgets = () => {
+const OwnedBudgets = (props: { disabled?: boolean }) => {
   const { ownedBudgets } = useBudgetsContext();
 
   return (
@@ -19,7 +19,7 @@ const OwnedBudgets = () => {
             key={cc.flagCode}
             currencyCode={cc.currencyCode}
             flagCode={cc.flagCode}
-            //disabled
+            disabled={props.disabled}
           />
         ))}
     </View>

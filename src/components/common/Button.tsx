@@ -7,6 +7,7 @@ interface Props {
   outlined?: boolean;
   slim?: boolean;
   disabled?: boolean;
+  width?: string;
 }
 
 const Button: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const Button: React.FC<Props> = ({
   outlined,
   slim,
   disabled,
+  width = '90%',
 }): JSX.Element => {
   const typeStyles = outlined ? styles.outlined : styles.filled;
   const disabledStyles = disabled ? styles.disabled : styles.notDisabled;
@@ -25,6 +27,7 @@ const Button: React.FC<Props> = ({
         ...typeStyles,
         ...disabledStyles,
         paddingVertical: slim ? 8 : 18,
+        width,
       }}
       activeOpacity={0.7}
       onPress={pressHandler}
@@ -41,7 +44,6 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     borderRadius: 15,
-    width: '90%',
   },
   filled: {
     backgroundColor: '#06B3C4',

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { currencyCodes } from '../constants/currencyList';
 import * as api from '../api';
@@ -10,8 +10,7 @@ import Button from '../components/common/Button';
 import HeaderText from '../components/common/HeaderText';
 import CurrencyItem from '../components/CurrencyItem';
 import CustomText from '../components/common/CustomText';
-import { useFetch } from '../hooks/useFetch';
-import { BASE_URL } from '../constants/constants';
+import OwnedBudgets from '../components/Budget/OwnedBudgets';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   const { ownedBudgets } = useBudgetsContext();
@@ -48,10 +47,12 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View style={styles.container}>
       <MonthHeader />
-      <HeaderText
-        text="Add new budget"
-        styles={{ paddingLeft: 10, marginVertical: 10 }}
-      />
+      <View style={{ marginVertical: 10 }}>
+        <HeaderText
+          text="Add new budget"
+          styles={{ paddingLeft: 10, marginVertical: 10 }}
+        />
+      </View>
       <View style={styles.listWrapper}>
         {isLoading && (
           <View>
@@ -60,26 +61,13 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
         )}
 
         {!isLoading && (
-          <View>
+          <View style={{ marginTop: 35 }}>
             {currentBudgets ? (
               <CustomText text="Your current budgets" />
             ) : (
               <></>
             )}
-            {currencyCodes
-              .filter((cc) =>
-                ownedBudgets.some(
-                  (acc: any) => acc.currency === cc.currencyCode,
-                ),
-              )
-              .map((cc) => (
-                <CurrencyItem
-                  key={cc.flagCode}
-                  currencyCode={cc.currencyCode}
-                  flagCode={cc.flagCode}
-                  disabled
-                />
-              ))}
+            <OwnedBudgets disabled />
           </View>
         )}
 
