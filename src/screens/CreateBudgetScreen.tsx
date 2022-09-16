@@ -5,7 +5,7 @@ import * as api from '../api';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import { budgetType } from '../types/budgetType';
 //Components
-import MonthHeader from '../components/Budget/MonthHeader';
+import MonthHeader from '../components/common/MonthHeader';
 import Button from '../components/common/Button';
 import HeaderText from '../components/common/HeaderText';
 import CurrencyItem from '../components/CurrencyItem';
@@ -45,7 +45,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   const availableBudgets = currencyCodes.filter((cc) =>
     ownedBudgets.every((b: budgetType) => b.currency !== cc.currencyCode),
   );
-  console.log(availableBudgets);
+
   return (
     <View style={styles.container}>
       <MonthHeader />

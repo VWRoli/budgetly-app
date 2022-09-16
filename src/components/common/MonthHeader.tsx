@@ -1,11 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View } from 'react-native';
 import { useAuthContext } from '../../context/AuthContext';
 //Components
-import CustomText from '../common/CustomText';
+import CustomText from './CustomText';
+import IconButton from './IconButton';
 
 const MonthHeader: React.FC = (): JSX.Element => {
+  const navigation = useNavigation();
   const { signOut } = useAuthContext();
   return (
     <View
@@ -17,13 +19,12 @@ const MonthHeader: React.FC = (): JSX.Element => {
         paddingVertical: 10,
       }}
     >
-      <TouchableOpacity activeOpacity={0.7}>
-        <Icon name="chevron-left" size={28} color="#1D3777" />
-      </TouchableOpacity>
+      <IconButton
+        pressHandler={() => navigation.goBack()}
+        icon="chevron-left"
+      />
       <CustomText text="June" primary bold />
-      <TouchableOpacity activeOpacity={0.7} onPress={() => signOut()}>
-        <Icon name="exit-to-app" size={28} color="#1D3777" />
-      </TouchableOpacity>
+      <IconButton icon="exit-to-app" pressHandler={() => signOut()} />
     </View>
   );
 };

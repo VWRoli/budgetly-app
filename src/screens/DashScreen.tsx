@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
-import MonthHeader from '../components/Budget/MonthHeader';
+import MonthHeader from '../components/common/MonthHeader';
 
 const DashScreen: React.FC = (): JSX.Element => {
   return (

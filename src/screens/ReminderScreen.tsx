@@ -7,7 +7,7 @@ import CustomText from '../components/common/CustomText';
 import HeaderText from '../components/common/HeaderText';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
-import BackButton from '../components/common/BackButton';
+import IconButton from '../components/common/IconButton';
 
 const ReminderScreen = ({ navigation }: { navigation: any }) => {
   const [text, setText] = React.useState('');
@@ -15,7 +15,10 @@ const ReminderScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.backButton}>
-        <BackButton pressHandler={() => navigation.goBack()} />
+        <IconButton
+          icon="chevron-left"
+          pressHandler={() => navigation.goBack()}
+        />
       </View>
       <Logo />
       <View style={styles.header}>

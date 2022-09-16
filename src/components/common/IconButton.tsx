@@ -4,14 +4,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
   pressHandler: () => void;
+  icon: string;
 }
 
-const BackButton: React.FC<Props> = ({ pressHandler }): JSX.Element => {
+const IconButton: React.FC<Props> = ({ pressHandler, icon }): JSX.Element => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={pressHandler}>
-      <Icon name="arrow-back" size={35} color="#5E6C89" />
+      <Icon name={icon} size={35} color="#5E6C89" />
     </TouchableOpacity>
   );
 };
 
-export default BackButton;
+export default IconButton;

@@ -1,16 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NavType } from '../../../types/navType';
 //Components
 import Button from '../../common/Button';
 import OwnedBudgets from '../OwnedBudgets';
 
-type Nav = {
-  navigate: (value: string) => void;
-};
-
 const Drawer = () => {
-  const { navigate } = useNavigation<Nav>();
+  const { navigate } = useNavigation<NavType>();
 
   return (
     <View style={styles.wrapper}>
