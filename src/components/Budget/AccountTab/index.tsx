@@ -1,17 +1,16 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import CountryFlag from 'react-native-country-flag';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { formatter } from '../../../utils/helpers';
 import RBSheet from 'react-native-raw-bottom-sheet';
 //Components
 import HeaderText from '../../common/HeaderText';
-import OwnedBudgets from '../OwnedBudgets';
 import FlagCurrencyInfo from '../../common/FlagCurrencyInfo';
 import Drawer from './Drawer';
+import IconButton from '../../common/IconButton';
 
 const AccountTab = () => {
-  //todo RBSheet typerror, npm package error does not support propswithchildren
+  //todo RBSheet typeerror, npm package error does not support propswithchildren
   const refRBSheet = React.createRef<RBSheet>();
 
   return (
@@ -21,13 +20,10 @@ const AccountTab = () => {
         <View style={{ marginRight: 20, alignItems: 'center' }}>
           <HeaderText text={formatter(16514)} />
         </View>
-        <TouchableOpacity onPress={() => refRBSheet.current!.open()}>
-          <MaterialCommunityIcons
-            name={'chevron-down-circle-outline'}
-            size={20}
-            color={'#06B3C4'}
-          />
-        </TouchableOpacity>
+        <IconButton
+          icon="chevron-down-circle-outline"
+          pressHandler={() => refRBSheet.current!.open()}
+        />
       </View>
       <RBSheet
         ref={refRBSheet}
