@@ -13,7 +13,7 @@ import CustomText from '../components/common/CustomText';
 import OwnedBudgets from '../components/Budget/OwnedBudgets';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
-  const { ownedBudgets } = useBudgetsContext();
+  const { ownedBudgets, setOwnedBudgets } = useBudgetsContext();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,7 +25,9 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
         currency: selected,
         balance: 0,
       });
+
       if (data) {
+        setOwnedBudgets((prev) => [...prev, data]);
         navigation.navigate('BudgetStack');
       }
       setIsLoading(false);
@@ -43,7 +45,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   const availableBudgets = currencyCodes.filter((cc) =>
     ownedBudgets.every((b: budgetType) => b.currency !== cc.currencyCode),
   );
-
+  console.log(availableBudgets);
   return (
     <View style={styles.container}>
       <MonthHeader />
@@ -73,7 +75,11 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
 
         {!isLoading && (
           <View>
-            {availableBudgets ? <CustomText text="Available Budgets" /> : <></>}
+            {availableBudgets.length ? (
+              <CustomText text="Available Budgets" />
+            ) : (
+              <></>
+            )}
             {currencyCodes
               .filter((cc) =>
                 ownedBudgets.every(
@@ -97,7 +103,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
         <Button
           label="Create Budget"
           pressHandler={handleCreate}
-          disabled={isLoading}
+          disabled={isLoading || availableBudgets.length === 0}
         />
       </View>
     </View>

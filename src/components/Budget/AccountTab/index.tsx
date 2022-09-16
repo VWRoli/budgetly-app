@@ -31,7 +31,7 @@ const AccountTab = () => {
       </View>
       <RBSheet
         ref={refRBSheet}
-        height={300}
+        height={330}
         openDuration={250}
         customStyles={{
           container: {

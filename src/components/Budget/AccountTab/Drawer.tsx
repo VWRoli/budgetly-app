@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     alignItems: 'flex-end',
     padding: 5,
+    paddingTop: 10,
   },
 });
 
