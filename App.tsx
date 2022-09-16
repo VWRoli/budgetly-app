@@ -7,6 +7,7 @@ import { AuthContext } from './src/context/AuthContext';
 import AppStack from './src/navigation/AppStack';
 import AuthStack from './src/navigation/AuthStack';
 import { localStorageUtils } from './src/utils/helpers';
+import { BudgetsProvider } from './src/context/BudgetsContext';
 
 //To ignore warning
 LogBox.ignoreLogs([
@@ -44,9 +45,11 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {userToken !== null ? <AppStack /> : <AuthStack />}
-      </NavigationContainer>
+      <BudgetsProvider>
+        <NavigationContainer>
+          {userToken !== null ? <AppStack /> : <AuthStack />}
+        </NavigationContainer>
+      </BudgetsProvider>
     </AuthContext.Provider>
   );
 };

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { BudgetsProvider, useBudgetsContext } from '../context/BudgetsContext';
+import { useBudgetsContext } from '../context/BudgetsContext';
 import { useFetch } from '../hooks/useFetch';
 import { BASE_URL } from '../constants/constants';
 import { ActivityIndicator, View } from 'react-native';
-import * as api from '../api';
 //Screens
 import CreateBudgetScreen from '../screens/CreateBudgetScreen';
 import BudgetStack from './BudgetStack';
@@ -12,32 +11,13 @@ import BudgetStack from './BudgetStack';
 const Stack = createNativeStackNavigator();
 
 const AppStack: React.FC = (): JSX.Element => {
-  const { ownedBudgets, setOwnedBudgets } = useBudgetsContext();
-  const [isLoading, setIsLoading] = useState(true);
-  //const { data, isLoading, isError } = useFetch(`${BASE_URL}budgets`);
-  let data = [];
-
-  const getOwnedAccounts = async () => {
-    setIsLoading(true);
-    try {
-      console.log('pre');
-      const { data } = await api.getBudgets();
-      console.log('post');
-      //todo it gets stuck on the api call, why?
-      console.log(data);
-      //console.log({ data });
-      //setOwnedBudgets(data);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      //todo error handling
-    }
-  };
+  const { setOwnedBudgets } = useBudgetsContext();
+  const { data, isLoading, isError } = useFetch(`${BASE_URL}budgets`);
 
   useEffect(() => {
-    getOwnedAccounts();
-  }, []);
-  // console.log({ ownedBudgets });
+    setOwnedBudgets(data);
+  }, [data, isLoading]);
+
   if (isLoading) {
     return (
       <View
@@ -49,30 +29,28 @@ const AppStack: React.FC = (): JSX.Element => {
   }
 
   return (
-    <BudgetsProvider>
-      <Stack.Navigator>
-        {!ownedBudgets.length ? (
-          <>
-            <Stack.Screen
-              name="CreateBudget"
-              component={CreateBudgetScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="BudgetStack"
-              component={BudgetStack}
-              options={{ headerShown: false }}
-            />
-          </>
-        ) : (
+    <Stack.Navigator>
+      {!data.length ? (
+        <>
+          <Stack.Screen
+            name="CreateBudget"
+            component={CreateBudgetScreen}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="BudgetStack"
             component={BudgetStack}
             options={{ headerShown: false }}
           />
-        )}
-      </Stack.Navigator>
-    </BudgetsProvider>
+        </>
+      ) : (
+        <Stack.Screen
+          name="BudgetStack"
+          component={BudgetStack}
+          options={{ headerShown: false }}
+        />
+      )}
+    </Stack.Navigator>
   );
 };
 

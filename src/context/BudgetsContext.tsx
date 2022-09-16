@@ -19,6 +19,7 @@ interface Props {
 
 export const BudgetsProvider: React.FC<Props> = ({ children }) => {
   const [ownedBudgets, setOwnedBudgets] = useState<budgetType[]>([]);
+
   return (
     <BudgetContext.Provider value={{ ownedBudgets, setOwnedBudgets }}>
       {children}
