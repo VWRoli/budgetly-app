@@ -5,6 +5,8 @@ interface Props {
   placeholder: string;
   styles?: { [key: string]: string | number };
   fullWidth?: boolean;
+  value: string;
+  changeHandler: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const InputSecondary: React.FC<Props> = (props): JSX.Element => {
@@ -13,6 +15,8 @@ const InputSecondary: React.FC<Props> = (props): JSX.Element => {
       editable
       maxLength={40}
       placeholder={props.placeholder}
+      value={props.value}
+      onChangeText={(text) => props.changeHandler(text)}
       style={{
         borderColor: '#06B3C4',
         borderWidth: 1,

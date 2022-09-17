@@ -53,7 +53,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       )}
       <RBSheet
         ref={refRBSheet}
-        height={200}
+        height={150}
         openDuration={250}
         customStyles={{
           container: {
