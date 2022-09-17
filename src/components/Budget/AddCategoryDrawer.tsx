@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { categoryType } from '../../types/categoryType';
+import * as api from '../../api';
+//Components
 import Button from '../common/Button';
-import CardWrapper from '../common/CardWrapper';
 import InputSecondary from '../common/InputSecondary';
 
-const AddCategoryDrawer = () => {
+interface Props {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const AddCategoryDrawer: React.FC<Props> = (props) => {
   const [title, setTitle] = useState('');
 
-  const handleCreate = () => {
-    console.log(title);
+  const handleCreate = async () => {
+    props.setLoading(true);
+    const newCategory = {
+      title,
+      budgeted: 0,
+      available: 0,
+    };
+    try {
+      await api.createCategory(newCategory);
+      props.setLoading(false);
+    } catch (error) {
+      props.setLoading(false);
+    }
   };
+
   return (
     <View style={{ width: '100%' }}>
       <View style={{ marginHorizontal: 10, alignItems: 'center' }}>

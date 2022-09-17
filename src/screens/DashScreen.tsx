@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 //Components
@@ -14,13 +14,26 @@ import { useFetch } from '../hooks/useFetch';
 import { categoryType } from '../types/categoryType';
 
 const DashScreen: React.FC = (): JSX.Element => {
-  //todo RBSheet typeerror, npm package error does not support propswithchildren
+  const [loadingCreate, setLoadingCreate] = useState(false);
   const refRBSheet = React.createRef<RBSheet>();
+
   const {
     data: categories,
     isLoading,
     isError,
   } = useFetch(`${BASE_URL}categories`);
+
+  if (loadingCreate) {
+    return (
+      <View style={styles.container}>
+        <MonthHeader />
+        <View style={{ padding: 10 }}>
+          <AccountTab />
+        </View>
+        <Loading />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -49,7 +62,9 @@ const DashScreen: React.FC = (): JSX.Element => {
       {isLoading ? (
         <Loading />
       ) : (
-        categories?.map((c: categoryType) => <Category category={c} />)
+        categories?.map((c: categoryType) => (
+          <Category key={c._id} category={c} />
+        ))
       )}
       <RBSheet
         ref={refRBSheet}
@@ -62,7 +77,7 @@ const DashScreen: React.FC = (): JSX.Element => {
           },
         }}
       >
-        <AddCategoryDrawer />
+        <AddCategoryDrawer setLoading={setLoadingCreate} />
       </RBSheet>
     </View>
   );
