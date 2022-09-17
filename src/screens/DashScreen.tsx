@@ -1,7 +1,9 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
+import AddCategoryDrawer from '../components/Budget/AddCategoryDrawer';
 import Category from '../components/Budget/Category';
 import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
@@ -12,6 +14,8 @@ import { useFetch } from '../hooks/useFetch';
 import { categoryType } from '../types/categoryType';
 
 const DashScreen: React.FC = (): JSX.Element => {
+  //todo RBSheet typeerror, npm package error does not support propswithchildren
+  const refRBSheet = React.createRef<RBSheet>();
   const {
     data: categories,
     isLoading,
@@ -36,7 +40,10 @@ const DashScreen: React.FC = (): JSX.Element => {
             text="You don't have any categories or budget items yet."
             styles={{ marginVertical: 20 }}
           />
-          <Button label="Add your first category" pressHandler={() => {}} />
+          <Button
+            label="Add your first category"
+            pressHandler={() => refRBSheet.current!.open()}
+          />
         </View>
       )}
       {isLoading ? (
@@ -44,6 +51,19 @@ const DashScreen: React.FC = (): JSX.Element => {
       ) : (
         categories?.map((c: categoryType) => <Category category={c} />)
       )}
+      <RBSheet
+        ref={refRBSheet}
+        height={200}
+        openDuration={250}
+        customStyles={{
+          container: {
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        }}
+      >
+        <AddCategoryDrawer />
+      </RBSheet>
     </View>
   );
 };

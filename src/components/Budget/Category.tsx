@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { BASE_URL, skeletonArray } from '../../constants/constants';
-import { useFetch } from '../../hooks/useFetch';
 import { budgetItemType } from '../../types/budgetItemType';
 import { categoryType } from '../../types/categoryType';
-import SkeletonBudgetItem from '../Skeletons/SkeletonBudgetItem';
+//Components
 import AddCategory from './AddCategory';
 import BudgetItem from './BudgetItem';
 import CategoryHeader from './CategoryHeader';
