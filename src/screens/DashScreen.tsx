@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import { BASE_URL } from '../constants/constants';
+import { useFetch } from '../hooks/useFetch';
+import { categoryType } from '../types/categoryType';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
 import AddCategoryDrawer from '../components/Budget/AddCategoryDrawer';
@@ -9,9 +12,6 @@ import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
 import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
-import { BASE_URL } from '../constants/constants';
-import { useFetch } from '../hooks/useFetch';
-import { categoryType } from '../types/categoryType';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [loadingCreate, setLoadingCreate] = useState(false);
@@ -63,7 +63,11 @@ const DashScreen: React.FC = (): JSX.Element => {
         <Loading />
       ) : (
         categories?.map((c: categoryType) => (
-          <Category key={c._id} category={c} />
+          <Category
+            key={c._id}
+            category={c}
+            onOpen={() => refRBSheet.current!.open()}
+          />
         ))
       )}
       <RBSheet
