@@ -8,6 +8,7 @@ import InputSecondary from '../common/InputSecondary';
 interface Props {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => void;
+  isLoading: boolean;
 }
 const AddCategoryDrawer: React.FC<Props> = (props) => {
   const [title, setTitle] = useState('');
@@ -22,10 +23,10 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
     try {
       await api.createCategory(newCategory);
       props.setLoading(false);
+      props.onClose();
     } catch (error) {
       props.setLoading(false);
     }
-    //props.onClose();
   };
 
   return (
@@ -42,7 +43,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
           pressHandler={handleCreate}
           width="100%"
           slim
-          disabled={!title}
+          disabled={!title || props.isLoading}
         />
       </View>
     </View>

@@ -103,6 +103,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       >
         <AddCategoryDrawer
           setLoading={setIsLoading}
+          isLoading={isLoading}
           onClose={() => refRBSheet.current?.close()}
         />
       </RBSheet>
