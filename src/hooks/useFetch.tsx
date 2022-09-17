@@ -26,6 +26,7 @@ export const useFetch = (url: string): FetchDataType => {
         setIsLoading(false);
       })
       .catch((err) => {
+        //console.error(JSON.stringify(err.response, undefined, 2));
         console.error(err);
         setIsError(true);
         setIsLoading(false);

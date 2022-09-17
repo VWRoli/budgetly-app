@@ -24,7 +24,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       <View style={{ padding: 10 }}>
         <AccountTab />
       </View>
-      {!isLoading && !categories.length && (
+      {!isLoading && !categories?.length && (
         <View
           style={{
             flex: 1,
@@ -42,7 +42,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       {isLoading ? (
         <Loading />
       ) : (
-        categories.map((c: categoryType) => <Category category={c} />)
+        categories?.map((c: categoryType) => <Category category={c} />)
       )}
     </View>
   );
