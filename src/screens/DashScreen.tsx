@@ -24,8 +24,21 @@ const DashScreen: React.FC = (): JSX.Element => {
       <View style={{ padding: 10 }}>
         <AccountTab />
       </View>
-      <CustomText text="You don't have any categories or budget items yet." />
-      <Button label="Add your first category" pressHandler={() => {}} />
+      {!isLoading && !categories.length && (
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <CustomText
+            text="You don't have any categories or budget items yet."
+            styles={{ marginVertical: 20 }}
+          />
+          <Button label="Add your first category" pressHandler={() => {}} />
+        </View>
+      )}
       {isLoading ? (
         <Loading />
       ) : (
