@@ -11,7 +11,6 @@ interface Props {
 }
 
 const Category: React.FC<Props> = ({ category, onOpen }): JSX.Element => {
-  const [isOpen, setisOpen] = useState(false);
   return (
     <View>
       <CategoryHeader title={category.title} setIsOpen={onOpen} />

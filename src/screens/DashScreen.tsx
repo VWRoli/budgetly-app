@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { AppRegistry, StyleSheet, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { BASE_URL } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
+import * as api from '../api';
 import { categoryType } from '../types/categoryType';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
@@ -12,29 +13,48 @@ import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
 import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
+import { useFocusEffect } from '@react-navigation/native';
 
 const DashScreen: React.FC = (): JSX.Element => {
-  const [loadingCreate, setLoadingCreate] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [categories, setCategories] = useState<categoryType[]>([]);
   const refRBSheet = React.createRef<RBSheet>();
 
-  const {
-    data: categories,
-    isLoading,
-    isError,
-  } = useFetch(`${BASE_URL}categories`);
+  const fetchCategories = async () => {
+    try {
+      const { data } = await api.getCategories();
+      setCategories(data);
+    } catch (error) {}
+  };
 
-  if (loadingCreate) {
-    return (
-      <View style={styles.container}>
-        <MonthHeader />
-        <View style={{ padding: 10 }}>
-          <AccountTab />
-        </View>
-        <Loading />
-      </View>
-    );
-  }
+  useEffect(() => {
+    fetchCategories();
+  }, [isLoading]);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => refRBSheet.current?.close();
+    }, []),
+  );
+
+  // const {
+  //   data: categories,
+  //   isLoading,
+  //   isError,
+  // } = useFetch(`${BASE_URL}categories`);
+
+  // if (isLoading) {
+  //   return (
+  //     <View style={styles.container}>
+  //       <MonthHeader />
+  //       <View style={{ padding: 10 }}>
+  //         <AccountTab />
+  //       </View>
+  //       <Loading />
+  //     </View>
+  //   );
+  // }
+  console.log(refRBSheet);
   return (
     <View style={styles.container}>
       <MonthHeader />
@@ -55,7 +75,7 @@ const DashScreen: React.FC = (): JSX.Element => {
           />
           <Button
             label="Add your first category"
-            pressHandler={() => refRBSheet.current!.open()}
+            pressHandler={() => refRBSheet.current?.open()}
           />
         </View>
       )}
@@ -81,7 +101,10 @@ const DashScreen: React.FC = (): JSX.Element => {
           },
         }}
       >
-        <AddCategoryDrawer setLoading={setLoadingCreate} />
+        <AddCategoryDrawer
+          setLoading={setIsLoading}
+          onClose={() => refRBSheet.current?.close()}
+        />
       </RBSheet>
     </View>
   );

@@ -19,3 +19,5 @@ export const getBudgets = () => axios.get('budgets');
 
 export const createCategory = (category: categoryType) =>
   axios.post('categories', category);
+
+export const getCategories = () => axios.get('categories');
