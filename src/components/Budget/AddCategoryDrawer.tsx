@@ -23,7 +23,6 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
     try {
       await api.createCategory(newCategory);
       props.setLoading(false);
-      props.onClose();
     } catch (error) {
       props.setLoading(false);
     }
@@ -40,7 +39,10 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
         />
         <Button
           label="Add category"
-          pressHandler={handleCreate}
+          pressHandler={() => {
+            handleCreate();
+            props.onClose();
+          }}
           width="100%"
           slim
           disabled={!title || props.isLoading}
