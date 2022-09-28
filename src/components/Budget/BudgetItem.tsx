@@ -32,7 +32,11 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
           <Chip icon="laptop" value={item.title} />
           <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
             {isEditable ? (
-              <InputSecondary placeholder={formatter(item.balance)} />
+              <InputSecondary
+                placeholder={formatter(item.balance)}
+                value={'5'}
+                changeHandler={() => {}}
+              />
             ) : (
               <TouchableOpacity
                 onPress={() => setIsEditable(true)}

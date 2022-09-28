@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AppRegistry, StyleSheet, View } from 'react-native';
+import { AppRegistry, ScrollView, StyleSheet, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { BASE_URL } from '../constants/constants';
 import { useFetch } from '../hooks/useFetch';
@@ -54,42 +54,44 @@ const DashScreen: React.FC = (): JSX.Element => {
   //     </View>
   //   );
   // }
-  console.log(refRBSheet);
+
   return (
     <View style={styles.container}>
       <MonthHeader />
       <View style={{ padding: 10 }}>
         <AccountTab />
       </View>
-      {!isLoading && !categories?.length && (
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <CustomText
-            text="You don't have any categories or budget items yet."
-            styles={{ marginVertical: 20 }}
-          />
-          <Button
-            label="Add your first category"
-            pressHandler={() => refRBSheet.current?.open()}
-          />
-        </View>
-      )}
-      {isLoading ? (
-        <Loading />
-      ) : (
-        categories?.map((c: categoryType) => (
-          <Category
-            key={c._id}
-            category={c}
-            onOpen={() => refRBSheet.current!.open()}
-          />
-        ))
-      )}
+      <ScrollView>
+        {!isLoading && !categories?.length && (
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <CustomText
+              text="You don't have any categories or budget items yet."
+              styles={{ marginVertical: 20 }}
+            />
+            <Button
+              label="Add your first category"
+              pressHandler={() => refRBSheet.current?.open()}
+            />
+          </View>
+        )}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          categories?.map((c: categoryType) => (
+            <Category
+              key={c._id}
+              category={c}
+              onOpen={() => refRBSheet.current!.open()}
+            />
+          ))
+        )}
+      </ScrollView>
       <RBSheet
         ref={refRBSheet}
         height={150}
@@ -113,6 +115,7 @@ const DashScreen: React.FC = (): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   categoryWrapper: { paddingTop: 35, width: '95%', justifyContent: 'center' },
 });

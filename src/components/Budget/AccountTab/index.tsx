@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { StyleSheet, View } from 'react-native';
 import { formatter } from '../../../utils/helpers';
 import RBSheet from 'react-native-raw-bottom-sheet';
 //Components
@@ -10,7 +9,7 @@ import Drawer from './Drawer';
 import IconButton from '../../common/IconButton';
 
 const AccountTab = () => {
-  //todo RBSheet typeerror, npm package error does not support propswithchildren
+  //RBSheet typeerror, npm package error does not support propswithchildren, added manually
   const refRBSheet = React.createRef<RBSheet>();
 
   return (
