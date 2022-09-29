@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { AppRegistry, ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { BASE_URL } from '../constants/constants';
-import { useFetch } from '../hooks/useFetch';
+
 import * as api from '../api';
 import { categoryType } from '../types/categoryType';
 //Components
@@ -13,7 +12,6 @@ import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
 import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
-import { useFocusEffect } from '@react-navigation/native';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,36 +22,22 @@ const DashScreen: React.FC = (): JSX.Element => {
     try {
       const { data } = await api.getCategories();
       setCategories(data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error); //todo error handling
+    }
   };
+
+  const renderItem = ({ item }: { item: categoryType }) => (
+    <Category
+      key={item._id}
+      category={item}
+      onOpen={() => refRBSheet.current!.open()}
+    />
+  );
 
   useEffect(() => {
     fetchCategories();
   }, [isLoading]);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      return () => refRBSheet.current?.close();
-    }, []),
-  );
-
-  // const {
-  //   data: categories,
-  //   isLoading,
-  //   isError,
-  // } = useFetch(`${BASE_URL}categories`);
-
-  // if (isLoading) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <MonthHeader />
-  //       <View style={{ padding: 10 }}>
-  //         <AccountTab />
-  //       </View>
-  //       <Loading />
-  //     </View>
-  //   );
-  // }
 
   return (
     <View style={styles.container}>
@@ -61,7 +45,8 @@ const DashScreen: React.FC = (): JSX.Element => {
       <View style={{ padding: 10 }}>
         <AccountTab />
       </View>
-      <ScrollView>
+
+      <View>
         {!isLoading && !categories?.length && (
           <View
             style={{
@@ -83,15 +68,13 @@ const DashScreen: React.FC = (): JSX.Element => {
         {isLoading ? (
           <Loading />
         ) : (
-          categories?.map((c: categoryType) => (
-            <Category
-              key={c._id}
-              category={c}
-              onOpen={() => refRBSheet.current!.open()}
-            />
-          ))
+          <FlatList
+            data={categories}
+            renderItem={renderItem}
+            keyExtractor={(item) => item._id + ''}
+          />
         )}
-      </ScrollView>
+      </View>
       <RBSheet
         ref={refRBSheet}
         height={150}
