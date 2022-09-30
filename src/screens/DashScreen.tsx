@@ -17,9 +17,9 @@ const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState<categoryType[]>([]);
   const [isAdd, setIsAdd] = useState(true);
-  const [editableCategory, setEditableCategory] = useState<null | categoryType>(
-    null,
-  );
+  const [editableCategory, setEditableCategory] = useState<categoryType>({
+    title: '',
+  });
   const refRBSheet = React.createRef<RBSheet>();
 
   const fetchCategories = async () => {
