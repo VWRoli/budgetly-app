@@ -12,6 +12,7 @@ import CustomText from '../components/common/CustomText';
 import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
 import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
+import { budgetType } from '../types/budgetType';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,6 +35,7 @@ const DashScreen: React.FC = (): JSX.Element => {
     setIsAdd(true);
     refRBSheet.current!.open();
   };
+
   const handleEditPress = (category: categoryType) => {
     setIsAdd(false);
     setEditableCategory(category);

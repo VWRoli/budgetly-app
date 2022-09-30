@@ -3,10 +3,10 @@ import { currencyCodes } from '../constants/currencyList';
 import { budgetType } from '../types/budgetType';
 
 //todo locale: string, currency: string,
-export const formatter = (amount: number) =>
+export const formatter = (amount: number, currency: string) =>
   new Intl.NumberFormat('hu-HU', {
     style: 'currency',
-    currency: 'huf',
+    currency: currency,
     minimumFractionDigits: 0,
   }).format(amount);
 
