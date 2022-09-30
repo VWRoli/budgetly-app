@@ -17,13 +17,19 @@ interface Props {
 const EditCategoryDrawer: React.FC<Props> = (props) => {
   const [title, setTitle] = useState(props.category.title);
 
-  const handleEdit = async () => {
+  const handleEdit = async (title?: string) => {
     props.setLoading(true);
-    const newCategory = {
-      title,
-    };
+
     try {
-      await api.editCategory(props.category._id, newCategory);
+      if (title) {
+        const newCategory = {
+          title,
+        };
+        await api.editCategory(props.category._id, newCategory);
+      } else {
+        await api.deleteCategory(props.category._id);
+      }
+
       props.setLoading(false);
     } catch (error) {
       props.setLoading(false);
@@ -43,7 +49,7 @@ const EditCategoryDrawer: React.FC<Props> = (props) => {
           <Button
             label="Edit category"
             pressHandler={() => {
-              handleEdit();
+              handleEdit(title);
               props.onClose();
             }}
             width="100%"
@@ -54,13 +60,13 @@ const EditCategoryDrawer: React.FC<Props> = (props) => {
           <Button
             label="Delete category"
             pressHandler={() => {
-              // handleCreate();
-              // props.onClose();
+              handleEdit();
+              props.onClose();
             }}
             width="100%"
             slim
             error
-            //disabled={!title || props.isLoading}
+            disabled={props.isLoading}
           />
         </View>
       </View>

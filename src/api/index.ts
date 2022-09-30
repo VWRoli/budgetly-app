@@ -24,3 +24,6 @@ export const getCategories = () => axios.get('categories');
 
 export const editCategory = (id: string | undefined, category: categoryType) =>
   axios.patch(`/categories/${id}`, category);
+
+export const deleteCategory = (id: string | undefined) =>
+  axios.delete(`/categories/${id}`);
