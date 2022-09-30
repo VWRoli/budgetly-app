@@ -7,15 +7,20 @@ import BudgetItem from './BudgetItem';
 import CategoryHeader from './CategoryHeader';
 interface Props {
   category: categoryType;
-  onOpen: () => void;
+  handleAddPress: () => void;
+  handleEditPress: () => void;
 }
 
-const Category: React.FC<Props> = ({ category, onOpen }): JSX.Element => {
+const Category: React.FC<Props> = (props): JSX.Element => {
   return (
     <View style={styles.container}>
-      <CategoryHeader title={category.title} setIsOpen={onOpen} />
+      <CategoryHeader
+        title={props.category.title}
+        handleAddPress={props.handleAddPress}
+        handleEditPress={props.handleEditPress}
+      />
 
-      {category.budgetItems?.map((b: budgetItemType) => (
+      {props.category.budgetItems?.map((b: budgetItemType) => (
         <BudgetItem key={b.id} item={b} />
       ))}
     </View>

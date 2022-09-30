@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import * as api from '../../api';
+import * as api from '../../../api';
 //Components
-import Button from '../common/Button';
-import InputSecondary from '../common/InputSecondary';
+import Button from '../../common/Button';
+import InputSecondary from '../../common/InputSecondary';
 
 interface Props {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //Components
 import CustomText from '../common/CustomText';
 import CircularIcon from '../common/CircularIcon';
@@ -8,10 +8,11 @@ import HeaderText from '../common/HeaderText';
 
 interface Props {
   title: string;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleAddPress: () => void;
+  handleEditPress: () => void;
 }
 
-const CategoryHeader: React.FC<Props> = ({ title, setIsOpen }): JSX.Element => {
+const CategoryHeader: React.FC<Props> = (props): JSX.Element => {
   return (
     <View
       style={{
@@ -26,12 +27,18 @@ const CategoryHeader: React.FC<Props> = ({ title, setIsOpen }): JSX.Element => {
           alignItems: 'center',
         }}
       >
-        <HeaderText text={title} size={24} />
-        <CircularIcon pressHandler={() => setIsOpen((prev) => !prev)}>
-          <Icon name="add" color="#fff" size={16} />
+        <HeaderText text={props.title} size={24} />
+        <CircularIcon pressHandler={props.handleAddPress}>
+          <Icon name="plus" color="#fff" size={16} />
         </CircularIcon>
       </View>
       <CustomText text="Available" size={12} />
+      <Icon
+        name="dots-vertical"
+        color="#8B8C9E"
+        size={20}
+        onPress={props.handleEditPress}
+      />
     </View>
   );
 };

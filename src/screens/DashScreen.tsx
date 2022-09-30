@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
-
 import * as api from '../api';
 import { categoryType } from '../types/categoryType';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
-import AddCategoryDrawer from '../components/Budget/AddCategoryDrawer';
+import AddCategoryDrawer from '../components/Budget/Drawers/AddCategoryDrawer';
 import Category from '../components/Budget/Category';
 import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
 import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
+import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState<categoryType[]>([]);
+  const [isAdd, setIsAdd] = useState(true);
   const refRBSheet = React.createRef<RBSheet>();
 
   const fetchCategories = async () => {
@@ -26,14 +27,14 @@ const DashScreen: React.FC = (): JSX.Element => {
       console.log(error); //todo error handling
     }
   };
-
-  const renderItem = ({ item }: { item: categoryType }) => (
-    <Category
-      key={item._id}
-      category={item}
-      onOpen={() => refRBSheet.current!.open()}
-    />
-  );
+  const handleAddPress = () => {
+    setIsAdd(true);
+    refRBSheet.current!.open();
+  };
+  const handleEditPress = () => {
+    setIsAdd(false);
+    refRBSheet.current!.open();
+  };
 
   useEffect(() => {
     fetchCategories();
@@ -61,7 +62,7 @@ const DashScreen: React.FC = (): JSX.Element => {
             />
             <Button
               label="Add your first category"
-              pressHandler={() => refRBSheet.current?.open()}
+              pressHandler={handleAddPress}
             />
           </View>
         )}
@@ -70,7 +71,14 @@ const DashScreen: React.FC = (): JSX.Element => {
         ) : (
           <FlatList
             data={categories}
-            renderItem={renderItem}
+            renderItem={({ item }: { item: categoryType }) => (
+              <Category
+                key={item._id}
+                category={item}
+                handleAddPress={handleAddPress}
+                handleEditPress={handleEditPress}
+              />
+            )}
             keyExtractor={(item) => item._id + ''}
           />
         )}
@@ -86,11 +94,15 @@ const DashScreen: React.FC = (): JSX.Element => {
           },
         }}
       >
-        <AddCategoryDrawer
-          setLoading={setIsLoading}
-          isLoading={isLoading}
-          onClose={() => refRBSheet.current?.close()}
-        />
+        {isAdd ? (
+          <AddCategoryDrawer
+            setLoading={setIsLoading}
+            isLoading={isLoading}
+            onClose={() => refRBSheet.current?.close()}
+          />
+        ) : (
+          <EditCategoryDrawer />
+        )}
       </RBSheet>
     </View>
   );
