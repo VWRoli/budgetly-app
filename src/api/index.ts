@@ -21,3 +21,6 @@ export const createCategory = (category: categoryType) =>
   axios.post('categories', category);
 
 export const getCategories = () => axios.get('categories');
+
+export const editCategory = (id: string | undefined, category: categoryType) =>
+  axios.patch(`/categories/${id}`, category);

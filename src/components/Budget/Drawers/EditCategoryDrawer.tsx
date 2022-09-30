@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { categoryType } from '../../../types/categoryType';
+import * as api from '../../../api';
+//Components
 import Button from '../../common/Button';
 import CustomText from '../../common/CustomText';
 import InputSecondary from '../../common/InputSecondary';
@@ -15,6 +17,19 @@ interface Props {
 const EditCategoryDrawer: React.FC<Props> = (props) => {
   const [title, setTitle] = useState(props.category.title);
 
+  const handleEdit = async () => {
+    props.setLoading(true);
+    const newCategory = {
+      title,
+    };
+    try {
+      await api.editCategory(props.category._id, newCategory);
+      props.setLoading(false);
+    } catch (error) {
+      props.setLoading(false);
+    }
+  };
+
   return (
     <View style={{ width: '100%' }}>
       <View style={{ marginHorizontal: 10 }}>
@@ -28,12 +43,12 @@ const EditCategoryDrawer: React.FC<Props> = (props) => {
           <Button
             label="Edit category"
             pressHandler={() => {
-              // handleCreate();
-              // props.onClose();
+              handleEdit();
+              props.onClose();
             }}
             width="100%"
             slim
-            //disabled={!title || props.isLoading}
+            disabled={!title || props.isLoading}
           />
           <CustomText text="or" />
           <Button
