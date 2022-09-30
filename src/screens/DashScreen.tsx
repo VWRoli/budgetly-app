@@ -12,7 +12,6 @@ import CustomText from '../components/common/CustomText';
 import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
 import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
-import { budgetType } from '../types/budgetType';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +25,7 @@ const DashScreen: React.FC = (): JSX.Element => {
   const fetchCategories = async () => {
     try {
       const { data } = await api.getCategories();
+
       setCategories(data);
     } catch (error) {
       console.log(error); //todo error handling
@@ -53,7 +53,7 @@ const DashScreen: React.FC = (): JSX.Element => {
         <AccountTab />
       </View>
 
-      <View>
+      <View style={{ flex: 1 }}>
         {!isLoading && !categories?.length && (
           <View
             style={{
