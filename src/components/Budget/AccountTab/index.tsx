@@ -9,6 +9,7 @@ import FlagCurrencyInfo from '../../common/FlagCurrencyInfo';
 import Drawer from './Drawer';
 import IconButton from '../../common/IconButton';
 import { currencyCodes } from '../../../constants/currencyList';
+import SkeletonAccountTab from '../../Skeletons/SkeletonAccountTab';
 
 const AccountTab = () => {
   //RBSheet typeerror, npm package error does not support propswithchildren, added manually
@@ -19,7 +20,7 @@ const AccountTab = () => {
   return (
     <View style={styles.wrapper}>
       {isLoading ? (
-        <Text>Loading</Text>
+        <SkeletonAccountTab />
       ) : (
         <>
           <FlagCurrencyInfo
