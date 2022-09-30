@@ -8,7 +8,7 @@ import CategoryHeader from './CategoryHeader';
 interface Props {
   category: categoryType;
   handleAddPress: () => void;
-  handleEditPress: () => void;
+  handleEditPress: (category: categoryType) => void;
 }
 
 const Category: React.FC<Props> = (props): JSX.Element => {
@@ -17,7 +17,7 @@ const Category: React.FC<Props> = (props): JSX.Element => {
       <CategoryHeader
         title={props.category.title}
         handleAddPress={props.handleAddPress}
-        handleEditPress={props.handleEditPress}
+        handleEditPress={() => props.handleEditPress(props.category)}
       />
 
       {props.category.budgetItems?.map((b: budgetItemType) => (

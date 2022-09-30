@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import { categoryType } from '../../../types/categoryType';
 import Button from '../../common/Button';
 import CustomText from '../../common/CustomText';
 import InputSecondary from '../../common/InputSecondary';
 
-const EditCategoryDrawer = () => {
-  const [title, setTitle] = useState('');
+interface Props {
+  category: categoryType;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
+  isLoading: boolean;
+}
+
+const EditCategoryDrawer: React.FC<Props> = (props) => {
+  const [title, setTitle] = useState(props.category.title);
+
   return (
     <View style={{ width: '100%' }}>
       <View style={{ marginHorizontal: 10 }}>

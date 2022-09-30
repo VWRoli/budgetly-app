@@ -17,6 +17,9 @@ const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState<categoryType[]>([]);
   const [isAdd, setIsAdd] = useState(true);
+  const [editableCategory, setEditableCategory] = useState<null | categoryType>(
+    null,
+  );
   const refRBSheet = React.createRef<RBSheet>();
 
   const fetchCategories = async () => {
@@ -31,8 +34,9 @@ const DashScreen: React.FC = (): JSX.Element => {
     setIsAdd(true);
     refRBSheet.current!.open();
   };
-  const handleEditPress = () => {
+  const handleEditPress = (category: categoryType) => {
     setIsAdd(false);
+    setEditableCategory(category);
     refRBSheet.current!.open();
   };
 
@@ -101,7 +105,12 @@ const DashScreen: React.FC = (): JSX.Element => {
             onClose={() => refRBSheet.current?.close()}
           />
         ) : (
-          <EditCategoryDrawer />
+          <EditCategoryDrawer
+            category={editableCategory}
+            setLoading={setIsLoading}
+            isLoading={isLoading}
+            onClose={() => refRBSheet.current?.close()}
+          />
         )}
       </RBSheet>
     </View>
