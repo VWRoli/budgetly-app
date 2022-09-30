@@ -8,6 +8,7 @@ interface Props {
   slim?: boolean;
   disabled?: boolean;
   width?: string;
+  error?: boolean;
 }
 
 const Button: React.FC<Props> = ({
@@ -17,9 +18,15 @@ const Button: React.FC<Props> = ({
   slim,
   disabled,
   width = '90%',
+  error,
 }): JSX.Element => {
-  const typeStyles = outlined ? styles.outlined : styles.filled;
+  const typeStyles = outlined
+    ? styles.outlined
+    : error
+    ? styles.error
+    : styles.filled;
   const disabledStyles = disabled ? styles.disabled : styles.notDisabled;
+
   return (
     <TouchableOpacity
       style={{
@@ -48,6 +55,7 @@ const styles = StyleSheet.create({
   filled: {
     backgroundColor: '#06B3C4',
   },
+  error: { backgroundColor: '#C42610' },
   disabled: {
     opacity: 0.5,
   },
