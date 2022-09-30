@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CustomText from '../common/CustomText';
 import CircularIcon from '../common/CircularIcon';
 import HeaderText from '../common/HeaderText';
+import IconButton from '../common/IconButton';
 
 interface Props {
   title: string;
@@ -28,9 +29,14 @@ const CategoryHeader: React.FC<Props> = (props): JSX.Element => {
         }}
       >
         <HeaderText text={props.title} size={24} />
-        <CircularIcon pressHandler={props.handleAddPress}>
+        <IconButton
+          icon="plus"
+          pressHandler={props.handleAddPress}
+          type="primary"
+        />
+        {/* <CircularIcon pressHandler={props.handleAddPress}>
           <Icon name="plus" color="#fff" size={16} />
-        </CircularIcon>
+        </CircularIcon> */}
       </View>
       <CustomText text="Available" size={12} />
       <Icon

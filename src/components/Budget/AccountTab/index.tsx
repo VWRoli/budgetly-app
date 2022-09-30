@@ -22,6 +22,7 @@ const AccountTab = () => {
         <IconButton
           icon="chevron-down-circle-outline"
           pressHandler={() => refRBSheet.current!.open()}
+          type="secondary"
         />
       </View>
       <RBSheet

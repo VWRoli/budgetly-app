@@ -26,6 +26,10 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
         balance: 0,
       });
 
+      await api.updateProfile({
+        defaultBudget: data._id,
+      });
+
       if (data) {
         setOwnedBudgets((prev) => [...prev, data]);
         navigation.navigate('BudgetStack');

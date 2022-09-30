@@ -12,6 +12,9 @@ export const signUp = (userForm: userType) => API.post('users/user', userForm);
 export const logIn = (userForm: userFormType) =>
   API.post('users/login', userForm);
 
+export const updateProfile = (userForm: userType) =>
+  axios.patch('users/me', userForm);
+
 export const createBudget = (budgetData: budgetType) =>
   axios.post('budgets', budgetData);
 
