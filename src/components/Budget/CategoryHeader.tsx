@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { categoryType } from '../../types/categoryType';
+import { HandlerTypes } from '../../types/dashHandlerTypes';
 //Components
 import CustomText from '../common/CustomText';
 import HeaderText from '../common/HeaderText';
@@ -9,10 +10,8 @@ import IconButton from '../common/IconButton';
 import Popup from '../common/Popup';
 
 export interface CategoryHeaderProps {
-  title: string;
-  handleAddPress: () => void;
-  handleEditPress: () => void;
-  handleDeletePress: () => void;
+  category: categoryType;
+  handlers: HandlerTypes;
 }
 
 const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
@@ -31,10 +30,10 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
           alignItems: 'center',
         }}
       >
-        <HeaderText text={props.title} size={24} />
+        <HeaderText text={props.category.title} size={24} />
         <IconButton
           icon="plus"
-          pressHandler={props.handleAddPress}
+          pressHandler={props.handlers.handleAddPress}
           type="primary"
         />
       </View>
@@ -47,11 +46,9 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
       />
       {isOpen && (
         <Popup
-          title={props.title}
+          category={props.category}
           onClose={() => setisOpen(false)}
-          handleAddPress={props.handleAddPress}
-          handleEditPress={props.handleEditPress}
-          handleDeletePress={props.handleDeletePress}
+          handlers={props.handlers}
         />
       )}
     </View>

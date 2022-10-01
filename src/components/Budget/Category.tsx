@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { budgetItemType } from '../../types/budgetItemType';
 import { categoryType } from '../../types/categoryType';
+import { HandlerTypes } from '../../types/dashHandlerTypes';
+//Components
 import Button from '../common/Button';
 import CustomText from '../common/CustomText';
-//Components
 import BudgetItem from './BudgetItem';
 import CategoryHeader from './CategoryHeader';
 interface Props {
   category: categoryType;
-  handleAddPress: () => void;
-  handleEditPress: (category: categoryType) => void;
-  handleDeletePress: (category: categoryType) => void;
+  handlers: HandlerTypes;
 }
 
 const Category: React.FC<Props> = (props): JSX.Element => {
   return (
     <View style={styles.container}>
-      <CategoryHeader
-        title={props.category.title}
-        handleAddPress={props.handleAddPress}
-        handleEditPress={() => props.handleEditPress(props.category)}
-        handleDeletePress={() => props.handleDeletePress(props.category)}
-      />
+      <CategoryHeader category={props.category} handlers={props.handlers} />
       <View>
         {!props.category.budgetItems?.length && (
           <View

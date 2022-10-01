@@ -15,6 +15,7 @@ import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer'
 import { useBudgetsContext } from '../context/BudgetsContext';
 import CustomModal from '../components/common/Modal';
 import ConfirmDeleteModal from '../components/Modals/ConfirmDeleteModal';
+import { HandlerTypes } from '../types/dashHandlerTypes';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,19 +37,20 @@ const DashScreen: React.FC = (): JSX.Element => {
       console.log(error); //todo error handling
     }
   };
-  const handleAddPress = () => {
-    setIsAdd(true);
-    refRBSheet.current!.open();
-  };
-
-  const handleEditPress = (category: categoryType) => {
-    setIsAdd(false);
-    setEditableCategory(category);
-    refRBSheet.current!.open();
-  };
-  const handleDeletePress = (category: categoryType) => {
-    setModalVisible(true);
-    setEditableCategory(category);
+  const handlers: HandlerTypes = {
+    handleAddPress() {
+      setIsAdd(true);
+      refRBSheet.current!.open();
+    },
+    handleEditPress(category: categoryType) {
+      setIsAdd(false);
+      setEditableCategory(category);
+      refRBSheet.current!.open();
+    },
+    handleDeletePress(category: categoryType) {
+      setModalVisible(true);
+      setEditableCategory(category);
+    },
   };
 
   useEffect(() => {
@@ -77,7 +79,7 @@ const DashScreen: React.FC = (): JSX.Element => {
             />
             <Button
               label="Add your first category"
-              pressHandler={handleAddPress}
+              pressHandler={handlers.handleAddPress}
             />
           </View>
         )}
@@ -87,13 +89,7 @@ const DashScreen: React.FC = (): JSX.Element => {
           <FlatList
             data={categories}
             renderItem={({ item }: { item: categoryType }) => (
-              <Category
-                key={item._id}
-                category={item}
-                handleAddPress={handleAddPress}
-                handleEditPress={handleEditPress}
-                handleDeletePress={handleDeletePress}
-              />
+              <Category key={item._id} category={item} handlers={handlers} />
             )}
             keyExtractor={(item) => item._id + ''}
           />

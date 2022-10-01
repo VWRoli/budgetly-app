@@ -24,21 +24,21 @@ const Popup: React.FC<Props> = (props) => {
         label="Add"
         pressHandler={() => {
           props.onClose();
-          props.handleAddPress();
+          props.handlers.handleAddPress();
         }}
       />
       <PopupButton
         label="Edit"
         pressHandler={() => {
           props.onClose();
-          props.handleEditPress();
+          props.handlers.handleEditPress(props.category);
         }}
       />
       <PopupButton
         label="Delete"
         pressHandler={() => {
           props.onClose();
-          props.handleDeletePress();
+          props.handlers.handleDeletePress(props.category);
         }}
       />
     </View>
