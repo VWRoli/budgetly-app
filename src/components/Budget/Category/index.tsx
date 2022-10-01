@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { budgetItemType } from '../../types/budgetItemType';
-import { categoryType } from '../../types/categoryType';
-import { HandlerTypes } from '../../types/dashHandlerTypes';
+import { budgetItemType } from '../../../types/budgetItemType';
+import { categoryType } from '../../../types/categoryType';
+import { HandlerTypes } from '../../../types/dashHandlerTypes';
 //Components
-import Button from '../common/Button';
-import CustomText from '../common/CustomText';
-import BudgetItem from './BudgetItem';
+import Button from '../../common/Button';
+import CustomText from '../../common/CustomText';
+import BudgetItem from '../BudgetItem';
 import CategoryHeader from './CategoryHeader';
 interface Props {
   category: categoryType;

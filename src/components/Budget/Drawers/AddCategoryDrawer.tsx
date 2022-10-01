@@ -10,6 +10,7 @@ interface Props {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => void;
   isLoading: boolean;
+  item?: boolean;
 }
 const AddCategoryDrawer: React.FC<Props> = (props) => {
   const [title, setTitle] = useState('');

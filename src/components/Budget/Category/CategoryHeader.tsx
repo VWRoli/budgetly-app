@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { categoryType } from '../../types/categoryType';
-import { HandlerTypes } from '../../types/dashHandlerTypes';
+import { categoryType } from '../../../types/categoryType';
+import { HandlerTypes } from '../../../types/dashHandlerTypes';
 //Components
-import CustomText from '../common/CustomText';
-import HeaderText from '../common/HeaderText';
-import IconButton from '../common/IconButton';
-import Popup from '../common/Popup';
+import CustomText from '../../common/CustomText';
+import HeaderText from '../../common/HeaderText';
+import IconButton from '../../common/IconButton';
+import Popup from '../../common/Popup';
 
 export interface CategoryHeaderProps {
   category: categoryType;
@@ -30,12 +30,12 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
           alignItems: 'center',
         }}
       >
-        <HeaderText text={props.category.title} size={24} />
-        <IconButton
-          icon="plus"
-          pressHandler={props.handlers.handleAddPress}
-          type="primary"
+        <HeaderText
+          text={props.category.title}
+          size={24}
+          styles={{ marginRight: 5 }}
         />
+        <IconButton icon="plus" pressHandler={() => {}} type="primary" />
       </View>
       <CustomText text="Available" size={12} />
       <Icon

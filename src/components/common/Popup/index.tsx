@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { CategoryHeaderProps } from '../../Budget/CategoryHeader';
+import { CategoryHeaderProps } from '../../Budget/Category/CategoryHeader';
 //Components
 import PopupButton from './PopupButton';
 interface Props extends CategoryHeaderProps {
