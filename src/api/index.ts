@@ -21,7 +21,27 @@ export const createBudget = (budgetData: budgetType) =>
   axios.post('budgets', budgetData);
 
 export const getBudgets = () => axios.get('budgets');
+
 export const getBudget = (id: string) => axios.get(`budgets/${id}`);
+
+export const fetchDefaultBudget = async (
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setDefaultBudget: React.Dispatch<React.SetStateAction<budgetType | null>>,
+) => {
+  setIsLoading(true);
+  try {
+    const profile = await getProfile();
+    const budget = await getBudget(profile.data.defaultBudget);
+
+    setDefaultBudget(budget.data);
+
+    setIsLoading(false);
+  } catch (error) {
+    setIsLoading(false);
+    console.log(error);
+  }
+};
+
 export const createCategory = (category: categoryType) =>
   axios.post('categories', category);
 

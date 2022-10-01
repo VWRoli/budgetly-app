@@ -13,11 +13,11 @@ import CustomText from '../components/common/CustomText';
 import OwnedBudgets from '../components/Budget/OwnedBudgets';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
-  const { ownedBudgets, setOwnedBudgets } = useBudgetsContext();
-
+  const { ownedBudgets, setOwnedBudgets, setDefaultBudget } =
+    useBudgetsContext();
   const [isLoading, setIsLoading] = useState(false);
-
   const [selected, setSelected] = useState<string>('EUR');
+
   const handleCreate = async () => {
     setIsLoading(true);
     try {
@@ -32,6 +32,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
 
       if (data) {
         setOwnedBudgets((prev) => [...prev, data]);
+        setDefaultBudget(data);
         navigation.navigate('BudgetStack');
       }
       setIsLoading(false);

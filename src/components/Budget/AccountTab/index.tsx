@@ -1,25 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { formatter } from '../../../utils/helpers';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { useFetchDefaultBudget } from '../../../hooks/useFetchDefaultBudget';
+import { useBudgetsContext } from '../../../context/BudgetsContext';
+import { currencyCodes } from '../../../constants/currencyList';
 //Components
 import HeaderText from '../../common/HeaderText';
 import FlagCurrencyInfo from '../../common/FlagCurrencyInfo';
 import Drawer from './Drawer';
 import IconButton from '../../common/IconButton';
-import { currencyCodes } from '../../../constants/currencyList';
 import SkeletonAccountTab from '../../Skeletons/SkeletonAccountTab';
 
 const AccountTab = () => {
   //RBSheet typeerror, npm package error does not support propswithchildren, added manually
   const refRBSheet = React.createRef<RBSheet>();
 
-  const { defaultBudget, isLoading } = useFetchDefaultBudget();
+  const { defaultBudget, defaultBudgetLoading } = useBudgetsContext();
 
   return (
     <View style={styles.wrapper}>
-      {isLoading ? (
+      {defaultBudgetLoading ? (
         <SkeletonAccountTab />
       ) : (
         <>
