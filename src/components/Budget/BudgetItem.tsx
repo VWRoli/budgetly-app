@@ -9,11 +9,13 @@ import Chip from '../common/Chip';
 import CardWrapper from '../common/CardWrapper';
 import HeaderText from '../common/HeaderText';
 import InputSecondary from '../common/InputSecondary';
+import { useBudgetsContext } from '../../context/BudgetsContext';
 
 interface Props {
   item: budgetItemType;
 }
 const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
+  const { defaultBudget } = useBudgetsContext();
   const [isEditable, setIsEditable] = useState(false);
   return (
     <CardWrapper>
@@ -33,7 +35,7 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
           <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
             {isEditable ? (
               <InputSecondary
-                placeholder={formatter(item.balance)}
+                placeholder={formatter(item.balance, defaultBudget?.currency)}
                 value={'5'}
                 changeHandler={() => {}}
               />
@@ -43,7 +45,7 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
                 activeOpacity={0.7}
               >
                 <CustomText
-                  text={formatter(item.balance)}
+                  text={formatter(item.balance, defaultBudget?.currency)}
                   size={16}
                   styles={{ marginRight: 5, color: '#06B3C4' }}
                   bold
@@ -51,7 +53,10 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
               </TouchableOpacity>
             )}
 
-            <HeaderText text={`/${formatter(item.budgeted)}`} size={20} />
+            <HeaderText
+              text={`/${formatter(item.budgeted, defaultBudget?.currency)}`}
+              size={20}
+            />
           </View>
         </View>
         <View style={{ marginVertical: 7 }}>

@@ -1,7 +1,7 @@
 export interface budgetItemType {
   title: string;
   userId: number;
-  id: number;
+  _id: number;
   categoryId: number;
   budgeted: number;
   outflow: number;

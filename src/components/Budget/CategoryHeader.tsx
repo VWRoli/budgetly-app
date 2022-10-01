@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //Components
 import CustomText from '../common/CustomText';
-import CircularIcon from '../common/CircularIcon';
 import HeaderText from '../common/HeaderText';
 import IconButton from '../common/IconButton';
+import Popup from '../common/Popup';
 
 interface Props {
   title: string;
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const CategoryHeader: React.FC<Props> = (props): JSX.Element => {
+  const [isOpen, setisOpen] = useState(false);
   return (
     <View
       style={{
@@ -34,17 +35,15 @@ const CategoryHeader: React.FC<Props> = (props): JSX.Element => {
           pressHandler={props.handleAddPress}
           type="primary"
         />
-        {/* <CircularIcon pressHandler={props.handleAddPress}>
-          <Icon name="plus" color="#fff" size={16} />
-        </CircularIcon> */}
       </View>
       <CustomText text="Available" size={12} />
       <Icon
         name="dots-vertical"
         color="#8B8C9E"
         size={20}
-        onPress={props.handleEditPress}
+        onPress={() => setisOpen((prev) => !prev)}
       />
+      {isOpen && <Popup />}
     </View>
   );
 };

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { budgetItemType } from '../../types/budgetItemType';
 import { categoryType } from '../../types/categoryType';
+import Button from '../common/Button';
+import CustomText from '../common/CustomText';
 //Components
 import BudgetItem from './BudgetItem';
 import CategoryHeader from './CategoryHeader';
@@ -19,10 +21,25 @@ const Category: React.FC<Props> = (props): JSX.Element => {
         handleAddPress={props.handleAddPress}
         handleEditPress={() => props.handleEditPress(props.category)}
       />
-
-      {props.category.budgetItems?.map((b: budgetItemType) => (
-        <BudgetItem key={b.id} item={b} />
-      ))}
+      <View>
+        {!props.category.budgetItems?.length && (
+          <View
+            style={{
+              marginVertical: 10,
+              alignItems: 'center',
+            }}
+          >
+            <CustomText
+              text="You dont have any items in this category yet"
+              styles={{ marginVertical: 10 }}
+            />
+            <Button label="Create Item" pressHandler={() => {}} slim />
+          </View>
+        )}
+        {props.category.budgetItems?.map((b: budgetItemType) => (
+          <BudgetItem key={b._id} item={b} />
+        ))}
+      </View>
     </View>
   );
 };
