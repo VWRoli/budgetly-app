@@ -6,7 +6,7 @@ import { NavType } from '../../../types/navType';
 import Button from '../../common/Button';
 import OwnedBudgets from '../OwnedBudgets';
 
-const Drawer = () => {
+const Drawer = ({ onClose }: { onClose: () => void }) => {
   const { navigate } = useNavigation<NavType>();
 
   return (
@@ -19,7 +19,7 @@ const Drawer = () => {
           width="15%"
         />
       </View>
-      <OwnedBudgets />
+      <OwnedBudgets onClose={onClose} />
     </View>
   );
 };

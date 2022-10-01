@@ -61,7 +61,7 @@ const AccountTab = () => {
           },
         }}
       >
-        <Drawer />
+        <Drawer onClose={() => refRBSheet.current!.close()} />
       </RBSheet>
     </View>
   );

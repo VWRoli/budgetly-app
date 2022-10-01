@@ -1,12 +1,8 @@
 import React from 'react';
-import CountryFlag from 'react-native-country-flag';
-import cc from 'currency-codes';
 import { TouchableOpacity, View } from 'react-native';
 import FlagCurrencyInfo, {
   FlagCurrencyInfoProps,
 } from './common/FlagCurrencyInfo';
-//Components
-import CustomText from './common/CustomText';
 
 interface Props extends FlagCurrencyInfoProps {
   setSelected?: React.Dispatch<React.SetStateAction<string>>;
