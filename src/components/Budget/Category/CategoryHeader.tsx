@@ -7,7 +7,7 @@ import { HandlerTypes } from '../../../types/dashHandlerTypes';
 import CustomText from '../../common/CustomText';
 import HeaderText from '../../common/HeaderText';
 import IconButton from '../../common/IconButton';
-import Popup from '../../common/Popup';
+import Popup from './Popup';
 
 export interface CategoryHeaderProps {
   category: categoryType;

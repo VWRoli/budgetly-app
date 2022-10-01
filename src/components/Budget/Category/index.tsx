@@ -29,7 +29,12 @@ const Category: React.FC<Props> = (props): JSX.Element => {
               text="You dont have any items in this category yet"
               styles={{ marginVertical: 10 }}
             />
-            <Button label="Create Item" pressHandler={() => {}} slim />
+            <Button
+              label="Create Item"
+              pressHandler={() => {}}
+              slim
+              type="primary"
+            />
           </View>
         )}
         {props.category.budgetItems?.map((b: budgetItemType) => (

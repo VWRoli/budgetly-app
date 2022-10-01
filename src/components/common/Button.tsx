@@ -4,27 +4,34 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 interface Props {
   label: string;
   pressHandler: () => void;
-  outlined?: boolean;
   slim?: boolean;
   disabled?: boolean;
   width?: string;
-  error?: boolean;
+  type?: 'primary' | 'secondary' | 'error' | 'outlined';
 }
 
 const Button: React.FC<Props> = ({
   label,
   pressHandler,
-  outlined,
   slim,
   disabled,
   width = '90%',
-  error,
+  type = 'primary',
 }): JSX.Element => {
-  const typeStyles = outlined
-    ? styles.outlined
-    : error
-    ? styles.error
-    : styles.filled;
+  const getTypeStyles = () => {
+    switch (type) {
+      case 'secondary':
+        return styles.secondary;
+      case 'error':
+        return styles.error;
+      case 'outlined':
+        return styles.outlined;
+      default:
+        return styles.primary;
+    }
+  };
+  const typeStyles = getTypeStyles();
+
   const disabledStyles = disabled ? styles.disabled : styles.notDisabled;
 
   return (
@@ -35,12 +42,19 @@ const Button: React.FC<Props> = ({
         ...disabledStyles,
         paddingVertical: slim ? 8 : 18,
         width,
+        borderWidth: type === 'outlined' ? 1 : 0,
+        borderColor: type === 'outlined' ? '#06B3C4' : '',
       }}
       activeOpacity={0.7}
       onPress={pressHandler}
       disabled={disabled}
     >
-      <Text style={{ ...styles.text, color: outlined ? '#06B3C4' : '#fff' }}>
+      <Text
+        style={{
+          ...styles.text,
+          ...typeStyles,
+        }}
+      >
         {label}
       </Text>
     </TouchableOpacity>
@@ -52,10 +66,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 15,
   },
-  filled: {
+  primary: {
     backgroundColor: '#06B3C4',
+    color: '#fff',
   },
-  error: { backgroundColor: '#C42610' },
+  secondary: { backgroundColor: '#e2e2e2', color: '#1D3777' },
+  error: { backgroundColor: '#C42610', color: '#fff' },
   disabled: {
     opacity: 0.5,
   },
@@ -63,9 +79,8 @@ const styles = StyleSheet.create({
     opacity: 1,
   },
   outlined: {
-    borderWidth: 1,
-    borderColor: '#06B3C4',
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
+    color: '#1D3777',
   },
   text: {
     fontWeight: '500',

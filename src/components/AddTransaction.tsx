@@ -14,24 +14,40 @@ const AddTransaction = () => {
     <View style={{ width: '85%' }}>
       <CardWrapper>
         <View style={{ width: '100%' }}>
-          <InputSecondary placeholder="Payee..." />
-          <InputSecondary placeholder="Category..." />
+          <InputSecondary
+            placeholder="Payee..."
+            changeHandler={() => {}}
+            value="1"
+          />
+          <InputSecondary
+            placeholder="Category..."
+            changeHandler={() => {}}
+            value="1"
+          />
           <View
             style={{
               flexDirection: 'row',
             }}
           >
             <View style={{ flex: 1, marginRight: 2.5 }}>
-              <InputSecondary placeholder="Income" />
+              <InputSecondary
+                placeholder="Income"
+                changeHandler={() => {}}
+                value="1"
+              />
             </View>
             <View style={{ flex: 1, marginLeft: 2.5 }}>
-              <InputSecondary placeholder="Outcome" styles={{ flex: 1 }} />
+              <InputSecondary
+                placeholder="Outcome"
+                styles={{ flex: 1 }}
+                changeHandler={() => {}}
+                value="1"
+              />
             </View>
           </View>
           <View style={{ marginVertical: 5 }}>
             <Button
               label="21/05/2022"
-              outlined
               slim
               pressHandler={() => setOpenDatePicker(true)}
             />
