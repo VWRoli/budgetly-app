@@ -9,9 +9,23 @@ const PopupButton: React.FC<Props> = ({ label, pressHandler }) => {
   return (
     <TouchableOpacity
       onPress={pressHandler}
-      style={{ backgroundColor: '#F8F4F4' }}
+      style={{
+        backgroundColor: '#fff',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        borderBottomColor: '#8B8C9E',
+        borderBottomWidth: 1,
+        borderRadius: 10,
+      }}
     >
-      <Text>{label}</Text>
+      <Text
+        style={{
+          fontWeight: '500',
+          color: label === 'Delete' ? '#C42610' : '',
+        }}
+      >
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };

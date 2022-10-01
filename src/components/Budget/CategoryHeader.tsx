@@ -43,7 +43,7 @@ const CategoryHeader: React.FC<Props> = (props): JSX.Element => {
         size={20}
         onPress={() => setisOpen((prev) => !prev)}
       />
-      {isOpen && <Popup />}
+      {isOpen && <Popup onClose={() => setisOpen(false)} />}
     </View>
   );
 };
