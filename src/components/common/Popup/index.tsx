@@ -38,6 +38,7 @@ const Popup: React.FC<Props> = (props) => {
         label="Delete"
         pressHandler={() => {
           props.onClose();
+          props.handleDeletePress();
         }}
       />
     </View>

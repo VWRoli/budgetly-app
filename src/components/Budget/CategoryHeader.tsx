@@ -12,6 +12,7 @@ export interface CategoryHeaderProps {
   title: string;
   handleAddPress: () => void;
   handleEditPress: () => void;
+  handleDeletePress: () => void;
 }
 
 const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
@@ -50,6 +51,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
           onClose={() => setisOpen(false)}
           handleAddPress={props.handleAddPress}
           handleEditPress={props.handleEditPress}
+          handleDeletePress={props.handleDeletePress}
         />
       )}
     </View>

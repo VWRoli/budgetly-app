@@ -13,11 +13,13 @@ import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
 import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
 import { useBudgetsContext } from '../context/BudgetsContext';
+import CustomModal from '../components/common/Modal';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState<categoryType[]>([]);
   const [isAdd, setIsAdd] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const [editableCategory, setEditableCategory] = useState<categoryType>({
     title: '',
   });
@@ -42,6 +44,9 @@ const DashScreen: React.FC = (): JSX.Element => {
     setIsAdd(false);
     setEditableCategory(category);
     refRBSheet.current!.open();
+  };
+  const handleDeletePress = () => {
+    setModalVisible(true);
   };
 
   useEffect(() => {
@@ -85,6 +90,7 @@ const DashScreen: React.FC = (): JSX.Element => {
                 category={item}
                 handleAddPress={handleAddPress}
                 handleEditPress={handleEditPress}
+                handleDeletePress={handleDeletePress}
               />
             )}
             keyExtractor={(item) => item._id + ''}
@@ -117,6 +123,12 @@ const DashScreen: React.FC = (): JSX.Element => {
           />
         )}
       </RBSheet>
+      {modalVisible && (
+        <CustomModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
+      )}
     </View>
   );
 };

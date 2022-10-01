@@ -11,6 +11,7 @@ interface Props {
   category: categoryType;
   handleAddPress: () => void;
   handleEditPress: (category: categoryType) => void;
+  handleDeletePress: () => void;
 }
 
 const Category: React.FC<Props> = (props): JSX.Element => {
@@ -20,6 +21,7 @@ const Category: React.FC<Props> = (props): JSX.Element => {
         title={props.category.title}
         handleAddPress={props.handleAddPress}
         handleEditPress={() => props.handleEditPress(props.category)}
+        handleDeletePress={props.handleDeletePress}
       />
       <View>
         {!props.category.budgetItems?.length && (
