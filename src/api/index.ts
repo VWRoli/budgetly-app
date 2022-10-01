@@ -49,7 +49,8 @@ export const fetchDefaultBudget = async (
 export const createCategory = (category: categoryType) =>
   axios.post('categories', category);
 
-export const getCategories = () => axios.get('categories');
+export const getCategories = (budgetId: string | undefined) =>
+  axios.get(`categories/${budgetId}`);
 export const getCategory = (id: string) => axios.get(`categories/${id}`);
 
 export const editCategory = (id: string | undefined, category: categoryType) =>

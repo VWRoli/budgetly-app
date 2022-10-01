@@ -12,6 +12,7 @@ import CustomText from '../components/common/CustomText';
 import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
 import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
+import { useBudgetsContext } from '../context/BudgetsContext';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,11 +21,12 @@ const DashScreen: React.FC = (): JSX.Element => {
   const [editableCategory, setEditableCategory] = useState<categoryType>({
     title: '',
   });
+  const { defaultBudget } = useBudgetsContext();
   const refRBSheet = React.createRef<RBSheet>();
 
   const fetchCategories = async () => {
     try {
-      const { data } = await api.getCategories();
+      const { data } = await api.getCategories(defaultBudget?._id);
 
       setCategories(data);
     } catch (error) {
@@ -44,7 +46,7 @@ const DashScreen: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     fetchCategories();
-  }, [isLoading]);
+  }, [isLoading, defaultBudget]);
 
   return (
     <View style={styles.container}>
