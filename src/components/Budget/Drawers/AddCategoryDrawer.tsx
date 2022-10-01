@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import * as api from '../../../api';
+import { useBudgetsContext } from '../../../context/BudgetsContext';
 //Components
 import Button from '../../common/Button';
 import InputSecondary from '../../common/InputSecondary';
@@ -12,6 +13,7 @@ interface Props {
 }
 const AddCategoryDrawer: React.FC<Props> = (props) => {
   const [title, setTitle] = useState('');
+  const { defaultBudget } = useBudgetsContext();
 
   const handleCreate = async () => {
     props.setLoading(true);
@@ -19,6 +21,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
       title,
       budgeted: 0,
       available: 0,
+      budgetId: defaultBudget!._id,
     };
     try {
       await api.createCategory(newCategory);
