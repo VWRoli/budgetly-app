@@ -7,16 +7,19 @@ import { categoryType } from '../types/categoryType';
 
 const API = axios.create({ baseURL: BASE_URL });
 
+//?Auth
 export const signUp = (userForm: userType) => API.post('users/user', userForm);
 
 export const logIn = (userForm: userFormType) =>
   API.post('users/login', userForm);
 
+//?Profile
 export const getProfile = () => axios.get('users/me');
 
 export const updateProfile = (userForm: userType) =>
   axios.patch('users/me', userForm);
 
+//?Budget
 export const createBudget = (budgetData: budgetType) =>
   axios.post('budgets', budgetData);
 
@@ -42,6 +45,7 @@ export const fetchDefaultBudget = async (
   }
 };
 
+//?Category
 export const createCategory = (category: categoryType) =>
   axios.post('categories', category);
 
