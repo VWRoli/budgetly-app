@@ -14,6 +14,7 @@ import MonthHeader from '../components/common/MonthHeader';
 import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import CustomModal from '../components/common/Modal';
+import ConfirmDeleteModal from '../components/Modals/ConfirmDeleteModal';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,8 +46,9 @@ const DashScreen: React.FC = (): JSX.Element => {
     setEditableCategory(category);
     refRBSheet.current!.open();
   };
-  const handleDeletePress = () => {
+  const handleDeletePress = (category: categoryType) => {
     setModalVisible(true);
+    setEditableCategory(category);
   };
 
   useEffect(() => {
@@ -99,7 +101,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       </View>
       <RBSheet
         ref={refRBSheet}
-        height={200}
+        height={150}
         openDuration={250}
         customStyles={{
           container: {
@@ -127,7 +129,13 @@ const DashScreen: React.FC = (): JSX.Element => {
         <CustomModal
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-        />
+        >
+          <ConfirmDeleteModal
+            category={editableCategory}
+            setModalVisible={setModalVisible}
+            setLoading={setIsLoading}
+          />
+        </CustomModal>
       )}
     </View>
   );

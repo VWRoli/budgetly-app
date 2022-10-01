@@ -17,22 +17,19 @@ interface Props {
 const EditCategoryDrawer: React.FC<Props> = (props) => {
   const [title, setTitle] = useState(props.category.title);
 
-  const handleEdit = async (title?: string) => {
+  const handleEdit = async (title: string) => {
     props.setLoading(true);
 
     try {
-      if (title) {
-        const newCategory = {
-          title,
-        };
-        await api.editCategory(props.category._id, newCategory);
-      } else {
-        await api.deleteCategory(props.category._id);
-      }
+      const newCategory = {
+        title,
+      };
+      await api.editCategory(props.category._id, newCategory);
 
       props.setLoading(false);
     } catch (error) {
       props.setLoading(false);
+      console.log(error);
     }
   };
 
@@ -55,18 +52,6 @@ const EditCategoryDrawer: React.FC<Props> = (props) => {
             width="100%"
             slim
             disabled={!title || props.isLoading}
-          />
-          <CustomText text="or" />
-          <Button
-            label="Delete category"
-            pressHandler={() => {
-              handleEdit();
-              props.onClose();
-            }}
-            width="100%"
-            slim
-            error
-            disabled={props.isLoading}
           />
         </View>
       </View>
