@@ -1,7 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
+import { CategoryHeaderProps } from '../../Budget/CategoryHeader';
+//Components
 import PopupButton from './PopupButton';
-interface Props {
+interface Props extends CategoryHeaderProps {
   onClose: () => void;
 }
 
@@ -22,12 +24,14 @@ const Popup: React.FC<Props> = (props) => {
         label="Add"
         pressHandler={() => {
           props.onClose();
+          props.handleAddPress();
         }}
       />
       <PopupButton
         label="Edit"
         pressHandler={() => {
           props.onClose();
+          props.handleEditPress();
         }}
       />
       <PopupButton

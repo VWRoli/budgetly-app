@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { categoryType } from '../../types/categoryType';
 //Components
 import CustomText from '../common/CustomText';
 import HeaderText from '../common/HeaderText';
 import IconButton from '../common/IconButton';
 import Popup from '../common/Popup';
 
-interface Props {
+export interface CategoryHeaderProps {
   title: string;
   handleAddPress: () => void;
   handleEditPress: () => void;
 }
 
-const CategoryHeader: React.FC<Props> = (props): JSX.Element => {
+const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
   const [isOpen, setisOpen] = useState(false);
   return (
     <View
@@ -43,7 +44,14 @@ const CategoryHeader: React.FC<Props> = (props): JSX.Element => {
         size={20}
         onPress={() => setisOpen((prev) => !prev)}
       />
-      {isOpen && <Popup onClose={() => setisOpen(false)} />}
+      {isOpen && (
+        <Popup
+          title={props.title}
+          onClose={() => setisOpen(false)}
+          handleAddPress={props.handleAddPress}
+          handleEditPress={props.handleEditPress}
+        />
+      )}
     </View>
   );
 };
