@@ -21,7 +21,7 @@ const PopupButton: React.FC<Props> = ({ label, pressHandler }) => {
       <Text
         style={{
           fontWeight: '500',
-          color: label === 'Delete' ? '#C42610' : '',
+          color: label === 'Delete' ? '#C42610' : '#8B8C9E',
         }}
       >
         {label}

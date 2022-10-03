@@ -30,7 +30,20 @@ const Button: React.FC<Props> = ({
         return styles.primary;
     }
   };
+  const getTextTypeStyles = () => {
+    switch (type) {
+      case 'secondary':
+        return styles.secondaryText;
+      case 'error':
+        return styles.errorText;
+      case 'outlined':
+        return styles.outlinedText;
+      default:
+        return styles.primaryText;
+    }
+  };
   const typeStyles = getTypeStyles();
+  const textTypeStyles = getTextTypeStyles();
 
   const disabledStyles = disabled ? styles.disabled : styles.notDisabled;
 
@@ -45,14 +58,14 @@ const Button: React.FC<Props> = ({
         borderWidth: type === 'outlined' ? 1 : 0,
         borderColor: type === 'outlined' ? '#06B3C4' : '',
       }}
-      activeOpacity={0.7}
+      activeOpacity={0.8}
       onPress={pressHandler}
       disabled={disabled}
     >
       <Text
         style={{
+          ...textTypeStyles,
           ...styles.text,
-          ...typeStyles,
         }}
       >
         {label}
@@ -68,10 +81,12 @@ const styles = StyleSheet.create({
   },
   primary: {
     backgroundColor: '#06B3C4',
-    color: '#fff',
   },
-  secondary: { backgroundColor: '#e2e2e2', color: '#1D3777' },
-  error: { backgroundColor: '#C42610', color: '#fff' },
+  primaryText: { color: '#fff' },
+  secondary: { backgroundColor: '#e2e2e2' },
+  secondaryText: { color: '#1D3777' },
+  error: { backgroundColor: '#C42610' },
+  errorText: { color: '#fff' },
   disabled: {
     opacity: 0.5,
   },
@@ -80,8 +95,8 @@ const styles = StyleSheet.create({
   },
   outlined: {
     backgroundColor: 'transparent',
-    color: '#1D3777',
   },
+  outlinedText: { color: '#1D3777' },
   text: {
     fontWeight: '500',
     fontSize: 14,
