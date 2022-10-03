@@ -10,7 +10,7 @@ interface Props {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => void;
   isLoading: boolean;
-  item?: boolean;
+  isBudget?: boolean;
 }
 const AddCategoryDrawer: React.FC<Props> = (props) => {
   const [title, setTitle] = useState('');
@@ -42,7 +42,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
           changeHandler={setTitle}
         />
         <Button
-          label="Add category"
+          label={`${props.isBudget ? 'Add budget item' : 'Add category'}`}
           pressHandler={() => {
             handleCreate();
             props.onClose();

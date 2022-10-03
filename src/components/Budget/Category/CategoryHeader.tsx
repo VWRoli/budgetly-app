@@ -35,7 +35,11 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
           size={24}
           styles={{ marginRight: 5 }}
         />
-        <IconButton icon="plus" pressHandler={() => {}} type="primary" />
+        <IconButton
+          icon="plus"
+          pressHandler={() => props.handlers.handleAddPress('isBudget')}
+          type="primary"
+        />
       </View>
       <CustomText text="Available" size={12} />
       <Icon

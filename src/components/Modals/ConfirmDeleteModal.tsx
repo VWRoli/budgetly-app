@@ -35,17 +35,18 @@ const ConfirmDeleteModal: React.FC<Props> = (props) => {
           label="Cancel"
           pressHandler={() => props.setModalVisible(false)}
           slim
+          type="secondary"
           width="45%"
         />
         <View style={{ width: 10 }}></View>
         <Button
-          error
           label="Delete"
           pressHandler={() => {
             props.setModalVisible(false);
             handleDelete(props.category._id);
           }}
           slim
+          type="error"
           width="45%"
         />
       </View>

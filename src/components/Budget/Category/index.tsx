@@ -31,7 +31,7 @@ const Category: React.FC<Props> = (props): JSX.Element => {
             />
             <Button
               label="Create Item"
-              pressHandler={() => {}}
+              pressHandler={() => props.handlers.handleAddPress('isBudget')}
               slim
               type="primary"
             />

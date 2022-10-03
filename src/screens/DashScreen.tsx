@@ -5,7 +5,7 @@ import * as api from '../api';
 import { categoryType } from '../types/categoryType';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
-import AddCategoryDrawer from '../components/Budget/Drawers/AddCategoryDrawer';
+import AddDrawer from '../components/Budget/Drawers/AddDrawer';
 import Category from '../components/Budget/Category';
 import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
@@ -21,6 +21,7 @@ const DashScreen: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState<categoryType[]>([]);
   const [isAdd, setIsAdd] = useState(true);
+  const [isBudget, setIsBudget] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [editableCategory, setEditableCategory] = useState<categoryType>({
     title: '',
@@ -38,9 +39,10 @@ const DashScreen: React.FC = (): JSX.Element => {
     }
   };
   const handlers: HandlerTypes = {
-    handleAddPress() {
+    handleAddPress(isBudget?: string) {
       setIsAdd(true);
       refRBSheet.current!.open();
+      if (isBudget) setIsBudget(true);
     },
     handleEditPress(category: categoryType) {
       setIsAdd(false);
@@ -79,7 +81,7 @@ const DashScreen: React.FC = (): JSX.Element => {
             />
             <Button
               label="Add your first category"
-              pressHandler={handlers.handleAddPress}
+              pressHandler={() => handlers.handleAddPress()}
             />
           </View>
         )}
@@ -98,6 +100,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       <RBSheet
         ref={refRBSheet}
         height={150}
+        onClose={() => setIsBudget(false)}
         openDuration={250}
         customStyles={{
           container: {
@@ -107,10 +110,14 @@ const DashScreen: React.FC = (): JSX.Element => {
         }}
       >
         {isAdd ? (
-          <AddCategoryDrawer
+          <AddDrawer
             setLoading={setIsLoading}
             isLoading={isLoading}
-            onClose={() => refRBSheet.current?.close()}
+            onClose={() => {
+              setIsBudget(false);
+              refRBSheet.current?.close();
+            }}
+            isBudget={isBudget}
           />
         ) : (
           <EditCategoryDrawer
