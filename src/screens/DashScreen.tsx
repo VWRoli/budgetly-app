@@ -107,13 +107,10 @@ const DashScreen: React.FC = (): JSX.Element => {
             isBudget={isBudget}
           />
         ) : (
-          <></>
-          // <EditCategoryDrawer
-          //   category={editableCategory}
-          //   setLoading={setIsLoading}
-          //   isLoading={isLoading}
-          //   onClose={() => refRBSheet.current?.close()}
-          // />
+          <EditCategoryDrawer
+            category={editableCategory}
+            onClose={() => refRBSheet.current?.close()}
+          />
         )}
       </RBSheet>
       {modalVisible && (

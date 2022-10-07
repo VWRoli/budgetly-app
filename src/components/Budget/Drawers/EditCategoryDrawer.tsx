@@ -9,7 +9,6 @@ import InputSecondary from '../../common/InputSecondary';
 
 interface Props {
   category: categoryType;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => void;
 }
 
