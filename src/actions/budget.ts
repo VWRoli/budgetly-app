@@ -1,6 +1,6 @@
 import { BUDGET_ACTION_TYPES } from '../types/budgetActionTypes';
 import * as api from '../api';
-import { actionType, budgetStateType } from '../reducers/budgetReducer';
+import { actionType } from '../reducers/budgetReducer';
 import { categoryType } from '../types/categoryType';
 
 export const getCategories = async (
@@ -32,7 +32,6 @@ export const createCategory = async (
   }
 };
 export const deleteCategory = async (
-  state: any,
   dispatch: React.Dispatch<actionType>,
   id?: string,
 ) => {
@@ -40,7 +39,6 @@ export const deleteCategory = async (
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
     await api.deleteCategory(id);
     dispatch({ type: BUDGET_ACTION_TYPES.REMOVE_SUCCESS, payload: id });
-    //  console.log(state.categories);
   } catch (error) {
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
   }
