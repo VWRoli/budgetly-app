@@ -17,11 +17,12 @@ import CustomModal from '../components/common/Modal';
 import ConfirmDeleteModal from '../components/Modals/ConfirmDeleteModal';
 import { HandlerTypes } from '../types/dashHandlerTypes';
 import { budgetReducer, INITIAL_STATE } from '../reducers/budgetReducer';
+import { getCategories } from '../actions/budget';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [state, dispatch] = useReducer(budgetReducer, INITIAL_STATE);
-  const [isLoading, setIsLoading] = useState(false);
-  const [categories, setCategories] = useState<categoryType[]>([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  //const [categories, setCategories] = useState<categoryType[]>([]);
   const [isAdd, setIsAdd] = useState(true);
   const [isBudget, setIsBudget] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,15 +32,19 @@ const DashScreen: React.FC = (): JSX.Element => {
   const { defaultBudget } = useBudgetsContext();
   const refRBSheet = React.createRef<RBSheet>();
 
-  const fetchCategories = async () => {
-    try {
-      const { data } = await api.getCategories(defaultBudget?._id);
+  useEffect(() => {
+    getCategories(state, dispatch, defaultBudget?._id);
+  }, []);
 
-      setCategories(data);
-    } catch (error) {
-      console.log(error); //todo error handling
-    }
-  };
+  // const fetchCategories = async () => {
+  //   try {
+  //     const { data } = await api.getCategories(defaultBudget?._id);
+
+  //     setCategories(data);
+  //   } catch (error) {
+  //     console.log(error); //todo error handling
+  //   }
+  // };
   const handlers: HandlerTypes = {
     handleAddPress(isBudget?: string) {
       setIsAdd(true);
@@ -57,9 +62,9 @@ const DashScreen: React.FC = (): JSX.Element => {
     },
   };
 
-  useEffect(() => {
-    fetchCategories();
-  }, [isLoading, defaultBudget]);
+  // useEffect(() => {
+  //   fetchCategories();
+  // }, [isLoading, defaultBudget]);
 
   return (
     <View style={styles.container}>
@@ -69,7 +74,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       </View>
 
       <View style={{ flex: 1 }}>
-        {!isLoading && !categories?.length && (
+        {!state.loading && !state.categories?.length && (
           <View
             style={{
               flex: 1,
@@ -87,11 +92,11 @@ const DashScreen: React.FC = (): JSX.Element => {
             />
           </View>
         )}
-        {isLoading ? (
+        {state.loading ? (
           <Loading />
         ) : (
           <FlatList
-            data={categories}
+            data={state.categories}
             renderItem={({ item }: { item: categoryType }) => (
               <Category key={item._id} category={item} handlers={handlers} />
             )}
@@ -111,7 +116,7 @@ const DashScreen: React.FC = (): JSX.Element => {
           },
         }}
       >
-        {isAdd ? (
+        {/* {isAdd ? (
           <AddDrawer
             setLoading={setIsLoading}
             isLoading={isLoading}
@@ -128,9 +133,9 @@ const DashScreen: React.FC = (): JSX.Element => {
             isLoading={isLoading}
             onClose={() => refRBSheet.current?.close()}
           />
-        )}
+        )} */}
       </RBSheet>
-      {modalVisible && (
+      {/* {modalVisible && (
         <CustomModal
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
@@ -141,7 +146,7 @@ const DashScreen: React.FC = (): JSX.Element => {
             setLoading={setIsLoading}
           />
         </CustomModal>
-      )}
+      )} */}
     </View>
   );
 };

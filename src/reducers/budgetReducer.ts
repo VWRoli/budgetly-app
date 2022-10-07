@@ -1,7 +1,7 @@
 import { BUDGET_ACTION_TYPES } from '../types/budgetActionTypes';
 import { categoryType } from '../types/categoryType';
 
-interface budgetStateType {
+export interface budgetStateType {
   loading: boolean;
   error: boolean;
   categories: categoryType[];
@@ -12,9 +12,9 @@ export const INITIAL_STATE: budgetStateType = {
   error: false,
 };
 
-interface actionType {
-  type: string;
-  payload: any;
+export interface actionType {
+  type: BUDGET_ACTION_TYPES;
+  payload?: any;
 }
 
 export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
