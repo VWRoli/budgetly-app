@@ -24,12 +24,8 @@ const DashScreen: React.FC = (): JSX.Element => {
   const [editableCategory, setEditableCategory] = useState<categoryType>({
     title: '',
   });
-  const { defaultBudget, state, dispatch } = useBudgetsContext();
+  const { state } = useBudgetsContext();
   const refRBSheet = React.createRef<RBSheet>();
-
-  useEffect(() => {
-    getCategories(dispatch, defaultBudget?._id);
-  }, [defaultBudget]);
 
   const handlers: HandlerTypes = {
     handleAddPress(isBudget?: string) {

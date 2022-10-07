@@ -21,7 +21,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
       available: 0,
       budgetId: defaultBudget!._id,
     };
-    createCategory(state, dispatch, newCategory);
+    createCategory(dispatch, newCategory);
   };
 
   return (

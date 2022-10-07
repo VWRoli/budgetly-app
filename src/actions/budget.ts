@@ -17,7 +17,6 @@ export const getCategories = async (
 };
 
 export const createCategory = async (
-  state: any, //todo remove
   dispatch: React.Dispatch<actionType>,
   newCategory: categoryType,
 ) => {
@@ -28,7 +27,6 @@ export const createCategory = async (
       type: BUDGET_ACTION_TYPES.CREATE_SUCCESS,
       payload: newCategory,
     });
-    console.log(state.categories);
   } catch (error) {
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
   }

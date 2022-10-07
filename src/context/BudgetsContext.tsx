@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
+import { getCategories } from '../actions/budget';
 import { fetchDefaultBudget } from '../api';
 import {
   actionType,
@@ -43,6 +44,10 @@ export const BudgetsProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     fetchDefaultBudget(setDefaultBudgetLoading, setDefaultBudget);
   }, []);
+
+  useEffect(() => {
+    getCategories(dispatch, defaultBudget?._id);
+  }, [defaultBudget]);
 
   return (
     <BudgetContext.Provider
