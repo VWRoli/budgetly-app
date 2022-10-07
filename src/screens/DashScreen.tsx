@@ -33,18 +33,9 @@ const DashScreen: React.FC = (): JSX.Element => {
   const refRBSheet = React.createRef<RBSheet>();
 
   useEffect(() => {
-    getCategories(state, dispatch, defaultBudget?._id);
+    getCategories(dispatch, defaultBudget?._id);
   }, []);
 
-  // const fetchCategories = async () => {
-  //   try {
-  //     const { data } = await api.getCategories(defaultBudget?._id);
-
-  //     setCategories(data);
-  //   } catch (error) {
-  //     console.log(error); //todo error handling
-  //   }
-  // };
   const handlers: HandlerTypes = {
     handleAddPress(isBudget?: string) {
       setIsAdd(true);
@@ -61,10 +52,6 @@ const DashScreen: React.FC = (): JSX.Element => {
       setEditableCategory(category);
     },
   };
-
-  // useEffect(() => {
-  //   fetchCategories();
-  // }, [isLoading, defaultBudget]);
 
   return (
     <View style={styles.container}>
@@ -116,10 +103,8 @@ const DashScreen: React.FC = (): JSX.Element => {
           },
         }}
       >
-        {/* {isAdd ? (
+        {isAdd ? (
           <AddDrawer
-            setLoading={setIsLoading}
-            isLoading={isLoading}
             onClose={() => {
               setIsBudget(false);
               refRBSheet.current?.close();
@@ -127,13 +112,14 @@ const DashScreen: React.FC = (): JSX.Element => {
             isBudget={isBudget}
           />
         ) : (
-          <EditCategoryDrawer
-            category={editableCategory}
-            setLoading={setIsLoading}
-            isLoading={isLoading}
-            onClose={() => refRBSheet.current?.close()}
-          />
-        )} */}
+          <></>
+          // <EditCategoryDrawer
+          //   category={editableCategory}
+          //   setLoading={setIsLoading}
+          //   isLoading={isLoading}
+          //   onClose={() => refRBSheet.current?.close()}
+          // />
+        )}
       </RBSheet>
       {/* {modalVisible && (
         <CustomModal

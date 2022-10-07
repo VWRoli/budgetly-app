@@ -37,6 +37,23 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         loading: false,
         categories: [],
       };
+    case BUDGET_ACTION_TYPES.CREATE_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case BUDGET_ACTION_TYPES.CREATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        categories: [...state.categories, action.payload],
+      };
+    case BUDGET_ACTION_TYPES.CREATE_ERROR:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+      };
     default:
       return state;
   }

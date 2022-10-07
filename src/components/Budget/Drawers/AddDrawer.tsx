@@ -1,35 +1,29 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { View } from 'react-native';
-import * as api from '../../../api';
+import { createCategory } from '../../../actions/budget';
 import { useBudgetsContext } from '../../../context/BudgetsContext';
+import { budgetReducer, INITIAL_STATE } from '../../../reducers/budgetReducer';
 //Components
 import Button from '../../common/Button';
 import InputSecondary from '../../common/InputSecondary';
 
 interface Props {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => void;
-  isLoading: boolean;
   isBudget?: boolean;
 }
 const AddCategoryDrawer: React.FC<Props> = (props) => {
+  const [state, dispatch] = useReducer(budgetReducer, INITIAL_STATE);
   const [title, setTitle] = useState('');
   const { defaultBudget } = useBudgetsContext();
 
   const handleCreate = async () => {
-    props.setLoading(true);
     const newCategory = {
       title,
       budgeted: 0,
       available: 0,
       budgetId: defaultBudget!._id,
     };
-    try {
-      await api.createCategory(newCategory);
-      props.setLoading(false);
-    } catch (error) {
-      props.setLoading(false);
-    }
+    createCategory(dispatch, newCategory);
   };
 
   return (
@@ -49,7 +43,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
           }}
           width="100%"
           slim
-          disabled={!title || props.isLoading}
+          disabled={!title || state.loading}
         />
       </View>
     </View>
