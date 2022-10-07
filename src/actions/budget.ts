@@ -45,3 +45,17 @@ export const deleteCategory = async (
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
   }
 };
+export const editCategory = async (
+  dispatch: React.Dispatch<actionType>,
+  newCategory: categoryType,
+  id?: string,
+) => {
+  try {
+    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
+    const { data } = await api.editCategory(id, newCategory);
+
+    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
+  }
+};

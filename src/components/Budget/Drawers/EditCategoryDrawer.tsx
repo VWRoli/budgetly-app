@@ -1,36 +1,27 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { categoryType } from '../../../types/categoryType';
-import * as api from '../../../api';
+import { editCategory } from '../../../actions/budget';
+import { useBudgetsContext } from '../../../context/BudgetsContext';
 //Components
 import Button from '../../common/Button';
-import CustomText from '../../common/CustomText';
 import InputSecondary from '../../common/InputSecondary';
 
 interface Props {
   category: categoryType;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => void;
-  isLoading: boolean;
 }
 
 const EditCategoryDrawer: React.FC<Props> = (props) => {
+  const { state, dispatch } = useBudgetsContext();
   const [title, setTitle] = useState(props.category.title);
 
   const handleEdit = async (title: string) => {
-    props.setLoading(true);
-
-    try {
-      const newCategory = {
-        title,
-      };
-      await api.editCategory(props.category._id, newCategory);
-
-      props.setLoading(false);
-    } catch (error) {
-      props.setLoading(false);
-      console.log(error);
-    }
+    const newCategory = {
+      title,
+    };
+    editCategory(dispatch, newCategory, props.category._id);
   };
 
   return (
@@ -51,7 +42,7 @@ const EditCategoryDrawer: React.FC<Props> = (props) => {
             }}
             width="100%"
             slim
-            disabled={!title || props.isLoading}
+            disabled={!title || state.loading}
           />
         </View>
       </View>

@@ -60,6 +60,14 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         loading: false,
         categories: state.categories.filter((c) => c._id !== action.payload),
       };
+    case BUDGET_ACTION_TYPES.EDIT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        categories: state.categories.map((c) =>
+          c._id === action.payload._id ? action.payload : c,
+        ),
+      };
 
     default:
       return state;
