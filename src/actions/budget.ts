@@ -17,17 +17,31 @@ export const getCategories = async (
 };
 
 export const createCategory = async (
+  state: any, //todo remove
   dispatch: React.Dispatch<actionType>,
   newCategory: categoryType,
 ) => {
   try {
-    dispatch({ type: BUDGET_ACTION_TYPES.CREATE_START });
+    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
     await api.createCategory(newCategory);
     dispatch({
       type: BUDGET_ACTION_TYPES.CREATE_SUCCESS,
       payload: newCategory,
     });
+    console.log(state.categories);
   } catch (error) {
-    dispatch({ type: BUDGET_ACTION_TYPES.CREATE_ERROR });
+    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
+  }
+};
+export const deleteCategory = async (
+  dispatch: React.Dispatch<actionType>,
+  id?: string,
+) => {
+  try {
+    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
+    await api.deleteCategory(id);
+    dispatch({ type: BUDGET_ACTION_TYPES.REMOVE_SUCCESS });
+  } catch (error) {
+    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
   }
 };

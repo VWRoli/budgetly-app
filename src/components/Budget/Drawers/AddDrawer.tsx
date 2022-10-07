@@ -1,8 +1,7 @@
-import React, { useReducer, useState } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { createCategory } from '../../../actions/budget';
 import { useBudgetsContext } from '../../../context/BudgetsContext';
-import { budgetReducer, INITIAL_STATE } from '../../../reducers/budgetReducer';
 //Components
 import Button from '../../common/Button';
 import InputSecondary from '../../common/InputSecondary';
@@ -12,9 +11,8 @@ interface Props {
   isBudget?: boolean;
 }
 const AddCategoryDrawer: React.FC<Props> = (props) => {
-  const [state, dispatch] = useReducer(budgetReducer, INITIAL_STATE);
   const [title, setTitle] = useState('');
-  const { defaultBudget } = useBudgetsContext();
+  const { defaultBudget, state, dispatch } = useBudgetsContext();
 
   const handleCreate = async () => {
     const newCategory = {
@@ -23,7 +21,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
       available: 0,
       budgetId: defaultBudget!._id,
     };
-    createCategory(dispatch, newCategory);
+    createCategory(state, dispatch, newCategory);
   };
 
   return (

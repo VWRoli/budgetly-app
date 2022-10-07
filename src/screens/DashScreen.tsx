@@ -1,8 +1,10 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import * as api from '../api';
 import { categoryType } from '../types/categoryType';
+import { useBudgetsContext } from '../context/BudgetsContext';
+import { getCategories } from '../actions/budget';
+import { HandlerTypes } from '../types/dashHandlerTypes';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
 import AddDrawer from '../components/Budget/Drawers/AddDrawer';
@@ -12,29 +14,22 @@ import CustomText from '../components/common/CustomText';
 import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
 import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
-import { useBudgetsContext } from '../context/BudgetsContext';
 import CustomModal from '../components/common/Modal';
 import ConfirmDeleteModal from '../components/Modals/ConfirmDeleteModal';
-import { HandlerTypes } from '../types/dashHandlerTypes';
-import { budgetReducer, INITIAL_STATE } from '../reducers/budgetReducer';
-import { getCategories } from '../actions/budget';
 
 const DashScreen: React.FC = (): JSX.Element => {
-  const [state, dispatch] = useReducer(budgetReducer, INITIAL_STATE);
-  // const [isLoading, setIsLoading] = useState(false);
-  //const [categories, setCategories] = useState<categoryType[]>([]);
   const [isAdd, setIsAdd] = useState(true);
   const [isBudget, setIsBudget] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [editableCategory, setEditableCategory] = useState<categoryType>({
     title: '',
   });
-  const { defaultBudget } = useBudgetsContext();
+  const { defaultBudget, state, dispatch } = useBudgetsContext();
   const refRBSheet = React.createRef<RBSheet>();
 
   useEffect(() => {
     getCategories(dispatch, defaultBudget?._id);
-  }, []);
+  }, [defaultBudget]);
 
   const handlers: HandlerTypes = {
     handleAddPress(isBudget?: string) {
@@ -121,7 +116,7 @@ const DashScreen: React.FC = (): JSX.Element => {
           // />
         )}
       </RBSheet>
-      {/* {modalVisible && (
+      {modalVisible && (
         <CustomModal
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
@@ -129,10 +124,9 @@ const DashScreen: React.FC = (): JSX.Element => {
           <ConfirmDeleteModal
             category={editableCategory}
             setModalVisible={setModalVisible}
-            setLoading={setIsLoading}
           />
         </CustomModal>
-      )} */}
+      )}
     </View>
   );
 };

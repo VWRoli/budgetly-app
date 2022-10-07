@@ -1,8 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { fetchDefaultBudget } from '../api';
+import {
+  actionType,
+  budgetReducer,
+  budgetStateType,
+  INITIAL_STATE,
+} from '../reducers/budgetReducer';
 import { budgetType } from '../types/budgetType';
 
 interface ValueTypes {
+  state: budgetStateType;
+  dispatch: React.Dispatch<actionType>;
   ownedBudgets: budgetType[];
   setOwnedBudgets: React.Dispatch<React.SetStateAction<budgetType[]>>;
   defaultBudgetLoading: boolean;
@@ -11,6 +19,8 @@ interface ValueTypes {
 }
 
 const defaultValue: ValueTypes = {
+  state: INITIAL_STATE,
+  dispatch: () => {},
   ownedBudgets: [],
   setOwnedBudgets: () => {},
   defaultBudgetLoading: false,
@@ -25,6 +35,7 @@ interface Props {
 }
 
 export const BudgetsProvider: React.FC<Props> = ({ children }) => {
+  const [state, dispatch] = useReducer(budgetReducer, INITIAL_STATE);
   const [ownedBudgets, setOwnedBudgets] = useState<budgetType[]>([]);
   const [defaultBudgetLoading, setDefaultBudgetLoading] = useState(false);
   const [defaultBudget, setDefaultBudget] = useState<null | budgetType>(null);
@@ -41,6 +52,8 @@ export const BudgetsProvider: React.FC<Props> = ({ children }) => {
         defaultBudgetLoading,
         defaultBudget,
         setDefaultBudget,
+        state,
+        dispatch,
       }}
     >
       {children}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import * as api from '../../api';
+import { deleteCategory } from '../../actions/budget';
+import { useBudgetsContext } from '../../context/BudgetsContext';
 import { categoryType } from '../../types/categoryType';
 //Components
 import Button from '../common/Button';
@@ -9,19 +10,12 @@ import CustomText from '../common/CustomText';
 interface Props {
   category: categoryType;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const ConfirmDeleteModal: React.FC<Props> = (props) => {
-  const handleDelete = async (id?: string) => {
-    props.setLoading(true);
+  const { dispatch } = useBudgetsContext();
 
-    try {
-      await api.deleteCategory(id);
-      props.setLoading(false);
-    } catch (error) {
-      props.setLoading(false);
-      console.log(error);
-    }
+  const handleDelete = async (id?: string) => {
+    deleteCategory(dispatch, id);
   };
 
   return (

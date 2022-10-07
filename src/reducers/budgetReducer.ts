@@ -37,7 +37,7 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         loading: false,
         categories: [],
       };
-    case BUDGET_ACTION_TYPES.CREATE_START:
+    case BUDGET_ACTION_TYPES.EDIT_START:
       return {
         ...state,
         loading: true,
@@ -48,12 +48,19 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         loading: false,
         categories: [...state.categories, action.payload],
       };
-    case BUDGET_ACTION_TYPES.CREATE_ERROR:
+    case BUDGET_ACTION_TYPES.EDIT_ERROR:
       return {
         ...state,
         error: true,
         loading: false,
       };
+    case BUDGET_ACTION_TYPES.REMOVE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        categories: state.categories.filter((c) => c._id !== action.payload),
+      };
+
     default:
       return state;
   }
