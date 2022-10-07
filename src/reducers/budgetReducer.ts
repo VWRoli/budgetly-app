@@ -55,6 +55,10 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         loading: false,
       };
     case BUDGET_ACTION_TYPES.REMOVE_SUCCESS:
+      const filteredCategories = state.categories.filter(
+        (c) => c._id !== action.payload,
+      );
+      console.log({ filteredCategories });
       return {
         ...state,
         loading: false,

@@ -12,10 +12,10 @@ interface Props {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const ConfirmDeleteModal: React.FC<Props> = (props) => {
-  const { dispatch } = useBudgetsContext();
+  const { state, dispatch } = useBudgetsContext();
 
   const handleDelete = async (id?: string) => {
-    deleteCategory(dispatch, id);
+    deleteCategory(state, dispatch, id);
   };
 
   return (

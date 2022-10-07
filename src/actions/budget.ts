@@ -32,13 +32,15 @@ export const createCategory = async (
   }
 };
 export const deleteCategory = async (
+  state: any,
   dispatch: React.Dispatch<actionType>,
   id?: string,
 ) => {
   try {
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
     await api.deleteCategory(id);
-    dispatch({ type: BUDGET_ACTION_TYPES.REMOVE_SUCCESS });
+    dispatch({ type: BUDGET_ACTION_TYPES.REMOVE_SUCCESS, payload: id });
+    //  console.log(state.categories);
   } catch (error) {
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
   }
