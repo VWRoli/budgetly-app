@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import * as api from '../api';
@@ -16,8 +16,10 @@ import { useBudgetsContext } from '../context/BudgetsContext';
 import CustomModal from '../components/common/Modal';
 import ConfirmDeleteModal from '../components/Modals/ConfirmDeleteModal';
 import { HandlerTypes } from '../types/dashHandlerTypes';
+import { budgetReducer, INITIAL_STATE } from '../reducers/budgetReducer';
 
 const DashScreen: React.FC = (): JSX.Element => {
+  const [state, dispatch] = useReducer(budgetReducer, INITIAL_STATE);
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState<categoryType[]>([]);
   const [isAdd, setIsAdd] = useState(true);
