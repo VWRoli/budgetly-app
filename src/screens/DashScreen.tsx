@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { categoryType } from '../types/categoryType';
 import { useBudgetsContext } from '../context/BudgetsContext';
@@ -50,9 +50,9 @@ const DashScreen: React.FC = (): JSX.Element => {
       <View style={{ padding: 10 }}>
         <AccountTab />
       </View>
-
+      {state.loading && <Text>Loading...</Text>}
       <View style={{ flex: 1 }}>
-        {!state.loading && !state.categories?.length && (
+        {!state.categories?.length && (
           <View
             style={{
               flex: 1,
@@ -70,17 +70,14 @@ const DashScreen: React.FC = (): JSX.Element => {
             />
           </View>
         )}
-        {state.loading ? (
-          <Loading />
-        ) : (
-          <FlatList
-            data={state.categories}
-            renderItem={({ item }: { item: categoryType }) => (
-              <Category key={item._id} category={item} handlers={handlers} />
-            )}
-            keyExtractor={(item) => item._id + ''}
-          />
-        )}
+
+        <FlatList
+          data={state.categories}
+          renderItem={({ item }: { item: categoryType }) => (
+            <Category key={item._id} category={item} handlers={handlers} />
+          )}
+          keyExtractor={(item) => item._id + ''}
+        />
       </View>
       <RBSheet
         ref={refRBSheet}
