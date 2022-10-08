@@ -14,6 +14,7 @@ import MonthHeader from '../components/common/MonthHeader';
 import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
 import CustomModal from '../components/common/Modal';
 import ConfirmDeleteModal from '../components/Modals/ConfirmDeleteModal';
+import EmptyScreen from '../components/common/EmptyScreen';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isAdd, setIsAdd] = useState(true);
@@ -58,22 +59,11 @@ const DashScreen: React.FC = (): JSX.Element => {
       {state.loading && <CustomText text="Loading..." />}
       <View style={{ flex: 1 }}>
         {!state.categories?.length && (
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <CustomText
-              text="You don't have any categories or budget items yet."
-              styles={{ marginVertical: 20 }}
-            />
-            <Button
-              label="Add your first category"
-              pressHandler={() => handlers.handleAddPress()}
-            />
-          </View>
+          <EmptyScreen
+            text="You don't have any categories or budget items yet."
+            btnLabel="Add your first category"
+            pressHandler={() => handlers.handleAddPress()}
+          />
         )}
 
         <FlatList

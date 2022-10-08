@@ -13,6 +13,7 @@ import AddTransaction from '../components/AddTransaction';
 import { getTransactions } from '../actions/transactions';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import FAB from '../components/common/FAB';
+import EmptyScreen from '../components/common/EmptyScreen';
 
 const TransactionsScreen = () => {
   const [state, dispatch] = useReducer(transactionsReducer, TRX_INIT_STATE);
@@ -22,12 +23,11 @@ const TransactionsScreen = () => {
     getTransactions(dispatch, defaultBudget?._id);
   }, [defaultBudget]);
 
-  console.log(state.transactions);
-
   return (
     <View
       style={{
         flex: 1,
+        backgroundColor: '#fff',
       }}
     >
       <View
@@ -37,6 +37,14 @@ const TransactionsScreen = () => {
       >
         {/* <AddTransaction /> */}
       </View>
+      {state.loading && <Text>Loading...</Text>}
+      {!state.transactions.length && (
+        <EmptyScreen
+          text="You don't have any transactions yet."
+          btnLabel="Add your first transaction"
+          pressHandler={() => {}}
+        />
+      )}
       <ScrollView
         contentContainerStyle={{
           alignItems: 'center',
@@ -47,13 +55,9 @@ const TransactionsScreen = () => {
         }}
       >
         <View style={{ width: '85%' }}>
-          {state.loading ? (
-            <Text>Loading...</Text>
-          ) : (
-            state.transactions.map((trx: transactionType) => (
-              <TransactionCard key={trx.id} trx={trx} />
-            ))
-          )}
+          {state.transactions.map((trx: transactionType) => (
+            <TransactionCard key={trx.id} trx={trx} />
+          ))}
         </View>
       </ScrollView>
       <FAB pressHandler={() => {}} type="primary" icon="plus" size={40} />
