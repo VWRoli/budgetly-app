@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { transactionType } from '../types/transactionType';
 import { formatter } from '../utils/helpers';
 import CardWrapper from './common/CardWrapper';
 import Chip from './common/Chip';
@@ -7,34 +8,26 @@ import CustomText from './common/CustomText';
 import HeaderText from './common/HeaderText';
 
 interface Props {
-  payee: string;
-  amount: number;
-  date: string;
-  category: string;
+  trx: transactionType;
 }
 
-const TransactionCard: React.FC<Props> = ({
-  payee,
-  amount,
-  date,
-  category,
-}): JSX.Element => {
+const TransactionCard: React.FC<Props> = ({ trx }): JSX.Element => {
   return (
     <CardWrapper>
       <View style={styles.iconWrapper}>
-        <Text style={styles.iconText}>{payee.charAt(0)}</Text>
+        <Text style={styles.iconText}>{trx.payee.charAt(0)}</Text>
       </View>
       <View style={styles.content}>
         <View>
-          <HeaderText text={payee} size={18} />
-          <CustomText text={category} bold size={14} />
+          <HeaderText text={trx.payee} size={18} />
+          <CustomText text={trx.categoryTitle} bold size={14} />
         </View>
 
-        <Chip
-          value={formatter(amount)}
-          textColor={`${category === 'Income' ? '#1eff05' : 'red'}`}
-          outline={category === 'Income' ? false : true}
-        />
+        {/* <Chip
+          value={formatter(trx.amount)}
+          textColor={`${trx.category === 'Income' ? '#1eff05' : 'red'}`}
+          outline={trx.category === 'Income' ? false : true}
+        /> */}
       </View>
     </CardWrapper>
   );

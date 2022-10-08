@@ -52,6 +52,7 @@ export const createCategory = (category: categoryType) =>
 
 export const getCategories = (budgetId: string | undefined) =>
   axios.get(`categories/${budgetId}`);
+
 export const getCategory = (id: string) => axios.get(`categories/${id}`);
 
 export const editCategory = (id: string | undefined, category: categoryType) =>
@@ -66,4 +67,5 @@ export const createBudgetItem = (budgetItem: budgetItemType) =>
 
 //? Transactions
 
-//export const getTransaction
+export const getTransactions = (budgetId: string | undefined) =>
+  axios.get(`transactions/${budgetId}`);

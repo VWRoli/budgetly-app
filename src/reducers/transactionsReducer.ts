@@ -1,6 +1,4 @@
-import { InitialState } from '@react-navigation/native';
 import { TRANSACTIONS_ACTION_TYPES } from '../types/transactionActionTypes';
-import { transactionType } from '../types/transactionType';
 
 export interface transactionsStateType {
   loading: boolean;
@@ -8,7 +6,7 @@ export interface transactionsStateType {
   transactions: any[];
 }
 
-export const TR_INIT_STATE: transactionsStateType = {
+export const TRX_INIT_STATE: transactionsStateType = {
   loading: false,
   error: false,
   transactions: [],
@@ -20,7 +18,7 @@ export interface actionType {
 }
 
 export const transactionsReducer = (
-  state = TR_INIT_STATE,
+  state = TRX_INIT_STATE,
   action: actionType,
 ) => {
   switch (action.type) {

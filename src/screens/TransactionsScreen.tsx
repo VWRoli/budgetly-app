@@ -1,18 +1,27 @@
-import React, { useReducer } from 'react';
-import { ScrollView, View } from 'react-native';
+import React, { useEffect, useReducer } from 'react';
+import { ScrollView, Text, View } from 'react-native';
 import { skeletonArray } from '../constants/constants';
 import { transactionType } from '../types/transactionType';
 import {
-  TR_INIT_STATE,
+  TRX_INIT_STATE,
   transactionsReducer,
 } from '../reducers/transactionsReducer';
 //Components
 import TransactionCard from '../components/TransactionCard';
 import SkeletonTransaction from '../components/Skeletons/SkeletonTransaction';
 import AddTransaction from '../components/AddTransaction';
+import { getTransactions } from '../actions/transactions';
+import { useBudgetsContext } from '../context/BudgetsContext';
 
 const TransactionsScreen = () => {
-  const [state, dispatch] = useReducer(transactionsReducer, TR_INIT_STATE);
+  const [state, dispatch] = useReducer(transactionsReducer, TRX_INIT_STATE);
+  const { defaultBudget } = useBudgetsContext();
+
+  useEffect(() => {
+    getTransactions(dispatch, defaultBudget?._id);
+  }, [defaultBudget]);
+
+  console.log(state.transactions);
 
   return (
     <View
@@ -25,7 +34,7 @@ const TransactionsScreen = () => {
           alignItems: 'center',
         }}
       >
-        <AddTransaction />
+        {/* <AddTransaction /> */}
       </View>
       <ScrollView
         contentContainerStyle={{
@@ -37,21 +46,13 @@ const TransactionsScreen = () => {
         }}
       >
         <View style={{ width: '85%' }}>
-          {state.loading
-            ? skeletonArray.map((_, i) => <SkeletonTransaction key={i} />)
-            : state.transactions.map((tr: transactionType) => (
-                <TransactionCard
-                  key={tr.id}
-                  payee={tr.payee}
-                  amount={tr.amount}
-                  date={tr.date}
-                  category={
-                    tr.income
-                      ? 'Income'
-                      : `${tr.categoryTitle}/${tr.budgetItemTitle}`
-                  }
-                />
-              ))}
+          {state.loading ? (
+            <Text>Loading...</Text>
+          ) : (
+            state.transactions.map((trx: transactionType) => (
+              <TransactionCard key={trx.id} trx={trx} />
+            ))
+          )}
         </View>
       </ScrollView>
     </View>
