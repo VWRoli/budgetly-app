@@ -15,13 +15,16 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
   const { defaultBudget, state, dispatch } = useBudgetsContext();
 
   const handleCreate = async () => {
-    const newCategory = {
-      title,
-      budgeted: 0,
-      available: 0,
-      budgetId: defaultBudget!._id,
-    };
-    createCategory(dispatch, newCategory);
+    if (props.isBudget) {
+    } else {
+      const newCategory = {
+        title,
+        budgeted: 0,
+        available: 0,
+        budgetId: defaultBudget!._id,
+      };
+      createCategory(dispatch, newCategory);
+    }
   };
 
   return (

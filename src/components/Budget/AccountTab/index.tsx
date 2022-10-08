@@ -78,6 +78,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    elevation: 10,
+    marginBottom: 25,
   },
   flagWrapper: {
     borderRadius: 10,

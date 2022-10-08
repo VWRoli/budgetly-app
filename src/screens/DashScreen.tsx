@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { categoryType } from '../types/categoryType';
 import { useBudgetsContext } from '../context/BudgetsContext';
-import { getCategories } from '../actions/budget';
 import { HandlerTypes } from '../types/dashHandlerTypes';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
@@ -11,7 +10,6 @@ import AddDrawer from '../components/Budget/Drawers/AddDrawer';
 import Category from '../components/Budget/Category';
 import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
-import Loading from '../components/common/Loading';
 import MonthHeader from '../components/common/MonthHeader';
 import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
 import CustomModal from '../components/common/Modal';
@@ -50,7 +48,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       <View style={{ padding: 10 }}>
         <AccountTab />
       </View>
-      {state.loading && <Text>Loading...</Text>}
+      {state.loading && <CustomText text="Loading..." />}
       <View style={{ flex: 1 }}>
         {!state.categories?.length && (
           <View
