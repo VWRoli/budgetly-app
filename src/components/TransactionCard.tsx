@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import { transactionType } from '../types/transactionType';
 import { formatter } from '../utils/helpers';
-import CardWrapper from './common/CardWrapper';
+//Components
 import Chip from './common/Chip';
 import CustomText from './common/CustomText';
 import HeaderText from './common/HeaderText';
@@ -16,7 +16,7 @@ const TransactionCard: React.FC<Props> = ({ trx }): JSX.Element => {
   const { defaultBudget } = useBudgetsContext();
 
   return (
-    <CardWrapper>
+    <View style={styles.container}>
       <View style={styles.iconWrapper}>
         <Text style={styles.iconText}>{trx.payee.charAt(0)}</Text>
       </View>
@@ -32,11 +32,21 @@ const TransactionCard: React.FC<Props> = ({ trx }): JSX.Element => {
           outline={trx.income ? false : true}
         />
       </View>
-    </CardWrapper>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    padding: 10,
+    elevation: 10,
+    marginVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   iconWrapper: {
     backgroundColor: '#06B3C4',
     borderRadius: 15,
