@@ -1,3 +1,4 @@
+import { data } from 'currency-codes';
 import { BUDGET_ACTION_TYPES } from '../types/budgetActionTypes';
 import { categoryType } from '../types/categoryType';
 
@@ -68,7 +69,24 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
           c._id === action.payload._id ? action.payload : c,
         ),
       };
-
+    case BUDGET_ACTION_TYPES.CREATE_ITEM_SUCCESS:
+      const updatedCategory = state.categories.filter(
+        (c) => c._id === action.payload.categoryId,
+      )[0];
+      const newCategory = {
+        ...updatedCategory,
+        budgetItems: [...updatedCategory.budgetItems, action.payload],
+      };
+      return {
+        ...state,
+        loading: false,
+        categories: [
+          ...state.categories.filter(
+            (c) => c._id !== action.payload.categoryId,
+          ),
+          newCategory,
+        ],
+      };
     default:
       return state;
   }

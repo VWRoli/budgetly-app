@@ -17,19 +17,25 @@ import ConfirmDeleteModal from '../components/Modals/ConfirmDeleteModal';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isAdd, setIsAdd] = useState(true);
-  const [isBudget, setIsBudget] = useState(false);
+  const [categoryId, setCategoryId] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [editableCategory, setEditableCategory] = useState<categoryType>({
     title: '',
+    budgetItems: [],
+    createdAt: '',
+    updatedAt: '',
   });
   const { state } = useBudgetsContext();
   const refRBSheet = React.createRef<RBSheet>();
-
+  const sortedCategories = state.categories.sort(
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+  );
+  console.log({ sortedCategories });
   const handlers: HandlerTypes = {
-    handleAddPress(isBudget?: string) {
+    handleAddPress(categoryId?: string) {
       setIsAdd(true);
       refRBSheet.current!.open();
-      if (isBudget) setIsBudget(true);
+      if (categoryId) setCategoryId(categoryId);
     },
     handleEditPress(category: categoryType) {
       setIsAdd(false);
@@ -70,7 +76,7 @@ const DashScreen: React.FC = (): JSX.Element => {
         )}
 
         <FlatList
-          data={state.categories}
+          data={sortedCategories}
           renderItem={({ item }: { item: categoryType }) => (
             <Category key={item._id} category={item} handlers={handlers} />
           )}
@@ -80,7 +86,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       <RBSheet
         ref={refRBSheet}
         height={150}
-        onClose={() => setIsBudget(false)}
+        onClose={() => setCategoryId('')}
         openDuration={250}
         customStyles={{
           container: {
@@ -92,10 +98,10 @@ const DashScreen: React.FC = (): JSX.Element => {
         {isAdd ? (
           <AddDrawer
             onClose={() => {
-              setIsBudget(false);
+              setCategoryId('');
               refRBSheet.current?.close();
             }}
-            isBudget={isBudget}
+            categoryId={categoryId}
           />
         ) : (
           <EditCategoryDrawer

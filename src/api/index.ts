@@ -4,6 +4,7 @@ import { userFormType } from '../types/userFormType';
 import { userType } from '../types/userType';
 import axios from '../lib/axios';
 import { categoryType } from '../types/categoryType';
+import { budgetItemType } from '../types/budgetItemType';
 
 const API = axios.create({ baseURL: BASE_URL });
 
@@ -58,3 +59,7 @@ export const editCategory = (id: string | undefined, category: categoryType) =>
 
 export const deleteCategory = (id: string | undefined) =>
   axios.delete(`/categories/${id}`);
+
+//? Budget items
+export const createBudgetItem = (budgetItem: budgetItemType) =>
+  axios.post('budgetitems', budgetItem);

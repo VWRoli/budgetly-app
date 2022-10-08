@@ -37,7 +37,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
         />
         <IconButton
           icon="plus"
-          pressHandler={() => props.handlers.handleAddPress('isBudget')}
+          pressHandler={() => props.handlers.handleAddPress(props.category._id)}
           type="primary"
         />
       </View>

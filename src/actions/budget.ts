@@ -2,6 +2,7 @@ import { BUDGET_ACTION_TYPES } from '../types/budgetActionTypes';
 import * as api from '../api';
 import { actionType } from '../reducers/budgetReducer';
 import { categoryType } from '../types/categoryType';
+import { budgetItemType } from '../types/budgetItemType';
 
 export const getCategories = async (
   dispatch: React.Dispatch<actionType>,
@@ -54,6 +55,19 @@ export const editCategory = async (
     const { data } = await api.editCategory(id, newCategory);
 
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
+  }
+};
+
+export const createBudgetItem = async (
+  dispatch: React.Dispatch<actionType>,
+  newBudgetItem: budgetItemType,
+) => {
+  try {
+    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
+    const { data } = await api.createBudgetItem(newBudgetItem);
+    dispatch({ type: BUDGET_ACTION_TYPES.CREATE_ITEM_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
   }

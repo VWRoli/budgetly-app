@@ -4,7 +4,9 @@ export interface categoryType {
   title: string;
   _id?: string;
   userId?: number;
-  budgetItems?: budgetItemType[];
+  budgetItems: budgetItemType[];
   budgeted?: number;
   available?: number;
+  createdAt: string;
+  updatedAt: string;
 }
