@@ -1,4 +1,4 @@
-import { BUDGET_ACTION_TYPES } from '../types/budgetActionTypes';
+import { BUDGET_ACTION_TYPES } from '../types/actions/budgetActionTypes';
 import { categoryType } from '../types/categoryType';
 
 export interface budgetStateType {

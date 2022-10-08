@@ -5,6 +5,7 @@ import { userType } from '../types/userType';
 import axios from '../lib/axios';
 import { categoryType } from '../types/categoryType';
 import { budgetItemType } from '../types/budgetItemType';
+import { transactionType } from '../types/transactionType';
 
 const API = axios.create({ baseURL: BASE_URL });
 
@@ -69,3 +70,6 @@ export const createBudgetItem = (budgetItem: budgetItemType) =>
 
 export const getTransactions = (budgetId: string | undefined) =>
   axios.get(`transactions/${budgetId}`);
+
+export const createTransaction = (transaction: transactionType) =>
+  axios.post('transactions', transaction);

@@ -1,4 +1,4 @@
-import { BUDGET_ACTION_TYPES } from '../types/budgetActionTypes';
+import { BUDGET_ACTION_TYPES } from '../types/actions/budgetActionTypes';
 import * as api from '../api';
 import { actionType } from '../reducers/budgetReducer';
 import { categoryType } from '../types/categoryType';
@@ -33,6 +33,7 @@ export const createCategory = async (
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
   }
 };
+
 export const deleteCategory = async (
   dispatch: React.Dispatch<actionType>,
   id?: string,

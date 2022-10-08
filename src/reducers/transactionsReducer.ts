@@ -1,4 +1,4 @@
-import { TRANSACTIONS_ACTION_TYPES } from '../types/transactionActionTypes';
+import { TRANSACTIONS_ACTION_TYPES } from '../types/actions/transactionActionTypes';
 
 export interface transactionsStateType {
   loading: boolean;
@@ -39,6 +39,23 @@ export const transactionsReducer = (
         error: true,
         loading: false,
         transactions: [],
+      };
+    case TRANSACTIONS_ACTION_TYPES.EDIT_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case TRANSACTIONS_ACTION_TYPES.CREATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        transactions: [...state.transactions, action.payload],
+      };
+    case TRANSACTIONS_ACTION_TYPES.EDIT_ERROR:
+      return {
+        ...state,
+        error: true,
+        loading: false,
       };
 
     default:

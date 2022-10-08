@@ -1,6 +1,7 @@
 import * as api from '../api';
 import { actionType } from '../reducers/transactionsReducer';
-import { TRANSACTIONS_ACTION_TYPES } from '../types/transactionActionTypes';
+import { TRANSACTIONS_ACTION_TYPES } from '../types/actions/transactionActionTypes';
+import { transactionType } from '../types/transactionType';
 
 export const getTransactions = async (
   dispatch: React.Dispatch<actionType>,
@@ -13,5 +14,18 @@ export const getTransactions = async (
     dispatch({ type: TRANSACTIONS_ACTION_TYPES.FETCH_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: TRANSACTIONS_ACTION_TYPES.FETCH_ERROR });
+  }
+};
+
+export const createTransaction = async (
+  dispatch: React.Dispatch<actionType>,
+  transaction: transactionType,
+) => {
+  try {
+    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_START });
+    const { data } = await api.createTransaction(transaction);
+    dispatch({ type: TRANSACTIONS_ACTION_TYPES.CREATE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_ERROR });
   }
 };
