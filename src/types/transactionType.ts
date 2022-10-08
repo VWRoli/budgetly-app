@@ -1,14 +1,14 @@
 export interface transactionType {
   payee: string;
-  userId: number;
-  id: number;
+  user_id: string;
+  id: string;
   amount: number;
-  currency: string;
   date: string;
-  categoryId: number;
-  budgetItemsId: number;
-  accountId: number;
+  categoryId: string;
+  budgetId: string;
   categoryTitle: string;
   budgetItemTitle: string;
-  income?: boolean;
+  income: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }

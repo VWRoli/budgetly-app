@@ -1,4 +1,3 @@
-import { data } from 'currency-codes';
 import { BUDGET_ACTION_TYPES } from '../types/budgetActionTypes';
 import { categoryType } from '../types/categoryType';
 

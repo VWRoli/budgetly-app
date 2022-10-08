@@ -27,10 +27,11 @@ const DashScreen: React.FC = (): JSX.Element => {
   });
   const { state } = useBudgetsContext();
   const refRBSheet = React.createRef<RBSheet>();
+
   const sortedCategories = state.categories.sort(
     (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
   );
-  console.log({ sortedCategories });
+
   const handlers: HandlerTypes = {
     handleAddPress(categoryId?: string) {
       setIsAdd(true);
