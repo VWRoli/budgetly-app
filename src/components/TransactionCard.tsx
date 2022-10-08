@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useBudgetsContext } from '../context/BudgetsContext';
 import { transactionType } from '../types/transactionType';
 import { formatter } from '../utils/helpers';
 import CardWrapper from './common/CardWrapper';
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const TransactionCard: React.FC<Props> = ({ trx }): JSX.Element => {
+  const { defaultBudget } = useBudgetsContext();
+
   return (
     <CardWrapper>
       <View style={styles.iconWrapper}>
@@ -23,11 +26,11 @@ const TransactionCard: React.FC<Props> = ({ trx }): JSX.Element => {
           <CustomText text={trx.categoryTitle} bold size={14} />
         </View>
 
-        {/* <Chip
-          value={formatter(trx.amount)}
-          textColor={`${trx.category === 'Income' ? '#1eff05' : 'red'}`}
-          outline={trx.category === 'Income' ? false : true}
-        /> */}
+        <Chip
+          value={formatter(trx.amount, defaultBudget?.currency)}
+          textColor={`${trx.income ? '#1eff05' : 'red'}`}
+          outline={trx.income ? false : true}
+        />
       </View>
     </CardWrapper>
   );
