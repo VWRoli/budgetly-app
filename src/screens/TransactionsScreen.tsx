@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { skeletonArray } from '../constants/constants';
 import { transactionType } from '../types/transactionType';
@@ -14,10 +14,13 @@ import { getTransactions } from '../actions/transactions';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import FAB from '../components/common/FAB';
 import EmptyScreen from '../components/common/EmptyScreen';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
 const TransactionsScreen = () => {
   const [state, dispatch] = useReducer(transactionsReducer, TRX_INIT_STATE);
+  const [isOpen, setIsOpen] = useState(false);
   const { defaultBudget } = useBudgetsContext();
+  const refRBSheet = React.createRef<RBSheet>();
 
   useEffect(() => {
     getTransactions(dispatch, defaultBudget?._id);
@@ -30,13 +33,6 @@ const TransactionsScreen = () => {
         backgroundColor: '#fff',
       }}
     >
-      <View
-        style={{
-          alignItems: 'center',
-        }}
-      >
-        {/* <AddTransaction /> */}
-      </View>
       {state.loading && <Text>Loading...</Text>}
       {!state.transactions.length && (
         <EmptyScreen
@@ -60,7 +56,27 @@ const TransactionsScreen = () => {
           ))}
         </View>
       </ScrollView>
-      <FAB pressHandler={() => {}} type="primary" icon="plus" size={40} />
+      <FAB
+        pressHandler={() => refRBSheet.current!.open()}
+        type="primary"
+        icon="plus"
+        size={40}
+      />
+
+      <RBSheet
+        ref={refRBSheet}
+        height={300}
+        // onClose={() => refRBSheet.current!.close()}
+        openDuration={250}
+        customStyles={{
+          container: {
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        }}
+      >
+        <AddTransaction />
+      </RBSheet>
     </View>
   );
 };
