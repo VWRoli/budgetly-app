@@ -12,6 +12,7 @@ import SkeletonTransaction from '../components/Skeletons/SkeletonTransaction';
 import AddTransaction from '../components/AddTransaction';
 import { getTransactions } from '../actions/transactions';
 import { useBudgetsContext } from '../context/BudgetsContext';
+import FAB from '../components/common/FAB';
 
 const TransactionsScreen = () => {
   const [state, dispatch] = useReducer(transactionsReducer, TRX_INIT_STATE);
@@ -55,6 +56,7 @@ const TransactionsScreen = () => {
           )}
         </View>
       </ScrollView>
+      <FAB pressHandler={() => {}} type="primary" icon="plus" size={40} />
     </View>
   );
 };

@@ -2,14 +2,14 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-interface Props {
+export interface IconButtonProps {
   pressHandler: () => void;
   icon: string;
   type: 'primary' | 'secondary';
   size?: number;
 }
 
-const IconButton: React.FC<Props> = ({
+const IconButton: React.FC<IconButtonProps> = ({
   pressHandler,
   icon,
   type,
@@ -23,6 +23,8 @@ const IconButton: React.FC<Props> = ({
         height: size,
         width: size,
         borderRadius: size / 2,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: type === 'primary' ? '#06B3C4' : 'transparent',
       }}
     >
