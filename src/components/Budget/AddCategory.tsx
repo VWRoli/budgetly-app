@@ -14,11 +14,13 @@ const AddCategory: React.FC<Props> = ({ setIsOpen }): JSX.Element => {
     <CardWrapper>
       <View style={{ width: '100%' }}>
         <InputSecondary
+          editable
           placeholder="Budget Item"
           value="5"
           changeHandler={() => {}}
         />
         <InputSecondary
+          editable
           placeholder="Category items"
           value="5"
           changeHandler={() => {}}

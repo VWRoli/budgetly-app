@@ -1,25 +1,37 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import { formReducer, INITIAL_STATE } from '../reducers/txnFormReducer';
+import { TXN_FORM_ACTION_TYPES } from '../types/actions/txnFormActionType';
 //Components
 import Button from './common/Button';
 import InputSecondary from './common/InputSecondary';
 
 const AddTransaction = () => {
   const [date, setDate] = useState(new Date());
+  const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
   const [openDatePicker, setOpenDatePicker] = useState(false);
 
   return (
     <View style={{ width: '95%' }}>
       <InputSecondary
+        editable
         placeholder="Payee..."
-        changeHandler={() => {}}
-        value="1"
+        changeHandler={(text) =>
+          dispatch({ type: TXN_FORM_ACTION_TYPES.CHANGE_PAYEE, payload: text })
+        }
+        value={state.payee}
       />
       <InputSecondary
+        editable
         placeholder="Category..."
-        changeHandler={() => {}}
-        value="1"
+        changeHandler={(text) =>
+          dispatch({
+            type: TXN_FORM_ACTION_TYPES.CHANGE_CATEGORY,
+            payload: text,
+          })
+        }
+        value={state.categoryTitle}
       />
       <View
         style={{
@@ -29,16 +41,30 @@ const AddTransaction = () => {
         <View style={{ flex: 1, marginRight: 2.5 }}>
           <InputSecondary
             placeholder="Income"
-            changeHandler={() => {}}
-            value="1"
+            changeHandler={(text) =>
+              dispatch({
+                type: TXN_FORM_ACTION_TYPES.CHANGE_INCOME,
+                payload: text,
+              })
+            }
+            keyboardType="numeric"
+            editable={!state.outcome}
+            value={state.income}
           />
         </View>
         <View style={{ flex: 1, marginLeft: 2.5 }}>
           <InputSecondary
             placeholder="Outcome"
             styles={{ flex: 1 }}
-            changeHandler={() => {}}
-            value="1"
+            keyboardType="numeric"
+            editable={!state.income}
+            changeHandler={(text) =>
+              dispatch({
+                type: TXN_FORM_ACTION_TYPES.CHANGE_OUTCOME,
+                payload: text,
+              })
+            }
+            value={state.outcome}
           />
         </View>
       </View>
@@ -69,7 +95,9 @@ const AddTransaction = () => {
       <Button
         label="Add transaction"
         slim
-        pressHandler={() => {}}
+        pressHandler={() => {
+          console.log(state);
+        }}
         width="100%"
       />
     </View>

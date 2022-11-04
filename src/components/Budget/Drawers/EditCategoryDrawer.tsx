@@ -27,6 +27,7 @@ const EditCategoryDrawer: React.FC<Props> = (props) => {
     <View style={{ width: '100%' }}>
       <View style={{ marginHorizontal: 10 }}>
         <InputSecondary
+          editable
           placeholder="Title"
           fullWidth
           value={title}

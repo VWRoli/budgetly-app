@@ -52,7 +52,7 @@ const TransactionsScreen = () => {
       >
         <View style={{ width: '85%' }}>
           {state.transactions.map((trx: transactionType) => (
-            <TransactionCard key={trx.id} trx={trx} />
+            <TransactionCard key={trx._id} trx={trx} />
           ))}
         </View>
       </ScrollView>

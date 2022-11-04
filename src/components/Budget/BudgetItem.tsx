@@ -35,6 +35,7 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
           <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
             {isEditable ? (
               <InputSecondary
+                editable
                 placeholder={formatter(item.balance, defaultBudget?.currency)}
                 value={'5'}
                 changeHandler={() => {}}

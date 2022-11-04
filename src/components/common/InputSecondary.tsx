@@ -1,22 +1,25 @@
 import React from 'react';
-import { TextInput } from 'react-native';
+import { KeyboardTypeOptions, TextInput } from 'react-native';
 
 interface Props {
   placeholder: string;
   styles?: { [key: string]: string | number };
   fullWidth?: boolean;
-  value: string;
+  value: string | number;
   changeHandler: React.Dispatch<React.SetStateAction<string>>;
+  keyboardType?: KeyboardTypeOptions;
+  editable: boolean;
 }
 
 const InputSecondary: React.FC<Props> = (props): JSX.Element => {
   return (
     <TextInput
-      editable
       maxLength={40}
+      editable={props.editable}
       placeholder={props.placeholder}
-      value={props.value}
+      value={props.value + ''} //to accept numbers too
       onChangeText={(text) => props.changeHandler(text)}
+      keyboardType={props.keyboardType}
       style={{
         borderColor: '#06B3C4',
         borderWidth: 1,
@@ -25,6 +28,7 @@ const InputSecondary: React.FC<Props> = (props): JSX.Element => {
         paddingHorizontal: 10,
         marginVertical: 5,
         width: props.fullWidth ? '100%' : 'auto',
+        opacity: props.editable ? 1 : 0.5,
         ...props.styles,
       }}
     />

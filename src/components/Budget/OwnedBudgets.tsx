@@ -6,7 +6,7 @@ import { budgetType } from '../../types/budgetType';
 //Components
 import CurrencyItem from '../CurrencyItem';
 
-const OwnedBudgets = (props: { disabled?: boolean; onClose: () => void }) => {
+const OwnedBudgets = (props: { disabled?: boolean; onClose?: () => void }) => {
   const { ownedBudgets } = useBudgetsContext();
   const { setDefaultBudget } = useBudgetsContext();
 
@@ -15,7 +15,7 @@ const OwnedBudgets = (props: { disabled?: boolean; onClose: () => void }) => {
     setDefaultBudget(
       ownedBudgets.filter((b) => b.currency === currencyCode)[0],
     );
-    props.onClose();
+    props.onClose && props.onClose();
   };
 
   return (
