@@ -2,18 +2,14 @@ import { TXN_FORM_ACTION_TYPES } from '../types/actions/txnFormActionType';
 import { transactionType } from '../types/transactionType';
 
 export const INITIAL_STATE: transactionType = {
-  _id: '',
   payee: '',
-  outcome: '',
+  outcome: '0',
   date: new Date().toISOString(),
   categoryTitle: '',
   budgetItemTitle: '',
   categoryId: '',
   budgetId: '',
-  user_id: '',
-  createdAt: '',
-  updatedAt: '',
-  income: '',
+  income: '0',
 };
 
 export interface actionType {

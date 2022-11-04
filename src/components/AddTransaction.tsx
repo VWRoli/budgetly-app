@@ -1,17 +1,35 @@
 import React, { useReducer, useState } from 'react';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import { useBudgetsContext } from '../context/BudgetsContext';
 import { formReducer, INITIAL_STATE } from '../reducers/txnFormReducer';
 import { TXN_FORM_ACTION_TYPES } from '../types/actions/txnFormActionType';
 //Components
 import Button from './common/Button';
 import InputSecondary from './common/InputSecondary';
+import { getCategoryDropdownValues } from '../utils/helpers';
 
 const AddTransaction = () => {
+  const { defaultBudget, state: budgetState } = useBudgetsContext();
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
   const [date, setDate] = useState(new Date());
   const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
   const [openDatePicker, setOpenDatePicker] = useState(false);
 
+  const handleCreate = () => {
+    const newTransaction = {
+      ...state,
+      income: +state.income,
+      outcome: +state.outcome,
+      budgetId: defaultBudget?._id,
+    };
+    console.log(newTransaction);
+  };
+
+  const dropdownItems = getCategoryDropdownValues(budgetState.categories);
+  console.log(dropdownItems);
   return (
     <View style={{ width: '95%' }}>
       <InputSecondary
@@ -22,7 +40,14 @@ const AddTransaction = () => {
         }
         value={state.payee}
       />
-      <InputSecondary
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={dropdownItems || []}
+        setOpen={setOpen}
+        setValue={setValue}
+      />
+      {/* <InputSecondary
         editable
         placeholder="Category..."
         changeHandler={(text) =>
@@ -32,7 +57,7 @@ const AddTransaction = () => {
           })
         }
         value={state.categoryTitle}
-      />
+      /> */}
       <View
         style={{
           flexDirection: 'row',
@@ -104,9 +129,7 @@ const AddTransaction = () => {
       <Button
         label="Add transaction"
         slim
-        pressHandler={() => {
-          console.log(state);
-        }}
+        pressHandler={handleCreate}
         width="100%"
       />
     </View>

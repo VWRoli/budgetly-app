@@ -65,7 +65,7 @@ const TransactionsScreen = () => {
 
       <RBSheet
         ref={refRBSheet}
-        height={300}
+        height={600}
         // onClose={() => refRBSheet.current!.close()}
         openDuration={250}
         customStyles={{
