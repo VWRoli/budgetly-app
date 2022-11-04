@@ -70,25 +70,34 @@ const AddTransaction = () => {
       </View>
       <View style={{ marginVertical: 5 }}>
         <Button
-          label="21/05/2022"
+          label={state.date.substring(0, 10)}
           slim
           pressHandler={() => setOpenDatePicker(true)}
           width="100%"
         />
       </View>
       <DatePicker
-        date={date}
+        date={new Date(state.date)}
         mode="date"
         modal
         open={openDatePicker}
         onConfirm={(date) => {
           setOpenDatePicker(false);
           setDate(date);
+          dispatch({
+            type: TXN_FORM_ACTION_TYPES.CHANGE_DATE,
+            payload: date.toISOString(),
+          });
         }}
         onCancel={() => {
           setOpenDatePicker(false);
         }}
-        onDateChange={setDate}
+        onDateChange={() =>
+          dispatch({
+            type: TXN_FORM_ACTION_TYPES.CHANGE_DATE,
+            payload: date.toISOString(),
+          })
+        }
         androidVariant="nativeAndroid"
         textColor="#1D3777"
       />

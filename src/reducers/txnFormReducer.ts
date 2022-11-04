@@ -5,7 +5,7 @@ export const INITIAL_STATE: transactionType = {
   _id: '',
   payee: '',
   outcome: '',
-  date: '',
+  date: new Date().toISOString(),
   categoryTitle: '',
   budgetItemTitle: '',
   categoryId: '',
@@ -32,6 +32,8 @@ export const formReducer = (state = INITIAL_STATE, action: actionType) => {
       return { ...state, outcome: action.payload };
     case TXN_FORM_ACTION_TYPES.CHANGE_INCOME:
       return { ...state, income: action.payload };
+    case TXN_FORM_ACTION_TYPES.CHANGE_DATE:
+      return { ...state, date: action.payload };
 
     default:
       return state;
