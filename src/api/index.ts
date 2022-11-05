@@ -73,3 +73,11 @@ export const getTransactions = (budgetId: string | undefined) =>
 
 export const createTransaction = (transaction: transactionType) =>
   axios.post('transactions', transaction);
+
+export const editTransaction = (
+  id: string | undefined,
+  transaction: transactionType,
+) => axios.patch(`/transactions/${id}`, transaction);
+
+export const deleteTransaction = (id: string | undefined) =>
+  axios.delete(`/transactions/${id}`);

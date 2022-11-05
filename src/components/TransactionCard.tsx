@@ -9,27 +9,30 @@ import CustomText from './common/CustomText';
 import HeaderText from './common/HeaderText';
 
 interface Props {
-  trx: transactionType;
+  txn: transactionType;
 }
 
-const TransactionCard: React.FC<Props> = ({ trx }): JSX.Element => {
+const TransactionCard: React.FC<Props> = ({ txn }): JSX.Element => {
   const { defaultBudget } = useBudgetsContext();
 
   return (
     <View style={styles.container}>
       <View style={styles.iconWrapper}>
-        <Text style={styles.iconText}>{trx.payee.charAt(0)}</Text>
+        <Text style={styles.iconText}>{txn.payee.charAt(0)}</Text>
       </View>
       <View style={styles.content}>
         <View>
-          <HeaderText text={trx.payee} size={18} />
-          <CustomText text={trx.categoryTitle} bold size={14} />
+          <HeaderText text={txn.payee} size={18} />
+          <CustomText text={txn.categoryTitle} bold size={14} />
         </View>
 
         <Chip
-          value={formatter(trx.amount, defaultBudget?.currency)}
-          textColor={`${trx.income ? '#1eff05' : 'red'}`}
-          outline={trx.income ? false : true}
+          value={formatter(
+            +txn.outcome || +txn.income,
+            defaultBudget?.currency,
+          )}
+          textColor={`${txn.income ? '#1eff05' : 'red'}`}
+          outline={txn.income ? false : true}
         />
       </View>
     </View>

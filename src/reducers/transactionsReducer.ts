@@ -51,6 +51,20 @@ export const transactionsReducer = (
         loading: false,
         transactions: [...state.transactions, action.payload],
       };
+    case TRANSACTIONS_ACTION_TYPES.REMOVE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        categories: state.transactions.filter((c) => c._id !== action.payload),
+      };
+    case TRANSACTIONS_ACTION_TYPES.EDIT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        categories: state.transactions.map((t) =>
+          t._id === action.payload._id ? action.payload : t,
+        ),
+      };
     case TRANSACTIONS_ACTION_TYPES.EDIT_ERROR:
       return {
         ...state,

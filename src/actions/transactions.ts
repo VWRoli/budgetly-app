@@ -29,3 +29,31 @@ export const createTransaction = async (
     dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_ERROR });
   }
 };
+
+export const deleteTransaction = async (
+  dispatch: React.Dispatch<actionType>,
+  id?: string,
+) => {
+  try {
+    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_START });
+    await api.deleteTransaction(id);
+    dispatch({ type: TRANSACTIONS_ACTION_TYPES.REMOVE_SUCCESS, payload: id });
+  } catch (error) {
+    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_ERROR });
+  }
+};
+
+export const editTransaction = async (
+  dispatch: React.Dispatch<actionType>,
+  newTransaction: transactionType,
+  id?: string,
+) => {
+  try {
+    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_START });
+    const { data } = await api.editTransaction(id, newTransaction);
+
+    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_ERROR });
+  }
+};
