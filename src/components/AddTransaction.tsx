@@ -74,35 +74,34 @@ const AddTransaction = () => {
         dropDownContainerStyle={styles.dropDownContainerStyle}
         placeholder="Select a budget category"
       />
-      <View style={{ opacity: !categoryTitle ? 0.5 : 1 }}>
-        <DropDownPicker
-          open={openItem}
-          value={budgetItem}
-          items={
-            categoryTitle
-              ? budgetState.categories
-                  .filter((c) => c.title === categoryTitle)[0]
-                  .budgetItems?.map((c) => ({
-                    label: c.title,
-                    value: c.title,
-                  })) || []
-              : []
-          }
-          zIndex={3000}
-          zIndexInverse={1000}
-          onOpen={onItemOpen}
-          setOpen={setOpenItem}
-          setValue={setbudgetItem}
-          style={styles.pickerStyle}
-          placeholderStyle={styles.placeholderStyle}
-          dropDownContainerStyle={styles.dropDownContainerStyle}
-          disabled={!categoryTitle}
-          disabledItemContainerStyle={{
-            opacity: 0.5,
-          }}
-          placeholder="Select a budget item"
-        />
-      </View>
+
+      <DropDownPicker
+        open={openItem}
+        value={budgetItem}
+        items={
+          categoryTitle
+            ? budgetState.categories
+                .filter((c) => c.title === categoryTitle)[0]
+                .budgetItems?.map((c) => ({
+                  label: c.title,
+                  value: c.title,
+                })) || []
+            : []
+        }
+        zIndex={2000}
+        zIndexInverse={2000}
+        onOpen={onItemOpen}
+        setOpen={setOpenItem}
+        setValue={setbudgetItem}
+        style={{ ...styles.pickerStyle, opacity: !categoryTitle ? 0.5 : 1 }}
+        placeholderStyle={styles.placeholderStyle}
+        dropDownContainerStyle={styles.dropDownContainerStyle}
+        disabled={!categoryTitle}
+        disabledItemContainerStyle={{
+          opacity: 0.5,
+        }}
+        placeholder="Select a budget item"
+      />
 
       <View
         style={{
