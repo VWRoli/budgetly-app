@@ -75,7 +75,11 @@ const TransactionsScreen = () => {
           },
         }}
       >
-        <AddTransaction />
+        <AddTransaction
+          state={state}
+          dispatch={dispatch}
+          onClose={() => refRBSheet.current!.close()}
+        />
       </RBSheet>
     </View>
   );

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useReducer, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { StyleSheet, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
@@ -6,8 +6,19 @@ import { useBudgetsContext } from '../context/BudgetsContext';
 //Components
 import Button from './common/Button';
 import InputSecondary from './common/InputSecondary';
+import {
+  actionType,
+  transactionsStateType,
+} from '../reducers/transactionsReducer';
+import { createTransaction } from '../actions/transactions';
 
-const AddTransaction = () => {
+interface Props {
+  state: transactionsStateType;
+  dispatch: React.Dispatch<actionType>;
+  onClose: () => void;
+}
+
+const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
   const { defaultBudget, state: budgetState } = useBudgetsContext();
   //Openers
   const [openCategory, setOpenCategory] = useState(false);
@@ -17,7 +28,7 @@ const AddTransaction = () => {
   //States
   const [payee, setPayee] = useState('');
   const [categoryTitle, setCategoryTitle] = useState('');
-  const [budgetItem, setbudgetItem] = useState('');
+  const [budgetItemTitle, setBudgetItemTitle] = useState('');
   const [income, setIncome] = useState('');
   const [outcome, setOutcome] = useState('');
   const [date, setDate] = useState(new Date());
@@ -33,20 +44,20 @@ const AddTransaction = () => {
   const handleCreate = () => {
     const newTransaction = {
       payee,
-      date,
+      date: date.toISOString(),
       categoryTitle,
       income,
       outcome,
-      budgetId: defaultBudget?._id,
-      categoryId: budgetState.categories.filter(
-        (c) => c.title === categoryTitle,
-      )[0]?._id,
-      budgetItem,
+      budgetId: defaultBudget?._id || '',
+      categoryId:
+        budgetState.categories.filter((c) => c.title === categoryTitle)[0]
+          ._id || '',
+      budgetItemTitle,
     };
 
-    console.log(newTransaction);
+    createTransaction(dispatch, newTransaction);
+    onClose();
   };
-  //console.log(JSON.stringify(budgetState.categories, undefined, 2));
 
   return (
     <View style={{ width: '95%' }}>
@@ -77,7 +88,7 @@ const AddTransaction = () => {
 
       <DropDownPicker
         open={openItem}
-        value={budgetItem}
+        value={budgetItemTitle}
         items={
           categoryTitle
             ? budgetState.categories
@@ -92,7 +103,7 @@ const AddTransaction = () => {
         zIndexInverse={2000}
         onOpen={onItemOpen}
         setOpen={setOpenItem}
-        setValue={setbudgetItem}
+        setValue={setBudgetItemTitle}
         style={{ ...styles.pickerStyle, opacity: !categoryTitle ? 0.5 : 1 }}
         placeholderStyle={styles.placeholderStyle}
         dropDownContainerStyle={styles.dropDownContainerStyle}

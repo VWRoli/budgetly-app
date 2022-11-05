@@ -74,7 +74,7 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
       )[0];
       const newCategory = {
         ...updatedCategory,
-        budgetItems: [...updatedCategory.budgetItems, action.payload],
+        budgetItems: [...(updatedCategory.budgetItems || []), action.payload],
       };
       return {
         ...state,
