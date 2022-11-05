@@ -1,87 +1,97 @@
-import React, { useReducer, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import { useBudgetsContext } from '../context/BudgetsContext';
-import { formReducer, INITIAL_STATE } from '../reducers/txnFormReducer';
-import { TXN_FORM_ACTION_TYPES } from '../types/actions/txnFormActionType';
 //Components
 import Button from './common/Button';
 import InputSecondary from './common/InputSecondary';
 
 const AddTransaction = () => {
   const { defaultBudget, state: budgetState } = useBudgetsContext();
+  //Openers
   const [openCategory, setOpenCategory] = useState(false);
   const [openItem, setOpenItem] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
   const [openDatePicker, setOpenDatePicker] = useState(false);
+
+  //States
+  const [payee, setPayee] = useState('');
+  const [categoryTitle, setCategoryTitle] = useState('');
+  const [budgetItem, setbudgetItem] = useState('');
+  const [income, setIncome] = useState('');
+  const [outcome, setOutcome] = useState('');
+  const [date, setDate] = useState(new Date());
+
+  const onCategoryOpen = useCallback(() => {
+    setOpenItem(false);
+  }, []);
+
+  const onItemOpen = useCallback(() => {
+    setOpenCategory(false);
+  }, []);
 
   const handleCreate = () => {
     const newTransaction = {
-      ...state,
-      income: +state.income,
-      outcome: +state.outcome,
+      payee,
+      date,
+      categoryTitle,
+      income,
+      outcome,
       budgetId: defaultBudget?._id,
+      categoryId: '?',
+      budgetItem,
     };
     console.log(newTransaction);
   };
 
-  //onst dropdownItems = getCategoryDropdownValues(budgetState.categories);
-  //console.log(dropdownItems);
   return (
     <View style={{ width: '95%' }}>
       <InputSecondary
         editable
         placeholder="Payee..."
-        changeHandler={(text) =>
-          dispatch({ type: TXN_FORM_ACTION_TYPES.CHANGE_PAYEE, payload: text })
-        }
-        value={state.payee}
+        changeHandler={setPayee}
+        value={payee}
       />
+
       <DropDownPicker
         open={openCategory}
-        value={state.categoryTitle}
+        value={categoryTitle}
         items={budgetState.categories.map((c) => ({
           label: c.title,
           value: c.title,
         }))}
+        zIndex={3000}
+        zIndexInverse={1000}
+        onOpen={onCategoryOpen}
         setOpen={setOpenCategory}
-        setValue={(value) =>
-          dispatch({
-            type: TXN_FORM_ACTION_TYPES.CHANGE_CATEGORY,
-            payload: value,
-          })
-        }
+        setValue={setCategoryTitle}
+        style={styles.pickerStyle}
+        placeholderStyle={styles.placeholderStyle}
+        dropDownContainerStyle={styles.dropDownContainerStyle}
         placeholder="Select a budget category"
       />
       <DropDownPicker
         open={openItem}
-        value={state.categoryTitle}
+        value={budgetItem}
         items={budgetState.categories.map((c) => ({
           label: c.title,
           value: c.title,
         }))}
+        zIndex={2000}
+        zIndexInverse={2000}
+        onOpen={onItemOpen}
         setOpen={setOpenItem}
-        setValue={(value) =>
-          dispatch({
-            type: TXN_FORM_ACTION_TYPES.CHANGE_CATEGORY,
-            payload: value,
-          })
-        }
+        setValue={setbudgetItem}
+        style={styles.pickerStyle}
+        placeholderStyle={styles.placeholderStyle}
+        dropDownContainerStyle={styles.dropDownContainerStyle}
+        disabled={!categoryTitle}
+        disabledItemContainerStyle={{
+          opacity: 0.5,
+        }}
         placeholder="Select a budget item"
       />
-      {/* <InputSecondary
-        editable
-        placeholder="Category..."
-        changeHandler={(text) =>
-          dispatch({
-            type: TXN_FORM_ACTION_TYPES.CHANGE_CATEGORY,
-            payload: text,
-          })
-        }
-        value={state.categoryTitle}
-      /> */}
+
       <View
         style={{
           flexDirection: 'row',
@@ -90,15 +100,10 @@ const AddTransaction = () => {
         <View style={{ flex: 1, marginRight: 2.5 }}>
           <InputSecondary
             placeholder="Income"
-            changeHandler={(text) =>
-              dispatch({
-                type: TXN_FORM_ACTION_TYPES.CHANGE_INCOME,
-                payload: text,
-              })
-            }
+            changeHandler={setIncome}
             keyboardType="numeric"
-            editable={state.outcome === '0'}
-            value={state.income}
+            editable={!outcome}
+            value={income}
           />
         </View>
         <View style={{ flex: 1, marginLeft: 2.5 }}>
@@ -106,47 +111,32 @@ const AddTransaction = () => {
             placeholder="Outcome"
             styles={{ flex: 1 }}
             keyboardType="numeric"
-            editable={state.income === '0'}
-            changeHandler={(text) =>
-              dispatch({
-                type: TXN_FORM_ACTION_TYPES.CHANGE_OUTCOME,
-                payload: text,
-              })
-            }
-            value={state.outcome}
+            editable={!income}
+            changeHandler={setOutcome}
+            value={outcome}
           />
         </View>
       </View>
       <View style={{ marginVertical: 5 }}>
         <Button
-          label={state.date.substring(0, 10)}
+          label={date.toISOString().substring(0, 10)}
           slim
           pressHandler={() => setOpenDatePicker(true)}
           width="100%"
         />
       </View>
       <DatePicker
-        date={new Date(state.date)}
+        date={date}
         mode="date"
         modal
         open={openDatePicker}
         onConfirm={(date) => {
           setOpenDatePicker(false);
           setDate(date);
-          dispatch({
-            type: TXN_FORM_ACTION_TYPES.CHANGE_DATE,
-            payload: date.toISOString(),
-          });
         }}
         onCancel={() => {
           setOpenDatePicker(false);
         }}
-        onDateChange={() =>
-          dispatch({
-            type: TXN_FORM_ACTION_TYPES.CHANGE_DATE,
-            payload: date.toISOString(),
-          })
-        }
         androidVariant="nativeAndroid"
         textColor="#1D3777"
       />
@@ -159,5 +149,21 @@ const AddTransaction = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  pickerStyle: {
+    borderColor: '#06B3C4',
+    borderWidth: 1,
+    borderRadius: 15,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    marginVertical: 5,
+  },
+  dropDownContainerStyle: {
+    backgroundColor: 'white',
+    borderColor: '#06B3C4',
+  },
+  placeholderStyle: { color: 'grey' },
+});
 
 export default AddTransaction;
