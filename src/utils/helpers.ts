@@ -45,20 +45,3 @@ export const filterCurrentBudgets = (ownedBudgets: budgetType[]) =>
   currencyCodes.filter((cc) =>
     ownedBudgets.some((b: budgetType) => b.currency === cc.currencyCode),
   ).length;
-
-export const getCategoryDropdownValues = (categories: categoryType[]) => {
-  const res = categories.flatMap((c) => {
-    const parent = { label: c.title, value: c.title, disabled: true };
-
-    const child = c.budgetItems?.flatMap((b) => ({
-      label: b.title,
-      value: b.title,
-      parent: c.title,
-    }));
-
-    //console.log('res', [parent, ...(child || [])]);
-    return [parent, ...(child || [])];
-  });
-  //console.log('finalRes', res);
-  return res;
-};

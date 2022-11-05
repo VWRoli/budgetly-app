@@ -8,12 +8,11 @@ import { TXN_FORM_ACTION_TYPES } from '../types/actions/txnFormActionType';
 //Components
 import Button from './common/Button';
 import InputSecondary from './common/InputSecondary';
-import { getCategoryDropdownValues } from '../utils/helpers';
 
 const AddTransaction = () => {
   const { defaultBudget, state: budgetState } = useBudgetsContext();
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [openCategory, setOpenCategory] = useState(false);
+  const [openItem, setOpenItem] = useState(false);
   const [date, setDate] = useState(new Date());
   const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
   const [openDatePicker, setOpenDatePicker] = useState(false);
@@ -28,8 +27,8 @@ const AddTransaction = () => {
     console.log(newTransaction);
   };
 
-  const dropdownItems = getCategoryDropdownValues(budgetState.categories);
-  console.log(dropdownItems);
+  //onst dropdownItems = getCategoryDropdownValues(budgetState.categories);
+  //console.log(dropdownItems);
   return (
     <View style={{ width: '95%' }}>
       <InputSecondary
@@ -41,11 +40,36 @@ const AddTransaction = () => {
         value={state.payee}
       />
       <DropDownPicker
-        open={open}
-        value={value}
-        items={dropdownItems || []}
-        setOpen={setOpen}
-        setValue={setValue}
+        open={openCategory}
+        value={state.categoryTitle}
+        items={budgetState.categories.map((c) => ({
+          label: c.title,
+          value: c.title,
+        }))}
+        setOpen={setOpenCategory}
+        setValue={(value) =>
+          dispatch({
+            type: TXN_FORM_ACTION_TYPES.CHANGE_CATEGORY,
+            payload: value,
+          })
+        }
+        placeholder="Select a budget category"
+      />
+      <DropDownPicker
+        open={openItem}
+        value={state.categoryTitle}
+        items={budgetState.categories.map((c) => ({
+          label: c.title,
+          value: c.title,
+        }))}
+        setOpen={setOpenItem}
+        setValue={(value) =>
+          dispatch({
+            type: TXN_FORM_ACTION_TYPES.CHANGE_CATEGORY,
+            payload: value,
+          })
+        }
+        placeholder="Select a budget item"
       />
       {/* <InputSecondary
         editable
@@ -73,7 +97,7 @@ const AddTransaction = () => {
               })
             }
             keyboardType="numeric"
-            editable={!state.outcome}
+            editable={state.outcome === '0'}
             value={state.income}
           />
         </View>
@@ -82,7 +106,7 @@ const AddTransaction = () => {
             placeholder="Outcome"
             styles={{ flex: 1 }}
             keyboardType="numeric"
-            editable={!state.income}
+            editable={state.income === '0'}
             changeHandler={(text) =>
               dispatch({
                 type: TXN_FORM_ACTION_TYPES.CHANGE_OUTCOME,
