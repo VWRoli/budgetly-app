@@ -38,11 +38,15 @@ const AddTransaction = () => {
       income,
       outcome,
       budgetId: defaultBudget?._id,
-      categoryId: '?',
+      categoryId: budgetState.categories.filter(
+        (c) => c.title === categoryTitle,
+      )[0]?._id,
       budgetItem,
     };
+
     console.log(newTransaction);
   };
+  //console.log(JSON.stringify(budgetState.categories, undefined, 2));
 
   return (
     <View style={{ width: '95%' }}>
@@ -70,27 +74,35 @@ const AddTransaction = () => {
         dropDownContainerStyle={styles.dropDownContainerStyle}
         placeholder="Select a budget category"
       />
-      <DropDownPicker
-        open={openItem}
-        value={budgetItem}
-        items={budgetState.categories.map((c) => ({
-          label: c.title,
-          value: c.title,
-        }))}
-        zIndex={2000}
-        zIndexInverse={2000}
-        onOpen={onItemOpen}
-        setOpen={setOpenItem}
-        setValue={setbudgetItem}
-        style={styles.pickerStyle}
-        placeholderStyle={styles.placeholderStyle}
-        dropDownContainerStyle={styles.dropDownContainerStyle}
-        disabled={!categoryTitle}
-        disabledItemContainerStyle={{
-          opacity: 0.5,
-        }}
-        placeholder="Select a budget item"
-      />
+      <View style={{ opacity: !categoryTitle ? 0.5 : 1 }}>
+        <DropDownPicker
+          open={openItem}
+          value={budgetItem}
+          items={
+            categoryTitle
+              ? budgetState.categories
+                  .filter((c) => c.title === categoryTitle)[0]
+                  .budgetItems?.map((c) => ({
+                    label: c.title,
+                    value: c.title,
+                  })) || []
+              : []
+          }
+          zIndex={3000}
+          zIndexInverse={1000}
+          onOpen={onItemOpen}
+          setOpen={setOpenItem}
+          setValue={setbudgetItem}
+          style={styles.pickerStyle}
+          placeholderStyle={styles.placeholderStyle}
+          dropDownContainerStyle={styles.dropDownContainerStyle}
+          disabled={!categoryTitle}
+          disabledItemContainerStyle={{
+            opacity: 0.5,
+          }}
+          placeholder="Select a budget item"
+        />
+      </View>
 
       <View
         style={{
