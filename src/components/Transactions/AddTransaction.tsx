@@ -62,7 +62,7 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
   return (
     <View style={{ width: '95%' }}>
       <InputSecondary
-        editable
+        editable={!state.loading}
         placeholder="Payee..."
         changeHandler={setPayee}
         value={payee}
@@ -80,7 +80,11 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
         onOpen={onCategoryOpen}
         setOpen={setOpenCategory}
         setValue={setCategoryTitle}
-        style={styles.pickerStyle}
+        style={{
+          ...styles.pickerStyle,
+          opacity: state.loading ? 0.5 : 1,
+        }}
+        disabled={state.loading}
         placeholderStyle={styles.placeholderStyle}
         dropDownContainerStyle={styles.dropDownContainerStyle}
         placeholder="Select a budget category"
@@ -104,10 +108,13 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
         onOpen={onItemOpen}
         setOpen={setOpenItem}
         setValue={setBudgetItemTitle}
-        style={{ ...styles.pickerStyle, opacity: !categoryTitle ? 0.5 : 1 }}
+        style={{
+          ...styles.pickerStyle,
+          opacity: !categoryTitle && state.loading ? 0.5 : 1,
+        }}
         placeholderStyle={styles.placeholderStyle}
         dropDownContainerStyle={styles.dropDownContainerStyle}
-        disabled={!categoryTitle}
+        disabled={!categoryTitle && state.loading}
         disabledItemContainerStyle={{
           opacity: 0.5,
         }}
@@ -124,7 +131,7 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
             placeholder="inflow"
             changeHandler={setInflow}
             keyboardType="numeric"
-            editable={!outflow}
+            editable={!outflow && !state.loading}
             value={inflow}
           />
         </View>
@@ -133,7 +140,7 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
             placeholder="Outflow"
             styles={{ flex: 1 }}
             keyboardType="numeric"
-            editable={!inflow}
+            editable={!inflow && !state.loading}
             changeHandler={setOutflow}
             value={outflow}
           />
@@ -145,6 +152,7 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
           slim
           pressHandler={() => setOpenDatePicker(true)}
           width="100%"
+          disabled={state.loading}
         />
       </View>
       <DatePicker
@@ -167,6 +175,7 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
         slim
         pressHandler={handleCreate}
         width="100%"
+        disabled={state.loading}
       />
     </View>
   );
