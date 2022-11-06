@@ -65,9 +65,11 @@ export const createBudgetItem = async (
   dispatch: React.Dispatch<actionType>,
   newBudgetItem: budgetItemType,
 ) => {
+  console.log({ newBudgetItem });
   try {
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
     const { data } = await api.createBudgetItem(newBudgetItem);
+    console.log({ data });
     dispatch({ type: BUDGET_ACTION_TYPES.CREATE_ITEM_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });

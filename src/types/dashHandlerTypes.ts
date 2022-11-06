@@ -1,7 +1,7 @@
 import { categoryType } from './categoryType';
 
 export interface HandlerTypes {
-  handleAddPress(isBudget?: string): void;
+  handleAddPress(categoryId?: string): void;
   handleEditPress(category: categoryType): void;
   handleDeletePress(category: categoryType): void;
 }
