@@ -42,7 +42,7 @@ export const localStorageUtils = {
 
 export const filterCurrentBudgets = (ownedBudgets: budgetType[]) =>
   currencyCodes.filter((cc) =>
-    ownedBudgets.some((b: budgetType) => b.currency === cc.currencyCode),
+    ownedBudgets?.some((b: budgetType) => b.currency === cc.currencyCode),
   ).length;
 
 //isostring to date

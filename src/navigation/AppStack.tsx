@@ -30,7 +30,7 @@ const AppStack: React.FC = (): JSX.Element => {
 
   return (
     <Stack.Navigator>
-      {!data.length ? (
+      {!data?.length ? (
         <>
           <Stack.Screen
             name="CreateBudget"

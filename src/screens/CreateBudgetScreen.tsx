@@ -44,11 +44,11 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   };
 
   const currentBudgets = currencyCodes.filter((cc) =>
-    ownedBudgets.some((b: budgetType) => b.currency === cc.currencyCode),
+    ownedBudgets?.some((b: budgetType) => b.currency === cc.currencyCode),
   ).length;
 
   const availableBudgets = currencyCodes.filter((cc) =>
-    ownedBudgets.every((b: budgetType) => b.currency !== cc.currencyCode),
+    ownedBudgets?.every((b: budgetType) => b.currency !== cc.currencyCode),
   );
 
   return (
@@ -87,7 +87,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
             )}
             {currencyCodes
               .filter((cc) =>
-                ownedBudgets.every(
+                ownedBudgets?.every(
                   (acc: any) => acc.currency !== cc.currencyCode,
                 ),
               )

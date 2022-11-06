@@ -27,7 +27,7 @@ const AccountTab = () => {
             flagCode={
               currencyCodes.filter(
                 (cc) => cc.currencyCode === defaultBudget?.currency,
-              )[0].flagCode
+              )[0]?.flagCode
             }
             currencyCode={defaultBudget?.currency || ''}
           />

@@ -22,7 +22,7 @@ const OwnedBudgets = (props: { disabled?: boolean; onClose?: () => void }) => {
     <View>
       {currencyCodes
         .filter((cc) =>
-          ownedBudgets.some((b: budgetType) => b.currency === cc.currencyCode),
+          ownedBudgets?.some((b: budgetType) => b.currency === cc.currencyCode),
         )
         .map((cc) => (
           <CurrencyItem

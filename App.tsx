@@ -3,11 +3,11 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { LogBox } from 'react-native';
 import { AuthContext } from './src/context/AuthContext';
+import { localStorageUtils } from './src/utils/helpers';
+import { BudgetsProvider } from './src/context/BudgetsContext';
 //Navigation
 import AppStack from './src/navigation/AppStack';
 import AuthStack from './src/navigation/AuthStack';
-import { localStorageUtils } from './src/utils/helpers';
-import { BudgetsProvider } from './src/context/BudgetsContext';
 
 //To ignore warning
 LogBox.ignoreLogs([

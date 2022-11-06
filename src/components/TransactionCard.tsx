@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import { transactionType } from '../types/transactionType';
 import { formatter } from '../utils/helpers';
@@ -10,13 +10,18 @@ import HeaderText from './common/HeaderText';
 
 interface Props {
   txn: transactionType;
+  onOpen: () => void;
 }
 
-const TransactionCard: React.FC<Props> = ({ txn }): JSX.Element => {
+const TransactionCard: React.FC<Props> = ({ txn, onOpen }): JSX.Element => {
   const { defaultBudget } = useBudgetsContext();
-  console.log(txn.inflow);
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onOpen}
+      activeOpacity={0.8}
+    >
       <View style={styles.iconWrapper}>
         <Text style={styles.iconText}>{txn.payee.charAt(0)}</Text>
       </View>
@@ -38,7 +43,7 @@ const TransactionCard: React.FC<Props> = ({ txn }): JSX.Element => {
           />
         )}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -20,7 +20,6 @@ import { convertISODateToLocalDate } from '../utils/helpers';
 
 const TransactionsScreen = () => {
   const [state, dispatch] = useReducer(transactionsReducer, TRX_INIT_STATE);
-  const [isOpen, setIsOpen] = useState(false);
   const { defaultBudget } = useBudgetsContext();
   const refRBSheet = React.createRef<RBSheet>();
 
@@ -52,11 +51,16 @@ const TransactionsScreen = () => {
           backgroundColor: '#fff',
         }}
       >
-        <View style={{ width: '85%' }}>
-          {state.transactions.map((txn: transactionType) => (
+        <View style={{ width: '95%' }}>
+          {state.transactions.map((txn: transactionType, i: number) => (
             <React.Fragment key={txn._id}>
-              <CustomText text={convertISODateToLocalDate(txn.date)} />
-              <TransactionCard txn={txn} />
+              {state.transactions[i].date !== state.transactions[i + 1] && (
+                <CustomText text={convertISODateToLocalDate(txn.date)} />
+              )}
+              <TransactionCard
+                txn={txn}
+                onOpen={() => refRBSheet.current!.open()}
+              />
             </React.Fragment>
           ))}
         </View>
