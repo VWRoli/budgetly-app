@@ -14,7 +14,7 @@ interface Props {
 
 const TransactionCard: React.FC<Props> = ({ txn }): JSX.Element => {
   const { defaultBudget } = useBudgetsContext();
-
+  console.log(txn.inflow);
   return (
     <View style={styles.container}>
       <View style={styles.iconWrapper}>
@@ -25,15 +25,26 @@ const TransactionCard: React.FC<Props> = ({ txn }): JSX.Element => {
           <HeaderText text={txn.payee} size={18} />
           <CustomText text={txn.categoryTitle} bold size={14} />
         </View>
-
-        <Chip
+        {txn.inflow && (
+          <Chip
+            value={formatter(+txn.inflow, defaultBudget?.currency)}
+            textColor="#1D3777"
+          />
+        )}
+        {txn.outflow && (
+          <Chip
+            value={formatter(+txn.outflow, defaultBudget?.currency)}
+            textColor="red"
+          />
+        )}
+        {/* <Chip
           value={formatter(
             +txn.outflow || +txn.inflow,
             defaultBudget?.currency,
           )}
           textColor={`${txn.inflow ? '#1eff05' : 'red'}`}
           outline={txn.inflow ? false : true}
-        />
+        /> */}
       </View>
     </View>
   );

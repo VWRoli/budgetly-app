@@ -38,7 +38,7 @@ const TransactionsScreen = () => {
         <EmptyScreen
           text="You don't have any transactions yet."
           btnLabel="Add your first transaction"
-          pressHandler={() => {}}
+          pressHandler={() => refRBSheet.current!.open()}
         />
       )}
       <ScrollView

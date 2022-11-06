@@ -1,7 +1,6 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { currencyCodes } from '../constants/currencyList';
 import { budgetType } from '../types/budgetType';
-import { categoryType } from '../types/categoryType';
 
 //todo locale: string, currency: string,
 export const formatter = (amount: number, currency?: string) =>
