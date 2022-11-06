@@ -15,6 +15,8 @@ import { useBudgetsContext } from '../context/BudgetsContext';
 import FAB from '../components/common/FAB';
 import EmptyScreen from '../components/common/EmptyScreen';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import CustomText from '../components/common/CustomText';
+import { convertISODateToLocalDate } from '../utils/helpers';
 
 const TransactionsScreen = () => {
   const [state, dispatch] = useReducer(transactionsReducer, TRX_INIT_STATE);
@@ -52,7 +54,10 @@ const TransactionsScreen = () => {
       >
         <View style={{ width: '85%' }}>
           {state.transactions.map((txn: transactionType) => (
-            <TransactionCard key={txn._id} txn={txn} />
+            <React.Fragment key={txn._id}>
+              <CustomText text={convertISODateToLocalDate(txn.date)} />
+              <TransactionCard txn={txn} />
+            </React.Fragment>
           ))}
         </View>
       </ScrollView>

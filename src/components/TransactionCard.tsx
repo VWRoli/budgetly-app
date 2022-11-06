@@ -37,14 +37,6 @@ const TransactionCard: React.FC<Props> = ({ txn }): JSX.Element => {
             textColor="red"
           />
         )}
-        {/* <Chip
-          value={formatter(
-            +txn.outflow || +txn.inflow,
-            defaultBudget?.currency,
-          )}
-          textColor={`${txn.inflow ? '#1eff05' : 'red'}`}
-          outline={txn.inflow ? false : true}
-        /> */}
       </View>
     </View>
   );
