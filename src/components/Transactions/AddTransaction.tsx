@@ -2,15 +2,15 @@ import React, { useCallback, useReducer, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { StyleSheet, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { useBudgetsContext } from '../context/BudgetsContext';
+import { useBudgetsContext } from '../../context/BudgetsContext';
 //Components
-import Button from './common/Button';
-import InputSecondary from './common/InputSecondary';
+import Button from '../common/Button';
+import InputSecondary from '../common/InputSecondary';
 import {
   actionType,
   transactionsStateType,
-} from '../reducers/transactionsReducer';
-import { createTransaction } from '../actions/transactions';
+} from '../../reducers/transactionsReducer';
+import { createTransaction } from '../../actions/transactions';
 
 interface Props {
   state: transactionsStateType;

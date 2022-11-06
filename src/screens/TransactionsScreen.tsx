@@ -7,9 +7,9 @@ import {
   transactionsReducer,
 } from '../reducers/transactionsReducer';
 //Components
-import TransactionCard from '../components/TransactionCard';
+import TransactionCard from '../components/Transactions/TransactionCard';
 import SkeletonTransaction from '../components/Skeletons/SkeletonTransaction';
-import AddTransaction from '../components/AddTransaction';
+import AddTransaction from '../components/Transactions/AddTransaction';
 import { getTransactions } from '../actions/transactions';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import FAB from '../components/common/FAB';

@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useBudgetsContext } from '../context/BudgetsContext';
-import { transactionType } from '../types/transactionType';
-import { formatter } from '../utils/helpers';
+import { useBudgetsContext } from '../../context/BudgetsContext';
+import { transactionType } from '../../types/transactionType';
+import { formatter } from '../../utils/helpers';
 //Components
-import Chip from './common/Chip';
-import CustomText from './common/CustomText';
-import HeaderText from './common/HeaderText';
+import Chip from '../common/Chip';
+import CustomText from '../common/CustomText';
+import HeaderText from '../common/HeaderText';
 
 interface Props {
   txn: transactionType;
