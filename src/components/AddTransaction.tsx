@@ -29,8 +29,8 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
   const [payee, setPayee] = useState('');
   const [categoryTitle, setCategoryTitle] = useState('');
   const [budgetItemTitle, setBudgetItemTitle] = useState('');
-  const [income, setIncome] = useState('');
-  const [outcome, setOutcome] = useState('');
+  const [inflow, setInflow] = useState('');
+  const [outflow, setOutflow] = useState('');
   const [date, setDate] = useState(new Date());
 
   const onCategoryOpen = useCallback(() => {
@@ -46,8 +46,8 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
       payee,
       date: date.toISOString(),
       categoryTitle,
-      income,
-      outcome,
+      inflow,
+      outflow,
       budgetId: defaultBudget?._id || '',
       categoryId:
         budgetState.categories.filter((c) => c.title === categoryTitle)[0]
@@ -121,21 +121,21 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
       >
         <View style={{ flex: 1, marginRight: 2.5 }}>
           <InputSecondary
-            placeholder="Income"
-            changeHandler={setIncome}
+            placeholder="inflow"
+            changeHandler={setInflow}
             keyboardType="numeric"
-            editable={!outcome}
-            value={income}
+            editable={!outflow}
+            value={inflow}
           />
         </View>
         <View style={{ flex: 1, marginLeft: 2.5 }}>
           <InputSecondary
-            placeholder="Outcome"
+            placeholder="Outflow"
             styles={{ flex: 1 }}
             keyboardType="numeric"
-            editable={!income}
-            changeHandler={setOutcome}
-            value={outcome}
+            editable={!inflow}
+            changeHandler={setOutflow}
+            value={outflow}
           />
         </View>
       </View>

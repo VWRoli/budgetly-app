@@ -24,6 +24,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
 
         categoryId: props.categoryId,
       };
+      console.log({ newBudgetItem });
       createBudgetItem(dispatch, newBudgetItem);
     } else {
       const newCategory = {
@@ -35,6 +36,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
         createdAt: '',
         updatedAt: '',
       };
+      console.log({ newCategory });
       createCategory(dispatch, newCategory);
     }
   };
