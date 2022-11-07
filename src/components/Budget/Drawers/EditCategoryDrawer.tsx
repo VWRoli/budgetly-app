@@ -19,6 +19,7 @@ const EditCategoryDrawer: React.FC<Props> = (props) => {
   const handleEdit = async (title: string) => {
     const newCategory = {
       title,
+      createdAt: props.category.createdAt,
     };
     editCategory(dispatch, newCategory, props.category._id);
   };

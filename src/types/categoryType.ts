@@ -7,6 +7,6 @@ export interface categoryType {
   budgetItems?: budgetItemType[];
   budgeted?: number;
   available?: number;
-  createdAt?: string;
+  createdAt: string;
   updatedAt?: string;
 }
