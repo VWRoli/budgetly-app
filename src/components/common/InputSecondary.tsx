@@ -9,6 +9,7 @@ interface Props {
   changeHandler: (text: any) => void;
   keyboardType?: KeyboardTypeOptions;
   editable: boolean;
+  onBlur?: () => void;
 }
 
 const InputSecondary: React.FC<Props> = (props): JSX.Element => {
@@ -19,6 +20,7 @@ const InputSecondary: React.FC<Props> = (props): JSX.Element => {
       placeholder={props.placeholder}
       value={props.value + ''} //to accept numbers too
       onChangeText={(text) => props.changeHandler(text)}
+      onBlur={props.onBlur}
       keyboardType={props.keyboardType}
       style={{
         borderColor: '#06B3C4',
