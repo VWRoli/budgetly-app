@@ -21,6 +21,7 @@ import { convertISODateToLocalDate } from '../utils/helpers';
 const TransactionsScreen = () => {
   const [state, dispatch] = useReducer(transactionsReducer, TRX_INIT_STATE);
   const { defaultBudget } = useBudgetsContext();
+  const [transaction, setTransaction] = useState<transactionType | null>(null);
   const refRBSheet = React.createRef<RBSheet>();
 
   useEffect(() => {
@@ -59,7 +60,10 @@ const TransactionsScreen = () => {
               )}
               <TransactionCard
                 txn={txn}
-                onOpen={() => refRBSheet.current!.open()}
+                onOpen={() => {
+                  setTransaction(txn);
+                  refRBSheet.current!.open();
+                }}
               />
             </React.Fragment>
           ))}
@@ -75,7 +79,7 @@ const TransactionsScreen = () => {
       <RBSheet
         ref={refRBSheet}
         height={400}
-        // onClose={() => refRBSheet.current!.close()}
+        onClose={() => setTransaction(null)}
         openDuration={250}
         customStyles={{
           container: {
@@ -87,7 +91,11 @@ const TransactionsScreen = () => {
         <AddTransaction
           state={state}
           dispatch={dispatch}
-          onClose={() => refRBSheet.current!.close()}
+          transaction={transaction}
+          onClose={() => {
+            setTransaction(null);
+            refRBSheet.current!.close();
+          }}
         />
       </RBSheet>
     </View>

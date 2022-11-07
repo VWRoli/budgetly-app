@@ -6,7 +6,7 @@ interface Props {
   styles?: { [key: string]: string | number };
   fullWidth?: boolean;
   value: string | number;
-  changeHandler: React.Dispatch<React.SetStateAction<string>>;
+  changeHandler: (text: any) => void;
   keyboardType?: KeyboardTypeOptions;
   editable: boolean;
 }

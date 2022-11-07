@@ -15,6 +15,7 @@ import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer'
 import CustomModal from '../components/common/Modal';
 import ConfirmDeleteModal from '../components/Modals/ConfirmDeleteModal';
 import EmptyScreen from '../components/common/EmptyScreen';
+import { deleteCategory } from '../actions/budget';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isAdd, setIsAdd] = useState(true);
@@ -26,7 +27,7 @@ const DashScreen: React.FC = (): JSX.Element => {
     createdAt: '',
     updatedAt: '',
   });
-  const { state } = useBudgetsContext();
+  const { state, dispatch } = useBudgetsContext();
   const refRBSheet = React.createRef<RBSheet>();
 
   const sortedCategories = state.categories.sort((a, b) => {
@@ -111,6 +112,7 @@ const DashScreen: React.FC = (): JSX.Element => {
           <ConfirmDeleteModal
             category={editableCategory}
             setModalVisible={setModalVisible}
+            handleDelete={() => deleteCategory(dispatch, editableCategory._id)}
           />
         </CustomModal>
       )}

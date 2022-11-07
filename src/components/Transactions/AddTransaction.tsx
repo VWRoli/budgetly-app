@@ -10,15 +10,22 @@ import {
   actionType,
   transactionsStateType,
 } from '../../reducers/transactionsReducer';
-import { createTransaction } from '../../actions/transactions';
+import { createTransaction, editTransaction } from '../../actions/transactions';
+import { transactionType } from '../../types/transactionType';
 
 interface Props {
   state: transactionsStateType;
   dispatch: React.Dispatch<actionType>;
   onClose: () => void;
+  transaction: transactionType | null;
 }
 
-const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
+const AddTransaction: React.FC<Props> = ({
+  dispatch,
+  state,
+  onClose,
+  transaction,
+}) => {
   const { defaultBudget, state: budgetState } = useBudgetsContext();
   //Openers
   const [openCategory, setOpenCategory] = useState(false);
@@ -26,12 +33,16 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
   const [openDatePicker, setOpenDatePicker] = useState(false);
 
   //States
-  const [payee, setPayee] = useState('');
-  const [categoryTitle, setCategoryTitle] = useState('');
-  const [budgetItemTitle, setBudgetItemTitle] = useState('');
-  const [inflow, setInflow] = useState('');
-  const [outflow, setOutflow] = useState('');
-  const [date, setDate] = useState(new Date());
+  const [payee, setPayee] = useState(transaction?.payee || '');
+  const [categoryTitle, setCategoryTitle] = useState(
+    transaction?.categoryTitle || '',
+  );
+  const [budgetItemTitle, setBudgetItemTitle] = useState(
+    transaction?.budgetItemTitle || '',
+  );
+  const [inflow, setInflow] = useState(transaction?.inflow || '');
+  const [outflow, setOutflow] = useState(transaction?.outflow || '');
+  const [date, setDate] = useState(transaction?.date || new Date());
 
   const onCategoryOpen = useCallback(() => {
     setOpenItem(false);
@@ -44,7 +55,7 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
   const handleCreate = () => {
     const newTransaction = {
       payee,
-      date: date.toISOString(),
+      date: new Date(date).toISOString(),
       categoryTitle,
       inflow,
       outflow,
@@ -54,8 +65,12 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
           ._id || '',
       budgetItemTitle,
     };
-
-    createTransaction(dispatch, newTransaction);
+    if (transaction) {
+      editTransaction(dispatch, newTransaction, transaction._id);
+      //todo update locally and then delete txn
+    } else {
+      createTransaction(dispatch, newTransaction);
+    }
     onClose();
   };
 
@@ -148,7 +163,7 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
       </View>
       <View style={{ marginVertical: 5 }}>
         <Button
-          label={date.toISOString().substring(0, 10)}
+          label={new Date(date).toISOString().substring(0, 10)}
           slim
           pressHandler={() => setOpenDatePicker(true)}
           width="100%"
@@ -156,7 +171,7 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
         />
       </View>
       <DatePicker
-        date={date}
+        date={new Date(date)}
         mode="date"
         modal
         open={openDatePicker}
@@ -171,12 +186,27 @@ const AddTransaction: React.FC<Props> = ({ dispatch, state, onClose }) => {
         textColor="#1D3777"
       />
       <Button
-        label="Add transaction"
+        label={`${transaction ? 'Edit' : 'Add'} transaction`}
         slim
         pressHandler={handleCreate}
         width="100%"
         disabled={state.loading}
       />
+      {transaction && (
+        <View style={{ alignItems: 'center', marginVertical: 15 }}>
+          <Button
+            label="Delete transaction"
+            type="error"
+            pressHandler={() => {
+              // handleEdit(title);
+              onClose();
+            }}
+            width="100%"
+            slim
+            disabled={state.loading}
+          />
+        </View>
+      )}
     </View>
   );
 };

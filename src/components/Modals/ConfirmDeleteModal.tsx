@@ -1,23 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
-import { deleteCategory } from '../../actions/budget';
-import { useBudgetsContext } from '../../context/BudgetsContext';
-import { categoryType } from '../../types/categoryType';
 //Components
 import Button from '../common/Button';
 import CustomText from '../common/CustomText';
 
 interface Props {
-  category: categoryType;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDelete: () => Promise<void>;
 }
 const ConfirmDeleteModal: React.FC<Props> = (props) => {
-  const { dispatch } = useBudgetsContext();
-
-  const handleDelete = async (id?: string) => {
-    deleteCategory(dispatch, id);
-  };
-
   return (
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       <CustomText
@@ -37,7 +28,7 @@ const ConfirmDeleteModal: React.FC<Props> = (props) => {
           label="Delete"
           pressHandler={() => {
             props.setModalVisible(false);
-            handleDelete(props.category._id);
+            props.handleDelete();
           }}
           slim
           type="error"
