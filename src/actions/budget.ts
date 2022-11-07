@@ -1,4 +1,4 @@
-import { BUDGET_ACTION_TYPES } from '../types/actions/budgetActionTypes';
+import { ACTION_TYPES } from '../types/actionTypes';
 import * as api from '../api';
 import { actionType } from '../reducers/budgetReducer';
 import { categoryType } from '../types/categoryType';
@@ -9,11 +9,11 @@ export const getCategories = async (
   id?: string,
 ) => {
   try {
-    dispatch({ type: BUDGET_ACTION_TYPES.FETCH_START });
+    dispatch({ type: ACTION_TYPES.FETCH_START });
     const { data } = await api.getCategories(id);
-    dispatch({ type: BUDGET_ACTION_TYPES.FETCH_SUCCESS, payload: data });
+    dispatch({ type: ACTION_TYPES.FETCH_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: BUDGET_ACTION_TYPES.FETCH_ERROR });
+    dispatch({ type: ACTION_TYPES.FETCH_ERROR });
   }
 };
 
@@ -22,15 +22,15 @@ export const createCategory = async (
   newCategory: categoryType,
 ) => {
   try {
-    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
+    dispatch({ type: ACTION_TYPES.EDIT_START });
 
     const { data } = await api.createCategory(newCategory);
     dispatch({
-      type: BUDGET_ACTION_TYPES.CREATE_SUCCESS,
+      type: ACTION_TYPES.CREATE_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
+    dispatch({ type: ACTION_TYPES.EDIT_ERROR });
   }
 };
 
@@ -39,11 +39,11 @@ export const deleteCategory = async (
   id?: string,
 ) => {
   try {
-    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
+    dispatch({ type: ACTION_TYPES.EDIT_START });
     await api.deleteCategory(id);
-    dispatch({ type: BUDGET_ACTION_TYPES.REMOVE_SUCCESS, payload: id });
+    dispatch({ type: ACTION_TYPES.REMOVE_SUCCESS, payload: id });
   } catch (error) {
-    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
+    dispatch({ type: ACTION_TYPES.EDIT_ERROR });
   }
 };
 export const editCategory = async (
@@ -52,12 +52,12 @@ export const editCategory = async (
   id?: string,
 ) => {
   try {
-    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
+    dispatch({ type: ACTION_TYPES.EDIT_START });
     const { data } = await api.editCategory(id, newCategory);
 
-    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_SUCCESS, payload: data });
+    dispatch({ type: ACTION_TYPES.EDIT_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
+    dispatch({ type: ACTION_TYPES.EDIT_ERROR });
   }
 };
 
@@ -67,11 +67,11 @@ export const createBudgetItem = async (
 ) => {
   console.log({ newBudgetItem });
   try {
-    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_START });
+    dispatch({ type: ACTION_TYPES.EDIT_START });
     const { data } = await api.createBudgetItem(newBudgetItem);
     console.log({ data });
-    dispatch({ type: BUDGET_ACTION_TYPES.CREATE_ITEM_SUCCESS, payload: data });
+    dispatch({ type: ACTION_TYPES.CREATE_ITEM_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ERROR });
+    dispatch({ type: ACTION_TYPES.EDIT_ERROR });
   }
 };

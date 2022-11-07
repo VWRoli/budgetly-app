@@ -1,25 +1,19 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { skeletonArray } from '../constants/constants';
-import { transactionType } from '../types/transactionType';
-import {
-  TRX_INIT_STATE,
-  transactionsReducer,
-} from '../reducers/transactionsReducer';
-//Components
-import TransactionCard from '../components/Transactions/TransactionCard';
-import SkeletonTransaction from '../components/Skeletons/SkeletonTransaction';
-import AddTransaction from '../components/Transactions/AddTransaction';
 import { getTransactions } from '../actions/transactions';
 import { useBudgetsContext } from '../context/BudgetsContext';
+import { transactionType } from '../types/transactionType';
+import { convertISODateToLocalDate } from '../utils/helpers';
+//Components
+import TransactionCard from '../components/Transactions/TransactionCard';
+import AddTransaction from '../components/Transactions/AddTransaction';
 import FAB from '../components/common/FAB';
 import EmptyScreen from '../components/common/EmptyScreen';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CustomText from '../components/common/CustomText';
-import { convertISODateToLocalDate } from '../utils/helpers';
 
 const TransactionsScreen = () => {
-  const [state, dispatch] = useReducer(transactionsReducer, TRX_INIT_STATE);
+  const { state, dispatch } = useBudgetsContext();
   const { defaultBudget } = useBudgetsContext();
   const [transaction, setTransaction] = useState<transactionType | null>(null);
   const refRBSheet = React.createRef<RBSheet>();
@@ -55,9 +49,8 @@ const TransactionsScreen = () => {
         <View style={{ width: '95%' }}>
           {state.transactions.map((txn: transactionType, i: number) => (
             <React.Fragment key={txn._id}>
-              {state.transactions[i].date !== state.transactions[i + 1] && (
-                <CustomText text={convertISODateToLocalDate(txn.date)} />
-              )}
+              <CustomText text={convertISODateToLocalDate(txn.date)} />
+
               <TransactionCard
                 txn={txn}
                 onOpen={() => {
@@ -89,8 +82,6 @@ const TransactionsScreen = () => {
         }}
       >
         <AddTransaction
-          state={state}
-          dispatch={dispatch}
           transaction={transaction}
           onClose={() => {
             setTransaction(null);

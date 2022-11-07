@@ -1,38 +1,28 @@
-import React, { useCallback, useReducer, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { StyleSheet, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import { useBudgetsContext } from '../../context/BudgetsContext';
-//Components
-import Button from '../common/Button';
-import InputSecondary from '../common/InputSecondary';
-import {
-  actionType,
-  transactionsStateType,
-} from '../../reducers/transactionsReducer';
+import { actionType, budgetStateType } from '../../reducers/budgetReducer';
 import {
   createTransaction,
   deleteTransaction,
   editTransaction,
 } from '../../actions/transactions';
 import { transactionType } from '../../types/transactionType';
+//Components
+import Button from '../common/Button';
+import InputSecondary from '../common/InputSecondary';
 import CustomModal from '../common/Modal';
 import ConfirmDeleteModal from '../Modals/ConfirmDeleteModal';
 
 interface Props {
-  state: transactionsStateType;
-  dispatch: React.Dispatch<actionType>;
   onClose: () => void;
   transaction: transactionType | null;
 }
 
-const AddTransaction: React.FC<Props> = ({
-  dispatch,
-  state,
-  onClose,
-  transaction,
-}) => {
-  const { defaultBudget, state: budgetState } = useBudgetsContext();
+const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
+  const { defaultBudget, state, dispatch } = useBudgetsContext();
   //Openers
   const [openCategory, setOpenCategory] = useState(false);
   const [openItem, setOpenItem] = useState(false);
@@ -68,8 +58,7 @@ const AddTransaction: React.FC<Props> = ({
       outflow,
       budgetId: defaultBudget?._id || '',
       categoryId:
-        budgetState.categories.filter((c) => c.title === categoryTitle)[0]
-          ._id || '',
+        state.categories.filter((c) => c.title === categoryTitle)[0]._id || '',
       budgetItemTitle,
     };
     if (transaction) {
@@ -93,7 +82,7 @@ const AddTransaction: React.FC<Props> = ({
       <DropDownPicker
         open={openCategory}
         value={categoryTitle}
-        items={budgetState.categories.map((c) => ({
+        items={state.categories.map((c) => ({
           label: c.title,
           value: c.title,
         }))}
@@ -117,7 +106,7 @@ const AddTransaction: React.FC<Props> = ({
         value={budgetItemTitle}
         items={
           categoryTitle
-            ? budgetState.categories
+            ? state.categories
                 .filter((c) => c.title === categoryTitle)[0]
                 .budgetItems?.map((c) => ({
                   label: c.title,

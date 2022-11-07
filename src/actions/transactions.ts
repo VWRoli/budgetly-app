@@ -1,6 +1,6 @@
 import * as api from '../api';
-import { actionType } from '../reducers/transactionsReducer';
-import { TRANSACTIONS_ACTION_TYPES } from '../types/actions/transactionActionTypes';
+import { actionType } from '../reducers/budgetReducer';
+import { ACTION_TYPES } from '../types/actionTypes';
 import { transactionType } from '../types/transactionType';
 
 export const getTransactions = async (
@@ -8,12 +8,12 @@ export const getTransactions = async (
   id?: string,
 ) => {
   try {
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.FETCH_START });
+    dispatch({ type: ACTION_TYPES.TXN_FETCH_START });
     const { data } = await api.getTransactions(id);
-    // console.log({ data });
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.FETCH_SUCCESS, payload: data });
+
+    dispatch({ type: ACTION_TYPES.TXN_FETCH_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.FETCH_ERROR });
+    dispatch({ type: ACTION_TYPES.TXN_FETCH_ERROR });
   }
 };
 
@@ -22,11 +22,11 @@ export const createTransaction = async (
   transaction: transactionType,
 ) => {
   try {
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_START });
+    dispatch({ type: ACTION_TYPES.TXN_EDIT_START });
     const { data } = await api.createTransaction(transaction);
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.CREATE_SUCCESS, payload: data });
+    dispatch({ type: ACTION_TYPES.TXN_CREATE_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_ERROR });
+    dispatch({ type: ACTION_TYPES.TXN_EDIT_ERROR });
   }
 };
 
@@ -35,11 +35,11 @@ export const deleteTransaction = async (
   id?: string,
 ) => {
   try {
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_START });
+    dispatch({ type: ACTION_TYPES.TXN_EDIT_START });
     await api.deleteTransaction(id);
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.REMOVE_SUCCESS, payload: id });
+    dispatch({ type: ACTION_TYPES.TXN_REMOVE_SUCCESS, payload: id });
   } catch (error) {
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_ERROR });
+    dispatch({ type: ACTION_TYPES.TXN_EDIT_ERROR });
   }
 };
 
@@ -49,11 +49,11 @@ export const editTransaction = async (
   id?: string,
 ) => {
   try {
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_START });
+    dispatch({ type: ACTION_TYPES.TXN_EDIT_START });
     const { data } = await api.editTransaction(id, newTransaction);
 
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_SUCCESS, payload: data });
+    dispatch({ type: ACTION_TYPES.TXN_EDIT_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.EDIT_ERROR });
+    dispatch({ type: ACTION_TYPES.TXN_EDIT_ERROR });
   }
 };

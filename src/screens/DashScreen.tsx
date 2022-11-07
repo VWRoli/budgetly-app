@@ -50,7 +50,7 @@ const DashScreen: React.FC = (): JSX.Element => {
       setEditableCategory(category);
     },
   };
-
+  console.log(JSON.stringify(state.categories, undefined, 2));
   return (
     <View style={styles.container}>
       <MonthHeader />
