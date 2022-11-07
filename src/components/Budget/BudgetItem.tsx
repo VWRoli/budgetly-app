@@ -1,30 +1,23 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { budgetItemType } from '../../types/budgetItemType';
-import { formatter } from '../../utils/helpers';
 import * as Progress from 'react-native-progress';
 //Components
-import CustomText from '../common/CustomText';
 import Chip from '../common/Chip';
 import CardWrapper from '../common/CardWrapper';
-import HeaderText from '../common/HeaderText';
 import InputSecondary from '../common/InputSecondary';
-import { useBudgetsContext } from '../../context/BudgetsContext';
 import IconButton from '../common/IconButton';
+import Balance from './Balance';
 
 interface Props {
   item: budgetItemType;
 }
 const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
-  const { defaultBudget } = useBudgetsContext();
-  const [isEditableTitle, setIsEditableTitle] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
+
   return (
     <CardWrapper>
-      <View
-        // onPress={() => setIsEditable(false)}
-        style={{ flex: 1 }}
-      >
+      <View style={{ flex: 1 }}>
         <View
           style={{
             flexDirection: 'row',
@@ -32,20 +25,20 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
             alignItems: 'center',
           }}
         >
-          <TouchableOpacity onPress={() => setIsEditableTitle(true)}>
-            {isEditableTitle ? (
+          <TouchableOpacity onPress={() => setIsEditable(true)}>
+            {isEditable ? (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <InputSecondary
                   editable
                   placeholder="Budget item title"
                   value={item.title}
                   changeHandler={() => {}}
-                  onBlur={() => setIsEditableTitle(false)}
+                  onBlur={() => setIsEditable(false)}
                 />
                 <View style={{ width: 5 }} />
                 <IconButton
                   icon="check"
-                  pressHandler={() => {}}
+                  pressHandler={() => setIsEditable(false)}
                   type="primary"
                 />
               </View>
@@ -53,38 +46,7 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
               <Chip icon="laptop" value={item.title} />
             )}
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{ flexDirection: 'row', alignItems: 'flex-end' }}
-          >
-            {isEditable ? (
-              <InputSecondary
-                editable
-                placeholder={formatter(item.balance, defaultBudget?.currency)}
-                value={'5'}
-                changeHandler={() => {}}
-              />
-            ) : (
-              <TouchableOpacity
-                onPress={() => setIsEditable(true)}
-                activeOpacity={0.7}
-              >
-                <CustomText
-                  text={formatter(item.balance, defaultBudget?.currency)}
-                  size={16}
-                  styles={{ marginRight: 5 }}
-                  primary
-                  bold
-                />
-              </TouchableOpacity>
-            )}
-
-            <HeaderText
-              text={`/${formatter(item.budgeted, defaultBudget?.currency)}`}
-              size={20}
-              styles={{ color: '#06B3C4' }}
-            />
-          </TouchableOpacity>
+          <Balance item={item} />
         </View>
         <View style={{ marginVertical: 7 }}>
           <Progress.Bar

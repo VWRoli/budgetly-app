@@ -41,7 +41,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = (props): JSX.Element => {
           type="primary"
         />
       </View>
-      <CustomText text="Available" size={12} />
+
       <Icon
         name="dots-vertical"
         color="#8B8C9E"
