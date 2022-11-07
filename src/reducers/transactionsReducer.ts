@@ -55,14 +55,16 @@ export const transactionsReducer = (
       return {
         ...state,
         loading: false,
-        categories: state.transactions.filter((c) => c._id !== action.payload),
+        transactions: state.transactions.filter(
+          (c) => c._id !== action.payload,
+        ),
       };
     case TRANSACTIONS_ACTION_TYPES.EDIT_SUCCESS:
       //console.log(action.payload);
       return {
         ...state,
         loading: false,
-        categories: state.transactions.map((t) =>
+        transactions: state.transactions.map((t) =>
           t._id === action.payload._id ? action.payload : t,
         ),
       };

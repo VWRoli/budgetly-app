@@ -6,7 +6,7 @@ import CustomText from '../common/CustomText';
 
 interface Props {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  handleDelete: () => Promise<void>;
+  handleDelete: () => Promise<void> | void;
 }
 const ConfirmDeleteModal: React.FC<Props> = (props) => {
   return (

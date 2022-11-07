@@ -10,8 +10,14 @@ import {
   actionType,
   transactionsStateType,
 } from '../../reducers/transactionsReducer';
-import { createTransaction, editTransaction } from '../../actions/transactions';
+import {
+  createTransaction,
+  deleteTransaction,
+  editTransaction,
+} from '../../actions/transactions';
 import { transactionType } from '../../types/transactionType';
+import CustomModal from '../common/Modal';
+import ConfirmDeleteModal from '../Modals/ConfirmDeleteModal';
 
 interface Props {
   state: transactionsStateType;
@@ -31,6 +37,7 @@ const AddTransaction: React.FC<Props> = ({
   const [openCategory, setOpenCategory] = useState(false);
   const [openItem, setOpenItem] = useState(false);
   const [openDatePicker, setOpenDatePicker] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   //States
   const [payee, setPayee] = useState(transaction?.payee || '');
@@ -199,13 +206,28 @@ const AddTransaction: React.FC<Props> = ({
             type="error"
             pressHandler={() => {
               // handleEdit(title);
-              onClose();
+              setModalVisible(true);
+              // onClose();
             }}
             width="100%"
             slim
             disabled={state.loading}
           />
         </View>
+      )}
+      {modalVisible && (
+        <CustomModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        >
+          <ConfirmDeleteModal
+            setModalVisible={setModalVisible}
+            handleDelete={() => {
+              onClose();
+              deleteTransaction(dispatch, transaction?._id);
+            }}
+          />
+        </CustomModal>
       )}
     </View>
   );

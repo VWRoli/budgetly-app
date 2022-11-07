@@ -110,7 +110,6 @@ const DashScreen: React.FC = (): JSX.Element => {
           setModalVisible={setModalVisible}
         >
           <ConfirmDeleteModal
-            category={editableCategory}
             setModalVisible={setModalVisible}
             handleDelete={() => deleteCategory(dispatch, editableCategory._id)}
           />
