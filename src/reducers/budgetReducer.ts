@@ -6,7 +6,7 @@ export interface budgetStateType {
   loading: boolean;
   error: boolean;
   categories: categoryType[];
-  transactions: any[];
+  transactions: transactionType[];
 }
 export const INITIAL_STATE: budgetStateType = {
   loading: false,
@@ -71,6 +71,11 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         loading: false,
         categories: state.categories.map((c) =>
           c._id === action.payload._id ? action.payload : c,
+        ),
+        transactions: state.transactions.map((t) =>
+          t.categoryId === action.payload._id
+            ? { ...t, categoryTitle: action.payload.title }
+            : t,
         ),
       };
     case ACTION_TYPES.CREATE_ITEM_SUCCESS:
