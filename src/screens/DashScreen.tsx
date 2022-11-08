@@ -4,18 +4,17 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import { categoryType } from '../types/categoryType';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import { HandlerTypes } from '../types/dashHandlerTypes';
+import { deleteCategory } from '../actions/budget';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
 import AddDrawer from '../components/Budget/Drawers/AddDrawer';
 import Category from '../components/Budget/Category';
-import Button from '../components/common/Button';
 import CustomText from '../components/common/CustomText';
 import MonthHeader from '../components/common/MonthHeader';
 import EditCategoryDrawer from '../components/Budget/Drawers/EditCategoryDrawer';
 import CustomModal from '../components/common/Modal';
 import ConfirmDeleteModal from '../components/Modals/ConfirmDeleteModal';
 import EmptyScreen from '../components/common/EmptyScreen';
-import { deleteCategory } from '../actions/budget';
 
 const DashScreen: React.FC = (): JSX.Element => {
   const [isAdd, setIsAdd] = useState(true);
