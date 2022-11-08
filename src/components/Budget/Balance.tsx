@@ -14,6 +14,7 @@ interface Props {
 const Balance: React.FC<Props> = ({ item }) => {
   const { defaultBudget } = useBudgetsContext();
   const [isEditable, setIsEditable] = useState(false);
+  // const [available, setavailable] = useState(second);
 
   return (
     <TouchableOpacity
@@ -21,7 +22,7 @@ const Balance: React.FC<Props> = ({ item }) => {
       onPress={() => setIsEditable(true)}
     >
       <CustomText
-        text={formatter(item.balance, defaultBudget?.currency)}
+        text={formatter(item.spent, defaultBudget?.currency)}
         size={16}
         styles={{ marginRight: 5 }}
         primary
@@ -32,12 +33,12 @@ const Balance: React.FC<Props> = ({ item }) => {
         <InputSecondary
           editable
           placeholder={formatter(item.balance, defaultBudget?.currency)}
-          value={item.budgeted}
+          value={item.balance}
           changeHandler={() => {}}
         />
       ) : (
         <HeaderText
-          text={`/${formatter(item.budgeted, defaultBudget?.currency)}`}
+          text={`/${formatter(item.balance, defaultBudget?.currency)}`}
           size={20}
           styles={{ color: '#06B3C4' }}
         />
