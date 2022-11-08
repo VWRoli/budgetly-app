@@ -14,7 +14,7 @@ interface Props {
 }
 
 const TransactionCard: React.FC<Props> = ({ txn, onOpen }): JSX.Element => {
-  const { defaultBudget } = useBudgetsContext();
+  const { state } = useBudgetsContext();
 
   return (
     <TouchableOpacity
@@ -32,13 +32,13 @@ const TransactionCard: React.FC<Props> = ({ txn, onOpen }): JSX.Element => {
         </View>
         {txn.inflow && (
           <Chip
-            value={formatter(+txn.inflow, defaultBudget?.currency)}
+            value={formatter(+txn.inflow, state.defaultBudget?.currency)}
             textColor="#1D3777"
           />
         )}
         {txn.outflow && (
           <Chip
-            value={formatter(+txn.outflow, defaultBudget?.currency)}
+            value={formatter(+txn.outflow, state.defaultBudget?.currency)}
             textColor="red"
           />
         )}

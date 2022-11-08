@@ -14,7 +14,7 @@ interface Props {
   item: budgetItemType;
 }
 const Balance: React.FC<Props> = ({ item }) => {
-  const { defaultBudget, dispatch } = useBudgetsContext();
+  const { state, dispatch } = useBudgetsContext();
   const [isEditable, setIsEditable] = useState(false);
   const [balance, setBalance] = useState(item.balance);
 
@@ -29,7 +29,7 @@ const Balance: React.FC<Props> = ({ item }) => {
       onPress={() => setIsEditable(true)}
     >
       <CustomText
-        text={formatter(item.spent, defaultBudget?.currency)}
+        text={formatter(item.spent, state.defaultBudget?.currency)}
         size={16}
         styles={{ marginRight: 5 }}
         primary
@@ -40,7 +40,7 @@ const Balance: React.FC<Props> = ({ item }) => {
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <InputSecondary
             editable
-            placeholder={formatter(balance, defaultBudget?.currency)}
+            placeholder={formatter(balance, state.defaultBudget?.currency)}
             value={balance}
             changeHandler={setBalance}
           />
@@ -56,7 +56,7 @@ const Balance: React.FC<Props> = ({ item }) => {
         </View>
       ) : (
         <HeaderText
-          text={`/${formatter(balance, defaultBudget?.currency)}`}
+          text={`/${formatter(balance, state.defaultBudget?.currency)}`}
           size={20}
           styles={{ color: '#06B3C4' }}
         />

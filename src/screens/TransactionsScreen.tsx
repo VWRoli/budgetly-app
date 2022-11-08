@@ -16,14 +16,13 @@ import AccountDrawer from '../components/Transactions/AccountDrawer';
 
 const TransactionsScreen = () => {
   const { state, dispatch } = useBudgetsContext();
-  const { defaultBudget } = useBudgetsContext();
   const [transaction, setTransaction] = useState<transactionType | null>(null);
   const refRBSheet = React.createRef<RBSheet>();
   const accountDrawer = React.createRef<RBSheet>();
 
   useEffect(() => {
-    getTransactions(dispatch, defaultBudget?._id);
-  }, [defaultBudget]);
+    getTransactions(dispatch, state.defaultBudget?._id);
+  }, [state.defaultBudget]);
 
   return (
     <View
@@ -38,7 +37,7 @@ const TransactionsScreen = () => {
         pressHandler={() => {}}
       />
       {state.loading && <Text>Loading...</Text>}
-      {!defaultBudget?.accounts.length && (
+      {!state.defaultBudget?.accounts.length && (
         <EmptyScreen
           text="You don't have an account yet. Create your first by clicking below, to add transactions."
           btnLabel="Create your first account"
@@ -77,7 +76,7 @@ const TransactionsScreen = () => {
           ))}
         </View>
       </ScrollView>
-      {defaultBudget?.accounts.length ? (
+      {state.defaultBudget?.accounts.length ? (
         <FAB
           pressHandler={() => refRBSheet.current!.open()}
           type="primary"

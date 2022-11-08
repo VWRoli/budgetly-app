@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { categoryType } from '../types/categoryType';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import { HandlerTypes } from '../types/dashHandlerTypes';
-import { deleteCategory } from '../actions/budget';
+import { deleteCategory, getDefaultBudget } from '../actions/budget';
 //Components
 import AccountTab from '../components/Budget/AccountTab';
 import AddDrawer from '../components/Budget/Drawers/AddDrawer';

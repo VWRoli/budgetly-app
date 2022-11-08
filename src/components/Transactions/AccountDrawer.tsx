@@ -8,7 +8,7 @@ import CustomText from '../common/CustomText';
 import InputSecondary from '../common/InputSecondary';
 
 const AccountDrawer = () => {
-  const { defaultBudget } = useBudgetsContext();
+  const { state } = useBudgetsContext();
   const [name, setName] = useState('');
   const [balance, setBalance] = useState('');
   return (
@@ -41,7 +41,7 @@ const AccountDrawer = () => {
         </View>
       </View>
       <View>
-        {defaultBudget?.accounts.map((a) => (
+        {state.defaultBudget?.accounts.map((a) => (
           <View>
             <CustomText text={a.name} />
             <CustomText text={formatter(a.balance)} />

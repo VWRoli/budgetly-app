@@ -13,8 +13,7 @@ import CustomText from '../components/common/CustomText';
 import OwnedBudgets from '../components/Budget/OwnedBudgets';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
-  const { ownedBudgets, setOwnedBudgets, setDefaultBudget } =
-    useBudgetsContext();
+  const { ownedBudgets, setOwnedBudgets } = useBudgetsContext();
   const [isLoading, setIsLoading] = useState(false);
   const [selected, setSelected] = useState<string>('EUR');
 
@@ -24,6 +23,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
       const { data } = await api.createBudget({
         currency: selected,
         balance: 0,
+        accounts: [],
       });
 
       await api.updateProfile({
@@ -32,7 +32,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
 
       if (data) {
         setOwnedBudgets((prev) => [...prev, data]);
-        setDefaultBudget(data);
+        //todo setDefaultBudget(data);
         navigation.navigate('BudgetStack');
       }
       setIsLoading(false);

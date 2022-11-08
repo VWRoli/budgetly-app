@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
-import { getCategories } from '../actions/budget';
-import { fetchDefaultBudget } from '../api';
+import { getCategories, getDefaultBudget } from '../actions/budget';
 import {
   actionType,
   budgetReducer,
@@ -14,9 +13,9 @@ interface ValueTypes {
   dispatch: React.Dispatch<actionType>;
   ownedBudgets: budgetType[];
   setOwnedBudgets: React.Dispatch<React.SetStateAction<budgetType[]>>;
-  defaultBudgetLoading: boolean;
-  defaultBudget: null | budgetType;
-  setDefaultBudget: React.Dispatch<React.SetStateAction<null | budgetType>>;
+  // defaultBudgetLoading: boolean;
+  // defaultBudget: null | budgetType;
+  // setDefaultBudget: React.Dispatch<React.SetStateAction<null | budgetType>>;
 }
 
 const defaultValue: ValueTypes = {
@@ -24,9 +23,9 @@ const defaultValue: ValueTypes = {
   dispatch: () => {},
   ownedBudgets: [],
   setOwnedBudgets: () => {},
-  defaultBudgetLoading: false,
-  defaultBudget: null,
-  setDefaultBudget: () => {},
+  // defaultBudgetLoading: false,
+  // defaultBudget: null,
+  // setDefaultBudget: () => {},
 };
 
 const BudgetContext = React.createContext(defaultValue);
@@ -38,25 +37,26 @@ interface Props {
 export const BudgetsProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(budgetReducer, INITIAL_STATE);
   const [ownedBudgets, setOwnedBudgets] = useState<budgetType[]>([]);
-  const [defaultBudgetLoading, setDefaultBudgetLoading] = useState(false);
-  const [defaultBudget, setDefaultBudget] = useState<null | budgetType>(null);
+  // const [defaultBudgetLoading, setDefaultBudgetLoading] = useState(false);
+  //const [defaultBudget, setDefaultBudget] = useState<null | budgetType>(null);
 
   useEffect(() => {
-    fetchDefaultBudget(setDefaultBudgetLoading, setDefaultBudget);
+    getDefaultBudget(dispatch);
   }, []);
 
-  useEffect(() => {
-    getCategories(dispatch, defaultBudget?._id);
-  }, [defaultBudget]);
+  //todo causes problems
+  // useEffect(() => {
+  //   getCategories(dispatch, state.defaultBudget?._id);
+  // }, [state.defaultBudget]);
 
   return (
     <BudgetContext.Provider
       value={{
         ownedBudgets,
         setOwnedBudgets,
-        defaultBudgetLoading,
-        defaultBudget,
-        setDefaultBudget,
+        // defaultBudgetLoading,
+        // defaultBudget,
+        // setDefaultBudget,
         state,
         dispatch,
       }}

@@ -15,28 +15,31 @@ const AccountTab = () => {
   //RBSheet typeerror, npm package error does not support propswithchildren, added manually
   const refRBSheet = React.createRef<RBSheet>();
 
-  const { defaultBudget, defaultBudgetLoading } = useBudgetsContext();
+  const { state } = useBudgetsContext();
 
   return (
     <View style={styles.wrapper}>
-      {defaultBudgetLoading ? (
+      {state.loading ? (
         <SkeletonAccountTab />
       ) : (
         <>
           <FlagCurrencyInfo
             flagCode={
               currencyCodes.filter(
-                (cc) => cc.currencyCode === defaultBudget?.currency,
+                (cc) => cc.currencyCode === state.defaultBudget?.currency,
               )[0]?.flagCode
             }
-            currencyCode={defaultBudget?.currency || ''}
+            currencyCode={state.defaultBudget?.currency || ''}
           />
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <View style={{ marginRight: 20, alignItems: 'center' }}>
               <HeaderText
                 text={
-                  defaultBudget
-                    ? formatter(defaultBudget?.balance, defaultBudget.currency)
+                  state.defaultBudget
+                    ? formatter(
+                        state.defaultBudget?.balance,
+                        state.defaultBudget.currency,
+                      )
                     : '0'
                 }
               />

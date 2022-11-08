@@ -22,7 +22,7 @@ interface Props {
 }
 
 const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
-  const { defaultBudget, state, dispatch } = useBudgetsContext();
+  const { state, dispatch } = useBudgetsContext();
   //Openers
   const [openCategory, setOpenCategory] = useState(false);
   const [openItem, setOpenItem] = useState(false);
@@ -57,7 +57,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
       inflow,
       accountId: '', //todo
       outflow,
-      budgetId: defaultBudget?._id || '',
+      budgetId: state.defaultBudget?._id || '',
       categoryId:
         state.categories.filter((c) => c.title === categoryTitle)[0]._id || '',
       budgetItemTitle,

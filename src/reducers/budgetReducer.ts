@@ -1,4 +1,5 @@
 import { ACTION_TYPES } from '../types/actionTypes';
+import { budgetType } from '../types/budgetType';
 import { categoryType } from '../types/categoryType';
 import { transactionType } from '../types/transactionType';
 
@@ -7,12 +8,14 @@ export interface budgetStateType {
   error: boolean;
   categories: categoryType[];
   transactions: transactionType[];
+  defaultBudget: budgetType | null;
 }
 export const INITIAL_STATE: budgetStateType = {
   loading: false,
   categories: [],
   error: false,
   transactions: [],
+  defaultBudget: null,
 };
 
 export interface actionType {
@@ -136,6 +139,8 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         loading: false,
         transactions: [...state.transactions, action.payload],
       };
+    case ACTION_TYPES.ACCOUNT_CREATE_SUCCESS:
+      return { ...state, loading: false, defaultBudget: action.payload };
     case ACTION_TYPES.TXN_REMOVE_SUCCESS:
       return {
         ...state,

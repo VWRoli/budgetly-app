@@ -6,6 +6,7 @@ import axios from '../lib/axios';
 import { categoryType } from '../types/categoryType';
 import { budgetItemType } from '../types/budgetItemType';
 import { transactionType } from '../types/transactionType';
+import { accountType } from '../types/accountType';
 
 const API = axios.create({ baseURL: BASE_URL });
 
@@ -29,20 +30,13 @@ export const getBudgets = () => axios.get('budgets');
 
 export const getBudget = (id: string) => axios.get(`budgets/${id}`);
 
-export const fetchDefaultBudget = async (
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  setDefaultBudget: React.Dispatch<React.SetStateAction<budgetType | null>>,
-) => {
-  setIsLoading(true);
+export const fetchDefaultBudget = async () => {
   try {
     const profile = await getProfile();
-    const budget = await getBudget(profile.data.defaultBudget);
-
-    setDefaultBudget(budget.data);
-
-    setIsLoading(false);
+    const { data } = await getBudget(profile.data.defaultBudget);
+    console.log({ data });
+    return data;
   } catch (error) {
-    setIsLoading(false);
     console.log(error);
   }
 };
@@ -70,6 +64,10 @@ export const editBudgetItem = (
   id: string | undefined,
   budgetItem: budgetItemType,
 ) => axios.patch(`/budgetitems/${id}`, budgetItem);
+
+//? Accounts
+export const createAccount = (account: accountType) =>
+  axios.post('accounts', account);
 
 //? Transactions
 

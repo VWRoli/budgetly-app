@@ -12,7 +12,7 @@ interface Props {
 }
 const AddCategoryDrawer: React.FC<Props> = (props) => {
   const [title, setTitle] = useState('');
-  const { defaultBudget, state, dispatch } = useBudgetsContext();
+  const { state, dispatch } = useBudgetsContext();
 
   const handleCreate = async () => {
     if (props.categoryId) {
@@ -30,7 +30,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
         spent: 0,
         balance: 0,
         budgetItems: [],
-        budgetId: defaultBudget!._id,
+        budgetId: state.defaultBudget!._id,
         createdAt: '',
         updatedAt: '',
       };
