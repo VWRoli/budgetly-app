@@ -12,12 +12,14 @@ import EmptyScreen from '../components/common/EmptyScreen';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CustomText from '../components/common/CustomText';
 import CustomHeader from '../components/common/CustomHeader';
+import AccountDrawer from '../components/Transactions/AccountDrawer';
 
 const TransactionsScreen = () => {
   const { state, dispatch } = useBudgetsContext();
   const { defaultBudget } = useBudgetsContext();
   const [transaction, setTransaction] = useState<transactionType | null>(null);
   const refRBSheet = React.createRef<RBSheet>();
+  const accountDrawer = React.createRef<RBSheet>();
 
   useEffect(() => {
     getTransactions(dispatch, defaultBudget?._id);
@@ -32,17 +34,24 @@ const TransactionsScreen = () => {
     >
       <CustomHeader
         headerText="Transactions"
-        leftIcon="dots-vertical"
+        leftIcon="plus"
         pressHandler={() => {}}
       />
       {state.loading && <Text>Loading...</Text>}
-      {!state.transactions.length && (
+      {!defaultBudget?.accounts.length && (
+        <EmptyScreen
+          text="You don't have an account yet. Create your first by clicking below, to add transactions."
+          btnLabel="Create your first account"
+          pressHandler={() => accountDrawer.current!.open()}
+        />
+      )}
+      {/* {!state.transactions.length && (
         <EmptyScreen
           text="You don't have any transactions yet."
           btnLabel="Add your first transaction"
           pressHandler={() => refRBSheet.current!.open()}
         />
-      )}
+      )} */}
       <ScrollView
         contentContainerStyle={{
           alignItems: 'center',
@@ -68,12 +77,16 @@ const TransactionsScreen = () => {
           ))}
         </View>
       </ScrollView>
-      <FAB
-        pressHandler={() => refRBSheet.current!.open()}
-        type="primary"
-        icon="plus"
-        size={40}
-      />
+      {defaultBudget?.accounts.length ? (
+        <FAB
+          pressHandler={() => refRBSheet.current!.open()}
+          type="primary"
+          icon="plus"
+          size={40}
+        />
+      ) : (
+        <></>
+      )}
 
       <RBSheet
         ref={refRBSheet}
@@ -94,6 +107,20 @@ const TransactionsScreen = () => {
             refRBSheet.current!.close();
           }}
         />
+      </RBSheet>
+      <RBSheet
+        ref={accountDrawer}
+        height={400}
+        //onClose={() => setTransaction(null)}
+        openDuration={250}
+        customStyles={{
+          container: {
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        }}
+      >
+        <AccountDrawer />
       </RBSheet>
     </View>
   );

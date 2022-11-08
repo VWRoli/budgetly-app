@@ -18,7 +18,7 @@ const EmptyScreen: React.FC<Props> = ({ text, btnLabel, pressHandler }) => {
         justifyContent: 'center',
       }}
     >
-      <CustomText text={text} styles={{ marginVertical: 20 }} />
+      <CustomText text={text} styles={{ margin: 20, textAlign: 'center' }} />
       <Button label={btnLabel} pressHandler={pressHandler} />
     </View>
   );

@@ -55,6 +55,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
       date: new Date(date).toISOString(),
       categoryTitle,
       inflow,
+      accountId: '', //todo
       outflow,
       budgetId: defaultBudget?._id || '',
       categoryId:
