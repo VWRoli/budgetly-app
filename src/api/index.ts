@@ -66,6 +66,11 @@ export const deleteCategory = (id: string | undefined) =>
 export const createBudgetItem = (budgetItem: budgetItemType) =>
   axios.post('budgetitems', budgetItem);
 
+export const editBudgetItem = (
+  id: string | undefined,
+  budgetItem: budgetItemType,
+) => axios.patch(`/budgetitems/${id}`, budgetItem);
+
 //? Transactions
 
 export const getTransactions = (budgetId: string | undefined) =>

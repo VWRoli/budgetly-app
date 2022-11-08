@@ -63,7 +63,6 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
     };
     if (transaction) {
       editTransaction(dispatch, newTransaction, transaction._id);
-      //todo update locally and then delete txn
     } else {
       createTransaction(dispatch, newTransaction);
     }

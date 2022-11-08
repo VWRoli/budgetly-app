@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { budgetItemType } from '../../types/budgetItemType';
 import * as Progress from 'react-native-progress';
+import { useBudgetsContext } from '../../context/BudgetsContext';
+import { editBudgetItem } from '../../actions/budget';
 //Components
 import Chip from '../common/Chip';
 import CardWrapper from '../common/CardWrapper';
@@ -13,7 +15,14 @@ interface Props {
   item: budgetItemType;
 }
 const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
+  const { dispatch } = useBudgetsContext();
   const [isEditable, setIsEditable] = useState(false);
+  const [title, setTitle] = useState(item.title);
+
+  const handleSave = () => {
+    const newBudgetItem = { ...item, title };
+    editBudgetItem(dispatch, newBudgetItem, item._id);
+  };
 
   return (
     <CardWrapper>
@@ -31,14 +40,16 @@ const BudgetItem: React.FC<Props> = ({ item }): JSX.Element => {
                 <InputSecondary
                   editable
                   placeholder="Budget item title"
-                  value={item.title}
-                  changeHandler={() => {}}
-                  onBlur={() => setIsEditable(false)}
+                  value={title}
+                  changeHandler={setTitle}
                 />
                 <View style={{ width: 5 }} />
                 <IconButton
                   icon="check"
-                  pressHandler={() => setIsEditable(false)}
+                  pressHandler={() => {
+                    handleSave();
+                    setIsEditable(false);
+                  }}
                   type="primary"
                 />
               </View>

@@ -79,12 +79,20 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         ),
       };
     case ACTION_TYPES.CREATE_ITEM_SUCCESS:
+      //handles createing budget items end ediding them
       const updatedCategory = state.categories.filter(
         (c) => c._id === action.payload.categoryId,
       )[0];
+
       const newCategory = {
         ...updatedCategory,
-        budgetItems: [...(updatedCategory.budgetItems || []), action.payload],
+        //filtering budget items to check if already exists, if it does remove it for edit to work
+        budgetItems: [
+          ...(updatedCategory.budgetItems?.filter(
+            (b) => b._id !== action.payload._id,
+          ) || []),
+          action.payload,
+        ],
       };
       return {
         ...state,
@@ -96,6 +104,7 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
           newCategory,
         ],
       };
+
     case ACTION_TYPES.TXN_FETCH_START:
       return {
         ...state,
