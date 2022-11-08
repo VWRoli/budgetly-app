@@ -18,24 +18,23 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
     if (props.categoryId) {
       const newBudgetItem = {
         title,
-        budgeted: 0,
-        outflow: 0,
+        spent: 0,
         balance: 0,
         categoryId: props.categoryId,
       };
-      //console.log({ newBudgetItem });
+
       createBudgetItem(dispatch, newBudgetItem);
     } else {
       const newCategory = {
         title,
-        budgeted: 0,
-        available: 0,
+        spent: 0,
+        balance: 0,
         budgetItems: [],
         budgetId: defaultBudget!._id,
         createdAt: '',
         updatedAt: '',
       };
-      // console.log({ newCategory });
+
       createCategory(dispatch, newCategory);
     }
   };
