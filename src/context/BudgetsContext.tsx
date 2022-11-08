@@ -11,8 +11,8 @@ import { budgetType } from '../types/budgetType';
 interface ValueTypes {
   state: budgetStateType;
   dispatch: React.Dispatch<actionType>;
-  ownedBudgets: budgetType[];
-  setOwnedBudgets: React.Dispatch<React.SetStateAction<budgetType[]>>;
+  // ownedBudgets: budgetType[];
+  // setOwnedBudgets: React.Dispatch<React.SetStateAction<budgetType[]>>;
   // defaultBudgetLoading: boolean;
   // defaultBudget: null | budgetType;
   // setDefaultBudget: React.Dispatch<React.SetStateAction<null | budgetType>>;
@@ -21,8 +21,8 @@ interface ValueTypes {
 const defaultValue: ValueTypes = {
   state: INITIAL_STATE,
   dispatch: () => {},
-  ownedBudgets: [],
-  setOwnedBudgets: () => {},
+  // ownedBudgets: [],
+  // setOwnedBudgets: () => {},
   // defaultBudgetLoading: false,
   // defaultBudget: null,
   // setDefaultBudget: () => {},
@@ -36,7 +36,7 @@ interface Props {
 
 export const BudgetsProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(budgetReducer, INITIAL_STATE);
-  const [ownedBudgets, setOwnedBudgets] = useState<budgetType[]>([]);
+  //const [ownedBudgets, setOwnedBudgets] = useState<budgetType[]>([]);
   // const [defaultBudgetLoading, setDefaultBudgetLoading] = useState(false);
   //const [defaultBudget, setDefaultBudget] = useState<null | budgetType>(null);
 
@@ -52,8 +52,8 @@ export const BudgetsProvider: React.FC<Props> = ({ children }) => {
   return (
     <BudgetContext.Provider
       value={{
-        ownedBudgets,
-        setOwnedBudgets,
+        // ownedBudgets,
+        // setOwnedBudgets,
         // defaultBudgetLoading,
         // defaultBudget,
         // setDefaultBudget,

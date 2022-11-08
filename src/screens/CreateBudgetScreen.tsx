@@ -13,7 +13,7 @@ import CustomText from '../components/common/CustomText';
 import OwnedBudgets from '../components/Budget/OwnedBudgets';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
-  const { ownedBudgets, setOwnedBudgets } = useBudgetsContext();
+  const { state } = useBudgetsContext();
   const [isLoading, setIsLoading] = useState(false);
   const [selected, setSelected] = useState<string>('EUR');
 
@@ -31,7 +31,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
       });
 
       if (data) {
-        setOwnedBudgets((prev) => [...prev, data]);
+        //todosetOwnedBudgets((prev) => [...prev, data]);
         //todo setDefaultBudget(data);
         navigation.navigate('BudgetStack');
       }
@@ -44,11 +44,13 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   };
 
   const currentBudgets = currencyCodes.filter((cc) =>
-    ownedBudgets?.some((b: budgetType) => b.currency === cc.currencyCode),
+    state.ownedBudgets?.some((b: budgetType) => b.currency === cc.currencyCode),
   ).length;
 
   const availableBudgets = currencyCodes.filter((cc) =>
-    ownedBudgets?.every((b: budgetType) => b.currency !== cc.currencyCode),
+    state.ownedBudgets?.every(
+      (b: budgetType) => b.currency !== cc.currencyCode,
+    ),
   );
 
   return (
@@ -87,7 +89,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
             )}
             {currencyCodes
               .filter((cc) =>
-                ownedBudgets?.every(
+                state.ownedBudgets?.every(
                   (acc: any) => acc.currency !== cc.currencyCode,
                 ),
               )

@@ -9,6 +9,7 @@ export interface budgetStateType {
   categories: categoryType[];
   transactions: transactionType[];
   defaultBudget: budgetType | null;
+  ownedBudgets: budgetType[];
 }
 export const INITIAL_STATE: budgetStateType = {
   loading: false,
@@ -16,6 +17,7 @@ export const INITIAL_STATE: budgetStateType = {
   error: false,
   transactions: [],
   defaultBudget: null,
+  ownedBudgets: [],
 };
 
 export interface actionType {

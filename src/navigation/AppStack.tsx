@@ -11,11 +11,11 @@ import BudgetStack from './BudgetStack';
 const Stack = createNativeStackNavigator();
 
 const AppStack: React.FC = (): JSX.Element => {
-  const { setOwnedBudgets, dispatch } = useBudgetsContext();
+  const { state, dispatch } = useBudgetsContext();
   const { data, isLoading, isError } = useFetch(`${BASE_URL}budgets`);
 
   useEffect(() => {
-    setOwnedBudgets(data);
+    //todo setOwnedBudgets(data);
   }, [data, isLoading]);
 
   if (isLoading) {
