@@ -11,6 +11,7 @@ import FAB from '../components/common/FAB';
 import EmptyScreen from '../components/common/EmptyScreen';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CustomText from '../components/common/CustomText';
+import CustomHeader from '../components/common/CustomHeader';
 
 const TransactionsScreen = () => {
   const { state, dispatch } = useBudgetsContext();
@@ -29,6 +30,11 @@ const TransactionsScreen = () => {
         backgroundColor: '#fff',
       }}
     >
+      <CustomHeader
+        headerText="Transactions"
+        leftIcon="dots-vertical"
+        pressHandler={() => {}}
+      />
       {state.loading && <Text>Loading...</Text>}
       {!state.transactions.length && (
         <EmptyScreen

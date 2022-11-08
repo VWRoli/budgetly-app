@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View } from 'react-native';
 import { useAuthContext } from '../../context/AuthContext';
@@ -6,8 +5,16 @@ import { useAuthContext } from '../../context/AuthContext';
 import CustomText from './CustomText';
 import IconButton from './IconButton';
 
-const MonthHeader: React.FC = (): JSX.Element => {
-  const navigation = useNavigation();
+interface Props {
+  headerText: string;
+  leftIcon: string;
+  pressHandler: () => void;
+}
+const CustomHeader: React.FC<Props> = ({
+  headerText,
+  leftIcon,
+  pressHandler,
+}) => {
   const { signOut } = useAuthContext();
   return (
     <View
@@ -16,15 +23,15 @@ const MonthHeader: React.FC = (): JSX.Element => {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingVertical: 10,
+        padding: 10,
       }}
     >
       <IconButton
-        pressHandler={() => navigation.goBack()}
+        pressHandler={pressHandler}
         type="secondary"
-        icon="chevron-left"
+        icon={leftIcon}
       />
-      <CustomText text="June" primary bold />
+      <CustomText text={headerText} primary bold />
       <IconButton
         icon="exit-to-app"
         type="secondary"
@@ -34,4 +41,4 @@ const MonthHeader: React.FC = (): JSX.Element => {
   );
 };
 
-export default MonthHeader;
+export default CustomHeader;

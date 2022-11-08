@@ -46,14 +46,14 @@ const BudgetStack = () => {
       <Tab.Screen
         name="Transactions"
         component={TransactionsScreen}
-        options={{
-          headerShown: true,
-          title: 'Transactions',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-          headerTintColor: '#1D3777',
-        }}
+        // options={{
+        //   headerShown: true,
+        //   title: 'Transactions',
+        //   headerTitleStyle: {
+        //     fontWeight: 'bold',
+        //   },
+        //   headerTintColor: '#1D3777',
+        // }}
       />
     </Tab.Navigator>
   );
