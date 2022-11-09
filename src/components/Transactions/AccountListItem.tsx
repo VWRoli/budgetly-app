@@ -1,5 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import { getTransactions } from '../../actions/transactions';
 import { useBudgetsContext } from '../../context/BudgetsContext';
 import { accountType } from '../../types/accountType';
 import { formatter } from '../../utils/helpers';
@@ -10,10 +11,13 @@ interface Props {
   account: accountType;
 }
 const AccountListItem: React.FC<Props> = ({ account }) => {
-  const { state } = useBudgetsContext();
+  const { state, dispatch } = useBudgetsContext();
+
+  const handleFetch = (accountId?: string) => {
+    getTransactions(dispatch, accountId);
+  };
   return (
-    <View
-      key={account._id}
+    <TouchableOpacity
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -24,13 +28,14 @@ const AccountListItem: React.FC<Props> = ({ account }) => {
         elevation: 3,
         marginVertical: 5,
       }}
+      onPress={() => handleFetch(account._id)}
     >
       <CustomText text={account.name} primary bold />
       <CustomText
         text={formatter(account.balance, state.defaultBudget?.currency)}
         bold
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -71,8 +71,8 @@ export const createAccount = (account: accountType) =>
 
 //? Transactions
 
-export const getTransactions = (budgetId: string | undefined) =>
-  axios.get(`transactions/${budgetId}`);
+export const getTransactions = (accountId?: string) =>
+  axios.get(`transactions/${accountId}`);
 
 export const createTransaction = (transaction: transactionType) =>
   axios.post('transactions', transaction);

@@ -56,6 +56,9 @@ const AccountDrawer = () => {
         </View>
       </View>
       <View>
+        <AccountListItem
+          account={{ name: 'All', balance: 0, budgetId: '', _id: '' }}
+        />
         {state.defaultBudget?.accounts.map((a) => (
           <AccountListItem account={a} key={a._id} />
         ))}

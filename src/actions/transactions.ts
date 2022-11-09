@@ -10,7 +10,6 @@ export const getTransactions = async (
   try {
     dispatch({ type: ACTION_TYPES.TXN_FETCH_START });
     const { data } = await api.getTransactions(id);
-
     dispatch({ type: ACTION_TYPES.TXN_FETCH_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: ACTION_TYPES.TXN_FETCH_ERROR });
