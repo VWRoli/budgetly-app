@@ -57,19 +57,31 @@ const TransactionsScreen = () => {
         }}
       >
         <View style={{ width: '95%' }}>
-          {state.transactions.map((txn: transactionType, i: number) => (
-            <React.Fragment key={txn._id}>
-              <CustomText text={convertISODateToLocalDate(txn.date)} />
+          {state.transactions.map((txn: transactionType, i: number) => {
+            const currentTxnDate = state.transactions[i].date.substring(0, 10);
+            const prevTxnDate = state.transactions[i - 1]?.date.substring(
+              0,
+              10,
+            );
+            return (
+              <React.Fragment key={txn._id}>
+                {i === 0 && (
+                  <CustomText text={convertISODateToLocalDate(txn.date)} />
+                )}
+                {i > 0 && prevTxnDate !== currentTxnDate && (
+                  <CustomText text={convertISODateToLocalDate(txn.date)} />
+                )}
 
-              <TransactionCard
-                txn={txn}
-                onOpen={() => {
-                  setTransaction(txn);
-                  refRBSheet.current!.open();
-                }}
-              />
-            </React.Fragment>
-          ))}
+                <TransactionCard
+                  txn={txn}
+                  onOpen={() => {
+                    setTransaction(txn);
+                    refRBSheet.current!.open();
+                  }}
+                />
+              </React.Fragment>
+            );
+          })}
         </View>
       </ScrollView>
       {state.defaultBudget?.accounts.length ? (
