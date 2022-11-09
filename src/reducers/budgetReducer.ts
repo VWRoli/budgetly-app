@@ -174,6 +174,15 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         error: true,
         loading: false,
       };
+    case ACTION_TYPES.ACCOUNT_CREATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        defaultBudget: {
+          ...state.defaultBudget,
+          accounts: [...(state.defaultBudget?.accounts || []), action.payload],
+        },
+      };
     default:
       return state;
   }

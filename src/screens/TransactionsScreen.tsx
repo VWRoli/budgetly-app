@@ -30,7 +30,7 @@ const TransactionsScreen = () => {
       <CustomHeader
         headerText="Transactions"
         leftIcon="plus"
-        pressHandler={() => {}}
+        pressHandler={() => accountDrawer.current!.open()}
       />
       {state.loading && <Text>Loading...</Text>}
       {!state.defaultBudget?.accounts.length && (

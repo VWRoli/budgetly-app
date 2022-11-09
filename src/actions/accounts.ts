@@ -10,7 +10,7 @@ export const createAccount = async (
   try {
     dispatch({ type: ACTION_TYPES.TXN_EDIT_START });
     const { data } = await api.createAccount(account);
-    dispatch({ type: ACTION_TYPES.TXN_CREATE_SUCCESS, payload: data });
+    dispatch({ type: ACTION_TYPES.ACCOUNT_CREATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: ACTION_TYPES.TXN_EDIT_ERROR });
   }

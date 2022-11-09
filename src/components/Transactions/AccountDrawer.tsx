@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { createAccount } from '../../actions/accounts';
 import { useBudgetsContext } from '../../context/BudgetsContext';
 import { formatter } from '../../utils/helpers';
 //Components
@@ -8,13 +9,28 @@ import CustomText from '../common/CustomText';
 import InputSecondary from '../common/InputSecondary';
 
 const AccountDrawer = () => {
-  const { state } = useBudgetsContext();
+  const { state, dispatch } = useBudgetsContext();
   const [name, setName] = useState('');
   const [balance, setBalance] = useState('');
+
+  const handleCreate = () => {
+    const newAccount = {
+      name,
+      balance: +balance,
+      budgetId: state.defaultBudget?._id || '',
+    };
+    createAccount(dispatch, newAccount);
+  };
   return (
     <View style={styles.wrapper}>
       <View style={styles.buttonWrapper}>
-        <Button label="Add new" pressHandler={() => {}} slim width="20%" />
+        <Button
+          label="Add new"
+          pressHandler={handleCreate}
+          slim
+          width="20%"
+          disabled={!name || !balance}
+        />
         <View
           style={{
             flexDirection: 'row',
@@ -42,9 +58,11 @@ const AccountDrawer = () => {
       </View>
       <View>
         {state.defaultBudget?.accounts.map((a) => (
-          <View>
+          <View key={a._id}>
             <CustomText text={a.name} />
-            <CustomText text={formatter(a.balance)} />
+            <CustomText
+              text={formatter(a.balance, state.defaultBudget?.currency)}
+            />
           </View>
         ))}
       </View>
