@@ -16,3 +16,9 @@ export const monthList = [
   'November',
   'December',
 ];
+
+export const DEFAULT_BUDGET = {
+  currency: '',
+  balance: 0,
+  accounts: [],
+};

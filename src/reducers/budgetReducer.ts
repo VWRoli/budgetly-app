@@ -1,3 +1,4 @@
+import { DEFAULT_BUDGET } from '../constants/constants';
 import { ACTION_TYPES } from '../types/actionTypes';
 import { budgetType } from '../types/budgetType';
 import { categoryType } from '../types/categoryType';
@@ -8,7 +9,7 @@ export interface budgetStateType {
   error: boolean;
   categories: categoryType[];
   transactions: transactionType[];
-  defaultBudget: budgetType | null;
+  defaultBudget: budgetType;
   ownedBudgets: budgetType[];
 }
 export const INITIAL_STATE: budgetStateType = {
@@ -16,7 +17,7 @@ export const INITIAL_STATE: budgetStateType = {
   categories: [],
   error: false,
   transactions: [],
-  defaultBudget: null,
+  defaultBudget: DEFAULT_BUDGET,
   ownedBudgets: [],
 };
 

@@ -26,6 +26,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
   //Openers
   const [openCategory, setOpenCategory] = useState(false);
   const [openItem, setOpenItem] = useState(false);
+  const [openAccount, setOpenAccount] = useState(false);
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -37,16 +38,25 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
   const [budgetItemTitle, setBudgetItemTitle] = useState(
     transaction?.budgetItemTitle || '',
   );
+  const [accountName, setAccountName] = useState(
+    transaction?.accountName || '',
+  );
   const [inflow, setInflow] = useState(transaction?.inflow || '');
   const [outflow, setOutflow] = useState(transaction?.outflow || '');
   const [date, setDate] = useState(transaction?.date || new Date());
 
+  const onAccountOpen = useCallback(() => {
+    setOpenItem(false);
+    setOpenCategory(false);
+  }, []);
   const onCategoryOpen = useCallback(() => {
     setOpenItem(false);
+    setOpenAccount(false);
   }, []);
 
   const onItemOpen = useCallback(() => {
     setOpenCategory(false);
+    setOpenAccount(false);
   }, []);
 
   const handleCreate = () => {
@@ -55,7 +65,10 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
       date: new Date(date).toISOString(),
       categoryTitle,
       inflow,
-      accountId: '', //todo
+      accountId:
+        state.defaultBudget.accounts.filter((a) => a.name === accountName)[0]
+          ._id || '',
+      accountName,
       outflow,
       budgetId: state.defaultBudget?._id || '',
       categoryId:
@@ -70,6 +83,10 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
     onClose();
   };
 
+  //todo in and outflows
+  const disableAdd =
+    !payee || !categoryTitle || !budgetItemTitle || !accountName;
+
   return (
     <View style={{ width: '95%' }}>
       <InputSecondary
@@ -77,6 +94,27 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
         placeholder="Payee..."
         changeHandler={setPayee}
         value={payee}
+      />
+      <DropDownPicker
+        open={openAccount}
+        value={accountName}
+        items={state.defaultBudget.accounts.map((a) => ({
+          label: a.name,
+          value: a.name,
+        }))}
+        zIndex={3000}
+        zIndexInverse={1000}
+        onOpen={onAccountOpen}
+        setOpen={setOpenAccount}
+        setValue={setAccountName}
+        style={{
+          ...styles.pickerStyle,
+          opacity: state.loading ? 0.5 : 1,
+        }}
+        disabled={state.loading}
+        placeholderStyle={styles.placeholderStyle}
+        dropDownContainerStyle={styles.dropDownContainerStyle}
+        placeholder="Select an account"
       />
 
       <DropDownPicker
@@ -86,8 +124,8 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
           label: c.title,
           value: c.title,
         }))}
-        zIndex={3000}
-        zIndexInverse={1000}
+        zIndex={2000}
+        zIndexInverse={2000}
         onOpen={onCategoryOpen}
         setOpen={setOpenCategory}
         setValue={setCategoryTitle}
@@ -114,18 +152,18 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
                 })) || []
             : []
         }
-        zIndex={2000}
-        zIndexInverse={2000}
+        zIndex={1000}
+        zIndexInverse={3000}
         onOpen={onItemOpen}
         setOpen={setOpenItem}
         setValue={setBudgetItemTitle}
         style={{
           ...styles.pickerStyle,
-          opacity: !categoryTitle && state.loading ? 0.5 : 1,
+          opacity: !categoryTitle || state.loading ? 0.5 : 1,
         }}
         placeholderStyle={styles.placeholderStyle}
         dropDownContainerStyle={styles.dropDownContainerStyle}
-        disabled={!categoryTitle && state.loading}
+        disabled={!categoryTitle || state.loading}
         disabledItemContainerStyle={{
           opacity: 0.5,
         }}
@@ -186,18 +224,14 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
         slim
         pressHandler={handleCreate}
         width="100%"
-        disabled={state.loading}
+        disabled={disableAdd || state.loading}
       />
       {transaction && (
         <View style={{ alignItems: 'center', marginVertical: 15 }}>
           <Button
             label="Delete transaction"
             type="error"
-            pressHandler={() => {
-              // handleEdit(title);
-              setModalVisible(true);
-              // onClose();
-            }}
+            pressHandler={() => setModalVisible(true)}
             width="100%"
             slim
             disabled={state.loading}
