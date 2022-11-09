@@ -5,6 +5,21 @@ import { categoryType } from '../types/categoryType';
 import { budgetItemType } from '../types/budgetItemType';
 import { budgetType } from '../types/budgetType';
 
+export const createBudget = async (
+  dispatch: React.Dispatch<actionType>,
+  budgetData: budgetType,
+) => {
+  try {
+    dispatch({ type: ACTION_TYPES.FETCH_START });
+    const { data } = await api.createBudget(budgetData);
+    await api.updateProfile({
+      defaultBudget: data._id,
+    });
+    dispatch({ type: ACTION_TYPES.CREATE_BUDGET_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: ACTION_TYPES.FETCH_ERROR });
+  }
+};
 export const getDefaultBudget = async (
   dispatch: React.Dispatch<actionType>,
 ) => {

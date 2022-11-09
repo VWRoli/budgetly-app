@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { currencyCodes } from '../constants/currencyList';
-import * as api from '../api';
 import { useBudgetsContext } from '../context/BudgetsContext';
 import { budgetType } from '../types/budgetType';
+import { createBudget } from '../actions/budget';
 //Components
 import MonthHeader from '../components/common/MonthHeader';
 import Button from '../components/common/Button';
@@ -13,34 +13,13 @@ import CustomText from '../components/common/CustomText';
 import OwnedBudgets from '../components/Budget/OwnedBudgets';
 
 const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
-  const { state } = useBudgetsContext();
-  const [isLoading, setIsLoading] = useState(false);
+  const { state, dispatch } = useBudgetsContext();
   const [selected, setSelected] = useState<string>('EUR');
 
   const handleCreate = async () => {
-    setIsLoading(true);
-    try {
-      const { data } = await api.createBudget({
-        currency: selected,
-        balance: 0,
-        accounts: [],
-      });
-
-      await api.updateProfile({
-        defaultBudget: data._id,
-      });
-
-      if (data) {
-        //todosetOwnedBudgets((prev) => [...prev, data]);
-        //todo setDefaultBudget(data);
-        navigation.navigate('BudgetStack');
-      }
-      setIsLoading(false);
-    } catch (error) {
-      console.error(error);
-      //todo error handling
-      setIsLoading(false);
-    }
+    const budgetData = { currency: selected, balance: 0, accounts: [] };
+    createBudget(dispatch, budgetData);
+    navigation.navigate('BudgetStack');
   };
 
   const currentBudgets = currencyCodes.filter((cc) =>
@@ -63,13 +42,13 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
         />
       </View>
       <View style={styles.listWrapper}>
-        {isLoading && (
+        {state.loading && (
           <View>
             <ActivityIndicator size="large" color="#06B3C4" />
           </View>
         )}
 
-        {!isLoading && (
+        {!state.loading && (
           <View style={{ marginTop: 35 }}>
             {currentBudgets ? (
               <CustomText text="Your current budgets" />
@@ -80,7 +59,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
           </View>
         )}
 
-        {!isLoading && (
+        {!state.loading && (
           <View>
             {availableBudgets.length ? (
               <CustomText text="Available Budgets" />
@@ -110,7 +89,7 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
         <Button
           label="Create Budget"
           pressHandler={handleCreate}
-          disabled={isLoading || availableBudgets.length === 0}
+          disabled={state.loading || availableBudgets.length === 0}
         />
       </View>
     </View>

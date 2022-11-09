@@ -49,7 +49,7 @@ export const BudgetsProvider: React.FC<Props> = ({ children }) => {
     getOwnedBudgets(dispatch);
   }, []);
   console.log(JSON.stringify(state, undefined, 2));
-  //todo continue merging ownedbudgets, create apim actionsm reducers etc
+
   //todo causes problems
   // useEffect(() => {
   //   getCategories(dispatch, state.defaultBudget?._id);

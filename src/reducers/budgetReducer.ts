@@ -47,6 +47,13 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         loading: false,
         categories: [],
       };
+    case ACTION_TYPES.CREATE_BUDGET_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        defaultBudget: action.payload,
+        ownedBudgets: [...state.ownedBudgets, action.payload],
+      };
     case ACTION_TYPES.EDIT_START:
       return {
         ...state,
@@ -144,7 +151,6 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
     case ACTION_TYPES.FETCH_BUDGET_SUCCESS:
       return { ...state, loading: false, defaultBudget: action.payload };
     case ACTION_TYPES.FETCH_OWNED_BUDGET_SUCCESS:
-      console.log('payload', action.payload);
       return { ...state, loading: false, ownedBudgets: action.payload };
     case ACTION_TYPES.TXN_REMOVE_SUCCESS:
       return {
