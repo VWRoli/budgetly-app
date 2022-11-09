@@ -60,6 +60,14 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
   }, []);
 
   const handleCreate = () => {
+    const category = state.categories.filter(
+      (c) => c.title === categoryTitle,
+    )[0];
+
+    const budgetItemId = category.budgetItems.filter(
+      (b) => b.title === budgetItemTitle,
+    )[0]._id;
+
     const newTransaction = {
       payee,
       date: new Date(date).toISOString(),
@@ -70,9 +78,8 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
           ._id || '',
       accountName,
       outflow,
-      budgetId: state.defaultBudget?._id || '',
-      categoryId:
-        state.categories.filter((c) => c.title === categoryTitle)[0]._id || '',
+      budgetItemId: budgetItemId || '',
+      categoryId: category._id || '',
       budgetItemTitle,
     };
     if (transaction) {

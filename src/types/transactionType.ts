@@ -7,7 +7,7 @@ export interface transactionType {
   accountId: string;
   accountName: string;
   categoryId: string;
-  budgetId: string;
+  budgetItemId: string;
   categoryTitle: string;
   budgetItemTitle: string;
   inflow: string | number;
