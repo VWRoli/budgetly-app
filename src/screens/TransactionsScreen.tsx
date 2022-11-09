@@ -15,14 +15,10 @@ import CustomHeader from '../components/common/CustomHeader';
 import AccountDrawer from '../components/Transactions/AccountDrawer';
 
 const TransactionsScreen = () => {
-  const { state, dispatch } = useBudgetsContext();
+  const { state } = useBudgetsContext();
   const [transaction, setTransaction] = useState<transactionType | null>(null);
   const refRBSheet = React.createRef<RBSheet>();
   const accountDrawer = React.createRef<RBSheet>();
-
-  useEffect(() => {
-    getTransactions(dispatch, state.defaultBudget?._id);
-  }, [state.defaultBudget]);
 
   return (
     <View

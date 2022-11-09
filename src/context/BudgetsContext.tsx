@@ -4,6 +4,7 @@ import {
   getDefaultBudget,
   getOwnedBudgets,
 } from '../actions/budget';
+import { getTransactions } from '../actions/transactions';
 import {
   actionType,
   budgetReducer,
@@ -37,6 +38,7 @@ export const BudgetsProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     getCategories(dispatch, state.defaultBudget?._id);
+    getTransactions(dispatch, state.defaultBudget?._id);
   }, [state.defaultBudget]);
 
   return (
