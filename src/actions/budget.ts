@@ -3,6 +3,7 @@ import * as api from '../api';
 import { actionType } from '../reducers/budgetReducer';
 import { categoryType } from '../types/categoryType';
 import { budgetItemType } from '../types/budgetItemType';
+import { budgetType } from '../types/budgetType';
 
 export const getDefaultBudget = async (
   dispatch: React.Dispatch<actionType>,
@@ -14,6 +15,12 @@ export const getDefaultBudget = async (
   } catch (error) {
     dispatch({ type: ACTION_TYPES.FETCH_ERROR });
   }
+};
+export const setDefaultBudget = async (
+  dispatch: React.Dispatch<actionType>,
+  data: budgetType,
+) => {
+  dispatch({ type: ACTION_TYPES.FETCH_BUDGET_SUCCESS, payload: data });
 };
 export const getOwnedBudgets = async (dispatch: React.Dispatch<actionType>) => {
   try {

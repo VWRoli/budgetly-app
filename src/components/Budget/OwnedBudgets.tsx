@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { setDefaultBudget } from '../../actions/budget';
 import { currencyCodes } from '../../constants/currencyList';
 import { useBudgetsContext } from '../../context/BudgetsContext';
 import { budgetType } from '../../types/budgetType';
@@ -7,14 +8,13 @@ import { budgetType } from '../../types/budgetType';
 import CurrencyItem from '../CurrencyItem';
 
 const OwnedBudgets = (props: { disabled?: boolean; onClose?: () => void }) => {
-  const { ownedBudgets } = useBudgetsContext();
-  const { setDefaultBudget } = useBudgetsContext();
+  const { state, dispatch } = useBudgetsContext();
 
-  // console.log(ownedBudgets);
   const handlePress = (currencyCode: string) => {
-    setDefaultBudget(
-      ownedBudgets.filter((b) => b.currency === currencyCode)[0],
-    );
+    const budget = state.ownedBudgets.filter(
+      (b) => b.currency === currencyCode,
+    )[0];
+    setDefaultBudget(dispatch, budget);
     props.onClose && props.onClose();
   };
 
@@ -22,7 +22,9 @@ const OwnedBudgets = (props: { disabled?: boolean; onClose?: () => void }) => {
     <View>
       {currencyCodes
         .filter((cc) =>
-          ownedBudgets?.some((b: budgetType) => b.currency === cc.currencyCode),
+          state.ownedBudgets?.some(
+            (b: budgetType) => b.currency === cc.currencyCode,
+          ),
         )
         .map((cc) => (
           <CurrencyItem
