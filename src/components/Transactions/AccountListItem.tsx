@@ -9,12 +9,14 @@ import CustomText from '../common/CustomText';
 
 interface Props {
   account: accountType;
+  onClose: () => void;
 }
-const AccountListItem: React.FC<Props> = ({ account }) => {
+const AccountListItem: React.FC<Props> = ({ account, onClose }) => {
   const { state, dispatch } = useBudgetsContext();
 
   const handleFetch = (accountId?: string) => {
     getTransactions(dispatch, accountId);
+    onClose();
   };
   return (
     <TouchableOpacity

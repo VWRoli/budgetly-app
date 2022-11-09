@@ -30,7 +30,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
-  //States
+  //States //todo combine states
   const [payee, setPayee] = useState(transaction?.payee || '');
   const [categoryTitle, setCategoryTitle] = useState(
     transaction?.categoryTitle || '',
@@ -90,7 +90,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
   return (
     <View style={{ width: '95%' }}>
       <InputSecondary
-        editable={!state.loading}
+        editable={!state.txnLoading}
         placeholder="Payee..."
         changeHandler={setPayee}
         value={payee}
@@ -109,9 +109,9 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
         setValue={setAccountName}
         style={{
           ...styles.pickerStyle,
-          opacity: state.loading ? 0.5 : 1,
+          opacity: state.txnLoading ? 0.5 : 1,
         }}
-        disabled={state.loading}
+        disabled={state.txnLoading}
         placeholderStyle={styles.placeholderStyle}
         dropDownContainerStyle={styles.dropDownContainerStyle}
         placeholder="Select an account"
@@ -131,9 +131,9 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
         setValue={setCategoryTitle}
         style={{
           ...styles.pickerStyle,
-          opacity: state.loading ? 0.5 : 1,
+          opacity: state.txnLoading ? 0.5 : 1,
         }}
-        disabled={state.loading}
+        disabled={state.txnLoading}
         placeholderStyle={styles.placeholderStyle}
         dropDownContainerStyle={styles.dropDownContainerStyle}
         placeholder="Select a budget category"
@@ -159,11 +159,11 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
         setValue={setBudgetItemTitle}
         style={{
           ...styles.pickerStyle,
-          opacity: !categoryTitle || state.loading ? 0.5 : 1,
+          opacity: !categoryTitle || state.txnLoading ? 0.5 : 1,
         }}
         placeholderStyle={styles.placeholderStyle}
         dropDownContainerStyle={styles.dropDownContainerStyle}
-        disabled={!categoryTitle || state.loading}
+        disabled={!categoryTitle || state.txnLoading}
         disabledItemContainerStyle={{
           opacity: 0.5,
         }}
@@ -180,7 +180,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
             placeholder="inflow"
             changeHandler={setInflow}
             keyboardType="numeric"
-            editable={!outflow && !state.loading}
+            editable={!outflow && !state.txnLoading}
             value={inflow}
           />
         </View>
@@ -189,7 +189,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
             placeholder="Outflow"
             styles={{ flex: 1 }}
             keyboardType="numeric"
-            editable={!inflow && !state.loading}
+            editable={!inflow && !state.txnLoading}
             changeHandler={setOutflow}
             value={outflow}
           />
@@ -201,7 +201,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
           slim
           pressHandler={() => setOpenDatePicker(true)}
           width="100%"
-          disabled={state.loading}
+          disabled={state.txnLoading}
         />
       </View>
       <DatePicker
@@ -224,7 +224,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
         slim
         pressHandler={handleCreate}
         width="100%"
-        disabled={disableAdd || state.loading}
+        disabled={disableAdd || state.txnLoading}
       />
       {transaction && (
         <View style={{ alignItems: 'center', marginVertical: 15 }}>
@@ -234,7 +234,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
             pressHandler={() => setModalVisible(true)}
             width="100%"
             slim
-            disabled={state.loading}
+            disabled={state.txnLoading}
           />
         </View>
       )}

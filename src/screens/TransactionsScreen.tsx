@@ -115,7 +115,7 @@ const TransactionsScreen = () => {
           },
         }}
       >
-        <AccountDrawer />
+        <AccountDrawer handleClose={() => accountDrawer.current!.close()} />
       </RBSheet>
     </View>
   );

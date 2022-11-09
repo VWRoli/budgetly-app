@@ -7,7 +7,10 @@ import Button from '../common/Button';
 import InputSecondary from '../common/InputSecondary';
 import AccountListItem from './AccountListItem';
 
-const AccountDrawer = () => {
+interface Props {
+  handleClose: () => void;
+}
+const AccountDrawer: React.FC<Props> = ({ handleClose }) => {
   const { state, dispatch } = useBudgetsContext();
   const [name, setName] = useState('');
   const [balance, setBalance] = useState('');
@@ -58,9 +61,10 @@ const AccountDrawer = () => {
       <View>
         <AccountListItem
           account={{ name: 'All', balance: 0, budgetId: '', _id: '' }}
+          onClose={handleClose}
         />
         {state.defaultBudget?.accounts.map((a) => (
-          <AccountListItem account={a} key={a._id} />
+          <AccountListItem account={a} key={a._id} onClose={handleClose} />
         ))}
       </View>
     </View>

@@ -11,6 +11,8 @@ export interface budgetStateType {
   transactions: transactionType[];
   defaultBudget: budgetType;
   ownedBudgets: budgetType[];
+  txnLoading: boolean;
+  txnError: boolean;
 }
 export const INITIAL_STATE: budgetStateType = {
   loading: false,
@@ -19,6 +21,8 @@ export const INITIAL_STATE: budgetStateType = {
   transactions: [],
   defaultBudget: DEFAULT_BUDGET,
   ownedBudgets: [],
+  txnLoading: false,
+  txnError: false,
 };
 
 export interface actionType {
@@ -121,32 +125,32 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
     case ACTION_TYPES.TXN_FETCH_START:
       return {
         ...state,
-        loading: true,
-        error: false,
+        txnLoading: true,
+        txnError: false,
         transactions: [],
       };
     case ACTION_TYPES.TXN_FETCH_SUCCESS:
       return {
         ...state,
-        loading: false,
+        txnLoading: false,
         transactions: action.payload,
       };
     case ACTION_TYPES.TXN_FETCH_ERROR:
       return {
         ...state,
-        error: true,
-        loading: false,
+        txnError: true,
+        txnLoading: false,
         transactions: [],
       };
     case ACTION_TYPES.TXN_EDIT_START:
       return {
         ...state,
-        loading: true,
+        txnLoading: true,
       };
     case ACTION_TYPES.TXN_CREATE_SUCCESS:
       return {
         ...state,
-        loading: false,
+        txnLoading: false,
         transactions: [...state.transactions, action.payload],
       };
     case ACTION_TYPES.FETCH_BUDGET_SUCCESS:
@@ -156,7 +160,7 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
     case ACTION_TYPES.TXN_REMOVE_SUCCESS:
       return {
         ...state,
-        loading: false,
+        txnLoading: false,
         transactions: state.transactions.filter(
           (c) => c._id !== action.payload,
         ),
@@ -164,7 +168,7 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
     case ACTION_TYPES.TXN_EDIT_SUCCESS:
       return {
         ...state,
-        loading: false,
+        txnLoading: false,
         transactions: state.transactions.map((t) =>
           t._id === action.payload._id ? action.payload : t,
         ),
@@ -172,13 +176,13 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
     case ACTION_TYPES.TXN_EDIT_ERROR:
       return {
         ...state,
-        error: true,
-        loading: false,
+        txnError: true,
+        txnLoading: false,
       };
     case ACTION_TYPES.ACCOUNT_CREATE_SUCCESS:
       return {
         ...state,
-        loading: false,
+        txnLoading: false,
         defaultBudget: {
           ...state.defaultBudget,
           accounts: [...(state.defaultBudget?.accounts || []), action.payload],
