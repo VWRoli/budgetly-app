@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
-import { getCategories, getDefaultBudget } from '../actions/budget';
+import {
+  getCategories,
+  getDefaultBudget,
+  getOwnedBudgets,
+} from '../actions/budget';
 import {
   actionType,
   budgetReducer,
@@ -42,8 +46,10 @@ export const BudgetsProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     getDefaultBudget(dispatch);
+    getOwnedBudgets(dispatch);
   }, []);
-
+  console.log(JSON.stringify(state, undefined, 2));
+  //todo continue merging ownedbudgets, create apim actionsm reducers etc
   //todo causes problems
   // useEffect(() => {
   //   getCategories(dispatch, state.defaultBudget?._id);

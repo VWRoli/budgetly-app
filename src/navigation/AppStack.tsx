@@ -7,18 +7,20 @@ import { ActivityIndicator, View } from 'react-native';
 //Screens
 import CreateBudgetScreen from '../screens/CreateBudgetScreen';
 import BudgetStack from './BudgetStack';
+import { getStateFromPath } from '@react-navigation/native';
+import { getOwnedBudgets } from '../actions/budget';
 
 const Stack = createNativeStackNavigator();
 
 const AppStack: React.FC = (): JSX.Element => {
   const { state, dispatch } = useBudgetsContext();
-  const { data, isLoading, isError } = useFetch(`${BASE_URL}budgets`);
+  // const { data, isLoading, isError } = useFetch(`${BASE_URL}budgets`);
 
-  useEffect(() => {
-    //todo setOwnedBudgets(data);
-  }, [data, isLoading]);
+  // useEffect(() => {
+  //   //todo setOwnedBudgets(data);
+  // }, [data, isLoading]);
 
-  if (isLoading) {
+  if (state.loading) {
     return (
       <View
         style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'center' }}
@@ -30,7 +32,7 @@ const AppStack: React.FC = (): JSX.Element => {
 
   return (
     <Stack.Navigator>
-      {!data?.length ? (
+      {!state.ownedBudgets?.length ? (
         <>
           <Stack.Screen
             name="CreateBudget"

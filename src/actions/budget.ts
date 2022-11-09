@@ -10,7 +10,16 @@ export const getDefaultBudget = async (
   try {
     dispatch({ type: ACTION_TYPES.FETCH_START });
     const data = await api.fetchDefaultBudget();
-    dispatch({ type: ACTION_TYPES.ACCOUNT_CREATE_SUCCESS, payload: data });
+    dispatch({ type: ACTION_TYPES.FETCH_BUDGET_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: ACTION_TYPES.FETCH_ERROR });
+  }
+};
+export const getOwnedBudgets = async (dispatch: React.Dispatch<actionType>) => {
+  try {
+    dispatch({ type: ACTION_TYPES.FETCH_START });
+    const { data } = await api.getBudgets();
+    dispatch({ type: ACTION_TYPES.FETCH_OWNED_BUDGET_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: ACTION_TYPES.FETCH_ERROR });
   }

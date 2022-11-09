@@ -34,7 +34,7 @@ export const fetchDefaultBudget = async () => {
   try {
     const profile = await getProfile();
     const { data } = await getBudget(profile.data.defaultBudget);
-    console.log({ data });
+
     return data;
   } catch (error) {
     console.log(error);

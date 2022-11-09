@@ -141,8 +141,11 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         loading: false,
         transactions: [...state.transactions, action.payload],
       };
-    case ACTION_TYPES.ACCOUNT_CREATE_SUCCESS:
+    case ACTION_TYPES.FETCH_BUDGET_SUCCESS:
       return { ...state, loading: false, defaultBudget: action.payload };
+    case ACTION_TYPES.FETCH_OWNED_BUDGET_SUCCESS:
+      console.log('payload', action.payload);
+      return { ...state, loading: false, ownedBudgets: action.payload };
     case ACTION_TYPES.TXN_REMOVE_SUCCESS:
       return {
         ...state,
