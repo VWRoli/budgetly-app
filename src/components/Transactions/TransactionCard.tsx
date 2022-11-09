@@ -23,25 +23,36 @@ const TransactionCard: React.FC<Props> = ({ txn, onOpen }): JSX.Element => {
       activeOpacity={0.8}
     >
       <View style={styles.iconWrapper}>
-        <Text style={styles.iconText}>{txn.payee.charAt(0)}</Text>
+        <Text style={styles.iconText}>{txn.payee.charAt(0).toUpperCase()}</Text>
       </View>
       <View style={styles.content}>
         <View>
           <HeaderText text={txn.payee} size={18} />
-          <CustomText text={txn.categoryTitle} bold size={14} />
+          <CustomText
+            text={`${txn.categoryTitle}: ${txn.budgetItemTitle}`}
+            bold
+            size={14}
+          />
         </View>
-        {txn.inflow && (
-          <Chip
-            value={formatter(+txn.inflow, state.defaultBudget?.currency)}
-            textColor="#1D3777"
+        <View>
+          {txn.inflow && (
+            <Chip
+              value={formatter(+txn.inflow, state.defaultBudget?.currency)}
+              textColor="#1D3777"
+            />
+          )}
+          {txn.outflow && (
+            <Chip
+              value={formatter(+txn.outflow, state.defaultBudget?.currency)}
+              textColor="red"
+            />
+          )}
+          <CustomText
+            text={txn.accountName}
+            size={14}
+            styles={{ textAlign: 'right', marginRight: 5 }}
           />
-        )}
-        {txn.outflow && (
-          <Chip
-            value={formatter(+txn.outflow, state.defaultBudget?.currency)}
-            textColor="red"
-          />
-        )}
+        </View>
       </View>
     </TouchableOpacity>
   );

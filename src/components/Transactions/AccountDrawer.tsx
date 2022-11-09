@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { createAccount } from '../../actions/accounts';
 import { useBudgetsContext } from '../../context/BudgetsContext';
-import { formatter } from '../../utils/helpers';
 //Components
 import Button from '../common/Button';
-import CustomText from '../common/CustomText';
 import InputSecondary from '../common/InputSecondary';
+import AccountListItem from './AccountListItem';
 
 const AccountDrawer = () => {
   const { state, dispatch } = useBudgetsContext();
@@ -58,12 +57,7 @@ const AccountDrawer = () => {
       </View>
       <View>
         {state.defaultBudget?.accounts.map((a) => (
-          <View key={a._id}>
-            <CustomText text={a.name} />
-            <CustomText
-              text={formatter(a.balance, state.defaultBudget?.currency)}
-            />
-          </View>
+          <AccountListItem account={a} key={a._id} />
         ))}
       </View>
     </View>
