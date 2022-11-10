@@ -23,7 +23,7 @@ const DashScreen: React.FC = (): JSX.Element => {
   const [editableCategory, setEditableCategory] = useState<categoryType>({
     title: '',
     budgetItems: [],
-    spent: 0,
+    budgeted: 0,
     balance: 0,
     createdAt: '',
     updatedAt: '',

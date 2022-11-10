@@ -29,7 +29,7 @@ const Balance: React.FC<Props> = ({ item }) => {
       onPress={() => setIsEditable(true)}
     >
       <CustomText
-        text={formatter(item.spent, state.defaultBudget?.currency)}
+        text={formatter(item.budgeted, state.defaultBudget?.currency)}
         size={16}
         styles={{ marginRight: 5 }}
         primary

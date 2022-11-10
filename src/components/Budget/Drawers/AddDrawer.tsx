@@ -18,7 +18,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
     if (props.categoryId) {
       const newBudgetItem = {
         title,
-        spent: 0,
+        budgeted: 0,
         balance: 0,
         categoryId: props.categoryId,
       };
@@ -27,7 +27,7 @@ const AddCategoryDrawer: React.FC<Props> = (props) => {
     } else {
       const newCategory = {
         title,
-        spent: 0,
+        budgeted: 0,
         balance: 0,
         budgetItems: [],
         budgetId: state.defaultBudget!._id,

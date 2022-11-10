@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { categoryType } from '../../../types/categoryType';
 import { HandlerTypes } from '../../../types/dashHandlerTypes';
 //Components
-import CustomText from '../../common/CustomText';
 import HeaderText from '../../common/HeaderText';
 import IconButton from '../../common/IconButton';
 import Popup from './Popup';
