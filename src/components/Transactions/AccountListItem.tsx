@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { getTransactions } from '../../actions/transactions';
 import { useBudgetsContext } from '../../context/BudgetsContext';
 import { accountType } from '../../types/accountType';

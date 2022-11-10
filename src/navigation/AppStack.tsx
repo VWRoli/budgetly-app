@@ -1,24 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useBudgetsContext } from '../context/BudgetsContext';
-import { useFetch } from '../hooks/useFetch';
-import { BASE_URL } from '../constants/constants';
+
 import { ActivityIndicator, View } from 'react-native';
 //Screens
 import CreateBudgetScreen from '../screens/CreateBudgetScreen';
 import BudgetStack from './BudgetStack';
-import { getStateFromPath } from '@react-navigation/native';
-import { getOwnedBudgets } from '../actions/budget';
-
 const Stack = createNativeStackNavigator();
 
 const AppStack: React.FC = (): JSX.Element => {
-  const { state, dispatch } = useBudgetsContext();
-  // const { data, isLoading, isError } = useFetch(`${BASE_URL}budgets`);
-
-  // useEffect(() => {
-  //   //todo setOwnedBudgets(data);
-  // }, [data, isLoading]);
+  const { state } = useBudgetsContext();
 
   if (state.loading) {
     return (

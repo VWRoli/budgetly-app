@@ -3,7 +3,6 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { StyleSheet, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import { useBudgetsContext } from '../../context/BudgetsContext';
-import { actionType, budgetStateType } from '../../reducers/budgetReducer';
 import {
   createTransaction,
   deleteTransaction,

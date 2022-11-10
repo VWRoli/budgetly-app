@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Logo from '../assets/Logo';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //Componenets

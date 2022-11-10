@@ -24,7 +24,6 @@ const Input: React.FC<Props> = ({
   error,
   touched,
   editable,
-  ...otherProps
 }): JSX.Element => {
   const validationColor = !touched ? '#ddd' : error ? '#ff4444' : '#00c851';
   return (
