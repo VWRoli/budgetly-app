@@ -63,11 +63,11 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
       (c) => c.title === categoryTitle,
     )[0];
 
-    const budgetItemId = category.budgetItems.filter(
+    const budgetItemId = category?.budgetItems.filter(
       (b) => b.title === budgetItemTitle,
     )[0]._id;
 
-    const newTransaction = {
+    const newTransaction: transactionType = {
       payee,
       date: new Date(date).toISOString(),
       categoryTitle,
@@ -77,10 +77,12 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
           ._id || '',
       accountName,
       outflow,
+      budgetId: state.defaultBudget._id || '',
       budgetItemId: budgetItemId || '',
-      categoryId: category._id || '',
+      categoryId: category?._id || '',
       budgetItemTitle,
     };
+    //console.log({ newTransaction });
     if (transaction) {
       editTransaction(dispatch, newTransaction, transaction._id);
     } else {
@@ -89,9 +91,15 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
     onClose();
   };
 
+  const selectableCategories = [
+    { label: 'Income for this month', value: 'thisMonth' },
+    ...state.categories.map((c) => ({
+      label: c.title,
+      value: c.title,
+    })),
+  ];
   //todo in and outflows
-  const disableAdd =
-    !payee || !categoryTitle || !budgetItemTitle || !accountName;
+  const disableAdd = !payee || !categoryTitle || !accountName;
 
   return (
     <View style={{ width: '95%' }}>
@@ -126,10 +134,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
       <DropDownPicker
         open={openCategory}
         value={categoryTitle}
-        items={state.categories.map((c) => ({
-          label: c.title,
-          value: c.title,
-        }))}
+        items={selectableCategories}
         zIndex={2000}
         zIndexInverse={2000}
         onOpen={onCategoryOpen}
@@ -149,7 +154,7 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
         open={openItem}
         value={budgetItemTitle}
         items={
-          categoryTitle
+          categoryTitle && categoryTitle !== 'thisMonth'
             ? state.categories
                 .filter((c) => c.title === categoryTitle)[0]
                 .budgetItems?.map((c) => ({
@@ -165,11 +170,16 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
         setValue={setBudgetItemTitle}
         style={{
           ...styles.pickerStyle,
-          opacity: !categoryTitle || state.txnLoading ? 0.5 : 1,
+          opacity:
+            !categoryTitle || categoryTitle === 'thisMonth' || state.txnLoading
+              ? 0.5
+              : 1,
         }}
         placeholderStyle={styles.placeholderStyle}
         dropDownContainerStyle={styles.dropDownContainerStyle}
-        disabled={!categoryTitle || state.txnLoading}
+        disabled={
+          !categoryTitle || categoryTitle === 'thisMonth' || state.txnLoading
+        }
         disabledItemContainerStyle={{
           opacity: 0.5,
         }}
@@ -195,7 +205,9 @@ const AddTransaction: React.FC<Props> = ({ onClose, transaction }) => {
             placeholder="Outflow"
             styles={{ flex: 1 }}
             keyboardType="numeric"
-            editable={!inflow && !state.txnLoading}
+            editable={
+              !inflow && !state.txnLoading && categoryTitle !== 'thisMonth'
+            }
             changeHandler={setOutflow}
             value={outflow}
           />

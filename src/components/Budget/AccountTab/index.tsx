@@ -38,7 +38,7 @@ const AccountTab = () => {
                   state.defaultBudget
                     ? formatter(
                         state.defaultBudget?.available,
-                        state.defaultBudget.currency,
+                        state.defaultBudget?.currency,
                       )
                     : '0'
                 }

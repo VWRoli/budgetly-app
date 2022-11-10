@@ -40,7 +40,7 @@ export const BudgetsProvider: React.FC<Props> = ({ children }) => {
     getCategories(dispatch, state.defaultBudget?._id);
     getTransactions(dispatch, '');
   }, [state.defaultBudget]);
-
+  //console.log(JSON.stringify(state, undefined, 2));
   return (
     <BudgetContext.Provider
       value={{

@@ -35,17 +35,21 @@ const TransactionCard: React.FC<Props> = ({ txn, onOpen }): JSX.Element => {
           />
         </View>
         <View>
-          {txn.inflow && (
+          {txn.inflow ? (
             <Chip
               value={formatter(+txn.inflow, state.defaultBudget?.currency)}
               textColor="#1D3777"
             />
+          ) : (
+            <></>
           )}
-          {txn.outflow && (
+          {txn.outflow ? (
             <Chip
               value={formatter(+txn.outflow, state.defaultBudget?.currency)}
               textColor="red"
             />
+          ) : (
+            <></>
           )}
           <CustomText
             text={txn.accountName}
