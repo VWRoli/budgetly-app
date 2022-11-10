@@ -152,6 +152,12 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         ...state,
         txnLoading: false,
         transactions: [...state.transactions, action.payload],
+        defaultBudget: {
+          ...state.defaultBudget,
+          available: action.payload.inflow
+            ? state.defaultBudget.available + action.payload.inflow
+            : 0,
+        },
       };
     case ACTION_TYPES.FETCH_BUDGET_SUCCESS:
       return { ...state, loading: false, defaultBudget: action.payload };
