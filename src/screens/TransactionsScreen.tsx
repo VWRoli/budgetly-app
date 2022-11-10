@@ -40,12 +40,14 @@ const TransactionsScreen = () => {
           pressHandler={() => accountDrawer.current!.open()}
         />
       )}
-      {state.defaultBudget?.accounts.length && !state.transactions.length && (
+      {state.defaultBudget?.accounts.length && !state.transactions.length ? (
         <EmptyScreen
           text="You don't have any transactions yet."
           btnLabel="Add your first transaction"
           pressHandler={() => refRBSheet.current!.open()}
         />
+      ) : (
+        <></>
       )}
       <ScrollView
         contentContainerStyle={{

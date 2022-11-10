@@ -17,7 +17,12 @@ const CreateBudgetScreen = ({ navigation }: { navigation: any }) => {
   const [selected, setSelected] = useState<string>('EUR');
 
   const handleCreate = async () => {
-    const budgetData = { currency: selected, balance: 0, accounts: [] };
+    const budgetData = {
+      currency: selected,
+      balance: 0,
+      accounts: [],
+      available: 0,
+    };
     createBudget(dispatch, budgetData);
     navigation.navigate('BudgetStack');
   };
