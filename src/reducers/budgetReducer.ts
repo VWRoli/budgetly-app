@@ -154,7 +154,7 @@ export const budgetReducer = (state = INITIAL_STATE, action: actionType) => {
         transactions: [...state.transactions, action.payload],
         defaultBudget: {
           ...state.defaultBudget,
-          available: action.payload.inflow
+          available: !action.payload.budgetItemId
             ? state.defaultBudget.available + action.payload.inflow
             : 0,
         },
